@@ -26,10 +26,30 @@ const Navbar = () => {
        </div>
        <ul className='flex-1 flex justify-center items-center gap-10 max-lg:hidden'>
           {NavLinks.map((item) => (
-            <li key={item.navItem} onClick={()=>navigate(item.href) }  className="nav-links flex gap-[6px] items-center justify-center">
+            <li key={item.navItem} onClick={()=>navigate(item.href) }  className="relative nav-links flex gap-[6px] items-center justify-center hover:text-[#000080] transition cursor-pointer">
               <span className="">{item.navItem}</span>
               {
                 item.dropDown? <BsCaretRightFill fontSize={13}/> : null
+              }
+              {
+              item.dropDown && (
+                  <ul className="absolute top-full left-0 mt-2 bg-white shadow-md rounded">
+                       <span>{item.navItem}</span>
+                       {
+                        Array.isArray(item.dropDownOpt) && item.dropDownOpt.map((opt)=>(
+                          <li>
+                              <div>
+                                  <img src={opt.icon} alt="icon" className="w-[27px] h-[27px]"/>
+                              </div>
+                              <div>
+                                <span>{opt.title}</span>
+                                <p>{opt.desc}</p>
+                              </div>
+                       </li>
+                        ))
+                       }
+                  </ul>
+              )
               }
             </li>
           ))}
