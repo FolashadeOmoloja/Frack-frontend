@@ -19,7 +19,7 @@ const CTABTN:React.FC<ButtonProps>  = ({className,showIcon,CTA,route}) => {
     };
 
   return (
-        <button className={`px-[16px] py-[24px] bg-[#000080] text-white rounded-[6px] flex items-center justify-center`} onClick={()=>handleSignInClick(route)}>
+        <button className={`w-[138px] h-[55px] bg-[#000080] text-white rounded-[6px] flex items-center justify-center`} onClick={()=>handleSignInClick(route)}>
             <span>{CTA}</span>
             {/* <span className={`text-sm text-white ${showIcon?'': 'hidden'}`}><BsFillCheckCircleFill/></span> */}
         </button>
