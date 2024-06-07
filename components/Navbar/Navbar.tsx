@@ -2,6 +2,8 @@
 import { NavLinks } from "@/utilities/constants"
 import Image from "next/image"
 import { useRouter } from "next/navigation";
+import { BsCaretRightFill } from "react-icons/bs";
+import CTABTN from "../Elements/CTA/CTA-Button";
 
 
 
@@ -24,11 +26,18 @@ const Navbar = () => {
        </div>
        <ul className='flex-1 flex justify-center items-center gap-10 max-lg:hidden'>
           {NavLinks.map((item) => (
-            <li key={item.navItem} onClick={()=>navigate(item.href) }  className="nav-links">{item.navItem}
+            <li key={item.navItem} onClick={()=>navigate(item.href) }  className="nav-links flex gap-[6px] items-center justify-center">
+              <span className="text-lg">{item.navItem}</span>
+              {
+                item.dropDown? <BsCaretRightFill fontSize={13}/> : null
+              }
             </li>
           ))}
         </ul>
-        <div>
+        <div className="flex ">
+            <button>Sign Up</button>
+            <CTABTN route="/hire-talent" CTA="Hire Talent"/>
+
             {/* <BookRideButton className="mt-10 me-6 max-xsm:me-2 max-xsm:mt-8" /> */}
         </div>
     </nav>
