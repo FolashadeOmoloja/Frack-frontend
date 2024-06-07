@@ -16,7 +16,7 @@ const config: Config = {
       screens: {
         'xsm': '375px',
         'slg': '870px',
-        'xlg': '1250px'
+        'xlg': '1250px',
       },
     },
   },

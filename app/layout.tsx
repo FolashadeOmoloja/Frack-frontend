@@ -1,8 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Archivo, Archivo_Black, Inter } from "next/font/google";
+import localFont from '@next/font/local';
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
+const archivo = Archivo({
+  subsets: ["latin"],
+  
+})
+// const lotaFont = localFont({
+//   src: './public/fonts/lota-grotesque-alt-1-cufonfonts/Los-Andes-Lota-Grotesque-Alt-2-Regular.otf', 
+
+// });
 
 export const metadata: Metadata = {
   title: "Frack",
@@ -16,7 +25,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body className={archivo.className}>
+         <main className="max-w-[2400px]">{children}</main>
+      </body>
     </html>
   );
 }

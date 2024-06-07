@@ -36,7 +36,7 @@ export const NavLinks = [
        }
     },
     { navItem: "About Us", 
-        href: "about-us",
+        href: "/about-us",
        dropDown: false, 
     },
     { navItem: "Resources", 
@@ -58,7 +58,7 @@ export const NavLinks = [
        }
     },
     { navItem: "Contact Us", 
-        href: "contact-us",
+        href: "/contact-us",
        dropDown: false, 
     },
 ];
