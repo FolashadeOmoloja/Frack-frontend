@@ -1,7 +1,9 @@
+import { title } from "process";
+
 export const NavLinks = [
     { navItem: "For Companies", 
         href: "nil",
-       dropDown: true, 
+       dropDown: false, 
        dropDownOpt: [
         {
            icon: '/images/homepage/people.svg',
@@ -17,22 +19,22 @@ export const NavLinks = [
          }
       ]
     },
-    { navItem: "For Talents", 
+    { navItem: "For Talent", 
         href: "nil",
        dropDown: true, 
-      //  dropDownOpt: [
-      //   {
-      //      icon: '',
-      //      title: '',
-      //      desc: '',
-      //      href: ''
-      //   }, {
-      //       icon: '',
-      //       title: '',
-      //       desc: '',
-      //       href: ''
-      //    }
-      // ]
+       dropDownOpt: [
+        {
+           icon: '/images/homepage/recruitment.svg',
+           title: 'Find Job',
+           desc: 'Find the best Jobs in the fastest time',
+           href: ''
+        }, {
+              icon: '/images/homepage/user.svg',
+              title: 'Sign Up',
+              desc: 'Sign in to your profile',
+              href: ''
+         }
+      ]
     },
     { navItem: "About Us", 
         href: "/about-us",
@@ -40,7 +42,7 @@ export const NavLinks = [
     },
     { navItem: "Resources", 
         href: "nil",
-       dropDown: true, 
+       dropDown: false, 
       //  dropDownOpt: [
       //   {
       //      icon: '',

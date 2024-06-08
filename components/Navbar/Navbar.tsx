@@ -26,24 +26,26 @@ const Navbar = () => {
        </div>
        <ul className='flex-1 flex justify-center items-center gap-10 max-lg:hidden'>
           {NavLinks.map((item) => (
-            <li key={item.navItem} onClick={()=>navigate(item.href) }  className="relative nav-links flex gap-[6px] items-center justify-center hover:text-[#000080] transition cursor-pointer">
-              <span className="">{item.navItem}</span>
+            <li key={item.navItem} onClick={()=>navigate(item.href) }  className="relative nav-links  cursor-pointer">
+              <div className="hover:text-[#000080] flex gap-[6px] items-center justify-center transition">
+              <span >{item.navItem}</span>
               {
                 item.dropDown? <BsCaretRightFill fontSize={13}/> : null
               }
+              </div>
               {
               item.dropDown && (
-                  <ul className="absolute top-full left-0 mt-2 bg-white shadow-md rounded">
-                       <span>{item.navItem}</span>
+                  <ul className="absolute top-full left-0 mt-2 bg-white shadow-md rounded-lg px-[50px] py-[40px]  w-[27.5rem] flex flex-col gap-7">
+                       <span className="font-bold text-lg ">{item.navItem}</span>
                        {
-                        Array.isArray(item.dropDownOpt) && item.dropDownOpt.map((opt)=>(
-                          <li>
+                        Array.isArray(item.dropDownOpt) && item.dropDownOpt.map((opt,idx)=>(
+                          <li key={idx} className="flex pl-[13px] gap-5 items-center ">
                               <div>
                                   <img src={opt.icon} alt="icon" className="w-[27px] h-[27px]"/>
                               </div>
-                              <div>
-                                <span>{opt.title}</span>
-                                <p>{opt.desc}</p>
+                              <div className="">
+                                <span className="font-semibold mb-2" >{opt.title}</span>
+                                <p className="text-[#7C8698] text-sm">{opt.desc}</p>
                               </div>
                        </li>
                         ))
