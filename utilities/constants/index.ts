@@ -3,7 +3,7 @@ import { title } from "process";
 export const NavLinks = [
     { navItem: "For Companies", 
         href: "nil",
-       dropDown: false, 
+       dropDown: true, 
        dropDownOpt: [
         {
            icon: '/images/homepage/people.svg',
@@ -42,21 +42,21 @@ export const NavLinks = [
     },
     { navItem: "Resources", 
         href: "nil",
-       dropDown: false, 
-      //  dropDownOpt: [
-      //   {
-      //      icon: '',
-      //      title: '',
-      //      desc: '',
-      //      href: ''
-      //   },
-      //    {
-      //       icon: '',
-      //       title: '',
-      //       desc: '',
-      //       href: ''
-      //    }
-      // ]
+       dropDown: true, 
+       dropDownOpt: [
+        {
+           icon: '/images/homepage/computer.svg',
+           title: 'Blog',
+           desc: 'Here’s everything you’d need to begin your journey with frack.',
+           href: ''
+        },
+         {
+            icon: '/images/homepage/faq.svg',
+            title: 'Faq',
+            desc: 'Here’s a few of our frequently asked questions.',
+            href: ''
+         }
+      ]
     },
     { navItem: "Contact Us", 
         href: "/contact-us",
