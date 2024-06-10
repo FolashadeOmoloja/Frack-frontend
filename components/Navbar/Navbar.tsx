@@ -43,10 +43,12 @@ const toggleDropdown = (idx:number) => {
        <ul className='flex-1 flex justify-center items-center gap-10 max-lg:hidden'>
           {NavLinks.map((item,idx) => (
             <li key={item.navItem} onClick={()=>navigate(item.href, idx) }  className="relative nav-links  cursor-pointer">
-              <div className="hover:text-[#000080] flex gap-[6px] items-center justify-center transition">
+              <div className={`hover:text-[#000080] flex gap-[6px] items-center justify-center transition ${isOpen[idx]? 'text-[#000080]':''}`}>
               <span >{item.navItem}</span>
               {
-                item.dropDown? <BsCaretRightFill fontSize={13}/> : null
+                item.dropDown? 
+                <BsCaretRightFill fontSize={13} className={`${isOpen[idx]? 'rotate-90 transition-transform duration-[180ms] ease-linear' :''}  `}/> 
+                : null
               }
               </div>
               {

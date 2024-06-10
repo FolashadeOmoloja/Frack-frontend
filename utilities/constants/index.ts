@@ -7,7 +7,7 @@ export const NavLinks = [
        dropDownOpt: [
         {
            icon: '/images/homepage/people.svg',
-           title: 'Hire Talent',
+           title: 'Hire Talent', 
            desc: 'Find the best talents in the fastest time',
            href: ''
         },
