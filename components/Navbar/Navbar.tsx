@@ -35,10 +35,15 @@ const toggleDropdown = (idx:number) => {
 
 
   return (
-    <nav className="flex pl-16 pr-[100px] h-24">
+    <nav className="flex pl-16 pr-[100px] h-24 max-xlg:px-[50px]">
        <div>
           <Image 
-          src={"/images/homepage/fracklogo.svg"} alt={"logo"} width={191} height={96} className=""/>
+          src={"/images/homepage/frack.png"} 
+          alt={"logo"} 
+          width={191} 
+          height={96} 
+          quality={100}
+          className="" />
        </div>
        <ul className='flex-1 flex justify-center items-center gap-10 max-lg:hidden'>
           {NavLinks.map((item,idx) => (
