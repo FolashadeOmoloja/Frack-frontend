@@ -2,7 +2,9 @@ import React from 'react'
 
 const MobileNav = () => {
   return (
-    <div>MobileNav</div>
+   <nav className='lg:hidden'>
+    hi
+   </nav>
   )
 }
 

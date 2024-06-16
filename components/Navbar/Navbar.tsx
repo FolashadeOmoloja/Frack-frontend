@@ -35,7 +35,7 @@ const toggleDropdown = (idx:number) => {
 
 
   return (
-    <nav className="flex pl-16 pr-[100px] h-24 max-xlg:px-[50px]">
+    <nav className="flex pl-16 pr-[100px] h-24 max-xlg:pr-[50px] max-xlg:pl-[10px] max-lg:hidden">
        <div>
           <Image 
           src={"/images/homepage/frack.png"} 
@@ -45,7 +45,7 @@ const toggleDropdown = (idx:number) => {
           quality={100}
           className="" />
        </div>
-       <ul className='flex-1 flex justify-center items-center gap-10 max-lg:hidden'>
+       <ul className='flex-1 flex justify-center items-center gap-10 max-xlg:gap-[20px] '>
           {NavLinks.map((item,idx) => (
             <li key={item.navItem} onClick={()=>navigate(item.href, idx) }  className="relative nav-links  cursor-pointer">
               <div className={`hover:text-[#000080] flex gap-[6px] items-center justify-center transition ${isOpen[idx]? 'text-[#000080]':''}`}>
