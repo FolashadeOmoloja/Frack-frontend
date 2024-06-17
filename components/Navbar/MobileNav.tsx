@@ -51,8 +51,23 @@ const MobileNav = () => {
                 <section className='absolute  top-[96px] left-0 bottom-0 px-9 py-5 max-sm:px-4 '>
                      {
                       NavLinks.map((item,idx) =>(
-                        <ul>
-                           <li className='text-normal font-semibold text-[#000080]'>{item.navItem}</li>
+                        <ul className='' key={idx}>
+                           <li className='text-normal font-semibold text-[#000080] mb-[24px]'>{item.navItem}</li>
+                           <ul>
+                              {
+                                Array.isArray(item.dropDownOpt) && item.dropDownOpt.map((opt,idx)=>(
+                                  <li key={idx} className="flex pl-[13px] gap-5 items-center ">
+                                      <div>
+                                          <img src={opt.icon} alt="icon" className="w-[27px] h-[27px]"/>
+                                      </div>
+                                      <div className="text-sm mb-[24px]">
+                                        <span className="font-semibold mb-2" >{opt.title}</span>
+                                        <p className="text-[#7C8698] ">{opt.desc}</p>
+                                      </div>
+                               </li>
+                              ))}
+                           </ul>
+                           
                         </ul>
                       ))
                      }
