@@ -13,7 +13,7 @@ const MobileNav = () => {
     const toggleDropdown = () => {
       setisOpenDropdown(!isOpenDropdown);}
   return (
-   <nav className='lg:hidden '>
+   <nav className='lg:hidden relative '>
 
             <section className='flex justify-between items-center h-24 px-9 max-sm:px-4 max-sm:flex-row-reverse'>
               {
@@ -46,6 +46,19 @@ const MobileNav = () => {
                  </li>
              </ul>
             </section>
+            {
+              isOpen && (
+                <section className='absolute  top-[96px] left-0 bottom-0 px-9 py-5 max-sm:px-4 '>
+                     {
+                      NavLinks.map((item,idx) =>(
+                        <ul>
+                           <li className='text-normal font-semibold text-[#000080]'>{item.navItem}</li>
+                        </ul>
+                      ))
+                     }
+                </section>
+              )
+            }
    </nav>
   //           {
   //             isOpen? (
