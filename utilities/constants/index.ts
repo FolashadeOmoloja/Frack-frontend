@@ -39,6 +39,8 @@ export const NavLinks = [
     { navItem: "About Us", 
         href: "/about-us",
        dropDown: false, 
+       img: '/images/homepage/about.svg',
+       desc: 'Get to know more about us'
     },
     { navItem: "Resources", 
         href: "nil",
@@ -61,6 +63,8 @@ export const NavLinks = [
     { navItem: "Contact Us", 
         href: "/contact-us",
        dropDown: false, 
+       img: '/images/homepage/contact.svg',
+       desc: 'Contact us anytime'
     },
 ];
 

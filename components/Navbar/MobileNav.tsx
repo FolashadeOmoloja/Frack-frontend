@@ -55,7 +55,7 @@ const MobileNav = () => {
                            <li className='text-normal font-semibold text-[#000080] '>{item.navItem}</li>
                            <ul  className='flex flex-col gap-6'>
                               {
-                                Array.isArray(item.dropDownOpt) && item.dropDownOpt.map((opt,idx)=>(
+                                    item.dropDownOpt ? item.dropDownOpt.map((opt,idx)=>(
                                   <li key={idx} className="flex pl-[13px] gap-5 items-center">
                                       <div>
                                           <img src={opt.icon} alt="icon" className="w-[27px] h-[27px]"/>
@@ -65,7 +65,18 @@ const MobileNav = () => {
                                         <p className="text-[#7C8698] ">{opt.desc}</p>
                                       </div>
                                </li>
-                              ))}
+                              )): 
+                              <li className="flex pl-[13px] gap-5 items-center">
+                                      <div>
+                                          <img src={item.img} alt="icon" className="w-[27px] h-[27px]"/>
+                                      </div>
+                                      <div className="text-sm">
+                                      <span className="font-semibold mb-2 text-sm" >{item.navItem}</span>
+                                        <p className="text-[#7C8698] ">{item.desc}</p>
+                                      </div>
+                              </li>
+                              }
+
                            </ul>
                            
                         </ul>
@@ -75,40 +86,7 @@ const MobileNav = () => {
               )
             }
    </nav>
-  //           {
-  //             isOpen? (
-  //              <div
-  //              className={`${
-  //                isOpen ? 'translate-x-0' : '-translate-x-full'
-  //              } fixed inset-y-0 left-0 w-[90%] bg-color shadow-lg z-40 transform transition-transform duration-300 ease-in-out`}
-  //            >
-  //              <button
-  //                onClick={toggleSidebar}
-  //                className="absolute top-0 right-0 mt-[39px] mr-[51px]"
-  //              >
-  //                <ImCross/>
-  //              </button>
-               
-  //              <section className='flex flex-col gap-[10px]  mt-[0px] ml-[47px]'>
-  //              <ul >
-  //                   {
-  //                     NavLinks.map((item,index) =>{
-  //                       return(
-  //                         <a href={item.href} key={index} >
-  //                         {/* <li className="mobilenav-hover flex justify-between w-[210px] relative text-gray-700 mb-[20px] transition duration-300 rounded-lg pl-[10px] " key={index}>
-  //                           <div className="flex gap-2 ">
-  //                            <div className="p-2 border-[1px] border-gray-300 rounded-lg flex items-center item-icon "><span>{item.icon}</span></div>
-  //                           <span className="flex items-center">{item.page}</span>
-  //                           </div>
-  //                         </li> */}
-  //                         </a>
-  //                       )
-  //                     })
-  //                   }
-  //            </ul>
-       
-  //              </section>
-  //            </div>
+
    )
 }
 
