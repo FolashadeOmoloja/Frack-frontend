@@ -15,8 +15,6 @@ const MobileNav = () => {
 
     const toggleDropdown = () => {
       setisOpenDropdown(!isOpenDropdown);}
-      const toggleNav= () => {
-        setIsOpen(!isOpen);}
   return (
    <nav className='lg:hidden relative '>
 
@@ -51,9 +49,6 @@ const MobileNav = () => {
                  </li>
              </ul>
             </section>
-            {isOpen && (
-               <div className="fixed inset-0 z-10 bg-black opacity-30" onClick={() =>toggleNav()}></div>
-               )}
             {
                 <section className={`${isOpen ? 'translate-y-0' : '-translate-y-full'} navItem`}>
                      {
