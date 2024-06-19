@@ -4,9 +4,12 @@ import React, { useState } from 'react'
 import { BsCaretRightFill } from 'react-icons/bs';
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
 import { ImCross } from "react-icons/im";
+import CTABTN from '../Elements/CTA/CTA-Button';
+import { useRouter } from 'next/navigation';
 
 
 const MobileNav = () => {
+    const router = useRouter();
     const [isOpenDropdown, setisOpenDropdown] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
 
@@ -82,6 +85,10 @@ const MobileNav = () => {
                         </ul>
                       ))
                      }
+                      <div className="flex flex-col sm:hidden   gap-4">
+                         <button className="bg-[#22CCED] h-[55px] rounded-[6px] font-semibold" onClick={()=>{router.push('/sign-up')}}>Sign Up</button>
+                         <CTABTN width='full'  route="/hire-talent" CTA="Hire Talent"/>
+                      </div>
                 </section>
               )
             }
