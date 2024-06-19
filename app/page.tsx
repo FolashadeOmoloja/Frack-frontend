@@ -1,13 +1,10 @@
-import MobileNav from "@/components/Navbar/MobileNav";
-import Navbar from "@/components/Navbar/Navbar";
-import Image from "next/image";
+import Navbar from "@/components/Navbar/NavBar";
+
 
 export default function Home() {
   return (
     <>
-      <Navbar/>
-      <MobileNav/>
-
+    <Navbar/>
     </>
   );
 }
