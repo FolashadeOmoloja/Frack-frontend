@@ -6,11 +6,21 @@
 
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-
-  }
+::-webkit-scrollbar {
+  width: 15px;
 }
+
+
+::-webkit-scrollbar-track {
+  background: #0000801c;
+}
+
+
+::-webkit-scrollbar-thumb {
+  background: #00008060;
+  height: 30px;
+}
+
 
 
 
@@ -23,6 +33,12 @@
 @layer components {
   .navItem{
     @apply absolute overflow-y-scroll  top-[96px] left-0  px-9 py-5 max-sm:px-4  transform transition-transform duration-700 ease-in-out bg-white
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+
   }
 }
 

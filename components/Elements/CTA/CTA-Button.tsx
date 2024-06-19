@@ -13,7 +13,7 @@ height?: string
 width?: string
   }
 
-const CTABTN:React.FC<ButtonProps>  = ({className,showIcon=false,CTA,route,height='55px',width='w-[138px]'}) => {
+const CTABTN:React.FC<ButtonProps>  = ({className,showIcon=false,CTA,route,height='55px',width='w-[130px]'}) => {
 
     const router = useRouter();
 
