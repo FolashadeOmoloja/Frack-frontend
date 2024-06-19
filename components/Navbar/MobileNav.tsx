@@ -50,8 +50,7 @@ const MobileNav = () => {
              </ul>
             </section>
             {
-              isOpen && (
-                <section className='absolute overflow-y-scroll  top-[96px] left-0  px-9 py-5 max-sm:px-4 '>
+                <section className={`${isOpen ? 'translate-y-0' : '-translate-y-full'} absolute overflow-y-scroll  top-[96px] left-0  px-9 py-5 max-sm:px-4  transform transition-transform duration-700 ease-in-out`}>
                      {
                       NavLinks.map((item,idx) =>(
                         <ul className='flex flex-col gap-6 mb-6' key={idx}>
@@ -90,7 +89,6 @@ const MobileNav = () => {
                          <CTABTN width='full'  route="/hire-talent" CTA="Hire Talent"/>
                       </div>
                 </section>
-              )
             }
    </nav>
 
