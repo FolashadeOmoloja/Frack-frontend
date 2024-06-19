@@ -19,3 +19,10 @@
     text-wrap: balance;
   }
 }
+
+@layer components {
+  .navItem{
+    @apply absolute overflow-y-scroll  top-[96px] left-0  px-9 py-5 max-sm:px-4  transform transition-transform duration-700 ease-in-out bg-white
+  }
+}
+
