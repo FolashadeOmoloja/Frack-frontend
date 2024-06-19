@@ -15,10 +15,12 @@ const MobileNav = () => {
 
     const toggleDropdown = () => {
       setisOpenDropdown(!isOpenDropdown);}
+      const toggleNav= () => {
+        setIsOpen(!isOpen);}
   return (
    <nav className='lg:hidden relative '>
 
-            <section className='fixed inset-0 flex justify-between items-center h-24 px-9 max-sm:px-4 max-sm:flex-row-reverse bg-white z-10'>
+            <section className='fixed inset-0 flex justify-between items-center h-24 px-9 max-sm:px-4 max-sm:flex-row-reverse bg-white z-40'>
               {
                 isOpen ? (
                      <button onClick={()=>setIsOpen(!isOpen)} >
@@ -49,6 +51,9 @@ const MobileNav = () => {
                  </li>
              </ul>
             </section>
+            {isOpen && (
+               <div className="fixed inset-0 z-10 bg-black opacity-30" onClick={() =>toggleNav()}></div>
+               )}
             {
                 <section className={`${isOpen ? 'translate-y-0' : '-translate-y-full'} navItem`}>
                      {
