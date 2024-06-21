@@ -22,14 +22,14 @@ const Offer = () => {
   return (
    <section>
         <div className='flex flex-col items-center text-center mt-[151px] max-slg:mt-[50px]'>
-            <h2 className='font-extrabold text-[40px] mb-5'>Efficiency at Your Fingertips</h2>
-            <p className='font-light md:text-[24px] text-lg max-w-[941px] '>Say goodbye to endless hours spent searching for the perfect candidate. With Frack, companies can post their requirements on our job board and instantly access acurated list of qualified professionals from our network.</p>
+            <h2 className='font-extrabold text-[40px] max-md:text-[24px] mb-5'>Efficiency at Your Fingertips</h2>
+            <p className='font-light md:text-[24px] text-lg max-w-[941px] max-md:text-lg'>Say goodbye to endless hours spent searching for the perfect candidate. With Frack, companies can post their requirements on our job board and instantly access acurated list of qualified professionals from our network.</p>
         </div>
         <section className='md:mt-[112px] mt-[50px] flex max-xlg:flex-wrap max-slg:flex-col  justify-center items-center md:gap-16 gap-6 text-center'>
              {
                 cards.map((item,idx)=>(
                 <div key={idx} className='flex flex-col justify-center items-center max-xlg:max-w-[420px] '>
-                    <div className='mb-11 w-[328.5px] h-[250px]'>
+                    <div className='mb-11 w-[328.5px] h-[250px] max-sm:w-[280px]'>
                        <img src={item.img} alt="card" className='w-full h-full'/>
                     </div>
                      <span className='font-bold text-2xl'>{item.cardTitle}</span>
