@@ -24,9 +24,9 @@ const CTABTN:React.FC<ButtonProps>  = ({className,showIcon=false,CTA,route,heigh
     };
 
   return (
-        <button className={`${width} h-[${height}] ${backGround}  ${color} text-white rounded-[6px] flex items-center justify-center gap-2`} onClick={()=>handleSignInClick(route)}>
+        <button className={`${width} h-[${height}] ${backGround}  ${color} rounded-[6px] flex items-center justify-center gap-2 font-semibold`} onClick={()=>handleSignInClick(route)}>
             <span>{CTA}</span>
-            <span className={`text-sm text-white ${showIcon?'': 'hidden'}`}><FaArrowRight/></span>
+            <span className={`text-sm ${color} ${showIcon?'': 'hidden'}`}><FaArrowRight/></span>
         </button>
   )
 }
