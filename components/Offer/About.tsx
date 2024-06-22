@@ -3,7 +3,7 @@ import CTABTN from '../Elements/CTA/CTA-Button'
 
 const About = () => {
   return (
-    <section className='bg-[#000080] section-container flex text-white mt-[151px] max-slg:mt-[50px] xlg:py-24   py-16 relative max-slg:flex-col max-slg:items-center'>
+    <section className='bg-[#000080] section-container flex text-white   xlg:py-24   py-16 relative max-slg:flex-col max-slg:items-center'>
          <section className='xlg:max-w-[686px] max-w-[516px] max-slg:text-center'>
                <h3 className='font-bold text-[40px] max-md:text-[24px] mb-6'>Unlock the power of fractional talent with Frack.</h3>
                <p className='font-light leading-7 mb-6 '>Our AI-driven platform connects companies with top-tier professionals
