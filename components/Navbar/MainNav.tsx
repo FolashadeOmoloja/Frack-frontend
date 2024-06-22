@@ -58,7 +58,7 @@ const toggleDropdown = (idx:number) => {
               </div>
               {
               item.dropDown && isOpen[idx] && (
-                  <ul className="absolute top-full left-0 mt-2 bg-white shadow-md rounded-lg px-[50px] py-[40px]  w-[27.5rem] flex flex-col gap-7">
+                  <ul className="absolute z-20 top-full left-0 mt-2 bg-white shadow-lg rounded-lg px-[50px] py-[40px]  w-[27.5rem] flex flex-col gap-7">
                        <span className="font-bold text-lg ">{item.navItem}</span>
                        {
                         Array.isArray(item.dropDownOpt) && item.dropDownOpt.map((opt,idx)=>(

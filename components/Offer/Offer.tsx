@@ -23,7 +23,7 @@ const Offer = () => {
    <section className='section-container mt-[151px] max-slg:mt-[50px]'>
         <div className=' flex flex-col items-center text-center '>
             <h2 className='font-extrabold text-[40px] max-md:text-[24px] mb-5'>Efficiency at Your Fingertips</h2>
-            <p className='font-light md:text-[24px] text-lg max-w-[941px] max-md:text-lg'>Say goodbye to endless hours spent searching for the perfect candidate. With Frack, companies can post their requirements on our job board and instantly access acurated list of qualified professionals from our network.</p>
+            <p className='font-light md:text-[20px] text-lg max-w-[941px] max-md:text-lg'>Say goodbye to endless hours spent searching for the perfect candidate. With Frack, companies can post their requirements on our job board and instantly access acurated list of qualified professionals from our network.</p>
         </div>
         <section className='md:mt-[112px] mt-[50px] flex max-xlg:flex-wrap max-slg:flex-col  justify-center items-center md:gap-16 gap-6 text-center'>
              {
