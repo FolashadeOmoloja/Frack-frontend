@@ -28,6 +28,11 @@
   .text-balance {
     text-wrap: balance;
   }
+  .div-center{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 @layer components {
