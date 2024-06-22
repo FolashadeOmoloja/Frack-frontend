@@ -3,7 +3,7 @@
 const Footer = () => {
   return (
     <footer className="section-container ">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Column 1 */}
         <div className="col-span-1">
           <img src="/images/homepage/fracklogo.png" alt="Footer Logo" />
@@ -36,34 +36,45 @@ const Footer = () => {
 
         {/* Column 3 */}
         <div className="col-span-1">
-           <ul>
-          <li className="text-[16px] text-[#656464] font-bold">Support</li>
-          <li className="text-sm text-[#565252] mt-2 cursor-pointer font-semibold hover:text-[#0045A5]"><a href='#'>Help/FAQ</a></li>
-          <li className="text-sm text-[#565252] mt-2 cursor-pointer font-semibold hover:text-[#0045A5]"><a href='#'>Terms of Service</a></li>
-          <li className="text-sm text-[#565252] mt-2 cursor-pointer font-semibold hover:text-[#0045A5]"><a href='#'>Legal</a></li>
-          <li className="text-sm text-[#565252] mt-2 cursor-pointer font-semibold hover:text-[#0045A5]"><a href='#'>Privacy Policy</a></li>
+        <ul>
+          <li className="text-lg text-[#000080] font-bold transition mb-10 ">
+            <span>About Us</span>
+            <ul className="font-semibold text-sm mt-6">
+                <li className="hover:text-black cursor-pointer">About Frack</li>
+            </ul>
+          </li>
+          <li className="text-lg text-[#000080] font-bold transition ">
+            <span >Contact</span>
+            <ul className="font-semibold text-sm mt-6">
+                <li className="hover:text-black cursor-pointer">Contact Frack</li>
+            </ul>
+          </li>
+
            </ul>
         </div>
 
         {/* Column 4 */}
         <div className="col-span-1">
-          <span className="text-[16px] text-[#656464] font-bold">Subscribe To Our Newsletter</span>
-          <div className="flex mt-6 text-[12px]">
+          <span className="text-lg text-[#000080] font-bold">Sign up for the newsletter</span>
+          <form className="flex mt-6 text-[12px] text-[#341D74]">
             <input
               type="email"
-              placeholder="Enter Email"
-              className="w-3/4 md:w-96 h-12 p-6 bg-white text-[#565252] outline-none  rounded-l-[60px]"
+              placeholder="example@gmail.com"
+              className="w-3/4  h-12 p-5 bg-[#90919C14]  outline-none rounded-l-lg placeholder:text-sm"
             />
-            <button className="w-1/4 md:w-[200px] font-bold h-12 bg-[#0045A5] text-white rounded-r-[20px] ">
-              Subscribe
+            <button className="w-1/4 font-bold h-12 bg-[#90919C14] lg:px-4 lg:w-[100px] rounded-r-lg text-sm">
+              Sign up
             </button>
-          </div>
+          </form>
         </div>
       </div>
-      <div className='mt-[42px]  w-full h-[1px] bg-[#BFBFBF]'></div>
-      <div className='w-full  flex items-center justify-center pt-[42px]'>
-        <span className='text-[12px] text-[#565252]'>Copyright 2023 All right reserve QuickPay.com</span>
-      </div>
+      <div className='mt-[42px]  w-full h-[1px] bg-[#e7e7e7]'></div>
+        <ul className='w-full  flex justify-end text-[#000080] text-sm gap-8 py-9 max-sm:gap-5 max-sm:flex-col'>
+            <li><a href="">Sitemap</a></li>
+            <li><a href="">Security</a></li>
+            <li><a href="">Privacy Policy</a></li>
+            <li><a href="">Terms of service</a></li>
+        </ul>
     </footer>
   );
 };
