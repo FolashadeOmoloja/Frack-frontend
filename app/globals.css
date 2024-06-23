@@ -60,9 +60,11 @@
   }
 }
 
-.icon-animate {
-  animation: slideIn 0.5s ease-out;
+.button-container:hover .icon-animate {
+  animation: slideIn 0.5s ease-out forwards;
+  opacity: 1;
 }
+
 
 @media (prefers-color-scheme: light) {
   :root {
