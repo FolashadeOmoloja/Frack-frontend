@@ -63,10 +63,10 @@ const MobileNav = () => {
              </ul>
             </section>
             {
-                <section className={`${isOpen ? 'translate-y-0' : '-translate-y-full'} navItem`}>
+                <section className={`${isOpen ? 'translate-y-0 opacity-1' : '-translate-y-full opacity-0'} navItem`}>
                      {
                       NavLinks.map((item,idx) =>(
-                        <ul className={`flex flex-col ${isOpenCol[idx] ? 'gap-6' : 'gap-14'} mb-6`} key={idx}>
+                        <ul className={`flex flex-col ${isOpenCol[idx] ? 'gap-6' : 'gap-14'} mb-8`} key={idx}>
                            <li className='sm:text-lg font-semibold text-[#000080] flex justify-between' onClick={()=>{toggleCollapsible(idx)}}><span>{item.navItem}</span><span><HiMiniChevronDown /></span></li>
                            <ul  className={`flex flex-col gap-6 ${isOpenCol[idx] ? 'flex' : 'hidden'}`}>
                               {
