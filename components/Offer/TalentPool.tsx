@@ -32,7 +32,7 @@ const TalentPool = () => {
     <section className="md:mt-[108px] mt-[50px] flex flex-col md:gap-[104px] gap-9">
         {
             cards.map((item,idx) =>(
-                <div key={idx} className={`${item.bgColor} md:py-[104px] py-[50px] max-w-[1304px] div-center flex-col  gap-6 rounded-2xl max-xslg:px-7`}>
+                <div key={idx} className={`${item.bgColor} md:py-[104px] py-[50px] max-w-[1304px] div-center flex-col  gap-6 rounded-2xl max-xslg:px-7 ` }>
                         <div className="div-center gap-4 " >
                                 <div className="w-[57px] h-[57px]"><img src={item.gif} alt="gif" className="w-full h-full"/></div>
                             <span className={`${item.color} xsm:text-lg font-bold`}>{item.title}</span>

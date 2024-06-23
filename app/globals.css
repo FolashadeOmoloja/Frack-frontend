@@ -34,26 +34,6 @@
     align-items: center;
   }
 
-.slide {
-  transition: transform 0.5s ease-in-out;
-  will-change: transform;
-}
-
-.slide-enter {
-  transform: translateX(100%);
-}
-
-.slide-enter-active {
-  transform: translateX(0%);
-}
-
-.slide-exit {
-  transform: translateX(0%);
-}
-
-.slide-exit-active {
-  transform: translateX(-100%);
-}
 
 }
 
@@ -66,6 +46,22 @@
    @apply px-[100px] max-xlg:px-[50px] max-lg:px-9 max-sm:px-4 relative max-lg:top-[96px] mt-[151px] max-slg:mt-[50px]
   }
 
+
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.icon-animate {
+  animation: slideIn 0.5s ease-out;
 }
 
 @media (prefers-color-scheme: light) {

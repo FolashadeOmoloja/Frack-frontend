@@ -56,7 +56,7 @@ const Testimonials = () => {
             </section>
           </SwiperSlide>
         ))}
-        <div className="flex  gap-5 md:text-2xl text-lg mt-4 absolute bottom-0 right-0 max-slg:left-[40%] z-20">
+        <div className="flex  gap-5 md:text-2xl text-lg mt-4 absolute bottom-0 right-0 max-slg:left-[45%] z-20">
           <button className="swiper-button-prev cursor-pointer">
             <FaArrowLeft />
           </button>
