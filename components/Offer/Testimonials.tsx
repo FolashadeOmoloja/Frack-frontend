@@ -1,5 +1,8 @@
 "use client"
-import React, { useState } from 'react';
+import React from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Navigation, Autoplay } from 'swiper/modules';
+import 'swiper/css';
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 
 const testimonials = [
@@ -22,51 +25,46 @@ const testimonials = [
 ];
 
 const Testimonials = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isSliding, setIsSliding] = useState(false);
-
-  const handleNext = () => {
-    setIsSliding(true);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length);
-      setIsSliding(false);
-    }, 500); // Duration of the transition
-  };
-
-  const handlePrev = () => {
-    setIsSliding(true);
-    setTimeout(() => {
-      setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length);
-      setIsSliding(false);
-    }, 500); // Duration of the transition
-  };
-
   return (
-    <section className="section-container flex justify-between">
+    <section className="section-container flex flex-col">
       <span className='max-w-[432px] font-bold leading-10 text-[38px]'>
         What our clients say about Frack.
       </span>
-      <article>
-        <section className={`max-w-[632px] flex flex-col slide ${isSliding ? 'slide-enter' : ''}`}>
-          <p className='mb-5 leading-[29.4px] text-left tracking-[0.05em]'>
-            {testimonials[currentIndex].text}
-          </p>
-          <span className='font-bold mb-1'>
-            {testimonials[currentIndex].name}
-          </span>
-          <span className='text-[#5F5F6C] text-sm font-semibold'>
-            {testimonials[currentIndex].title}
-          </span>
-        </section>
-        <div className="flex gap-5 text-2xl mt-12 justify-end">
-          <button onClick={handlePrev}>
+      <Swiper
+      modules={[Navigation, Autoplay]}
+        spaceBetween={50}
+        slidesPerView={1}
+        navigation={{
+          nextEl: '.swiper-button-next',
+          prevEl: '.swiper-button-prev',
+        }}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        className="max-w-[632px] mt-8"
+      >
+        {testimonials.map((testimonial, index) => (
+          <SwiperSlide key={index}>
+            <section className='flex flex-col'>
+              <p className='mb-5 leading-[29.4px] text-left tracking-[0.05em]'>
+                {testimonial.text}
+              </p>
+              <span className='font-bold mb-1'>
+                {testimonial.name}
+              </span>
+              <span className='text-[#5F5F6C] text-sm font-semibold'>
+                {testimonial.title}
+              </span>
+            </section>
+          </SwiperSlide>
+        ))}
+        <div className="flex justify-end gap-5 text-2xl mt-12">
+          <button className="swiper-button-prev">
             <FaArrowLeft />
           </button>
-          <button onClick={handleNext}>
+          <button className="swiper-button-next">
             <FaArrowRight />
           </button>
         </div>
-      </article>
+      </Swiper>
     </section>
   );
 }
