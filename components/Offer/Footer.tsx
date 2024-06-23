@@ -3,7 +3,7 @@
 const Footer = () => {
   return (
     <footer className="section-container ">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-4 xslg:gap-8 gap-6">
         {/* Column 1 */}
         <div className="col-span-1">
           <img src="/images/homepage/fracklogo.png" alt="Footer Logo" />

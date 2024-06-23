@@ -5,6 +5,7 @@ import CTA from "@/components/Offer/CTA";
 import Footer from "@/components/Offer/Footer";
 import Offer from "@/components/Offer/Offer";
 import TalentPool from "@/components/Offer/TalentPool";
+import Testimonials from "@/components/Offer/Testimonials";
 
 
 export default function Home() {
@@ -15,6 +16,7 @@ export default function Home() {
      <Offer/>
      <About/>
      <TalentPool/>
+     <Testimonials/>
      <CTA/>
      <Footer/>
     </>
