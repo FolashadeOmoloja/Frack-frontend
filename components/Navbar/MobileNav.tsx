@@ -2,19 +2,32 @@
 import { NavLinks } from '@/utilities/constants';
 import React, { useState } from 'react'
 import { BsCaretRightFill } from 'react-icons/bs';
-import { HiMiniBars3BottomLeft } from "react-icons/hi2";
+import { HiMiniBars3BottomLeft, HiMiniChevronDown } from "react-icons/hi2";
 import { ImCross } from "react-icons/im";
 import CTABTN from '../Elements/CTA/CTA-Button';
 import { useRouter } from 'next/navigation';
 
 
+type IsOpenState = {
+  [key: number]: boolean;
+};
+
 const MobileNav = () => {
     const router = useRouter();
     const [isOpenDropdown, setisOpenDropdown] = useState(false);
     const [isOpen, setIsOpen] = useState(false);
+    const [isOpenCol, setIsOpenCol] = useState<IsOpenState>({});
 
     const toggleDropdown = () => {
       setisOpenDropdown(!isOpenDropdown);}
+    const toggleCollapsible = (idx:number) => {
+           setIsOpenCol((prev) => {
+             const newState: IsOpenState = {};
+             newState[idx] = !prev[idx];
+             return newState;
+           });
+
+};
   return (
    <nav className='lg:hidden relative '>
 
@@ -53,9 +66,9 @@ const MobileNav = () => {
                 <section className={`${isOpen ? 'translate-y-0' : '-translate-y-full'} navItem`}>
                      {
                       NavLinks.map((item,idx) =>(
-                        <ul className='flex flex-col gap-6 mb-6' key={idx}>
-                           <li className='text-normal font-semibold text-[#000080] '>{item.navItem}</li>
-                           <ul  className='flex flex-col gap-6'>
+                        <ul className={`flex flex-col ${isOpenCol[idx] ? 'gap-6' : 'gap-14'} mb-6`} key={idx}>
+                           <li className='sm:text-lg font-semibold text-[#000080] flex justify-between' onClick={()=>{toggleCollapsible(idx)}}><span>{item.navItem}</span><span><HiMiniChevronDown /></span></li>
+                           <ul  className={`flex flex-col gap-6 ${isOpenCol[idx] ? 'flex' : 'hidden'}`}>
                               {
                                     item.dropDownOpt ? item.dropDownOpt.map((opt,idx)=>(
                                   <li key={idx} className="flex pl-[13px] gap-5 items-center">
