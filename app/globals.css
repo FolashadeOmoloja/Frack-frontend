@@ -34,7 +34,6 @@
     align-items: center;
   }
 
-
 }
 
 @layer components {
@@ -45,9 +44,20 @@
   .section-container{
    @apply px-[100px] max-xlg:px-[50px] max-lg:px-9 max-sm:px-4 relative max-lg:top-[96px] mt-[151px] max-slg:mt-[50px]
   }
+   
+  .bg-text{
+    @apply bg-gradient-to-r from-[#22CCED] via-[#1995CF]  to-[#000080] text-transparent bg-clip-text
+  }
+
+  .about-section{
+    @apply md:text-[70px] text-[42px] md:leading-[91px] font-extrabold flex flex-col sm:justify-start  items-center my-[130px] max-sm:px-9 max-sm:text-[30px] max-xsm:text-2xl max-sm:my-8 relative max-sm:top-[96px]
+  }
 
 
 }
+
+
+
 
 @keyframes slideIn {
   from {
