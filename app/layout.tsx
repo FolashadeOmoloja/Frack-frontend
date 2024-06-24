@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Archivo_Black, Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/Offer/Footer";
+import Footer from "@/components/LandingPage/Offer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const archivo = Archivo({

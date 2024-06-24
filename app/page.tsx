@@ -1,10 +1,10 @@
-import Header from "@/components/Herosection/Header";
-import Navbar from "@/components/Navbar/NavBar";
-import About from "@/components/Offer/About";
-import CTA from "@/components/Offer/CTA";
-import Offer from "@/components/Offer/Offer";
-import TalentPool from "@/components/Offer/TalentPool";
-import Testimonials from "@/components/Offer/Testimonials";
+import Header from "@/components/LandingPage/Herosection/Header";
+import Navbar from "@/components/LandingPage/Navbar/NavBar";
+import About from "@/components/LandingPage/Offer/About";
+import CTA from "@/components/LandingPage/Offer/CTA";
+import Offer from "@/components/LandingPage/Offer/Offer";
+import TalentPool from "@/components/LandingPage/Offer/TalentPool";
+import Testimonials from "@/components/LandingPage/Offer/Testimonials";
 
 
 export default function Home() {

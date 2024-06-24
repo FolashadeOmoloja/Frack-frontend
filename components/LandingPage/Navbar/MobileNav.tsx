@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import { BsCaretRightFill } from 'react-icons/bs';
 import { HiMiniBars3BottomLeft, HiMiniChevronDown } from "react-icons/hi2";
 import { ImCross } from "react-icons/im";
-import CTABTN from '../Elements/CTA/CTA-Button';
+import CTABTN from '../../Elements/CTA/CTA-Button';
 import { useRouter } from 'next/navigation';
 
 

@@ -1,4 +1,4 @@
-import CTABTN from "../Elements/CTA/CTA-Button"
+import CTABTN from "../../Elements/CTA/CTA-Button"
 
 
 const CTA = () => {

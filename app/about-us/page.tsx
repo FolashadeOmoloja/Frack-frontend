@@ -1,5 +1,5 @@
-import Header from "@/components/Herosection/Header";
-import Navbar from "@/components/Navbar/NavBar";
+import Header from "@/components/LandingPage/Herosection/Header";
+import Navbar from "@/components/LandingPage/Navbar/NavBar";
 
 export default function AboutPage()  {
 return (

@@ -3,7 +3,7 @@ import { NavLinks } from "@/utilities/constants"
 import Image from "next/image"
 import { useRouter } from "next/navigation";
 import { BsCaretRightFill } from "react-icons/bs";
-import CTABTN from "../Elements/CTA/CTA-Button";
+import CTABTN from "../../Elements/CTA/CTA-Button";
 import { useState } from "react";
 
 type IsOpenState = {

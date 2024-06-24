@@ -1,6 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
-import CTABTN from '../Elements/CTA/CTA-Button'
+import CTABTN from '../../Elements/CTA/CTA-Button'
 
 const Header = () => {
   return (
