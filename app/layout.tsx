@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Archivo, Archivo_Black, Inter } from "next/font/google";
 import "./globals.css";
+import Footer from "@/components/Offer/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 const archivo = Archivo({
@@ -22,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${archivo.className} `}>
-         <main className="max-w-[2400px] mx-auto">{children}</main>
+         <main className="max-w-[2400px] mx-auto">
+          {children}
+          <Footer/>
+          </main>
       </body>
     </html>
   );
