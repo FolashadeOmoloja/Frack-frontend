@@ -13,6 +13,11 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
           'custom-bg': "url('/images/homepage/background.svg')",
+          'picture-bg': "url('/images/homepage/picturebg.svg')",
+      },
+      backgroundPosition: {
+        'right-medium': 'right center',
+        'right-lg': 'right center',
       },
       screens: {
         'xsm': '375px',

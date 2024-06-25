@@ -53,6 +53,10 @@
     @apply md:text-[70px] text-[42px] md:leading-[91px] font-extrabold flex flex-col sm:justify-start  items-center my-[130px]  max-sm:px-9 max-sm:text-[36px] max-xsm:text-2xl max-md:my-8 relative max-md:top-[96px]
   }
 
+  .picture-background{
+    @apply h-[500px] relative max-lg:top-[96px] mt-[151px] max-slg:mt-[50px] bg-picture-bg bg-cover bg-no-repeat w-full bg-center md:bg-right lg:bg-right max-md:h-[400px] max-sm:h-[350px]
+  }
+
 
 }
 

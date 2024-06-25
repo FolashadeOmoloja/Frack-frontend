@@ -24,7 +24,7 @@ const items = [
 
 const Grid = () => {
   return (
-    <section className="section-container md:mt-0 mt-[150px]  flex max-lg:flex-col gap-10">
+    <section className="section-container md:mt-0 mt-24  flex max-lg:flex-col gap-10">
          <div className="max-sm:text-center">
              <span className="font-semibold leading-[26.4px] md:text-2xl text-[20px] max-sm:text-lg text-[#161519] mb-4">Our Mission</span>
              <p className="font-bold text-[52px] leading-[52px] text-[#111013] lg:max-w-[408px] max-md:text-[38px] max-sm:text-3xl max-xsm:text-[22px]">Empowering Companies to Build Their Dream Teams</p>
