@@ -5,6 +5,7 @@ import PictureBg from "@/components/AboutUs/PictureBg";
 import Testimonials from "@/components/LandingPage/Offer/Testimonials";
 import CTA from "@/components/LandingPage/Offer/CTA";
 import HireTalentSection from "@/components/AboutUs/HireTalentSection";
+import OurValues from "@/components/AboutUs/OurValues";
 
 export default function AboutPage()  {
 return (
@@ -13,6 +14,7 @@ return (
           <AboutHeader/>
           <Grid/>
           <PictureBg/>
+          <OurValues/>
           <HireTalentSection/>
           <Testimonials/>
           <CTA/>

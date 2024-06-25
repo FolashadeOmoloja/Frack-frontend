@@ -4,7 +4,7 @@ import CTABTN from "../Elements/CTA/CTA-Button"
 const HireTalentSection = () => {
   return (
     <section className="section-container ">
-          <section className="bg-[#E7E4DE] sm:py-[120px] py-20 sm:px-24 px-8 max-xsm:px-5  rounded-2xl flex max-slg:flex-col-reverse justify-between gap-24 max-slg:gap-10">
+          <section className="bg-[#E7E4DE] sm:py-[120px] py-20 max-sm:py-12 sm:px-24 px-8 max-xsm:px-5  rounded-2xl flex max-slg:flex-col-reverse justify-between gap-24 max-slg:gap-10">
                  <article>
                      <h3 className='font-bold text-[40px] max-md:text-[24px] mb-8 text-[#111013] slg:w-[350px] max-slg:text-center'>Let us help you get the best opportunities. </h3>
                      <div className='mt-8 max-slg:justify-center flex'>
