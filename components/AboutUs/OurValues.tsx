@@ -12,11 +12,11 @@ const OurValues = () => {
                  </p> 
           </section>
           <section  className='flex justify-between gap-24 max-md:mb-[100px] max-sm:mb-[70px]'>
-                   <div className=' 2xl:basis-9/12'>
+                   <div className=' 2xl:basis-[70%]'>
                        <img src="/images/homepage/ourvalues-pic1.svg" alt="img" className='2xl:w-full'/>
                    </div>
-                   <div className='max-slg:hidden 2xl:basis-[25%]'>
-                       <img src="/images/homepage/ourvalues-pic2.svg" alt="img" className='2xl:w-full/>
+                   <div className='max-slg:hidden 2xl:basis-[30%]'>
+                       <img src="/images/homepage/ourvalues-pic2.svg" alt="img" className='2xl:w-full 2xl:h-full'/>
                    </div>
           </section>
     </section>

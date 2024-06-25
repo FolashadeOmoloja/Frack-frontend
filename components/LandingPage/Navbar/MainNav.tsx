@@ -43,7 +43,7 @@ const toggleDropdown = (idx:number) => {
           width={191} 
           height={96} 
           quality={100}
-          className="w-auto h-auto" />
+          className="" />
        </div>
        <ul className='flex-1 flex justify-center items-center gap-10 max-xlg:gap-[20px] '>
           {NavLinks.map((item,idx) => (
