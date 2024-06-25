@@ -24,19 +24,19 @@ const items = [
 
 const Grid = () => {
   return (
-    <section className="section-container mt-0 flex max-lg:flex-col gap-10">
-         <div>
-             <span className="font-semibold leading-[26.4px] text-2xl text-[#161519] mb-4">Our Mission</span>
-             <p className="font-bold text-[52px] leading-[52px] text-[#111013] lg:max-w-[408px]">Empowering Companies to Build Their Dream Teams</p>
+    <section className="section-container md:mt-0 mt-[150px]  flex max-lg:flex-col gap-10">
+         <div className="max-sm:text-center">
+             <span className="font-semibold leading-[26.4px] md:text-2xl text-[20px] max-sm:text-lg text-[#161519] mb-4">Our Mission</span>
+             <p className="font-bold text-[52px] leading-[52px] text-[#111013] lg:max-w-[408px] max-md:text-[38px] max-sm:text-3xl max-xsm:text-[22px]">Empowering Companies to Build Their Dream Teams</p>
         </div>   
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
               {
                 items.map((item,index)=>{
                     return(
                         <div key={index} className=" col-span-1  flex flex-col  max-md:items-center max-md:text-center border-l border-[#3b3b4e] pl-6">
-                            <span className="text-[#60606B] font-semibold mb-4">{item.num}.</span>
-                            <span className="text-[#111013] text-2xl font-bold mb-5 min-h-16">{item.title}</span>
-                            <p className="text-[#161519] tracking-[0.02em] leading-7">{item.txt}</p>
+                            <span className="text-[#000080] font-semibold mb-4">{item.num}.</span>
+                            <span className="text-[#111013] text-2xl max-xsm:text-lg font-bold mb-5 sm:min-h-16">{item.title}</span>
+                            <p className="text-[#161519] tracking-[0.02em] leading-7 max-sm:text-[15px]">{item.txt}</p>
                         </div>
                     )
                 })
