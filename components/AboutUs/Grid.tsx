@@ -24,12 +24,12 @@ const items = [
 
 const Grid = () => {
   return (
-    <section className="section-container flex max-lg:flex-col gap-10">
+    <section className="section-container mt-0 flex max-lg:flex-col gap-10">
          <div>
              <span className="font-semibold leading-[26.4px] text-2xl text-[#161519] mb-4">Our Mission</span>
              <p className="font-bold text-[52px] leading-[52px] text-[#111013] lg:max-w-[408px]">Empowering Companies to Build Their Dream Teams</p>
         </div>   
-        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4">
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">
               {
                 items.map((item,index)=>{
                     return(
