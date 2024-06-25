@@ -33,7 +33,7 @@ const Grid = () => {
               {
                 items.map((item,index)=>{
                     return(
-                        <div key={index} className=" col-span-1  flex flex-col  max-md:items-center max-md:text-center border-l border-[#3b3b4e] pl-6">
+                        <div key={index} className=" col-span-1  flex flex-col  max-sm:items-center max-sm:text-center border-l border-[#3b3b4e] pl-6">
                             <span className="text-[#000080] font-semibold mb-4">{item.num}.</span>
                             <span className="text-[#111013] text-2xl max-xsm:text-lg font-bold mb-5 sm:min-h-16">{item.title}</span>
                             <p className="text-[#161519] tracking-[0.02em] leading-7 max-sm:text-[15px]">{item.txt}</p>

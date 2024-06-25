@@ -1,4 +1,4 @@
-import React from 'react'
+
 
 const cards = [{
     img: '/images/homepage/delivery.svg',
