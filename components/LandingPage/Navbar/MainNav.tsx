@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { BsCaretRightFill } from "react-icons/bs";
 import CTABTN from "../../Elements/CTA/CTA-Button";
 import { useState } from "react";
+import Link from "next/link";
 
 type IsOpenState = {
   [key: number]: boolean;
@@ -47,7 +48,7 @@ const toggleDropdown = (idx:number) => {
        </div>
        <ul className='flex-1 flex justify-center items-center gap-10 max-xlg:gap-[20px] '>
           {NavLinks.map((item,idx) => (
-            <li key={item.navItem} onClick={()=>navigate(item.href, idx) }  className={`relative cursor-pointer ${activeItem === idx ? 'text-[#000080] font-semibold': ''}`}>
+            <Link href={item.href} key={item.navItem} onClick={()=>navigate(item.href, idx) }  className={`relative cursor-pointer ${activeItem === idx ? 'text-[#000080] font-semibold': ''}`}>
               <div className={`hover:text-[#000080] flex gap-[6px] items-center justify-center transition ${isOpen[idx]? 'text-[#000080]':''}`}>
               <span >{item.navItem}</span>
               {
@@ -76,7 +77,7 @@ const toggleDropdown = (idx:number) => {
                   </ul>
               )
               }
-            </li>
+            </Link>
           ))}
         </ul>
         <div className="flex items-center  gap-10">
