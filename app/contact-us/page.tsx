@@ -1,12 +1,13 @@
-import Navbar from "@/components/LandingPage/Navbar/NavBar"
-
+import ContactHeader from "@/components/Contact/ContactHeader";
+import Navbar from "@/components/LandingPage/Navbar/NavBar";
 
 const ContactUs = () => {
   return (
     <>
-               <Navbar activeItem={4}/>
+      <Navbar activeItem={4} />
+      <ContactHeader />
     </>
-  )
-}
+  );
+};
 
-export default ContactUs
+export default ContactUs;
