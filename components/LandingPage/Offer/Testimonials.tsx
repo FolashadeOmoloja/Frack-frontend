@@ -26,7 +26,9 @@ const testimonials = [
 
 const Testimonials = ({ color }: { color?: string }) => {
   return (
-    <section className="section-container flex  max-xslg:gap-7 max-slg:gap-14  max-slg:flex-col justify-between max-slg:items-center">
+    <section
+      className={`section-container flex  max-xslg:gap-7 max-slg:gap-14  max-slg:flex-col justify-between max-slg:items-center ${color}`}
+    >
       <span className="max-w-[432px] font-bold leading-10 text-[38px] max-slg:text-center max-md:text-[24px]">
         What our clients say about Frack.
       </span>
@@ -48,7 +50,7 @@ const Testimonials = ({ color }: { color?: string }) => {
                 {testimonial.text}
               </p>
               <span className="font-bold mb-1">{testimonial.name}</span>
-              <span className="text-[#5F5F6C] text-sm font-semibold">
+              <span className={`text-[#5F5F6C] text-sm font-semibold ${color}`}>
                 {testimonial.title}
               </span>
             </section>
