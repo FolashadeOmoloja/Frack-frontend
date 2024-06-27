@@ -3,7 +3,6 @@
 @tailwind utilities;
 
 :root {
-
 }
 
 /* ::-webkit-scrollbar {
@@ -21,47 +20,42 @@
   height: 30px;
 } */
 
-
-
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
   }
-  .div-center{
+  .div-center {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-
 }
 
 @layer components {
-  .navItem{
-    @apply fixed  top-[96px] left-0 bottom-0 px-9 py-5 max-sm:px-4  transform transition-transform duration-700 ease-in-out bg-white z-30 w-full 
+  .navItem {
+    @apply fixed  top-[96px] left-0 bottom-0 px-9 py-5 max-sm:px-4  transform transition-transform duration-700 ease-in-out bg-white z-30 w-full;
   }
 
-  .section-container{
-   @apply px-[100px] max-xlg:px-[50px] max-lg:px-9 max-sm:px-4 relative max-lg:top-[96px] mt-[151px] max-slg:mt-[50px]
-  }
-   
-  .bg-text{
-    @apply bg-gradient-to-r from-[#22CCED] via-[#1995CF]  to-[#000080] text-transparent bg-clip-text
+  .section-container {
+    @apply px-[100px] max-xlg:px-[50px] max-lg:px-9 max-sm:px-4 relative max-lg:top-[96px] mt-[151px] max-slg:mt-[50px];
   }
 
-  .about-section{
-    @apply md:text-[70px] text-[42px] md:leading-[91px] font-extrabold flex flex-col sm:justify-start  items-center my-[130px]  max-sm:px-9 max-sm:text-[36px] max-xsm:text-2xl max-md:my-8 relative max-md:top-[96px]
+  .bg-text {
+    @apply bg-gradient-to-r from-[#22CCED] via-[#1995CF]  to-[#000080] text-transparent bg-clip-text;
   }
 
-  .picture-background{
-    @apply h-[500px] relative max-lg:top-[96px] mt-[151px] max-slg:mt-[50px] bg-picture-bg bg-cover bg-no-repeat w-full bg-center md:bg-right lg:bg-right max-md:h-[400px] max-sm:h-[350px]
+  .about-section {
+    @apply md:text-[70px] text-[42px] md:leading-[91px] font-extrabold flex flex-col sm:justify-start  items-center my-[130px]  max-sm:px-9 max-sm:text-[36px] max-xsm:text-2xl max-md:my-8 relative max-md:top-[96px];
   }
 
+  .picture-background {
+    @apply h-[500px] relative max-lg:top-[96px] mt-[151px] max-slg:mt-[50px] bg-picture-bg bg-cover bg-no-repeat w-full bg-center md:bg-right lg:bg-right max-md:h-[400px] max-sm:h-[350px];
+  }
 
+  .headingspan {
+    @apply font-semibold leading-[26.4px] md:text-2xl text-[20px] max-sm:text-lg text-[#161519] mb-4;
+  }
 }
-
-
-
 
 @keyframes slideIn {
   from {
@@ -79,10 +73,7 @@
   opacity: 1;
 }
 
-
 @media (prefers-color-scheme: light) {
   :root {
-
   }
 }
-
