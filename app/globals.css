@@ -55,6 +55,10 @@
   .headingspan {
     @apply font-semibold leading-[26.4px] md:text-2xl text-[20px] max-sm:text-lg text-[#161519] mb-4;
   }
+
+  .contact-input {
+    @apply w-full h-[47px] rounded-md py-[10px] px-4 bg-white outline-none text-black placeholder:text-[#696969];
+  }
 }
 
 @keyframes slideIn {
