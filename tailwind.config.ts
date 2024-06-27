@@ -13,6 +13,7 @@ const config: Config = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
         "custom-bg": "url('/images/homepage/background.svg')",
+        "contact-bg": "url('/images/homepage/CTAContact.svg')",
         "picture-bg": "url('/images/homepage/picturebg.svg')",
         "custom-linear-gradient":
           "linear-gradient(90deg, #000080 0%, #22CCED 49.5%, #000080 100%)",
