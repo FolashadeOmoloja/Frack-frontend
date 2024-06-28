@@ -24,12 +24,24 @@ const testimonials = [
   // Add more testimonials as needed
 ];
 
-const Testimonials = ({ color }: { color?: string }) => {
+const Testimonials = ({
+  color,
+  textCenter = true,
+}: {
+  color?: string;
+  textCenter?: boolean;
+}) => {
   return (
     <section
-      className={`section-container flex  max-xslg:gap-7 max-slg:gap-14  max-slg:flex-col justify-between max-slg:items-center ${color}`}
+      className={`section-container flex  max-xslg:gap-7 max-slg:gap-14  max-slg:flex-col justify-between ${
+        textCenter ? "max-slg:items-center" : ""
+      } ${color}`}
     >
-      <span className="max-w-[432px] font-bold leading-10 text-[38px] max-slg:text-center max-md:text-[24px]">
+      <span
+        className={`max-w-[432px] font-bold leading-10 text-[38px] ${
+          textCenter ? "max-slg:text-center" : ""
+        } max-md:text-[24px]`}
+      >
         What our clients say about Frack.
       </span>
       <Swiper
