@@ -28,6 +28,7 @@ const config: Config = {
         sslg: "980px",
         xslg: "1100px",
         xlg: "1250px",
+        xxl: "1440px",
       },
     },
   },

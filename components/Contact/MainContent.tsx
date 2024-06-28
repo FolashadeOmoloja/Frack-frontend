@@ -5,7 +5,7 @@ import Form from "./Form";
 const MainContent = () => {
   return (
     <main className="bg-[#000080] mt-[151px] max-slg:mt-[50px] pt-1">
-      <section className="section-container flex max-lg:flex-col text-white gap-10">
+      <section className="section-container flex max-lg:flex-col text-white gap-10  xslg:justify-between ">
         <div>
           <h3 className="font-bold text-2xl">Talk to us.</h3>
           <p className="mt-4 text-wrap">
