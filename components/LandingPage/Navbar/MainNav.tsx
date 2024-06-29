@@ -76,11 +76,8 @@ const MainNav = ({ activeItem }: { activeItem?: number }) => {
                   <span className="font-bold text-lg ">{item.navItem}</span>
                   {Array.isArray(item.dropDownOpt) &&
                     item.dropDownOpt.map((opt, idx) => (
-                      <Link href={opt.href}>
-                        <li
-                          key={idx}
-                          className="flex pl-[13px] gap-5 items-center "
-                        >
+                      <Link href={opt.href} key={idx}>
+                        <li className="flex pl-[13px] gap-5 items-center ">
                           <div>
                             <img
                               src={opt.icon}
