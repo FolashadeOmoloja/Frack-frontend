@@ -61,7 +61,7 @@
   }
 
   .header-headline {
-    @apply font-bold text-[72px] max-xslg:text-[52px] leading-[52px] text-[#111013]  max-md:text-[38px] max-sm:text-3xl  max-xsm:text-center text-wrap;
+    @apply font-bold text-[72px] max-xslg:text-[52px]  text-[#111013]  max-md:text-[38px] max-sm:text-3xl  max-xsm:text-center text-wrap;
   }
 
   .header-headline-span {
