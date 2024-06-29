@@ -1,5 +1,3 @@
-import { title } from "process";
-
 export const NavLinks = [
   {
     navItem: "For Companies",
@@ -55,13 +53,13 @@ export const NavLinks = [
         icon: "/images/homepage/computer.svg",
         title: "Blog",
         desc: "Here’s everything you’d need to begin your journey with frack.",
-        href: "",
+        href: "/blog",
       },
       {
         icon: "/images/homepage/faq.svg",
         title: "Faq",
         desc: "Here’s a few of our frequently asked questions.",
-        href: "",
+        href: "/faq",
       },
     ],
   },
