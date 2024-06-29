@@ -16,7 +16,7 @@ export const NavLinks = [
         icon: "/images/homepage/support.svg",
         title: "Success Story ",
         desc: "Here’s how we handle business",
-        href: "",
+        href: "success-story",
       },
     ],
   },

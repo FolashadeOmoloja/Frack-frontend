@@ -76,24 +76,26 @@ const MainNav = ({ activeItem }: { activeItem?: number }) => {
                   <span className="font-bold text-lg ">{item.navItem}</span>
                   {Array.isArray(item.dropDownOpt) &&
                     item.dropDownOpt.map((opt, idx) => (
-                      <li
-                        key={idx}
-                        className="flex pl-[13px] gap-5 items-center "
-                      >
-                        <div>
-                          <img
-                            src={opt.icon}
-                            alt="icon"
-                            className="w-[27px] h-[27px]"
-                          />
-                        </div>
-                        <div className="">
-                          <span className="font-semibold mb-2">
-                            {opt.title}
-                          </span>
-                          <p className="text-[#7C8698] text-sm">{opt.desc}</p>
-                        </div>
-                      </li>
+                      <Link href={opt.href}>
+                        <li
+                          key={idx}
+                          className="flex pl-[13px] gap-5 items-center "
+                        >
+                          <div>
+                            <img
+                              src={opt.icon}
+                              alt="icon"
+                              className="w-[27px] h-[27px]"
+                            />
+                          </div>
+                          <div className="">
+                            <span className="font-semibold mb-2">
+                              {opt.title}
+                            </span>
+                            <p className="text-[#7C8698] text-sm">{opt.desc}</p>
+                          </div>
+                        </li>
+                      </Link>
                     ))}
                 </ul>
               )}
