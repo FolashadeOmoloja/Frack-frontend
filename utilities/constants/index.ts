@@ -116,3 +116,36 @@ export const successStories = [
       "Hiring through Frack has been a game-changer for us. The talent we found here has helped drive our marketing efforts to new heights.",
   },
 ];
+
+export const faqs = [
+  {
+    img: "images/homepage/icon.svg",
+    title: "What is Frack?",
+    p: "Frack is a platform where companies can post their requirements on our job board and instantly access a curated list of qualified professionals from our network.",
+  },
+  {
+    img: "images/homepage/icon1.svg",
+    title: "How does Frack work?",
+    p: "Companies post their job requirements on Frack, and our system matches them with a curated list of qualified professionals from our extensive network.",
+  },
+  {
+    img: "images/homepage/icon2.svg",
+    title: "What types of professionals are available on Frack?",
+    p: "Frack features a wide range of professionals including software developers, project managers, designers, marketers, and more, all curated to meet your specific requirements.",
+  },
+  {
+    img: "images/homepage/icon3.svg",
+    title: "How quickly can I find professionals on Frack?",
+    p: "With Frack, you can instantly access a curated list of qualified professionals as soon as you post your job requirements on our platform.",
+  },
+  {
+    img: "images/homepage/icon4.svg",
+    title: "Is there a fee to use Frack?",
+    p: "Frack offers various pricing plans to suit your needs. You can choose a plan that best fits your hiring requirements and budget.",
+  },
+  {
+    img: "images/homepage/icon5.svg",
+    title: "How does Frack ensure the quality of professionals?",
+    p: "Frack uses a thorough vetting process to ensure that all professionals in our network are highly qualified and meet the specific needs of your job requirements.",
+  },
+];
