@@ -73,3 +73,48 @@ export const NavLinks = [
     desc: "Contact us anytime",
   },
 ];
+
+export const successStories = [
+  {
+    img: "/images/homepage/avatar1.jpg",
+    title: "CEO",
+    name: "John Doe",
+    review:
+      "Thanks to Frack, we successfully hired top-notch professionals who have significantly contributed to our company’s growth.",
+  },
+  {
+    img: "/images/homepage/avatar2.png",
+    title: "CTO",
+    name: "Jane Smith",
+    review:
+      "Our recent hires through Frack have been exceptional, bringing innovation and expertise to our technology team.",
+  },
+  {
+    img: "/images/homepage/avatar1.jpg",
+    title: "HR Manager",
+    name: "Michael Brown",
+    review:
+      "Frack made our hiring process seamless, allowing us to find qualified candidates quickly and efficiently.",
+  },
+  {
+    img: "/images/homepage/avatar2.png",
+    title: "Project Manager",
+    name: "Emily Johnson",
+    review:
+      "We found the perfect match for our team through Frack. The professionals hired have exceeded our expectations.",
+  },
+  {
+    img: "/images/homepage/avatar1.jpg",
+    title: "Operations Head",
+    name: "David Wilson",
+    review:
+      "Our experience with Frack has been outstanding. The professionals we hired are skilled and have integrated well into our team.",
+  },
+  {
+    img: "/images/homepage/avatar2.png",
+    title: "Marketing Director",
+    name: "Sarah Lee",
+    review:
+      "Hiring through Frack has been a game-changer for us. The talent we found here has helped drive our marketing efforts to new heights.",
+  },
+];
