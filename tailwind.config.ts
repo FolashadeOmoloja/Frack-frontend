@@ -17,6 +17,7 @@ const config: Config = {
         "picture-bg": "url('/images/homepage/picturebg.svg')",
         "custom-linear-gradient":
           "linear-gradient(90deg, #000080 0%, #22CCED 49.5%, #000080 100%)",
+        "faq-gradient": "linear-gradient(180deg, #000080 0%, #00002F 96.94%)",
       },
       backgroundPosition: {
         "right-medium": "right center",
