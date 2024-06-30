@@ -1,41 +1,57 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Filter from "./Filter";
 import { blogPosts } from "@/utilities/constants";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 
 const BlogPost = () => {
-  let startCounter = 0;
-  let endCounter = 9;
-  const [slicedBlogPosts, setSlicedBlogPost] = useState(
+  const [startCounter, setStartCounter] = useState(0);
+  const [endCounter, setEndCounter] = useState(9);
+  const [slicedBlogPosts, setSlicedBlogPosts] = useState(
     blogPosts.slice(startCounter, endCounter)
   );
-  const nextpagination = () => {
-    startCounter += 9;
-    endCounter += 9;
-    console.log(startCounter, endCounter);
-    setSlicedBlogPost(blogPosts.slice(startCounter, endCounter));
-    console.log(slicedBlogPosts);
-  };
-  //   console.log(slicedBlogPosts);
   const [filteredPosts, setFilteredPosts] = useState(slicedBlogPosts);
+
+  const nextPagination = () => {
+    const newStartCounter = startCounter + 9;
+    const newEndCounter = endCounter + 9;
+    setStartCounter(newStartCounter);
+    setEndCounter(newEndCounter);
+  };
+
+  useEffect(() => {
+    const newSlicedBlogPosts = blogPosts.slice(startCounter, endCounter);
+    setSlicedBlogPosts(newSlicedBlogPosts);
+    setFilteredPosts(newSlicedBlogPosts);
+  }, [startCounter, endCounter]);
 
   return (
     <section className="section-container">
       <div className="mb-10 flex justify-between max-md:flex-col">
         <Filter onFilter={setFilteredPosts} blogPosts={slicedBlogPosts} />
         <div className="flex items-center gap-3 w-full md:justify-end">
-          <p>Showing {blogPosts.length} results</p>
+          <p>
+            Showing {startCounter + 1} - {endCounter} of {blogPosts.length}{" "}
+            results
+          </p>
           {startCounter !== 0 && (
-            <button className="paginationBlogBtn ml-3">
+            <button
+              className="paginationBlogBtn ml-3"
+              onClick={() => {
+                setStartCounter(startCounter - 9);
+                setEndCounter(endCounter - 9);
+              }}
+            >
               <FaAngleDoubleLeft />
               <span>Prev</span>
             </button>
           )}
-          <button className="paginationBlogBtn" onClick={nextpagination}>
-            <span>Next</span>
-            <FaAngleDoubleRight />
-          </button>
+          {endCounter !== blogPosts.length && (
+            <button className="paginationBlogBtn" onClick={nextPagination}>
+              <span>Next</span>
+              <FaAngleDoubleRight />
+            </button>
+          )}
         </div>
       </div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
