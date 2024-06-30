@@ -205,4 +205,58 @@ export const blogPosts = [
     title: "How to Conduct Effective Interviews: Tips and Techniques",
     readTime: "8 mins read",
   },
+  {
+    img: "images/homepage/Thumbnail.png",
+    date: "Sep 26, 2021",
+    title: "How to Conduct Effective Interviews: Tips and Techniques",
+    readTime: "8 mins read",
+  },
+  {
+    img: "images/homepage/Thumbnail.jpg",
+    date: "Sep 26, 2021",
+    title: "How to Build a Diverse and Inclusive Workplace",
+    readTime: "7 mins read",
+  },
+  {
+    img: "images/homepage/Thumbnail.svg",
+    date: "Sep 26, 2021",
+    title: "The Importance of Employer Branding in Recruitment",
+    readTime: "5 mins read",
+  },
+  {
+    img: "images/homepage/Thumbnail.png",
+    date: "Sep 26, 2021",
+    title: "How to Conduct Effective Interviews: Tips and Techniques",
+    readTime: "8 mins read",
+  },
+  {
+    img: "images/homepage/Thumbnail.jpg",
+    date: "Sep 26, 2021",
+    title: "How to Build a Diverse and Inclusive Workplace",
+    readTime: "7 mins read",
+  },
+  {
+    img: "images/homepage/Thumbnail.svg",
+    date: "Sep 26, 2021",
+    title: "The Importance of Employer Branding in Recruitment",
+    readTime: "5 mins read",
+  },
+  {
+    img: "images/homepage/Thumbnail.png",
+    date: "Sep 26, 2021",
+    title: "How to Conduct Effective Interviews: Tips and Techniques",
+    readTime: "8 mins read",
+  },
+  {
+    img: "images/homepage/Thumbnail.jpg",
+    date: "Sep 26, 2021",
+    title: "How to Build a Diverse and Inclusive Workplace",
+    readTime: "7 mins read",
+  },
+  {
+    img: "images/homepage/Thumbnail.svg",
+    date: "Sep 26, 2021",
+    title: "The Importance of Employer Branding in Recruitment",
+    readTime: "5 mins read",
+  },
 ];

@@ -8,7 +8,12 @@ const BlogPost = () => {
 
   return (
     <section className="section-container">
-      <Filter onFilter={setFilteredPosts} blogPosts={blogPosts} />
+      <div>
+        <Filter onFilter={setFilteredPosts} blogPosts={blogPosts} />
+        <div>
+          <p>Showing {blogPosts.length}</p>
+        </div>
+      </div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((item, idx) => (
