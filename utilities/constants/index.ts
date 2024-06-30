@@ -149,3 +149,51 @@ export const faqs = [
     p: "Frack uses a thorough vetting process to ensure that all professionals in our network are highly qualified and meet the specific needs of your job requirements.",
   },
 ];
+
+export const blogPosts = [
+  {
+    img: "images/blog/Thumbnail.jpg",
+    date: "2024-01-15",
+    title: "The Future of Hiring: How Frack is Revolutionizing Recruitment",
+  },
+  {
+    img: "images/blog/Thumbnail.svg",
+    date: "2024-02-10",
+    title: "5 Tips for Writing Effective Job Descriptions",
+  },
+  {
+    img: "images/blog/Thumbnail.png",
+    date: "2024-03-05",
+    title: "Top 10 Skills Employers Look for in 2024",
+  },
+  {
+    img: "images/blog/Thumbnail.jpg",
+    date: "2024-04-22",
+    title: "How to Attract Top Talent to Your Company",
+  },
+  {
+    img: "images/blog/Thumbnail.svg",
+    date: "2024-05-18",
+    title: "The Benefits of Remote Work and How to Implement It",
+  },
+  {
+    img: "images/blog/Thumbnail.png",
+    date: "2024-06-12",
+    title: "Understanding the Role of AI in Recruitment",
+  },
+  {
+    img: "images/blog/Thumbnail.jpg",
+    date: "2024-07-01",
+    title: "How to Build a Diverse and Inclusive Workplace",
+  },
+  {
+    img: "images/blog/Thumbnail.svg",
+    date: "2024-07-25",
+    title: "The Importance of Employer Branding in Recruitment",
+  },
+  {
+    img: "images/blog/Thumbnail.png",
+    date: "2024-08-15",
+    title: "How to Conduct Effective Interviews: Tips and Techniques",
+  },
+];
