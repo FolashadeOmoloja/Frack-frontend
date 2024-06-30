@@ -1,4 +1,5 @@
 import Header from "../FAQ/Header";
+import BlogPost from "./BlogPost";
 import Filter from "./Filter";
 
 const Blog = () => {
@@ -10,6 +11,7 @@ const Blog = () => {
         textCenter=""
       />
       <Filter />
+      <BlogPost />
     </main>
   );
 };
