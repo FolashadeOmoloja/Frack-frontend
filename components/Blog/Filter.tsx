@@ -25,7 +25,7 @@ const Filter = ({
   }, [searchTerm, onFilter]);
 
   return (
-    <div className=" inline-block w-full mb-8">
+    <div className=" inline-block w-full ">
       <div className="mb-5 relative w-full md:w-[370px] ">
         <input
           type="text"

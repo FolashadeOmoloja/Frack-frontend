@@ -254,7 +254,7 @@ export const blogPosts = [
     readTime: "7 mins read",
   },
   {
-    img: "images/homepage/Thumbnail.svg",
+    img: "images/homepage/recruitment.svg",
     date: "Sep 26, 2021",
     title: "The Importance of Employer Branding in Recruitment",
     readTime: "5 mins read",

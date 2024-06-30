@@ -2,16 +2,40 @@
 import React, { useState } from "react";
 import Filter from "./Filter";
 import { blogPosts } from "@/utilities/constants";
+import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
 
 const BlogPost = () => {
-  const [filteredPosts, setFilteredPosts] = useState(blogPosts);
+  let startCounter = 0;
+  let endCounter = 9;
+  const [slicedBlogPosts, setSlicedBlogPost] = useState(
+    blogPosts.slice(startCounter, endCounter)
+  );
+  const nextpagination = () => {
+    startCounter += 9;
+    endCounter += 9;
+    console.log(startCounter, endCounter);
+    setSlicedBlogPost(blogPosts.slice(startCounter, endCounter));
+    console.log(slicedBlogPosts);
+  };
+  //   console.log(slicedBlogPosts);
+  const [filteredPosts, setFilteredPosts] = useState(slicedBlogPosts);
 
   return (
     <section className="section-container">
-      <div>
-        <Filter onFilter={setFilteredPosts} blogPosts={blogPosts} />
-        <div>
-          <p>Showing {blogPosts.length}</p>
+      <div className="mb-10 flex justify-between max-md:flex-col">
+        <Filter onFilter={setFilteredPosts} blogPosts={slicedBlogPosts} />
+        <div className="flex items-center gap-3 w-full md:justify-end">
+          <p>Showing {blogPosts.length} results</p>
+          {startCounter !== 0 && (
+            <button className="paginationBlogBtn ml-3">
+              <FaAngleDoubleLeft />
+              <span>Prev</span>
+            </button>
+          )}
+          <button className="paginationBlogBtn" onClick={nextpagination}>
+            <span>Next</span>
+            <FaAngleDoubleRight />
+          </button>
         </div>
       </div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">

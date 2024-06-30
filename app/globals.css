@@ -67,6 +67,10 @@
   .header-headline-span {
     @apply bg-gradient-to-r from-[#000080] via-[#1995CF]  to-[#1995CF] text-transparent bg-clip-text max-xslg:mt-5;
   }
+
+  .paginationBlogBtn {
+    @apply p-3 text-sm border rounded-md hover:border-2 hover:border-[#000080] flex gap-2 items-center font-semibold border-gray-300;
+  }
 }
 
 @keyframes slideIn {
