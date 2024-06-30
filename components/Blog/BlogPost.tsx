@@ -1,12 +1,14 @@
 import { blogPosts } from "@/utilities/constants";
+import Filter from "./Filter";
 
 const BlogPost = () => {
   return (
     <section className="section-container">
+      <Filter />
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {blogPosts.map((item, idx) => (
           <div className="col-span-1 flex flex-col" key={idx}>
-            <div className="rounded-lg mb-5 aspect-w-16 aspect-h-9">
+            <div className="rounded-lg mb-5  aspect-video">
               <img
                 src={item.img}
                 alt="img"

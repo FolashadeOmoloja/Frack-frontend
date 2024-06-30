@@ -10,7 +10,6 @@ const Blog = () => {
         p="Stay informed with our most recent news, announcements, and blog posts"
         textCenter=""
       />
-      <Filter />
       <BlogPost />
     </main>
   );
