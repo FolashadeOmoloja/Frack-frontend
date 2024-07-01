@@ -27,16 +27,17 @@ const BlogPost = () => {
 
   return (
     <section className="section-container">
-      <div className="mb-10 flex justify-between max-md:flex-col">
+      <div className="mb-10 flex justify-between max-slg:flex-col items-center">
         <Filter onFilter={setFilteredPosts} blogPosts={slicedBlogPosts} />
-        <div className="flex items-center gap-3 w-full md:justify-end">
-          <p>
-            Showing {startCounter + 1} - {endCounter} of {blogPosts.length}{" "}
-            results
+        <div className="flex items-center gap-3 w-full slg:justify-end max-xxsm:flex-col">
+          <p className="max-xxsm:text-=centerS">
+            Showing {startCounter + 1} -{" "}
+            {endCounter <= blogPosts.length ? endCounter : blogPosts.length} of{" "}
+            {blogPosts.length} results
           </p>
           {startCounter !== 0 && (
             <button
-              className="paginationBlogBtn ml-3"
+              className="paginationBlogBtn xxsm:ml-3"
               onClick={() => {
                 setStartCounter(startCounter - 9);
                 setEndCounter(endCounter - 9);
@@ -46,7 +47,7 @@ const BlogPost = () => {
               <span>Prev</span>
             </button>
           )}
-          {endCounter !== blogPosts.length && (
+          {endCounter < blogPosts.length && (
             <button className="paginationBlogBtn" onClick={nextPagination}>
               <span>Next</span>
               <FaAngleDoubleRight />
@@ -57,8 +58,8 @@ const BlogPost = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((item, idx) => (
-            <div className="col-span-1 flex flex-col" key={idx}>
-              <div className="rounded-lg mb-5 aspect-video">
+            <div className="col-span-1 flex flex-col " key={idx}>
+              <div className="rounded-lg mb-5 aspect-video md:h-[225.28px]">
                 <img
                   src={item.img}
                   alt="img"
