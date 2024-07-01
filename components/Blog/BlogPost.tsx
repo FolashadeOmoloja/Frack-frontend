@@ -60,7 +60,9 @@ const BlogPost = () => {
         {filteredPosts.length > 0 ? (
           filteredPosts.map((item, idx) => (
             <Link
-              href={`/blog-post/${item.title.replaceAll(" ", "-")}`}
+              href={{
+                pathname: `/blog-post/${item.title.replaceAll(" ", "-")}`,
+              }}
               key={idx}
             >
               <div className="col-span-1 flex flex-col ">
