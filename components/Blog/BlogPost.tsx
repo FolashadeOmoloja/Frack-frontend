@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import Filter from "./Filter";
 import { blogPosts } from "@/utilities/constants";
 import { FaAngleDoubleLeft, FaAngleDoubleRight } from "react-icons/fa";
+import Link from "next/link";
 
 const BlogPost = () => {
   const [startCounter, setStartCounter] = useState(0);
@@ -58,21 +59,26 @@ const BlogPost = () => {
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
         {filteredPosts.length > 0 ? (
           filteredPosts.map((item, idx) => (
-            <div className="col-span-1 flex flex-col " key={idx}>
-              <div className="rounded-lg mb-5 aspect-video md:h-[225.28px]">
-                <img
-                  src={item.img}
-                  alt="img"
-                  className="h-full w-full object-cover rounded-lg"
-                />
+            <Link
+              href={`/blog-post/${item.title.replaceAll(" ", "-")}`}
+              key={idx}
+            >
+              <div className="col-span-1 flex flex-col ">
+                <div className="rounded-lg mb-5 aspect-video md:h-[225.28px]">
+                  <img
+                    src={item.img}
+                    alt="img"
+                    className="h-full w-full object-cover rounded-lg"
+                  />
+                </div>
+                <p className="text-[#60606B] text-sm mb-3 italic tracking-[1%] font-light">
+                  <span>{item.date}</span> . <span>{item.readTime}</span>
+                </p>
+                <p className="text-[#0F0F19] text-xl font-bold mb-10">
+                  {item.title}
+                </p>
               </div>
-              <p className="text-[#60606B] text-sm mb-3 italic tracking-[1%] font-light">
-                <span>{item.date}</span> . <span>{item.readTime}</span>
-              </p>
-              <p className="text-[#0F0F19] text-xl font-bold mb-10">
-                {item.title}
-              </p>
-            </div>
+            </Link>
           ))
         ) : (
           <p className="col-span-3 text-2xl font-semibold text-red-700">
