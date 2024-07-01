@@ -35,9 +35,9 @@ const Filter = ({
           onChange={(e) => setSearchTerm(e.target.value)}
           className="w-full  p-3 text-base border border-gray-300 rounded-md focus:border-2 focus:border-[#000080] outline-none"
         />
-        <button className="absolute top-0 right-0 h-full w-12 flex items-center justify-center bg-transparent border-none cursor-pointer text-[#000080]">
+        <div className="absolute top-0 right-0 h-full w-12 flex items-center justify-center bg-transparent border-none cursor-pointer text-[#000080]">
           <FaSearch />
-        </button>
+        </div>
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+import CTABTN from "@/components/Elements/CTA/CTA-Button";
 import Navbar from "@/components/LandingPage/Navbar/NavBar";
 import { blogPosts } from "@/utilities/constants";
 
@@ -9,12 +10,36 @@ const BlogPage = ({ params }: { params: { postId: string } }) => {
     (element) => element.title.trim().toLowerCase() === postTitle
   );
 
+  console.log(post?.img);
+
   return (
     <section>
       <Navbar activeItem={3} />
       <main className="section-container mt-[50px]">
-        <h3 className="header-headline text-[52px]">{post?.title}</h3>
-        <div>
+        <h3 className="header-headline text-[52px] max-md:text-[38px] max-sm:text-3xl">
+          {post?.title}
+        </h3>
+        <div className="flex gap-3 my-10">
+          <div className="w-14 h-14 rounded-full overflow-hidden ">
+            <img
+              src="/images/homepage/avatar1.jpg"
+              alt="img"
+              className="w-full h-full object-cover "
+            />
+          </div>
+          <div className="flex flex-col justify-between text-sm">
+            <span className="font-semibold">Jasmine Jacob</span>
+            <span className="text-gray-500">{post?.date}</span>
+          </div>
+        </div>
+        <div className="w-full aspect-video h-[500px] max-sm:h-[350px] rounded-2xl overflow-hidden mb-16">
+          <img
+            src={`/${post?.img}`}
+            alt="img"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <section className="tracking-[1%] text-gray-800">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Odio enim
           nobis facere nostrum itaque omnis cupiditate perspiciatis ipsa
           similique, quia accusantium! Temporibus optio ratione sequi
@@ -79,25 +104,9 @@ const BlogPage = ({ params }: { params: { postId: string } }) => {
           modi mollitia repellendus fugit dolore illo beatae? Molestiae, in
           ipsum. Voluptates, accusantium officia? Ipsam, maxime quis. Minus
           laudantium a quae nulla minima magni laborum sunt eius in cum nesciunt
-          rerum ipsa blanditiis, inventore asperiores vero quod est excepturi
-          tempore commodi? Debitis eligendi tempore repellendus, reiciendis
-          veniam, omnis error animi reprehenderit commodi sit maiores quasi
-          iusto neque voluptatibus nesciunt ipsa tenetur officiis expedita dicta
-          minima sapiente esse, eum aliquam! Reiciendis, enim? Ex quam quae
-          magni numquam? Quaerat fugit sapiente veritatis hic nesciunt cum
-          aspernatur iste cupiditate asperiores quam unde, veniam dolor atque
-          dolores, in expedita officiis cumque mollitia dolorum. Qui, iste?
-          Tempore facilis veniam et, quis fugit velit. Repellendus, suscipit
-          culpa doloremque voluptatum eaque, nihil iusto ipsam nostrum eum
-          cumque odio perferendis reiciendis beatae laboriosam ullam. Laboriosam
-          pariatur modi ex id. Libero deleniti facere, animi quod veniam minus
-          consectetur, quidem voluptatibus modi sed blanditiis, corporis earum?
-          Inventore debitis corporis quia aliquam esse recusandae ipsam
-          similique iste praesentium temporibus. Sint, cum esse! Dignissimos in
-          mollitia minima explicabo dolorem nostrum itaque? Tempora quasi
-          voluptatem neque earum maiores, expedita, dolor laborum iusto et odio
-          nesciunt, ipsum atque ullam. Totam inventore quia velit voluptatibus
-          saepe!
+        </section>
+        <div className="mt-24">
+          <CTABTN route={"/blog"} CTA="Go back" showIcon />
         </div>
       </main>
     </section>
