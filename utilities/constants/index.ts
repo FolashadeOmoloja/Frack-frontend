@@ -27,7 +27,7 @@ export const NavLinks = [
         icon: "/images/homepage/recruitment.svg",
         title: "Find Job",
         desc: "Find the best Jobs in the fastest time",
-        href: "",
+        href: "/jobs",
       },
       {
         icon: "/images/homepage/user.svg",

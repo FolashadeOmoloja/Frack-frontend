@@ -6,19 +6,20 @@ import Testimonials from "@/components/LandingPage/Offer/Testimonials";
 import CTA from "@/components/LandingPage/Offer/CTA";
 import HireTalentSection from "@/components/AboutUs/HireTalentSection";
 import OurValues from "@/components/AboutUs/OurValues";
+import Footer from "@/components/LandingPage/Offer/Footer";
 
-export default function AboutPage()  {
-return (
+export default function AboutPage() {
+  return (
     <>
-          <Navbar activeItem={2}/>
-          <AboutHeader/>
-          <Grid/>
-          <PictureBg/>
-          <OurValues/>
-          <HireTalentSection/>
-          <Testimonials/>
-          <CTA/>
-
+      <Navbar activeItem={2} />
+      <AboutHeader />
+      <Grid />
+      <PictureBg />
+      <OurValues />
+      <HireTalentSection />
+      <Testimonials />
+      <CTA />
+      <Footer />
     </>
-)
+  );
 }

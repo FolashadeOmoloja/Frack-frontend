@@ -1,5 +1,6 @@
 import CTABTN from "@/components/Elements/CTA/CTA-Button";
 import Navbar from "@/components/LandingPage/Navbar/NavBar";
+import Footer from "@/components/LandingPage/Offer/Footer";
 import { blogPosts } from "@/utilities/constants";
 
 const BlogPage = ({ params }: { params: { postId: string } }) => {
@@ -13,7 +14,7 @@ const BlogPage = ({ params }: { params: { postId: string } }) => {
   console.log(post?.img);
 
   return (
-    <section>
+    <>
       <Navbar activeItem={3} />
       <main className="section-container mt-[50px]">
         <h3 className="header-headline text-[52px] max-md:text-[38px] max-sm:text-3xl">
@@ -109,7 +110,8 @@ const BlogPage = ({ params }: { params: { postId: string } }) => {
           <CTABTN route={"/blog"} CTA="Go back" showIcon />
         </div>
       </main>
-    </section>
+      <Footer />
+    </>
   );
 };
 
