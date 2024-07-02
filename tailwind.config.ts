@@ -32,6 +32,9 @@ const config: Config = {
         xlg: "1250px",
         xxl: "1440px",
       },
+      height: {
+        "custom-height": "calc(100vh - 96px)",
+      },
     },
   },
   plugins: [],
