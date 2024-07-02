@@ -3,7 +3,7 @@ const Header = () => {
     <header className="section-container flex justify-between items-center max-slg:flex-col gap-10">
       <section className="flex flex-col max-slg:items-center max-slg:mb-6 slg:ml-[5px] text-[#161519] ">
         <span className=" headingspan mb-0">Success Stories</span>
-        <h2 className="header-headline ">
+        <h2 className="header-headline max-sm:text-center">
           Real Results, Real{" "}
           <span className="header-headline-span">Impact</span>
         </h2>
