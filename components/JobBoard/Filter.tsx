@@ -1,7 +1,5 @@
 "use client";
 import { useState } from "react";
-import CustomCheckbox from "../Elements/CheckBox";
-import StyledCheckbox from "../Elements/CheckBox";
 
 const hoursFilter = ["6", "8", "10", "12"];
 const proximityFilter = ["On Site", "Hybrid", "Fully Remote", "Remote"];
