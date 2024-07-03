@@ -1,5 +1,6 @@
 import JobSearchBar from "../Elements/JobSearchBar";
 import Filter from "./Filter";
+import JobPosting from "./JobPostings";
 
 const JobBoard = () => {
   return (
@@ -9,8 +10,8 @@ const JobBoard = () => {
         <div className="md:sticky md:top-[40px] h-[calc(100vh-50px)] md:h-[calc(100vh-80px)] overflow-y-auto flex-shrink-0 md:w-1/3 lg:w-1/4 bg-white p-5 shadow-md rounded-sm custom-scrollbar">
           <Filter />
         </div>
-        <div className="flex-grow bg-white p-5 overflow-y-auto h-[100vh] md:h-[7000px]">
-          right-side
+        <div className="flex-grow p-5 overflow-y-auto ">
+          <JobPosting />
         </div>
       </section>
     </section>
