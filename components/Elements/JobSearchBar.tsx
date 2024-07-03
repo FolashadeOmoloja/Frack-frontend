@@ -31,28 +31,33 @@ const JobSearchBar = () => {
   };
 
   return (
-    <section className="flex items-center space-x-4">
-      {searchBarData.map((item, idx) => (
-        <div key={idx} className="relative">
-          <div className="dropdown-button" onClick={() => showOptions(idx)}>
-            {selectedItems[idx] || item.label}
+    <section className="flex items-center mb-10 h-[50px]">
+      <section className="flex basis-4/5 h-full job-searchbar">
+        {searchBarData.map((item, idx) => (
+          <div key={idx} className="relative h-full basis-1/3 ">
+            <button
+              className="dropdown-button h-full w-full"
+              onClick={() => showOptions(idx)}
+            >
+              {selectedItems[idx] || item.label}
+            </button>
+            {isOpen[idx] && (
+              <div className="dropdown-menu custom-scrollbar">
+                {item.options.map((option, optionIdx) => (
+                  <div
+                    key={optionIdx}
+                    className="dropdown-item "
+                    onClick={() => handleSelect(idx, option)}
+                  >
+                    {option}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-          {isOpen[idx] && (
-            <div className="dropdown-menu absolute mt-1 bg-white shadow-lg rounded z-10">
-              {item.options.map((option, optionIdx) => (
-                <div
-                  key={optionIdx}
-                  className="dropdown-item px-4 py-2 cursor-pointer hover:bg-gray-200"
-                  onClick={() => handleSelect(idx, option)}
-                >
-                  {option}
-                </div>
-              ))}
-            </div>
-          )}
-        </div>
-      ))}
-      <button className="search-button px-4 py-2 bg-blue-500 text-white rounded">
+        ))}
+      </section>
+      <button className="h-full  bg-[#000080] basis-[20%] text-white rounded-r-md transition-[300ms]  hover:bg-[#000099] cursor-pointer">
         Search
       </button>
     </section>
