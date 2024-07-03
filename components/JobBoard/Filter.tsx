@@ -34,22 +34,24 @@ const Filter = () => {
           </span>
           <ul>
             {proximityFilter.map((item, idx) => (
-              <li key={idx} className="mb-1 flex gap-2 items-center">
+              <li key={idx} className="mb-1   flex gap-2 items-center">
                 <div>
                   <input
                     type="checkbox"
                     className="  accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
                   />
                 </div>
-                <span className="text-sm flex mb-1">{item} hours</span>
+                <span className="text-sm flex mb-1">{item}</span>
               </li>
             ))}
           </ul>
         </li>
         <li>
-          <span className="mb-6 inline-block font-semibold">Experience </span>
+          <span className="mb-6  mt-[26px] inline-block font-semibold">
+            Experience{" "}
+          </span>
           <ul>
-            {hoursFilter.map((item, idx) => (
+            {experienceFilter.map((item, idx) => (
               <li key={idx} className="mb-1 flex gap-2 items-center">
                 <div>
                   <input
@@ -57,7 +59,7 @@ const Filter = () => {
                     className="  accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
                   />
                 </div>
-                <span className="text-sm flex mb-1">{item} hours</span>
+                <span className="text-sm flex mb-1">{item} </span>
               </li>
             ))}
           </ul>
