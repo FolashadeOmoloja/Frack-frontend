@@ -75,11 +75,11 @@
   }
 
   .dropdown-button {
-    @apply bg-white border border-black cursor-pointer focus:border-[#000080]  text-gray-600;
+    @apply bg-white border border-black cursor-pointer outline-none focus:border-[#000080]  text-gray-600;
   }
 
   .dropdown-menu {
-    @apply absolute mt-4 bg-white shadow-lg rounded z-10 w-full overflow-y-scroll max-h-[300px];
+    @apply absolute mt-4 bg-white shadow-lg rounded z-10 w-full overflow-y-auto max-h-[300px];
   }
 
   .dropdown-item {
