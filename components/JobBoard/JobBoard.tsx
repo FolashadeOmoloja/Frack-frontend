@@ -1,4 +1,4 @@
-import JobSearchBar from "../Elements/JobSEarchBar";
+import JobSearchBar from "../Elements/JobSearchBar";
 
 const JobBoard = () => {
   return (

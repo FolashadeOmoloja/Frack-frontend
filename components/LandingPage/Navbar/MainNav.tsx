@@ -41,6 +41,7 @@ const MainNav = ({ activeItem }: { activeItem?: number }) => {
           width={191}
           height={96}
           quality={100}
+          priority
         />
       </div>
       <ul className="flex-1 flex justify-center items-center gap-10 max-xlg:gap-[20px] ">
