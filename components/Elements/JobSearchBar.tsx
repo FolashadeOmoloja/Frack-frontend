@@ -39,7 +39,9 @@ const JobSearchBar = () => {
             className="relative sm:h-full h-[50px]  sm:basis-1/3 w-full"
           >
             <button
-              className="dropdown-button h-full w-full max-sm:rounded-md"
+              className={`dropdown-button h-full w-full max-sm:rounded-md ${
+                idx == 1 || idx == 2 ? "sm:border-l-0" : ""
+              }`}
               onClick={() => showOptions(idx)}
             >
               {selectedItems[idx] || item.label}
