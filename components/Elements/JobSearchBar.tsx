@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 
 type IsOpenState = {
@@ -19,15 +19,15 @@ type filteredJobs = {
 
 const JobSearchBar = ({
   onSearch,
-  filteredJobs,
+  jobPosting,
 }: {
   onSearch: React.Dispatch<React.SetStateAction<filteredJobs>>;
-  filteredJobs: filteredJobs;
+  jobPosting: filteredJobs;
 }) => {
   const [isOpen, setIsOpen] = useState<IsOpenState>({});
-  const [filteredJobArr, setFiteredJobsArr] =
-    useState<filteredJobs>(filteredJobs);
-  console.log(filteredJobArr);
+  const [role, setRole] = useState("");
+  const [location, setLocation] = useState("");
+  const [skills, setSkills] = useState("");
 
   const [selectedItems, setSelectedItems] = useState(
     searchBarData.map(() => "")
@@ -41,35 +41,33 @@ const JobSearchBar = ({
     });
   };
 
-  const search = (idx: number, option: string) => {
-    console.log(filteredJobArr, filteredJobs);
-
-    if (idx === 0) {
-      const newFilteredJobArr = filteredJobArr.filter((job) =>
+  const search = () => {
+    const newFilteredJobArr = jobPosting.filter((job) => {
+      return (
+        job.role.toLowerCase().includes(role.toLowerCase()) &&
+        job.country.toLowerCase().includes(location.toLowerCase()) &&
         job.skills.some((skill) =>
-          skill.toLowerCase().includes(option.toLowerCase())
+          skill.toLowerCase().includes(skills.toLowerCase())
         )
       );
-      setFiteredJobsArr(newFilteredJobArr);
-      onSearch(newFilteredJobArr);
-    }
-    if (idx == 1) {
-      const newFilteredJobArr = filteredJobArr.filter((job) =>
-        job.role.toLowerCase().includes(option.toLowerCase())
-      );
-      setFiteredJobsArr(newFilteredJobArr);
-      onSearch(newFilteredJobArr);
-    }
-    if (idx == 2) {
-      const newFilteredJobArr = filteredJobArr.filter((job) =>
-        job.country.toLowerCase().includes(option.toLowerCase())
-      );
-      setFiteredJobsArr(newFilteredJobArr);
-      onSearch(newFilteredJobArr);
-    }
+    });
+    onSearch(newFilteredJobArr);
   };
 
+  useEffect(() => {
+    search();
+  }, [role, location, skills]);
+
   const handleSelect = (index: number, option: string) => {
+    if (index == 0) {
+      setSkills(option);
+    } else if (index == 1) {
+      setRole(option);
+    }
+    if (index == 2) {
+      setLocation(option);
+    }
+
     const newSelectedItems = [...selectedItems];
     newSelectedItems[index] = option;
     setSelectedItems(newSelectedItems);
@@ -77,7 +75,11 @@ const JobSearchBar = ({
       ...prevState,
       [index]: false,
     }));
-    search(index, option);
+  };
+
+  const reset = () => {
+    setSelectedItems(searchBarData.map(() => ""));
+    onSearch(jobPosting);
   };
 
   return (
@@ -112,8 +114,11 @@ const JobSearchBar = ({
           </div>
         ))}
       </section>
-      <button className="sm:h-full h-[50px]  bg-[#000080] sm:basis-[20%] max-sm:w-full text-white rounded-r-md max-sm:rounded-l-md transition-[300ms]  hover:bg-[#000099] cursor-pointer">
-        Search
+      <button
+        className="sm:h-full h-[50px]  bg-[#000080] sm:basis-[20%] max-sm:w-full text-white rounded-r-md max-sm:rounded-l-md transition-[300ms]  hover:bg-[#000099] cursor-pointer"
+        onClick={() => reset()}
+      >
+        Reset
       </button>
     </section>
   );

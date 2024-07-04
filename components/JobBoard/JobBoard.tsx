@@ -27,7 +27,7 @@ const JobBoard = () => {
     <section className="section-container bg-[#F4F5F7] mt-0 py-7">
       <JobSearchBar
         onSearch={setFilteredJobs}
-        filteredJobs={jobPostings as filteredJobs}
+        jobPosting={jobPostings as filteredJobs}
       />
       <button className="text-2xl text-[#000080] mb-5 sm:hidden bg-white w-full h-[50px] rounded-lg          flex justify-center items-center shadow-md">
         <FaFilter />
