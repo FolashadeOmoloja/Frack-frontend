@@ -6,13 +6,28 @@ export const searchBarData = [
   {
     label: "Select a Role",
     options: [
-      "Frontend Developer",
-      "Backend Developer",
-      "Full Stack Developer",
+      "Design",
+      "Engineering",
+      "Marketing",
+      "Sales",
+      "Operations",
+      "Finance",
+      "Communication",
+      "Consultancy",
     ],
   },
   {
     label: "Select a Country",
-    options: ["USA", "Canada", "UK", "Germany"],
+    options: [
+      "USA",
+      "Nigeria",
+      "Kenya",
+      "Canada",
+      "UK",
+      "Germany",
+      "Australia",
+      "Japan",
+      "South Africa",
+    ],
   },
 ];
