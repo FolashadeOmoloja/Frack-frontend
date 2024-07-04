@@ -34,7 +34,7 @@ const JobPosting = () => {
             </div>
             <div>
               <CTABTN
-                route={""}
+                route={`/job-details/${idx}`}
                 CTA="View Jobs"
                 width="w-full xlg:w-[138px]"
                 height="39px"
