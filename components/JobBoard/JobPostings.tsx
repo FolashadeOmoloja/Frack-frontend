@@ -1,14 +1,31 @@
-import { jobPostings } from "@/utilities/constants/jobData";
 import CTABTN from "../Elements/CTA/CTA-Button";
 
-const JobPosting = () => {
+type filteredJobs = {
+  title: string;
+  company: string;
+  location: string;
+  priceRange: string;
+  jobProximity: string;
+  jobHours: string;
+  experience: string;
+  skills: string[];
+  role: string;
+  country: string;
+}[];
+const JobPosting = ({
+  filteredJobs,
+  jobPostings,
+}: {
+  filteredJobs: filteredJobs;
+  jobPostings: filteredJobs;
+}) => {
   return (
     <section>
       <h4 className="text-[#7C8698] text-sm font-[500] mb-5">
-        Showing {jobPostings.length} of {jobPostings.length} jobs
+        Showing {filteredJobs.length} of {jobPostings.length} jobs
       </h4>
       <section className="flex flex-col gap-4">
-        {jobPostings.map((item, idx) => (
+        {filteredJobs.map((item, idx) => (
           <section
             key={idx}
             className="bg-white rounded-md p-6 flex justify-between max-xlg:flex-col gap-6"
@@ -37,7 +54,7 @@ const JobPosting = () => {
                 route={`/job-details/${idx}`}
                 CTA="View Job"
                 width="w-full xlg:w-[138px]"
-                height="39px"
+                height2="h-[39px]"
                 backGround="bg-[#F6F7F8]"
                 color="text-[#7C8698]"
               />

@@ -1,13 +1,34 @@
-"use client";
 import { useState } from "react";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 
 type IsOpenState = {
   [key: number]: boolean;
 };
+type filteredJobs = {
+  title: string;
+  company: string;
+  location: string;
+  priceRange: string;
+  jobProximity: string;
+  jobHours: string;
+  experience: string;
+  skills: string[];
+  role: string;
+  country: string;
+}[];
 
-const JobSearchBar = () => {
+const JobSearchBar = ({
+  onSearch,
+  filteredJobs,
+}: {
+  onSearch: React.Dispatch<React.SetStateAction<filteredJobs>>;
+  filteredJobs: filteredJobs;
+}) => {
   const [isOpen, setIsOpen] = useState<IsOpenState>({});
+  const [filteredJobArr, setFiteredJobsArr] =
+    useState<filteredJobs>(filteredJobs);
+  console.log(filteredJobArr);
+
   const [selectedItems, setSelectedItems] = useState(
     searchBarData.map(() => "")
   );
@@ -20,6 +41,34 @@ const JobSearchBar = () => {
     });
   };
 
+  const search = (idx: number, option: string) => {
+    console.log(filteredJobArr, filteredJobs);
+
+    if (idx === 0) {
+      const newFilteredJobArr = filteredJobArr.filter((job) =>
+        job.skills.some((skill) =>
+          skill.toLowerCase().includes(option.toLowerCase())
+        )
+      );
+      setFiteredJobsArr(newFilteredJobArr);
+      onSearch(newFilteredJobArr);
+    }
+    if (idx == 1) {
+      const newFilteredJobArr = filteredJobArr.filter((job) =>
+        job.role.toLowerCase().includes(option.toLowerCase())
+      );
+      setFiteredJobsArr(newFilteredJobArr);
+      onSearch(newFilteredJobArr);
+    }
+    if (idx == 2) {
+      const newFilteredJobArr = filteredJobArr.filter((job) =>
+        job.country.toLowerCase().includes(option.toLowerCase())
+      );
+      setFiteredJobsArr(newFilteredJobArr);
+      onSearch(newFilteredJobArr);
+    }
+  };
+
   const handleSelect = (index: number, option: string) => {
     const newSelectedItems = [...selectedItems];
     newSelectedItems[index] = option;
@@ -28,6 +77,7 @@ const JobSearchBar = () => {
       ...prevState,
       [index]: false,
     }));
+    search(index, option);
   };
 
   return (

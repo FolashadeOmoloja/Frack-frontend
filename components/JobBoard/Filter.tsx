@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 
 const hoursFilter = ["6", "8", "10", "12"];
