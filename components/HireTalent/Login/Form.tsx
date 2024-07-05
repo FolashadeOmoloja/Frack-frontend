@@ -2,6 +2,8 @@
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import Link from "next/link";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { useState } from "react";
 
 // Define validation rules for each form field
 const validationRules = {
@@ -29,6 +31,12 @@ const HireTalentLoginForm = () => {
 
   const onSubmit = (data: any) => {
     addItem(data);
+  };
+
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -71,13 +79,27 @@ const HireTalentLoginForm = () => {
         {/* password */}
         <div className="flex formdivs flex-col mb-6 gap-[6px]">
           <label>Password</label>
-          <input
-            type="email"
-            placeholder="Enter your full Name"
-            {...register("password", {
-              required: validationRules.password.required,
-            })}
-          />
+          <div className="relative">
+            <input
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter your password"
+              className="pr-10"
+              {...register("password", {
+                required: "Password is required",
+              })}
+            />
+            <button
+              type="button"
+              className="absolute inset-y-0 right-0 flex items-center pr-3 text-gray-400"
+              onClick={togglePasswordVisibility}
+            >
+              {showPassword ? (
+                <AiOutlineEyeInvisible size={20} />
+              ) : (
+                <AiOutlineEye size={20} />
+              )}
+            </button>
+          </div>
           {errors.password && (
             <span className="text-red-600 text-sm">{`${errors.password.message}`}</span>
           )}
