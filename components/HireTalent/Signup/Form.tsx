@@ -5,9 +5,29 @@ import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import PhoneNoInput from "@/components/Elements/PhoneNoInput";
 
 // Define validation rules for each form field
 const validationRules = {
+  firstName: {
+    required: "First Name is required",
+  },
+  lastName: {
+    required: "Last Name is required",
+  },
+  companyName: {
+    required: `Your Company's Name is required`,
+  },
+  jobTitle: {
+    required: "Full Name is required",
+  },
+  mobileNo: {
+    required: "Mobile No. is required",
+    pattern: {
+      value: /^[0-9]{11}$/,
+      message: "Invalid mobile phone number",
+    },
+  },
   email: {
     required: "Email is required",
     pattern: {
@@ -19,8 +39,7 @@ const validationRules = {
     required: "Pickup Date is required",
   },
 };
-
-const HireTalentSignUpForm = () => {
+const HireTalentLoginForm = () => {
   const {
     handleSubmit,
     register,
@@ -59,7 +78,7 @@ const HireTalentSignUpForm = () => {
           />
         </div>
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
-          Log in to find talent
+          Register for find talent
         </h3>
         <p className="text-gray-500 text-sm">
           we can unlock the power of talent and drive success for{" "}
@@ -67,9 +86,44 @@ const HireTalentSignUpForm = () => {
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="flex formdivs max-sm:flex-col mb-[20px] gap-[20px]">
+          <div className="basis-1/2">
+            <label>
+              First Name <span className="text-red-600 text-base">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your First Name"
+              {...register("firstName", {
+                required: validationRules.firstName.required,
+              })}
+            />
+            {errors.firstName && (
+              <span className="text-red-500 text-sm">{`${errors.firstName.message}`}</span>
+            )}
+          </div>
+          {/* Last Name */}
+          <div className="basis-1/2">
+            <label>
+              Last Name <span className="text-red-600 text-base">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter your Last Name"
+              {...register("lastName", {
+                required: validationRules.lastName.required,
+              })}
+            />
+            {errors.lastName && (
+              <span className="text-red-500 text-sm">{`${errors.lastName.message}`}</span>
+            )}
+          </div>
+        </div>
         {/* Email */}
         <div className="flex formdivs flex-col mb-4 gap-[6px]">
-          <label>Email Address</label>
+          <label>
+            Email Address <span className="text-red-600 text-base">*</span>
+          </label>
           <input
             type="email"
             placeholder="Enter your work address"
@@ -80,6 +134,52 @@ const HireTalentSignUpForm = () => {
           />
           {errors.email && (
             <span className="text-red-600 text-sm">{`${errors.email.message}`}</span>
+          )}
+        </div>
+        {/* Company Name */}
+        <div className="flex formdivs flex-col mb-4 gap-[6px]">
+          <label>
+            Company's Name <span className="text-red-600 text-base">*</span>
+          </label>
+          <input
+            type="text"
+            placeholder="Enter your company's name"
+            {...register("companyName", {
+              required: validationRules.companyName.required,
+            })}
+          />
+          {errors.companyName && (
+            <span className="text-red-600 text-sm">{`${errors.companyName.message}`}</span>
+          )}
+        </div>
+        {/* Job TiTle */}
+        <div className="flex formdivs flex-col mb-4 gap-[6px]">
+          <label>
+            Job Title <span className="text-red-600 text-base">*</span>
+          </label>
+          <input
+            type="text"
+            placeholder="Enter your job title"
+            {...register("jobTitle", {
+              required: validationRules.jobTitle.required,
+            })}
+          />
+          {errors.jobTitle && (
+            <span className="text-red-600 text-sm">{`${errors.jobTitle.message}`}</span>
+          )}
+        </div>
+        {/* Mobile No. */}
+        <div className="flex formdivs flex-col mb-4 gap-[6px]">
+          <label>
+            Phone Number <span className="text-red-600 text-base">*</span>
+          </label>
+          <PhoneNoInput
+            register={register}
+            errors={errors}
+            validationRules={validationRules}
+          />
+          {errors.mobileNo && (
+            <span className="text-red-600 text-sm">{`${errors.mobileNo.message}`}</span>
           )}
         </div>
         {/* password */}
@@ -132,4 +232,4 @@ const HireTalentSignUpForm = () => {
   );
 };
 
-export default HireTalentSignUpForm;
+export default HireTalentLoginForm;

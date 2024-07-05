@@ -1,11 +1,11 @@
-import HireTalentSignUpForm from "./Form";
+import HireTalentLoginForm from "./Form";
 
-const HireTalentSignUp = () => {
+const Login = () => {
   return (
-    <section className="xsm:h-[100vh] flex">
+    <section className=" flex">
       <div
         className="basis-1/2 bg-cover bg-no-repeat bg-[#000080] relative max-md:hidden"
-        style={{ backgroundImage: "url('/images/homepage/signup-bg1.svg')" }}
+        style={{ backgroundImage: "url('/images/homepage/signup-bg3.svg')" }}
       >
         <p className="login-text">
           companies can simply post their requirements on our job board, and
@@ -13,11 +13,11 @@ const HireTalentSignUp = () => {
           qualified professionals from our extensive network.
         </p>
       </div>
-      <section className="md:basis-1/2 max-md:w-full flex items-center justify-center">
-        <HireTalentSignUpForm />
+      <section className="md:basis-1/2 max-md:w-full flex justify-center pt-[50px]">
+        <HireTalentLoginForm />
       </section>
     </section>
   );
 };
 
-export default HireTalentSignUp;
+export default Login;
