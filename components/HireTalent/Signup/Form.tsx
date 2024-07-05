@@ -233,7 +233,7 @@ const HireTalentLoginForm = () => {
           Find Talent
         </button>
       </form>
-      <p className="text-sm text-[#667185] mt-6 mb-20 text-center">
+      <p className="text-sm text-[#667185] mt-6  text-center">
         Already have an account?{" "}
         <Link href={"/hire-talent"} className="text-black font-semibold ">
           Log in

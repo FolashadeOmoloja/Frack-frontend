@@ -66,14 +66,14 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
       <div className="basis-[20%] relative">
         <div
           onClick={toggleDropdown}
-          className="flex items-center justify-center cursor-pointer bg-[#F3F4F7] h-full py-[14.62px] rounded-md"
+          className="flex items-center justify-center cursor-pointer bg-[#F3F4F7] h-full py-[14.62px]  rounded-md"
         >
           <img
             src={selectedCountry.flag}
             alt={selectedCountry.name}
             className="w-5 h-5 rounded-full mr-2"
           />
-          <AiOutlineDown className=" text-[#98A2B3]" />
+          <AiOutlineDown className=" text-[#98A2B3] max-sm:hidden text-sm" />
         </div>
         {isOpen && (
           <div className="absolute z-10 mt-2 bg-white border rounded shadow-lg h-[100px] overflow-y-auto custom-scrollbar w-full">

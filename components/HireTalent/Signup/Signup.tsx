@@ -13,7 +13,7 @@ const Login = () => {
           qualified professionals from our extensive network.
         </p>
       </div>
-      <section className="md:basis-1/2 max-md:w-full flex justify-center pt-[50px]">
+      <section className="md:basis-1/2 max-md:w-full flex justify-center sm:p-[50px]">
         <HireTalentLoginForm />
       </section>
     </section>
