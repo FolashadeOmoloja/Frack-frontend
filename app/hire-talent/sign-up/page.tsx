@@ -1,5 +1,11 @@
+import HireTalentSignUp from "@/components/HireTalent/Signup/Signup";
+
 const page = () => {
-  return <div>page</div>;
+  return (
+    <>
+      <HireTalentSignUp />
+    </>
+  );
 };
 
 export default page;
