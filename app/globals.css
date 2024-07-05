@@ -100,7 +100,7 @@
   }
 
   .login-text {
-    @apply text-white xslg:max-w-[320px] max-w-[250px] leading-[29px] tracking-[1.5%] absolute right-0 mr-4 xslg:top-[150px] top-[50px] text-sm max-lg:hidden;
+    @apply text-white xlg:max-w-[320px] max-w-[250px] leading-[29px] tracking-[1.5%] absolute right-0 mr-4 xlg:top-[150px] top-[50px] text-sm max-lg:hidden;
   }
 }
 

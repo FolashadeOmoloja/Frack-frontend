@@ -33,7 +33,7 @@ export const NavLinks = [
         icon: "/images/homepage/user.svg",
         title: "Sign Up",
         desc: "Sign in to your profile",
-        href: "",
+        href: "/sign-in",
       },
     ],
   },

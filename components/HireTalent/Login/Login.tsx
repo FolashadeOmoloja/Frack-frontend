@@ -1,4 +1,3 @@
-import React from "react";
 import HireTalentLoginForm from "./Form";
 
 const Login = () => {
