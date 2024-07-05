@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 // Define validation rules for each form field
 const validationRules = {
@@ -26,6 +27,8 @@ const HireTalentLoginForm = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
+  const router = useRouter();
+
   //add Item to backeend
   const addItem = async (data: any) => {};
 
@@ -40,9 +43,12 @@ const HireTalentLoginForm = () => {
   };
 
   return (
-    <section className="md:max-w-[529px]">
+    <section className="md:max-w-[529px] max-sm:p-4">
       <div className="mb-6">
-        <div className="ml-[-35px]">
+        <div
+          className="ml-[-35px] cursor-pointer"
+          onClick={() => router.push("/")}
+        >
           <Image
             src={"/images/homepage/frack.png"}
             alt={"logo"}
@@ -56,8 +62,8 @@ const HireTalentLoginForm = () => {
           Log in to find talent
         </h3>
         <p className="text-gray-500 text-sm">
-          we can unlock the power of talent and drive success for <br />{" "}
-          businesses around the world.
+          we can unlock the power of talent and drive success for{" "}
+          <br className="max-sm:hidden" /> businesses around the world.
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
