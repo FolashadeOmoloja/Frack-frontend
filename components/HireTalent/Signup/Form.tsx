@@ -210,7 +210,21 @@ const HireTalentLoginForm = () => {
             <span className="text-red-600 text-sm">{`${errors.password.message}`}</span>
           )}
         </div>
-
+        <div className="mb-6 flex items-center  ">
+          <input
+            type="checkbox"
+            name="approval-check"
+            id="approval-check"
+            className="rounded-md h-5 w-5 accent-[#000080]"
+          />
+          <label
+            htmlFor="approval-check"
+            className="ml-2 text-sm text-[#667185]"
+          >
+            By submitting my personal data, I consent to Frack collecting,
+            processing, and storing my information.
+          </label>
+        </div>
         <button
           type="submit"
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
@@ -219,13 +233,10 @@ const HireTalentLoginForm = () => {
           Find Talent
         </button>
       </form>
-      <p className="text-sm text-[#667185] mt-6 text-center">
-        Don’t have an account?{" "}
-        <Link
-          href={"/hire-talent/sign-up"}
-          className="text-black font-semibold"
-        >
-          Sign up
+      <p className="text-sm text-[#667185] mt-6 mb-20 text-center">
+        Already have an account?{" "}
+        <Link href={"/hire-talent"} className="text-black font-semibold ">
+          Log in
         </Link>
       </p>
     </section>

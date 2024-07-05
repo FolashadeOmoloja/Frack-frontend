@@ -89,21 +89,33 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
           </div>
         )}
       </div>
-      <div className="flex">
+      <div className="flex w-full ">
         <input
           type="tel"
           {...register("countryCode")}
           value={selectedCountry.code}
           readOnly
-          className="basis-[20%] pr-0"
+          className="basis-[20%] input"
+          style={{
+            borderTopRightRadius: "0px",
+            borderBottomRightRadius: "0",
+            borderRight: "none",
+            paddingRight: "0",
+          }}
         />
         <input
           type="tel"
-          placeholder="Enter your Mobile No."
+          placeholder="810 0000 0000"
           {...register("mobileNo", {
             required: validationRules.mobileNo.required,
             pattern: validationRules.mobileNo.pattern,
           })}
+          className="input phoneinputdiv"
+          style={{
+            borderTopLeftRadius: "0px",
+            borderBottomLeftRadius: "0",
+            borderLeft: "none",
+          }}
         />
       </div>
     </div>
