@@ -5,7 +5,9 @@ const Header = () => {
         <span className=" headingspan mb-0">Success Stories</span>
         <h2 className="header-headline max-sm:text-center">
           Real Results, Real{" "}
-          <span className="header-headline-span">Impact</span>
+          <span className="header-headline-span max-sm:text-[#000080] max-sm:bg-none">
+            Impact
+          </span>
         </h2>
         <p className="leading-[29.4px] tracking-[1.5%] max-slg:text-center">
           Welcome to our <span className="font-bold">Success Stories page</span>
