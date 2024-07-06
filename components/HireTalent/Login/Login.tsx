@@ -2,7 +2,7 @@ import HireTalentLoginForm from "./Form";
 
 const Login = () => {
   return (
-    <section className="xsm:h-[100vh] flex">
+    <section className="sm:h-[100vh] flex">
       <div
         className="basis-1/2 bg-cover bg-no-repeat bg-[#000080] relative max-md:hidden"
         style={{ backgroundImage: "url('/images/homepage/signup-bg1.svg')" }}
