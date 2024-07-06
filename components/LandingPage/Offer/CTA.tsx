@@ -5,14 +5,16 @@ const CTA = ({
   color = "text-[#000080]",
   btnColor = "text-white",
   btnBg = "bg-[#000080]",
+  top = "",
 }: {
   bg?: string;
   color?: string;
   btnColor?: string;
   btnBg?: string;
+  top?: string;
 }) => {
   return (
-    <section className="section-container ">
+    <section className={`section-container ${top}`}>
       <section
         className={`${bg} bg-cover bg-no-repeat sm:py-[120px] py-20 sm:px-24 px-14   max-xsm:px-12 rounded-2xl`}
       >

@@ -4,7 +4,10 @@ const ContactHeader = () => {
       <div className="flex flex-col max-slg:items-center max-slg:mb-6 slg:ml-[5px]">
         <span className="text-[#161519] headingspan mb-0">Let’s talk!</span>
         <h2 className="header-headline">
-          How can we <span className="header-headline-span">help ?</span>
+          How can we{" "}
+          <span className="header-headline-span max-sm:text-[#000080]">
+            help ?
+          </span>
         </h2>
       </div>
       <div className="rounded-xl basis-[40%]">

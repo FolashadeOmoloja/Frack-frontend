@@ -27,15 +27,17 @@ const testimonials = [
 const Testimonials = ({
   color,
   textCenter = true,
+  top = "",
 }: {
   color?: string;
   textCenter?: boolean;
+  top?: string;
 }) => {
   return (
     <section
       className={`section-container flex  max-xslg:gap-7 max-slg:gap-14  max-slg:flex-col justify-between ${
         textCenter ? "max-slg:items-center" : ""
-      } ${color}`}
+      } ${color} ${top}`}
     >
       <span
         className={`max-w-[432px] font-bold leading-10 text-[38px] ${
