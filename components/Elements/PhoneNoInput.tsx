@@ -22,13 +22,11 @@ interface ValidationRules {
 interface PhoneNoInputProps {
   register: UseFormRegister<any>;
   validationRules: ValidationRules;
-  errors: FieldErrors<any>;
 }
 
 const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
   register,
   validationRules,
-  errors,
 }) => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);

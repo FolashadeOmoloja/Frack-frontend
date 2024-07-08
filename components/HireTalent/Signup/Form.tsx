@@ -19,12 +19,12 @@ const validationRules = {
     required: `Your Company's Name is required`,
   },
   jobTitle: {
-    required: "Full Name is required",
+    required: "Job Title is required",
   },
   mobileNo: {
     required: "Mobile No. is required",
     pattern: {
-      value: /^[0-9]{11}$/,
+      value: /^[0-9]/,
       message: "Invalid mobile phone number",
     },
   },
@@ -36,9 +36,15 @@ const validationRules = {
     },
   },
   password: {
-    required: "Pickup Date is required",
+    required: "Password is required",
+    pattern: {
+      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+      message:
+        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
+    },
   },
 };
+
 const HireTalentLoginForm = () => {
   const {
     handleSubmit,
@@ -173,11 +179,7 @@ const HireTalentLoginForm = () => {
           <label>
             Phone Number <span className="text-red-600 text-base">*</span>
           </label>
-          <PhoneNoInput
-            register={register}
-            errors={errors}
-            validationRules={validationRules}
-          />
+          <PhoneNoInput register={register} validationRules={validationRules} />
           {errors.mobileNo && (
             <span className="text-red-600 text-sm">{`${errors.mobileNo.message}`}</span>
           )}
@@ -192,6 +194,7 @@ const HireTalentLoginForm = () => {
               className="pr-10"
               {...register("password", {
                 required: "Password is required",
+                pattern: validationRules.password.pattern,
               })}
             />
             <button
@@ -216,6 +219,7 @@ const HireTalentLoginForm = () => {
             name="approval-check"
             id="approval-check"
             className="rounded-md h-5 w-5 accent-[#000080]"
+            required
           />
           <label
             htmlFor="approval-check"
