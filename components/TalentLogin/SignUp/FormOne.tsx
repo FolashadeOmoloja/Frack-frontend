@@ -6,6 +6,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PhoneNoInput from "@/components/Elements/PhoneNoInput";
+import StepCounter from "@/components/Elements/StepCounter";
 
 // Define validation rules for each form field
 const validationRules = {
@@ -68,7 +69,7 @@ const FormOne = () => {
   };
 
   return (
-    <section className="md:max-w-[529px] max-sm:p-4">
+    <section className="md:max-w-[529px] max-sm:p-4 mt-6">
       <div className="mb-6">
         <div
           className="ml-[-35px] cursor-pointer"
@@ -83,12 +84,15 @@ const FormOne = () => {
             priority
           />
         </div>
+        <StepCounter activeOne />
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
-          Register for find talent
+          Apply to join Frack’s workforce
         </h3>
         <p className="text-gray-500 text-sm">
-          we can unlock the power of talent and drive success for{" "}
-          <br className="max-sm:hidden" /> businesses around the world.
+          Discover exciting roles at the world's best companies, join a top{" "}
+          <br className="max-smhidden" />
+          class community, and access exclusive learning opportunities and
+          benefits.
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -140,38 +144,6 @@ const FormOne = () => {
           />
           {errors.email && (
             <span className="text-red-600 text-sm">{`${errors.email.message}`}</span>
-          )}
-        </div>
-        {/* Company Name */}
-        <div className="flex formdivs flex-col mb-4 gap-[6px]">
-          <label>
-            Company's Name <span className="text-red-600 text-base">*</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter your company's name"
-            {...register("companyName", {
-              required: validationRules.companyName.required,
-            })}
-          />
-          {errors.companyName && (
-            <span className="text-red-600 text-sm">{`${errors.companyName.message}`}</span>
-          )}
-        </div>
-        {/* Job TiTle */}
-        <div className="flex formdivs flex-col mb-4 gap-[6px]">
-          <label>
-            Job Title <span className="text-red-600 text-base">*</span>
-          </label>
-          <input
-            type="text"
-            placeholder="Enter your job title"
-            {...register("jobTitle", {
-              required: validationRules.jobTitle.required,
-            })}
-          />
-          {errors.jobTitle && (
-            <span className="text-red-600 text-sm">{`${errors.jobTitle.message}`}</span>
           )}
         </div>
         {/* Mobile No. */}
@@ -234,10 +206,10 @@ const FormOne = () => {
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
           disabled={isSubmitting}
         >
-          Find Talent
+          Continue
         </button>
       </form>
-      <p className="text-sm text-[#667185] mt-6  text-center">
+      <p className="text-sm text-[#667185] mt-6 mb-20 text-center">
         Already have an account?{" "}
         <Link href={"/sign-in"} className="text-black font-semibold ">
           Log in
