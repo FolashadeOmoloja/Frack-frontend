@@ -45,7 +45,7 @@ const validationRules = {
   },
 };
 
-const HireTalentLoginForm = () => {
+const HireTalentSignUpForm = () => {
   const {
     handleSubmit,
     register,
@@ -247,4 +247,4 @@ const HireTalentLoginForm = () => {
   );
 };
 
-export default HireTalentLoginForm;
+export default HireTalentSignUpForm;

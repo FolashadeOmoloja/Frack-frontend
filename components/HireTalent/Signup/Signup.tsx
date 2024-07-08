@@ -1,6 +1,6 @@
-import HireTalentLoginForm from "./Form";
+import HireTalentSignUpForm from "./Form";
 
-const Login = () => {
+const HireTalentSignUp = () => {
   return (
     <section className=" flex">
       <div
@@ -14,10 +14,10 @@ const Login = () => {
         </p>
       </div>
       <section className="md:basis-1/2 max-md:w-full flex justify-center sm:p-[50px]">
-        <HireTalentLoginForm />
+        <HireTalentSignUpForm />
       </section>
     </section>
   );
 };
 
-export default Login;
+export default HireTalentSignUp;
