@@ -64,8 +64,20 @@ const MobileNav = () => {
             </div>
             {isOpenDropdown && (
               <ul className="absolute top-full left-[-50%] mt-2 bg-white shadow-md rounded-lg p-[20px] w-[8rem] flex flex-col gap-7">
-                <li>Hire Talent</li>
-                <li>Sign up</li>
+                <li
+                  onClick={() => {
+                    router.push("/hire-talent");
+                  }}
+                >
+                  Hire Talent
+                </li>
+                <li
+                  onClick={() => {
+                    router.push("/sign-in");
+                  }}
+                >
+                  Sign In
+                </li>
               </ul>
             )}
           </li>
@@ -151,10 +163,10 @@ const MobileNav = () => {
             <button
               className="bg-[#22CCED] h-[55px] rounded-[6px] font-semibold"
               onClick={() => {
-                router.push("/sign-up");
+                router.push("/sign-in");
               }}
             >
-              Sign Up
+              Sign In
             </button>
             <CTABTN width="w-full" route="/hire-talent" CTA="Hire Talent" />
           </div>
