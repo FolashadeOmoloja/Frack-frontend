@@ -116,7 +116,7 @@
   }
 
   .step-line {
-    @apply bg-[#A2A6A9] w-[190px] h-[2px];
+    @apply bg-[#A2A6A9] w-[130px] h-[2px];
   }
 }
 

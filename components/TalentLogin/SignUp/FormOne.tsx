@@ -69,7 +69,7 @@ const FormOne = () => {
   };
 
   return (
-    <section className="md:max-w-[529px] max-sm:p-4 mt-6">
+    <section className="md:max-w-[529px] max-sm:p-4 mt-6 max-xl:px-[50px]">
       <div className="mb-6">
         <div
           className="ml-[-35px] cursor-pointer"
@@ -84,7 +84,9 @@ const FormOne = () => {
             priority
           />
         </div>
-        <StepCounter activeOne />
+        <div className="px-[15px]">
+          <StepCounter activeOne />
+        </div>
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
           Apply to join Frack’s workforce
         </h3>
