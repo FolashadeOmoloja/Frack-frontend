@@ -1,5 +1,11 @@
+import ForTalentSignUp from "@/components/TalentLogin/SignUp/SignUp";
+
 const page = () => {
-  return <div>page</div>;
+  return (
+    <>
+      <ForTalentSignUp />
+    </>
+  );
 };
 
 export default page;

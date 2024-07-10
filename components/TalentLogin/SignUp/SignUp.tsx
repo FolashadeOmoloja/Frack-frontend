@@ -1,7 +1,11 @@
-import React from "react";
+import SignUpStep1 from "./SignUpStep1";
 
-const SignUp = () => {
-  return <div>SignUp</div>;
+const ForTalentSignUp = () => {
+  return (
+    <section>
+      <SignUpStep1 />
+    </section>
+  );
 };
 
-export default SignUp;
+export default ForTalentSignUp;

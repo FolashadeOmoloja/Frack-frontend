@@ -105,10 +105,10 @@ const MainNav = ({ activeItem }: { activeItem?: number }) => {
         <button
           className=""
           onClick={() => {
-            router.push("/sign-up");
+            router.push("/sign-in");
           }}
         >
-          Sign Up
+          Sign In
         </button>
         <CTABTN route="/hire-talent" CTA="Hire Talent" />
       </div>

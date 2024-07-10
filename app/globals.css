@@ -110,6 +110,14 @@
   .login-text {
     @apply text-white xlg:max-w-[320px] max-w-[250px] leading-[29px] tracking-[1.5%] absolute right-0 mr-4 xlg:top-[150px] top-[50px] text-sm max-lg:hidden;
   }
+
+  .step-circle {
+    @apply w-[26px] h-[26px] rounded-full border-[1.5px] flex items-center justify-center border-black;
+  }
+
+  .step-line {
+    @apply bg-[#A2A6A9] w-[130px] h-[2px];
+  }
 }
 
 @keyframes slideIn {
