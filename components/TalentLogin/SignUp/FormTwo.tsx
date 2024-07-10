@@ -5,6 +5,8 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import StepCounter from "@/components/Elements/StepCounter";
+import Dropdown from "@/components/Elements/Dropdown";
+import { searchBarData } from "@/utilities/constants/searchbarData";
 
 // Define validation rules for each form field
 const validationRules = {
@@ -88,19 +90,21 @@ const FormTwo = ({
           />
         </div>
         <div className="px-[15px]">
-          <StepCounter activeOne />
+          <StepCounter activeTwo pastActiveOne />
         </div>
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
-          Apply to join Frack’s workforce
+          Professional expertise
         </h3>
         <p className="text-gray-500 text-sm">
-          Discover exciting roles at the world's best companies, join a top{" "}
-          <br className="max-sm:hidden" />
-          class community, and access exclusive learning opportunities and
-          benefits.
+          Let us match you with the greatest companies in the world.
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
+        <Dropdown
+          ItemsArr={searchBarData[1].options}
+          label="Role"
+          placeholder="Select your role"
+        />
         <button
           type="submit"
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
@@ -109,12 +113,6 @@ const FormTwo = ({
           Continue
         </button>
       </form>
-      {/* <p className="text-sm text-[#667185] mt-6 mb-20 text-center">
-        Already have an account?{" "}
-        <Link href={"/sign-in"} className="text-black font-semibold ">
-          Log in
-        </Link>
-      </p> */}
     </section>
   );
 };

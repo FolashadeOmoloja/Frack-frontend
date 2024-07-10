@@ -7,7 +7,7 @@ const SignUpStep1 = () => {
   const [bgImage, setBgImage] = useState(
     "url('/images/homepage/signup-bg2.svg')"
   );
-  const [active, setActive] = useState(1);
+  const [active, setActive] = useState(2);
   return (
     <section className="flex">
       <div
