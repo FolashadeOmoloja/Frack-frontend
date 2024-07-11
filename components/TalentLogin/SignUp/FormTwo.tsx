@@ -10,38 +10,11 @@ import { searchBarData } from "@/utilities/constants/searchbarData";
 
 // Define validation rules for each form field
 const validationRules = {
-  firstName: {
-    required: "First Name is required",
-  },
-  lastName: {
-    required: "Last Name is required",
-  },
-  companyName: {
-    required: `Your Company's Name is required`,
-  },
-  jobTitle: {
-    required: "Job Title is required",
-  },
-  mobileNo: {
-    required: "Mobile No. is required",
-    pattern: {
-      value: /^[0-9]/,
-      message: "Invalid phone number",
-    },
-  },
-  email: {
-    required: "Email is required",
+  url: {
+    required: "Your LinnkedIn url is required",
     pattern: {
       value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      message: "Invalid email address",
-    },
-  },
-  password: {
-    required: "Password is required",
-    pattern: {
-      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-      message:
-        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
+      message: "Invalid LinkedIn url",
     },
   },
 };
@@ -99,12 +72,50 @@ const FormTwo = ({
           Let us match you with the greatest companies in the world.
         </p>
       </div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <Dropdown
           ItemsArr={searchBarData[1].options}
           label="Role"
           placeholder="Select your role"
         />
+        <Dropdown
+          ItemsArr={[
+            "2-4 years",
+            "4-6 years",
+            "6-8 years",
+            "8-10 years",
+            "above 10 years",
+          ]}
+          label="Total years of work experience"
+          placeholder="Select years of work experience"
+        />
+        <Dropdown
+          ItemsArr={searchBarData[0].options}
+          label="Primary skill"
+          placeholder="Select skills"
+        />
+        <Dropdown
+          ItemsArr={["English", "Spanish", "French"]}
+          label="Language"
+          placeholder="Select your language"
+        />
+        {/* Email */}
+        <div className="flex formdivs flex-col mb-4 gap-[6px]">
+          <label>
+            linkedin url <span className="text-red-600 text-base">*</span>
+          </label>
+          <input
+            type="url"
+            placeholder="Enter linkedin url"
+            {...register("url", {
+              required: validationRules.url.required,
+              pattern: validationRules.url.pattern,
+            })}
+          />
+          {errors.url && (
+            <span className="text-red-600 text-sm">{`${errors.url.message}`}</span>
+          )}
+        </div>
         <button
           type="submit"
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"

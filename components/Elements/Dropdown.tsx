@@ -15,7 +15,7 @@ const Dropdown = ({
   const [focus, setFocus] = useState(false);
   const showOptions = () => {
     setIsOpen(!isOpen);
-    setFocus(true);
+    setFocus(!focus);
     console.log(focus);
   };
 
@@ -26,7 +26,7 @@ const Dropdown = ({
   };
   return (
     <section className="h-full md:min-w-[450px]">
-      <label className="text-gray-900">{label}</label>
+      <label className="text-gray-900 font-semibold">{label}</label>
       <div className="relative sm:h-full h-[50px]  sm:basis-1/3 w-full">
         <div
           className={`dropdown-button text-black w-full max-sm:rounded-md h-12 rounded-lg p-[12px] border-gray-200 mt-2 ${
@@ -37,7 +37,7 @@ const Dropdown = ({
           {selectedItem ? (
             <span>{selectedItem}</span>
           ) : (
-            <span className="text-gray-400">{placeholder}</span>
+            <span className="text-gray-400 text-sm">{placeholder}</span>
           )}
           <FaCaretDown className="absolute right-[12px] top-[18px]" />
         </div>
