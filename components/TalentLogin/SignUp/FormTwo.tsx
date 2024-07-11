@@ -1,21 +1,24 @@
 import { useForm } from "react-hook-form";
 import Image from "next/image";
-import Link from "next/link";
-import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
-import { useState } from "react";
 import { useRouter } from "next/navigation";
 import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
 import { searchBarData } from "@/utilities/constants/searchbarData";
+import { FaArrowLeft } from "react-icons/fa6";
 
-// Define validation rules for each form field
 const validationRules = {
   url: {
-    required: "Your LinnkedIn url is required",
+    required: "Your LinkedIn URL is required",
     pattern: {
-      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      message: "Invalid LinkedIn url",
+      value: /^https:\/\/(www\.)?linkedin\.com\/.*$/,
+      message: "Invalid LinkedIn URL",
     },
+  },
+  role: {
+    required: "Role required",
+  },
+  experience: {
+    required: "Experience required",
   },
 };
 
@@ -38,12 +41,6 @@ const FormTwo = ({
   const onSubmit = (data: any) => {
     addItem(data);
     changeBgState("url('/images/homepage/signup-bg4.svg')");
-  };
-
-  const [showPassword, setShowPassword] = useState(false);
-
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
   };
 
   return (
@@ -77,6 +74,11 @@ const FormTwo = ({
           ItemsArr={searchBarData[1].options}
           label="Role"
           placeholder="Select your role"
+          name={"role"}
+          required={true}
+          register={register}
+          errors={errors.role}
+          validationRules={validationRules.role.required}
         />
         <Dropdown
           ItemsArr={[
@@ -88,16 +90,27 @@ const FormTwo = ({
           ]}
           label="Total years of work experience"
           placeholder="Select years of work experience"
+          name={"experience"}
+          required={true}
+          register={register}
+          errors={errors.experience}
+          validationRules={validationRules.experience.required}
         />
         <Dropdown
           ItemsArr={searchBarData[0].options}
           label="Primary skill"
           placeholder="Select skills"
+          name={"skills"}
+          required={false}
+          register={register}
         />
         <Dropdown
           ItemsArr={["English", "Spanish", "French"]}
           label="Language"
           placeholder="Select your language"
+          name={"language"}
+          required={false}
+          register={register}
         />
         {/* Email */}
         <div className="flex formdivs flex-col mb-4 gap-[6px]">
@@ -116,13 +129,14 @@ const FormTwo = ({
             <span className="text-red-600 text-sm">{`${errors.url.message}`}</span>
           )}
         </div>
-        <button
-          type="submit"
-          className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
-          disabled={isSubmitting}
-        >
-          Continue
-        </button>
+        <div className="mb-12 flex gap-10 max-xsm:gap-5">
+          <div className="login-btn centered gap-3 cursor-pointer icon-animate">
+            <FaArrowLeft /> <span>Back</span>
+          </div>
+          <button type="submit" className="login-btn" disabled={isSubmitting}>
+            Continue
+          </button>
+        </div>
       </form>
     </section>
   );

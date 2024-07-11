@@ -44,9 +44,8 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
               (country.idd.suffixes ? country.idd.suffixes[0] : ""),
             flag: country.flags.png,
           }))
-          .filter((country: Country) => country.code)
-          .sort(); // filter out countries without codes
-        // console.log(countryData);
+          .filter((country: Country) => country.code) // filter out countries without codes
+          .sort((a: Country, b: Country) => a.name.localeCompare(b.name)); // sort alphabetically by name
         setCountries(countryData);
         setSelectedCountry(countryData[0]);
       })

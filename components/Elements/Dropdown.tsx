@@ -1,22 +1,42 @@
 import { useState } from "react";
 import { FaCaretDown } from "react-icons/fa6";
+interface ValidationRules {
+  role: {
+    required: string;
+  };
+  experience: {
+    required: string;
+  };
+}
 
 const Dropdown = ({
   ItemsArr,
   label,
   placeholder,
+  name,
+  required,
+  register,
+  errors,
+  validationRules,
+  fieldError,
 }: {
   ItemsArr: string[];
   label: string;
   placeholder?: string;
+  name: string;
+  required: boolean;
+  register: any;
+  errors?: any;
+  fieldError?: any;
+  validationRules?: string;
 }) => {
   const [selectedItem, setSelectedItem] = useState("");
   const [isOpen, setIsOpen] = useState(false);
   const [focus, setFocus] = useState(false);
+
   const showOptions = () => {
     setIsOpen(!isOpen);
     setFocus(!focus);
-    console.log(focus);
   };
 
   const handleSelect = (option: string) => {
@@ -24,13 +44,14 @@ const Dropdown = ({
     setIsOpen(false);
     setFocus(false);
   };
+
   return (
-    <section className="h-full md:min-w-[450px]">
-      <label className="text-gray-900 font-semibold">{label}</label>
+    <section className="h-full slg:min-w-[450px]">
+      <label className="text-gray-900 text-sm font-semibold">{label}</label>
       <div className="relative sm:h-full h-[50px]  sm:basis-1/3 w-full">
         <div
-          className={`dropdown-button text-black w-full max-sm:rounded-md h-12 rounded-lg p-[12px] border-gray-200 mt-2 ${
-            focus ? "border-blue-900" : ""
+          className={`dropdown-button text-black w-full max-sm:rounded-md h-12 rounded-lg p-[12px]  mt-2 ${
+            focus ? "border-[#000080]" : "border-gray-200"
           }`}
           onClick={showOptions}
         >
@@ -53,6 +74,20 @@ const Dropdown = ({
               </div>
             ))}
           </div>
+        )}
+        <input
+          type="hidden"
+          value={selectedItem}
+          {...(required
+            ? { ...register(name) }
+            : {
+                ...register(name, {
+                  required: validationRules,
+                }),
+              })}
+        />
+        {errors && (
+          <span className="text-red-600 text-sm">{`${label} is required`}</span>
         )}
       </div>
     </section>
