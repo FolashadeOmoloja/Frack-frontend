@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import StepCounter from "@/components/Elements/StepCounter";
@@ -36,7 +36,11 @@ const FormTwo = ({
   const router = useRouter();
 
   //add Item to backeend
-  const addItem = async (data: any) => {};
+  const addItem = async (data: any) => {
+    if (data) {
+      console.log(data.skills.trim());
+    }
+  };
 
   const onSubmit = (data: any) => {
     addItem(data);
@@ -77,7 +81,7 @@ const FormTwo = ({
           name={"role"}
           required={true}
           register={register}
-          errors={errors.role}
+          errors={errors.role as FieldError}
           validationRules={validationRules.role.required}
         />
         <Dropdown
@@ -93,7 +97,7 @@ const FormTwo = ({
           name={"experience"}
           required={true}
           register={register}
-          errors={errors.experience}
+          errors={errors.experience as FieldError}
           validationRules={validationRules.experience.required}
         />
         <Dropdown
@@ -112,6 +116,21 @@ const FormTwo = ({
           required={false}
           register={register}
         />
+        <select
+          className="custom-select"
+          id="selectmethod"
+          defaultValue=""
+          {...register("exampleRequired", { required: true })}
+        >
+          <option value="" disabled>
+            Select Option
+          </option>
+          <option value="1">Blue</option>
+          <option value="2">Red</option>
+        </select>
+        {errors.exampleRequired && (
+          <span className="formError errorMssg">This field is required</span>
+        )}
         {/* Email */}
         <div className="flex formdivs flex-col mb-4 gap-[6px]">
           <label>
