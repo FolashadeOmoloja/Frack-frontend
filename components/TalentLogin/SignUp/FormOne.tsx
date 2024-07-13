@@ -1,4 +1,3 @@
-"use client";
 import { useForm } from "react-hook-form";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,7 +25,7 @@ const validationRules = {
     required: "Mobile No. is required",
     pattern: {
       value: /^[0-9]/,
-      message: "Invalid mobile phone number",
+      message: "Invalid phone number",
     },
   },
   email: {
@@ -46,7 +45,13 @@ const validationRules = {
   },
 };
 
-const FormOne = () => {
+const FormOne = ({
+  changeBgState,
+  changeActive,
+}: {
+  changeBgState: (value: string) => void;
+  changeActive: (value: number) => void;
+}) => {
   const {
     handleSubmit,
     register,
@@ -60,6 +65,8 @@ const FormOne = () => {
 
   const onSubmit = (data: any) => {
     addItem(data);
+    changeBgState("url('/images/homepage/signup-bg4.svg')");
+    changeActive(2);
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -92,7 +99,7 @@ const FormOne = () => {
         </h3>
         <p className="text-gray-500 text-sm">
           Discover exciting roles at the world's best companies, join a top{" "}
-          <br className="max-smhidden" />
+          <br className="max-sm:hidden" />
           class community, and access exclusive learning opportunities and
           benefits.
         </p>
@@ -138,7 +145,7 @@ const FormOne = () => {
           </label>
           <input
             type="email"
-            placeholder="Enter your work address"
+            placeholder="Enter your email address"
             {...register("email", {
               required: validationRules.email.required,
               pattern: validationRules.email.pattern,

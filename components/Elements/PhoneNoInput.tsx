@@ -44,7 +44,8 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
               (country.idd.suffixes ? country.idd.suffixes[0] : ""),
             flag: country.flags.png,
           }))
-          .filter((country: Country) => country.code); // filter out countries without codes
+          .filter((country: Country) => country.code) // filter out countries without codes
+          .sort((a: Country, b: Country) => a.name.localeCompare(b.name)); // sort alphabetically by name
         setCountries(countryData);
         setSelectedCountry(countryData[0]);
       })
@@ -69,19 +70,20 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
           <img
             src={selectedCountry.flag}
             alt={selectedCountry.name}
-            className="w-5 h-5 rounded-full mr-2"
+            className="w-5 h-5 rounded-full mr-2  object-center"
           />
           <AiOutlineDown className=" text-[#98A2B3] max-sm:hidden text-sm" />
         </div>
         {isOpen && (
-          <div className="absolute z-10 mt-2 bg-white border rounded shadow-lg h-[100px] overflow-y-auto custom-scrollbar w-full">
+          <div className="absolute z-10 mt-2 bg-white border rounded shadow-lg h-[200px] overflow-y-auto custom-scrollbar w-[300px]">
             {countries.map((country, idx) => (
               <div
                 key={idx}
                 onClick={() => selectCountry(country)}
                 className="flex items-center cursor-pointer p-2 hover:bg-gray-200"
               >
-                <img src={country.flag} alt={""} className="w-6 h-4 mr-2" />
+                <img src={country.flag} alt={""} className="w-6 h-4 mr-2 " />
+                <span>{country.name}</span>
               </div>
             ))}
           </div>
