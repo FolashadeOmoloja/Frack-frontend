@@ -11,6 +11,7 @@ interface DropdownProps {
   register: UseFormRegister<any>;
   errors?: FieldError;
   validationRules?: any;
+  setValue: (name: string, value: string) => void;
 }
 
 const Dropdown = ({
@@ -22,6 +23,7 @@ const Dropdown = ({
   register,
   errors,
   validationRules,
+  setValue,
 }: DropdownProps) => {
   const [selectedItem, setSelectedItem] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -34,18 +36,21 @@ const Dropdown = ({
 
   const handleSelect = (option: string) => {
     setSelectedItem(option);
+    setValue(name, option);
     setIsOpen(false);
     setFocus(false);
   };
 
-  // Register the selectedItem with react-hook-form
   useEffect(() => {
     register(name, { required: validationRules });
   }, [register, name, validationRules]);
 
   return (
     <section className="h-full slg:min-w-[450px]">
-      <label className="text-gray-900 text-sm font-semibold">{label}</label>
+      <label className="text-gray-900 text-sm font-semibold">
+        {label}
+        {required && <span className="text-red-600 text-base">*</span>}
+      </label>
       <div className="relative sm:h-full h-[50px] sm:basis-1/3 w-full">
         <div
           className={`dropdown-button text-black w-full max-sm:rounded-md h-12 rounded-lg p-[12px] mt-2 ${
@@ -73,7 +78,7 @@ const Dropdown = ({
             ))}
           </div>
         )}
-        <input type="text" value={selectedItem} {...register(name)} />
+        <input type="hidden" value={selectedItem} {...register(name)} />
         {errors && (
           <span className="text-red-600 text-sm">{errors.message}</span>
         )}
