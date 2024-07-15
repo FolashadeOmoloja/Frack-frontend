@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useForm, UseFormRegister, FieldErrors } from "react-hook-form";
 import { AiOutlineDown } from "react-icons/ai";
 import axios from "axios";
+import { MdKeyboardArrowDown } from "react-icons/md";
 
 interface Country {
   name: string;
@@ -47,7 +48,7 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
           .filter((country: Country) => country.code) // filter out countries without codes
           .sort((a: Country, b: Country) => a.name.localeCompare(b.name)); // sort alphabetically by name
         setCountries(countryData);
-        setSelectedCountry(countryData[0]);
+        setSelectedCountry(countryData[159]);
       })
       .catch((error) => console.error("Error fetching countries:", error));
   }, []);
@@ -72,7 +73,7 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
             alt={selectedCountry.name}
             className="w-5 h-5 rounded-full mr-2  object-center"
           />
-          <AiOutlineDown className=" text-[#98A2B3] max-sm:hidden text-sm" />
+          <MdKeyboardArrowDown className=" text-[#98A2B3] max-sm:hidden " />
         </div>
         {isOpen && (
           <div className="absolute z-10 mt-2 bg-white border rounded shadow-lg h-[200px] overflow-y-auto custom-scrollbar w-[300px]">

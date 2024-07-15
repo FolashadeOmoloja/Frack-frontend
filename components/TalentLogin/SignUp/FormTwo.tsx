@@ -1,4 +1,3 @@
-"use client";
 import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -26,8 +25,10 @@ const validationRules = {
 
 const FormTwo = ({
   changeBgState,
+  changeActive,
 }: {
   changeBgState: (value: string) => void;
+  changeActive: (value: number) => void;
 }) => {
   const {
     handleSubmit,
@@ -46,9 +47,10 @@ const FormTwo = ({
   };
 
   const onSubmit = (data: any) => {
-    changeBgState("url('/images/homepage/signup-bg4.svg')");
     console.log(data);
     addItem(data);
+    changeBgState("url('/images/homepage/signup-bg5.svg')");
+    changeActive(3);
   };
 
   return (
