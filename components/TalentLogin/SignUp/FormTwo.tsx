@@ -1,3 +1,4 @@
+"use client";
 import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -5,6 +6,7 @@ import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useState } from "react";
 
 const validationRules = {
   url: {
@@ -30,6 +32,7 @@ const FormTwo = ({
   const {
     handleSubmit,
     register,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm();
 
@@ -38,13 +41,14 @@ const FormTwo = ({
   //add Item to backeend
   const addItem = async (data: any) => {
     if (data) {
-      console.log(data.skills.trim());
+      console.log(data.url.trim());
     }
   };
 
   const onSubmit = (data: any) => {
-    addItem(data);
     changeBgState("url('/images/homepage/signup-bg4.svg')");
+    console.log(data);
+    addItem(data);
   };
 
   return (
@@ -83,6 +87,7 @@ const FormTwo = ({
           register={register}
           errors={errors.role as FieldError}
           validationRules={validationRules.role.required}
+          setValue={setValue}
         />
         <Dropdown
           ItemsArr={[
@@ -99,6 +104,7 @@ const FormTwo = ({
           register={register}
           errors={errors.experience as FieldError}
           validationRules={validationRules.experience.required}
+          setValue={setValue}
         />
         <Dropdown
           ItemsArr={searchBarData[0].options}
@@ -107,6 +113,7 @@ const FormTwo = ({
           name={"skills"}
           required={false}
           register={register}
+          setValue={setValue}
         />
         <Dropdown
           ItemsArr={["English", "Spanish", "French"]}
@@ -115,22 +122,9 @@ const FormTwo = ({
           name={"language"}
           required={false}
           register={register}
+          setValue={setValue}
         />
-        <select
-          className="custom-select"
-          id="selectmethod"
-          defaultValue=""
-          {...register("exampleRequired", { required: true })}
-        >
-          <option value="" disabled>
-            Select Option
-          </option>
-          <option value="1">Blue</option>
-          <option value="2">Red</option>
-        </select>
-        {errors.exampleRequired && (
-          <span className="formError errorMssg">This field is required</span>
-        )}
+
         {/* Email */}
         <div className="flex formdivs flex-col mb-4 gap-[6px]">
           <label>
