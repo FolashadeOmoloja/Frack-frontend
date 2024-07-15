@@ -23,7 +23,7 @@ const validationRules = {
   },
 };
 
-const FormTwo = ({
+const FormThree = ({
   changeBgState,
   changeActive,
 }: {
@@ -42,7 +42,6 @@ const FormTwo = ({
   //add Item to backeend
   const addItem = async (data: any) => {
     if (data) {
-      console.log(data.url.trim());
     }
   };
 
@@ -73,77 +72,24 @@ const FormTwo = ({
           <StepCounter activeTwo pastActiveOne />
         </div>
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
-          Professional expertise
+          Upload your resume
         </h3>
         <p className="text-gray-500 text-sm">
-          Let us match you with the greatest companies in the world.
+          This will form the basis of your Frack profile, which can be updated
+          any time
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <Dropdown
-          ItemsArr={searchBarData[1].options}
-          label="Role"
-          placeholder="Select your role"
-          name={"role"}
-          required={true}
-          register={register}
-          errors={errors.role as FieldError}
-          validationRules={validationRules.role.required}
-          setValue={setValue}
-        />
-        <Dropdown
-          ItemsArr={[
-            "2-4 years",
-            "4-6 years",
-            "6-8 years",
-            "8-10 years",
-            "above 10 years",
-          ]}
-          label="Total years of work experience"
-          placeholder="Select years of work experience"
-          name={"experience"}
-          required={true}
-          register={register}
-          errors={errors.experience as FieldError}
-          validationRules={validationRules.experience.required}
-          setValue={setValue}
-        />
-        <Dropdown
-          ItemsArr={searchBarData[0].options}
-          label="Primary skill"
-          placeholder="Select skills"
-          name={"skills"}
-          required={false}
-          register={register}
-          setValue={setValue}
-        />
-        <Dropdown
-          ItemsArr={["English", "Spanish", "French"]}
-          label="Language"
-          placeholder="Select your language"
-          name={"language"}
+          ItemsArr={["Twitter", "Whatsapp", "LinkedIn", "Referral"]}
+          label="How did you hear about Frack? (optional)"
+          placeholder="Select an option"
+          name={"chanel"}
           required={false}
           register={register}
           setValue={setValue}
         />
 
-        {/* linkedin url */}
-        <div className="flex formdivs flex-col mb-4 gap-[6px]">
-          <label>
-            linkedin url <span className="text-red-600 text-base">*</span>
-          </label>
-          <input
-            type="url"
-            placeholder="Enter linkedin url"
-            {...register("url", {
-              required: validationRules.url.required,
-              pattern: validationRules.url.pattern,
-            })}
-          />
-          {errors.url && (
-            <span className="text-red-600 text-sm">{`${errors.url.message}`}</span>
-          )}
-        </div>
         <div className="mb-12 flex gap-10 max-xsm:gap-5">
           <div className="login-btn centered gap-3 cursor-pointer icon-animate">
             <FaArrowLeft /> <span>Back</span>
@@ -157,4 +103,4 @@ const FormTwo = ({
   );
 };
 
-export default FormTwo;
+export default FormThree;
