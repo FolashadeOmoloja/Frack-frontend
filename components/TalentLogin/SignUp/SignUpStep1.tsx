@@ -6,7 +6,7 @@ import FormThree from "./FormThree";
 
 const SignUpStep1 = () => {
   const [bgImage, setBgImage] = useState(
-    "url('/images/homepage/signup-bg2.svg')"
+    "url('/images/homepage/signup-bg5.svg')"
   );
   const [active, setActive] = useState(3);
   return (

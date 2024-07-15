@@ -1,27 +1,10 @@
-import { FieldError, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import { FaArrowLeft } from "react-icons/fa6";
-import { useState } from "react";
-
-const validationRules = {
-  url: {
-    required: "Your LinkedIn URL is required",
-    pattern: {
-      value: /^https:\/\/(www\.)?linkedin\.com\/.*$/,
-      message: "Invalid LinkedIn URL",
-    },
-  },
-  role: {
-    required: "Role required",
-  },
-  experience: {
-    required: "Experience required",
-  },
-};
+import { MdOutlineUploadFile } from "react-icons/md";
 
 const FormThree = ({
   changeBgState,
@@ -69,7 +52,7 @@ const FormThree = ({
           />
         </div>
         <div className="px-[15px]">
-          <StepCounter activeTwo pastActiveOne />
+          <StepCounter activeThree pastActiveTwo pastActiveOne />
         </div>
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
           Upload your resume
@@ -80,6 +63,24 @@ const FormThree = ({
         </p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
+        <div className="w-full h-[220px] border-2 border-[#CACCCF] rounded-lg border-dashed relative centered">
+          <input
+            type="file"
+            accept=".pdf, .doc, .docx"
+            className="h-full w-full opacity-0 absolute top-0"
+            {...register("resume", { required: "Resume is required" })}
+          />
+          <div className="bg-[#f4f6fa] w-[325px] h-[178px] rounded-md centered flex-col text-center gap-3">
+            <MdOutlineUploadFile className="text-[38px]" />
+            <span className="font-bold text-lg">Upload your resume</span>
+            <p className="text-sm">
+              Drop your file here (PDF) or{" "}
+              <span className="text-[#000080] font-bold">Browse</span>
+              <br />
+              Max file size: 2MB (PDF)
+            </p>
+          </div>
+        </div>
         <Dropdown
           ItemsArr={["Twitter", "Whatsapp", "LinkedIn", "Referral"]}
           label="How did you hear about Frack? (optional)"
