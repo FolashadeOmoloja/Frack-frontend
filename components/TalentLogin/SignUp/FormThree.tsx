@@ -1,7 +1,5 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import { FaArrowLeft } from "react-icons/fa6";
 import { MdOutlineUploadFile } from "react-icons/md";
 import { Worker, Viewer } from "@react-pdf-viewer/core";
@@ -9,6 +7,7 @@ import "@react-pdf-viewer/core/lib/styles/index.css";
 import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
 import { BiSolidFileDoc } from "react-icons/bi";
+import FormLogo from "@/components/Elements/FormLogo";
 
 const validationRules = {
   resume: {
@@ -36,7 +35,6 @@ const FormThree = ({
   const [fileName, setFileName] = useState<string | null>(null);
   const [fileType, setFileType] = useState<string | null>(null);
   const [fileSizeError, setFileSizeError] = useState<string | null>(null);
-  const router = useRouter();
 
   const addItem = async (data: any) => {
     if (data) {
@@ -47,7 +45,7 @@ const FormThree = ({
   const onSubmit = (data: any) => {
     console.log(data);
     addItem(data);
-    changeBgState("url('/images/homepage/signup-bg5.svg')");
+    changeBgState("url('/images/homepage/signup-bg6.svg')");
     changeActive(4);
   };
 
@@ -81,19 +79,7 @@ const FormThree = ({
   return (
     <section className="md:max-w-[529px] max-sm:p-4 mt-6 max-xl:px-[50px]">
       <div className="mb-6">
-        <div
-          className="ml-[-35px] cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          <Image
-            src={"/images/homepage/frack.png"}
-            alt={"logo"}
-            width={191}
-            height={96}
-            quality={100}
-            priority
-          />
-        </div>
+        <FormLogo />
         <div className="px-[15px]">
           <StepCounter activeThree pastActiveTwo pastActiveOne />
         </div>

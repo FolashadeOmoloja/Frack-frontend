@@ -1,10 +1,9 @@
 import { FieldError, useForm } from "react-hook-form";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 import { FaArrowLeft } from "react-icons/fa6";
+import FormLogo from "@/components/Elements/FormLogo";
 
 const validationRules = {
   url: {
@@ -36,7 +35,6 @@ const FormTwo = ({
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const router = useRouter();
 
   //add Item to backeend
   const addItem = async (data: any) => {
@@ -55,19 +53,7 @@ const FormTwo = ({
   return (
     <section className="md:max-w-[529px] max-sm:p-4 mt-6 max-xl:px-[50px]">
       <div className="mb-6">
-        <div
-          className="ml-[-35px] cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          <Image
-            src={"/images/homepage/frack.png"}
-            alt={"logo"}
-            width={191}
-            height={96}
-            quality={100}
-            priority
-          />
-        </div>
+        <FormLogo/>
         <div className="px-[15px]">
           <StepCounter activeTwo pastActiveOne />
         </div>
@@ -148,7 +134,7 @@ const FormTwo = ({
             className="login-btn centered gap-3 cursor-pointer icon-animate"
             onClick={() => {
               changeActive(2);
-              changeBgState("url('/images/homepage/signup-bg4.svg')");
+              changeBgState("url('/images/homepage/signup-bg3.svg')");
             }}
           >
             <FaArrowLeft /> <span>Back</span>
