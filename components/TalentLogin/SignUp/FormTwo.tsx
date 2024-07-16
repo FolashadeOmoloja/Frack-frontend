@@ -144,7 +144,13 @@ const FormTwo = ({
           )}
         </div>
         <div className="mb-12 flex gap-10 max-xsm:gap-5">
-          <div className="login-btn centered gap-3 cursor-pointer icon-animate">
+          <div
+            className="login-btn centered gap-3 cursor-pointer icon-animate"
+            onClick={() => {
+              changeActive(2);
+              changeBgState("url('/images/homepage/signup-bg4.svg')");
+            }}
+          >
             <FaArrowLeft /> <span>Back</span>
           </div>
           <button type="submit" className="login-btn" disabled={isSubmitting}>
