@@ -5,7 +5,6 @@ import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 import { FaArrowLeft } from "react-icons/fa6";
-import { useState } from "react";
 
 const validationRules = {
   url: {
