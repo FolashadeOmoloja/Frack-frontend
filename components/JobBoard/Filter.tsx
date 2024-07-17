@@ -1,6 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-type JobPosting = {
+const hoursFilter = ["6", "8", "10", "12"];
+const proximityFilter = ["On Site", "Hybrid", "Fully Remote", "Remote"];
+const experienceFilter = ["Intermediate", "Senior", "C-level"];
+
+type Job = {
   title: string;
   company: string;
   location: string;
@@ -14,46 +18,59 @@ type JobPosting = {
 };
 
 type FilterProps = {
-  onFilter: (filteredJobs: JobPosting[]) => void;
-  jobPostings: JobPosting[];
+  jobPostings: Job[];
+  onFilter: (filteredJobs: Job[]) => void;
 };
 
-const hoursFilter = ["6", "8", "10", "12"];
-const proximityFilter = ["On Site", "Hybrid", "Fully Remote", "Remote"];
-const experienceFilter = ["Intermediate", "Senior", "C-level"];
-
-const Filter = ({ onFilter, jobPostings }: FilterProps) => {
+const Filter = ({ jobPostings, onFilter }: FilterProps) => {
   const [selectedHours, setSelectedHours] = useState<string[]>([]);
   const [selectedProximity, setSelectedProximity] = useState<string[]>([]);
   const [selectedExperience, setSelectedExperience] = useState<string[]>([]);
 
-  const handleCheckboxChange = (
-    filterType: string,
-    value: string,
-    setSelected: React.Dispatch<React.SetStateAction<string[]>>
-  ) => {
-    setSelected((prevSelected) =>
-      prevSelected.includes(value)
-        ? prevSelected.filter((item) => item !== value)
-        : [...prevSelected, value]
-    );
+  const handleCheckboxChange = (filterType: string, value: string) => {
+    const updateState = (
+      currentState: string[],
+      setState: React.Dispatch<React.SetStateAction<string[]>>
+    ) => {
+      if (currentState.includes(value)) {
+        setState(currentState.filter((item) => item !== value));
+      } else {
+        setState([...currentState, value]);
+      }
+    };
+
+    if (filterType === "hours") {
+      updateState(selectedHours, setSelectedHours);
+    } else if (filterType === "proximity") {
+      updateState(selectedProximity, setSelectedProximity);
+    } else if (filterType === "experience") {
+      updateState(selectedExperience, setSelectedExperience);
+    }
   };
 
-  const applyFilters = () => {
+  useEffect(() => {
     const filteredJobs = jobPostings.filter((job) => {
-      const matchesHours =
-        selectedHours.length === 0 || selectedHours.includes(job.jobHours);
-      const matchesProximity =
-        selectedProximity.length === 0 ||
-        selectedProximity.includes(job.jobProximity);
-      const matchesExperience =
-        selectedExperience.length === 0 ||
-        selectedExperience.includes(job.experience);
+      const hoursMatch = selectedHours.length
+        ? selectedHours.includes(job.jobHours)
+        : true;
+      const proximityMatch = selectedProximity.length
+        ? selectedProximity.includes(job.jobProximity)
+        : true;
+      const experienceMatch = selectedExperience.length
+        ? selectedExperience.includes(job.experience)
+        : true;
 
-      return matchesHours || matchesProximity || matchesExperience;
+      return hoursMatch && proximityMatch && experienceMatch;
     });
+
     onFilter(filteredJobs);
-  };
+  }, [
+    selectedHours,
+    selectedProximity,
+    selectedExperience,
+    jobPostings,
+    onFilter,
+  ]);
 
   return (
     <section>
@@ -63,16 +80,11 @@ const Filter = ({ onFilter, jobPostings }: FilterProps) => {
           <ul>
             {hoursFilter.map((item, idx) => (
               <li key={idx} className="mb-1 flex gap-2 items-center">
-                <div>
-                  <input
-                    type="checkbox"
-                    className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
-                    checked={selectedHours.includes(item)}
-                    onChange={() =>
-                      handleCheckboxChange("hours", item, setSelectedHours)
-                    }
-                  />
-                </div>
+                <input
+                  type="checkbox"
+                  className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
+                  onChange={() => handleCheckboxChange("hours", item)}
+                />
                 <span className="text-sm flex mb-1">{item} hours</span>
               </li>
             ))}
@@ -85,20 +97,11 @@ const Filter = ({ onFilter, jobPostings }: FilterProps) => {
           <ul>
             {proximityFilter.map((item, idx) => (
               <li key={idx} className="mb-1 flex gap-2 items-center">
-                <div>
-                  <input
-                    type="checkbox"
-                    className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
-                    checked={selectedProximity.includes(item)}
-                    onChange={() =>
-                      handleCheckboxChange(
-                        "proximity",
-                        item,
-                        setSelectedProximity
-                      )
-                    }
-                  />
-                </div>
+                <input
+                  type="checkbox"
+                  className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
+                  onChange={() => handleCheckboxChange("proximity", item)}
+                />
                 <span className="text-sm flex mb-1">{item}</span>
               </li>
             ))}
@@ -111,32 +114,17 @@ const Filter = ({ onFilter, jobPostings }: FilterProps) => {
           <ul>
             {experienceFilter.map((item, idx) => (
               <li key={idx} className="mb-1 flex gap-2 items-center">
-                <div>
-                  <input
-                    type="checkbox"
-                    className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
-                    checked={selectedExperience.includes(item)}
-                    onChange={() =>
-                      handleCheckboxChange(
-                        "experience",
-                        item,
-                        setSelectedExperience
-                      )
-                    }
-                  />
-                </div>
+                <input
+                  type="checkbox"
+                  className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
+                  onChange={() => handleCheckboxChange("experience", item)}
+                />
                 <span className="text-sm flex mb-1">{item}</span>
               </li>
             ))}
           </ul>
         </li>
       </ul>
-      <button
-        className="mt-4 bg-[#000080] text-white py-2 px-4 rounded-md"
-        onClick={applyFilters}
-      >
-        Apply Filters
-      </button>
     </section>
   );
 };
