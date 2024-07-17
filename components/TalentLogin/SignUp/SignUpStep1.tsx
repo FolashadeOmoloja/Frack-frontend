@@ -7,9 +7,9 @@ import FormFour from "./FormFour";
 
 const SignUpStep1 = () => {
   const [bgImage, setBgImage] = useState(
-    "url('/images/homepage/signup-bg6.svg')"
+    "url('/images/homepage/signup-bg2.svg')"
   );
-  const [active, setActive] = useState(4);
+  const [active, setActive] = useState(1);
   return (
     <section className="flex">
       <div

@@ -22,12 +22,14 @@ const FormFour = ({}) => {
         <div className="px-[15px]">
           <StepCounter pastActiveOne pastActiveTwo pastActiveThree />
         </div>
-        <h3 className="text-[#1B1818] font-semibold text-2xl mb-1 text-center">
-          Congratulations!
-        </h3>
-        <p className="text-gray-500 text-sm text-center">
-          Congratulations you have been added to the wait list.
-        </p>
+        <div className="centered flex-col xsm:mt-36 mt-20">
+          <h3 className="text-[#1B1818] font-semibold text-2xl mb-1 text-center">
+            Congratulations!
+          </h3>
+          <p className="text-gray-500 text-sm text-center">
+            Congratulations you have been added to the wait list.
+          </p>
+        </div>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <button
