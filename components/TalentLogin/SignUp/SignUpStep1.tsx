@@ -3,12 +3,13 @@ import { useState } from "react";
 import FormOne from "./FormOne";
 import FormTwo from "./FormTwo";
 import FormThree from "./FormThree";
+import FormFour from "./FormFour";
 
 const SignUpStep1 = () => {
   const [bgImage, setBgImage] = useState(
-    "url('/images/homepage/signup-bg5.svg')"
+    "url('/images/homepage/signup-bg2.svg')"
   );
-  const [active, setActive] = useState(3);
+  const [active, setActive] = useState(1);
   return (
     <section className="flex">
       <div
@@ -17,7 +18,9 @@ const SignUpStep1 = () => {
       >
         <p className="login-text top-[30px] xlg:max-w-[230px] ">
           <span className="font-semibold text-base">
-            Our AI-driven platform streamlines the process
+            {active === 4
+              ? "Welcome to Frack!"
+              : " Our AI-driven platform streamlines the process"}
           </span>{" "}
           <br />
           making it easier and more efficient than ever before. Gone are the
@@ -35,6 +38,7 @@ const SignUpStep1 = () => {
         {active === 3 && (
           <FormThree changeBgState={setBgImage} changeActive={setActive} />
         )}
+        {active === 4 && <FormFour />}
       </section>
     </section>
   );

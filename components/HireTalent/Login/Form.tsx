@@ -5,6 +5,7 @@ import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import FormLogo from "@/components/Elements/FormLogo";
 
 // Define validation rules for each form field
 const validationRules = {
@@ -45,19 +46,7 @@ const HireTalentLoginForm = () => {
   return (
     <section className="md:max-w-[529px] max-sm:p-4">
       <div className="mb-6">
-        <div
-          className="ml-[-35px] cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          <Image
-            src={"/images/homepage/frack.png"}
-            alt={"logo"}
-            width={191}
-            height={96}
-            quality={100}
-            priority
-          />
-        </div>
+        <FormLogo />
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
           Log in to find talent
         </h3>

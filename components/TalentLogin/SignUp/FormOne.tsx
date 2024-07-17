@@ -1,11 +1,11 @@
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PhoneNoInput from "@/components/Elements/PhoneNoInput";
 import StepCounter from "@/components/Elements/StepCounter";
+import FormLogo from "@/components/Elements/FormLogo";
 
 // Define validation rules for each form field
 const validationRules = {
@@ -78,19 +78,7 @@ const FormOne = ({
   return (
     <section className="md:max-w-[529px] max-sm:p-4 mt-6 max-xl:px-[50px]">
       <div className="mb-6">
-        <div
-          className="ml-[-35px] cursor-pointer"
-          onClick={() => router.push("/")}
-        >
-          <Image
-            src={"/images/homepage/frack.png"}
-            alt={"logo"}
-            width={191}
-            height={96}
-            quality={100}
-            priority
-          />
-        </div>
+        <FormLogo />
         <div className="px-[15px]">
           <StepCounter activeOne />
         </div>

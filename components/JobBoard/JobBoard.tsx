@@ -34,7 +34,10 @@ const JobBoard = () => {
       </button>
       <section className="flex flex-col md:flex-row md:h-full gap-10">
         <div className="md:sticky lg:top-[40px] md:top-[80px]  h-full md:h-[calc(100vh-80px)] overflow-y-auto flex-shrink-0 md:w-1/3 lg:w-1/4 bg-white p-5 shadow-md rounded-sm custom-scrollbar max-sm:hidden">
-          <Filter />
+          <Filter
+            onFilter={setFilteredJobs}
+            jobPostings={jobPostings as filteredJobs}
+          />
         </div>
         <div className="flex-grow md:pl-5 pb-5 overflow-y-auto ">
           <JobPosting
