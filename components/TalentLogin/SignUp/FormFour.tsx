@@ -16,7 +16,7 @@ const FormFour = ({}) => {
   };
 
   return (
-    <section className="md:max-w-[529px] max-sm:p-4 mt-6 max-xl:px-[50px] h-[100vh]">
+    <section className="signup-form h-[100vh]">
       <div className="mb-6">
         <FormLogo />
         <div className="px-[15px]">

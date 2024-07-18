@@ -35,7 +35,6 @@ const FormTwo = ({
     formState: { errors, isSubmitting },
   } = useForm();
 
-
   //add Item to backeend
   const addItem = async (data: any) => {
     if (data) {
@@ -51,9 +50,9 @@ const FormTwo = ({
   };
 
   return (
-    <section className="md:max-w-[529px] max-sm:p-4 mt-6 max-xl:px-[50px]">
+    <section className="signup-form">
       <div className="mb-6">
-        <FormLogo/>
+        <FormLogo />
         <div className="px-[15px]">
           <StepCounter activeTwo pastActiveOne />
         </div>
