@@ -29,6 +29,7 @@ const JobBoard = () => {
   const [filteredJobs, setFilteredJobs] = useState(jobPostings);
   const [newJobPosting, setNewjobposting] = useState(jobPostings);
   const [isChecked, setIsChecked] = useState<IsCheckedState>({});
+  const [showFilter, setShowFilter] = useState(false);
 
   return (
     <section className="section-container bg-[#F4F5F7] mt-0 py-7">
@@ -38,11 +39,14 @@ const JobBoard = () => {
         jobPosting={jobPostings as filteredJobs}
         changeIsCheck={setIsChecked}
       />
-      <button className="text-2xl text-[#000080] mb-5 sm:hidden bg-white w-full h-[50px] rounded-lg          flex justify-center items-center shadow-md">
+      <button
+        className="text-2xl text-[#000080] mb-5 sm:hidden bg-white w-full h-[50px] rounded-lg          flex justify-center items-center shadow-md"
+        onClick={() => setShowFilter(!showFilter)}
+      >
         <FaFilter />
       </button>
       <section className="flex flex-col md:flex-row md:h-full gap-10">
-        <div className="md:sticky lg:top-[40px] md:top-[80px]  h-full md:h-[calc(100vh-80px)] overflow-y-auto flex-shrink-0 md:w-1/3 lg:w-1/4 bg-white p-5 shadow-md rounded-sm custom-scrollbar max-sm:hidden">
+        <div className={`filterDiv max-sm:${showFilter ? "" : "hidden"}`}>
           <Filter
             onFilter={setFilteredJobs}
             jobPostings={newJobPosting as filteredJobs}
