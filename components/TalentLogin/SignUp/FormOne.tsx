@@ -76,7 +76,7 @@ const FormOne = ({
   };
 
   return (
-    <section className="md:max-w-[529px] max-sm:p-4 mt-6 max-xl:px-[50px]">
+    <section className="signup-form">
       <div className="mb-6">
         <FormLogo />
         <div className="px-[15px]">
