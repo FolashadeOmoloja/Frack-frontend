@@ -94,6 +94,7 @@ const JobSearchBar = ({
   const reset = () => {
     setSelectedItems(searchBarData.map(() => ""));
     onSearch(jobPosting);
+    onNewSearch(jobPosting);
     changeIsCheck(() => {
       const resetState: IsCheckedState = {};
       hoursFilter

@@ -104,6 +104,6 @@ export const proximityFilter = [
 ];
 export const experienceFilter = [
   { item: "Intermediate", idx: 8 },
-  { item: "Senior", idx: 9 },
+  { item: "Senior level", idx: 9 },
   { item: "C-level", idx: 10 },
 ];
