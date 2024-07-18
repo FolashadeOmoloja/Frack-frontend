@@ -1,5 +1,10 @@
 import { useEffect, useState } from "react";
 import { searchBarData } from "@/utilities/constants/searchbarData";
+import {
+  hoursFilter,
+  proximityFilter,
+  experienceFilter,
+} from "@/utilities/constants/searchbarData";
 
 type IsOpenState = {
   [key: number]: boolean;
@@ -17,11 +22,19 @@ type filteredJobs = {
   country: string;
 }[];
 
+type IsCheckedState = {
+  [key: number]: boolean;
+};
+
 const JobSearchBar = ({
   onSearch,
   jobPosting,
+  onNewSearch,
+  changeIsCheck,
 }: {
   onSearch: React.Dispatch<React.SetStateAction<filteredJobs>>;
+  onNewSearch: React.Dispatch<React.SetStateAction<filteredJobs>>;
+  changeIsCheck: React.Dispatch<React.SetStateAction<IsCheckedState>>;
   jobPosting: filteredJobs;
 }) => {
   const [isOpen, setIsOpen] = useState<IsOpenState>({});
@@ -52,6 +65,7 @@ const JobSearchBar = ({
       );
     });
     onSearch(newFilteredJobArr);
+    onNewSearch(newFilteredJobArr);
   };
 
   useEffect(() => {
@@ -80,6 +94,16 @@ const JobSearchBar = ({
   const reset = () => {
     setSelectedItems(searchBarData.map(() => ""));
     onSearch(jobPosting);
+    changeIsCheck(() => {
+      const resetState: IsCheckedState = {};
+      hoursFilter
+        .concat(proximityFilter)
+        .concat(experienceFilter)
+        .forEach((filter) => {
+          resetState[filter.idx] = false;
+        });
+      return resetState;
+    });
   };
 
   return (

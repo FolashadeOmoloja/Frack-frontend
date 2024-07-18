@@ -89,3 +89,21 @@ export const searchBarData = [
     ],
   },
 ];
+
+export const hoursFilter = [
+  { item: "6", idx: 0 },
+  { item: "8", idx: 1 },
+  { item: "10", idx: 2 },
+  { item: "12", idx: 3 },
+];
+export const proximityFilter = [
+  { item: "On Site", idx: 4 },
+  { item: "Hybrid", idx: 5 },
+  { item: "Fully Remote", idx: 6 },
+  { item: "Remote", idx: 7 },
+];
+export const experienceFilter = [
+  { item: "Intermediate", idx: 8 },
+  { item: "Senior", idx: 9 },
+  { item: "C-level", idx: 10 },
+];
