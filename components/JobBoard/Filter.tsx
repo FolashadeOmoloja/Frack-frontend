@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-
-const hoursFilter = ["6", "8", "10", "12"];
-const proximityFilter = ["On Site", "Hybrid", "Fully Remote", "Remote"];
-const experienceFilter = ["Intermediate", "Senior", "C-level"];
+import {
+  hoursFilter,
+  proximityFilter,
+  experienceFilter,
+} from "@/utilities/constants/searchbarData";
 
 type Job = {
   title: string;
@@ -17,17 +18,37 @@ type Job = {
   country: string;
 };
 
+type IsCheckedState = {
+  [key: number]: boolean;
+};
+
 type FilterProps = {
   jobPostings: Job[];
   onFilter: (filteredJobs: Job[]) => void;
+  changeIsCheck: React.Dispatch<React.SetStateAction<IsCheckedState>>;
+  isChecked: IsCheckedState;
 };
 
-const Filter = ({ jobPostings, onFilter }: FilterProps) => {
+const Filter = ({
+  jobPostings,
+  onFilter,
+  changeIsCheck,
+  isChecked,
+}: FilterProps) => {
   const [selectedHours, setSelectedHours] = useState<string[]>([]);
   const [selectedProximity, setSelectedProximity] = useState<string[]>([]);
   const [selectedExperience, setSelectedExperience] = useState<string[]>([]);
 
-  const handleCheckboxChange = (filterType: string, value: string) => {
+  const handleCheckboxChange = (
+    filterType: string,
+    value: string,
+    idx: number
+  ) => {
+    changeIsCheck((prevState) => ({
+      ...prevState,
+      [idx]: !prevState[idx],
+    }));
+
     const updateState = (
       currentState: string[],
       setState: React.Dispatch<React.SetStateAction<string[]>>
@@ -78,14 +99,17 @@ const Filter = ({ jobPostings, onFilter }: FilterProps) => {
         <li>
           <span className="mb-6 inline-block font-semibold">Job Hrs</span>
           <ul>
-            {hoursFilter.map((item, idx) => (
-              <li key={idx} className="mb-1 flex gap-2 items-center">
+            {hoursFilter.map((item) => (
+              <li key={item.idx} className="mb-2 flex gap-2 items-center">
                 <input
                   type="checkbox"
+                  checked={isChecked[item.idx]}
                   className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
-                  onChange={() => handleCheckboxChange("hours", item)}
+                  onChange={() =>
+                    handleCheckboxChange("hours", item.item, item.idx)
+                  }
                 />
-                <span className="text-sm flex mb-1">{item} hours</span>
+                <span className="text-sm flex ">{item.item} hours</span>
               </li>
             ))}
           </ul>
@@ -95,14 +119,17 @@ const Filter = ({ jobPostings, onFilter }: FilterProps) => {
             Job Proximity
           </span>
           <ul>
-            {proximityFilter.map((item, idx) => (
-              <li key={idx} className="mb-1 flex gap-2 items-center">
+            {proximityFilter.map((item) => (
+              <li key={item.idx} className="mb-2 flex gap-2 items-center">
                 <input
                   type="checkbox"
+                  checked={isChecked[item.idx]}
                   className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
-                  onChange={() => handleCheckboxChange("proximity", item)}
+                  onChange={() =>
+                    handleCheckboxChange("proximity", item.item, item.idx)
+                  }
                 />
-                <span className="text-sm flex mb-1">{item}</span>
+                <span className="text-sm flex ">{item.item}</span>
               </li>
             ))}
           </ul>
@@ -112,14 +139,17 @@ const Filter = ({ jobPostings, onFilter }: FilterProps) => {
             Experience
           </span>
           <ul>
-            {experienceFilter.map((item, idx) => (
-              <li key={idx} className="mb-1 flex gap-2 items-center">
+            {experienceFilter.map((item) => (
+              <li key={item.idx} className="mb-2 flex gap-2 items-center">
                 <input
                   type="checkbox"
+                  checked={isChecked[item.idx]}
                   className="accent-[#000080] w-4 h-4 cursor-pointer bg-slate-700"
-                  onChange={() => handleCheckboxChange("experience", item)}
+                  onChange={() =>
+                    handleCheckboxChange("experience", item.item, item.idx)
+                  }
                 />
-                <span className="text-sm flex mb-1">{item}</span>
+                <span className="text-sm flex ">{item.item}</span>
               </li>
             ))}
           </ul>
