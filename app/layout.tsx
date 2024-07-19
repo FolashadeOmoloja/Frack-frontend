@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${archivo.className} `}>
+      <body className={`${archivo.className} bg-[#F4F5F7]`}>
         <main className="max-w-[2400px] mx-auto">{children}</main>
       </body>
     </html>
