@@ -11,5 +11,7 @@ export default function HireTalentLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <main className="max-w-[2400px] mx-auto">{children}</main>;
+  return (
+    <main className="max-w-[2400px] mx-auto bg-[#F4F5F7]">{children}</main>
+  );
 }
