@@ -1,10 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import {
-  HiMiniBars3BottomLeft,
-  HiMiniChevronDoubleRight,
-  HiMiniChevronRight,
-} from "react-icons/hi2";
+import { HiMiniBars3BottomLeft, HiMiniChevronRight } from "react-icons/hi2";
 import { ImCross } from "react-icons/im";
 import CTABTN from "../../Elements/CTA/CTA-Button";
 import { useRouter } from "next/navigation";

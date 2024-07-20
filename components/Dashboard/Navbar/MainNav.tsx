@@ -32,7 +32,7 @@ const DashboardMainNavbar = ({ activeItem }: { activeItem?: number }) => {
 
   const router = useRouter();
   return (
-    <nav className="fixed inset-0 flex pl-16 pr-[100px] h-24 max-xlg:pr-[50px] max-xlg:pl-[10px] max-md:hidden bg-white">
+    <nav className="fixed inset-0 z-30 flex pl-16 pr-[100px] h-24 max-xlg:pr-[50px] max-xlg:pl-[10px] max-md:hidden bg-white">
       <div className="cursor-pointer" onClick={() => router.push("/")}>
         <Image
           src={"/images/homepage/frack.png"}
