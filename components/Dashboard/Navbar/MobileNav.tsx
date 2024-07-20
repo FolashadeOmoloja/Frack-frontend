@@ -6,34 +6,27 @@ import CTABTN from "../../Elements/CTA/CTA-Button";
 import { useRouter } from "next/navigation";
 import UserAvatar from "@/components/Elements/UserAvatar";
 
-const DropDown = [
-  {
-    navItem: "Setting",
-    icon: "/images/dashboard/icon1.svg",
-    href: "/hire-talent/dashboard/setting",
-  },
-  {
-    navItem: "Sign Out",
-    icon: "/images/dashboard/icon2.svg",
-    href: "/hire-talent/dashboard/signout",
-  },
-];
+type NavLinks = {
+  navItem: string;
+  href: string;
+}[];
 
-const NavLinks = [
-  {
-    navItem: "Dashboard",
-    href: "/hire-talent/dashboard",
-  },
-  {
-    navItem: "Jobs",
-    href: "/hire-talent/dashboard/my-jobs",
-  },
-  {
-    navItem: "Settings",
-    href: "/hire-talent/dashboard/settings",
-  },
-];
-const DashboardMobileNav = () => {
+type DropDown = {
+  navItem: string;
+  icon: string;
+  href: string;
+}[];
+const DashboardMobileNav = ({
+  NavLinks,
+  DropDown,
+  buttonLink,
+  buttonCta,
+}: {
+  NavLinks: NavLinks;
+  DropDown: DropDown;
+  buttonLink: string;
+  buttonCta: string;
+}) => {
   const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -86,10 +79,10 @@ const DashboardMobileNav = () => {
             <button
               className="bg-[#22CCED] h-[55px] rounded-[6px] font-semibold"
               onClick={() => {
-                router.push("/hire-talent/dashboard/add-jobs");
+                router.push(buttonLink);
               }}
             >
-              Add Job
+              {buttonCta}
             </button>
             <CTABTN width="w-full" route="/" CTA="Sign Out" />
           </div>

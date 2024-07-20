@@ -5,31 +5,30 @@ import Link from "next/link";
 import CTABTN from "@/components/Elements/CTA/CTA-Button";
 import UserAvatar from "@/components/Elements/UserAvatar";
 
-const DashboardMainNavbar = ({ activeItem }: { activeItem?: number }) => {
-  const NavLinks = [
-    {
-      navItem: "Dashboard",
-      href: "/hire-talent/dashboard",
-    },
-    {
-      navItem: "Jobs",
-      href: "/hire-talent/dashboard/my-jobs",
-    },
-  ];
+type NavLinks = {
+  navItem: string;
+  href: string;
+}[];
 
-  const DropDown = [
-    {
-      navItem: "Setting",
-      icon: "/images/dashboard/icon1.svg",
-      href: "/hire-talent/dashboard/setting",
-    },
-    {
-      navItem: "Sign Out",
-      icon: "/images/dashboard/icon2.svg",
-      href: "/hire-talent/dashboard/signout",
-    },
-  ];
+type DropDown = {
+  navItem: string;
+  icon: string;
+  href: string;
+}[];
 
+const DashboardMainNavbar = ({
+  activeItem,
+  NavLinks,
+  DropDown,
+  buttonLink,
+  buttonCta,
+}: {
+  activeItem?: number;
+  NavLinks: NavLinks;
+  DropDown: DropDown;
+  buttonLink: string;
+  buttonCta: string;
+}) => {
   const router = useRouter();
   return (
     <nav className="fixed inset-0 z-30 flex pl-16 pr-[100px] h-24 max-xlg:pr-[50px] max-xlg:pl-[10px] max-md:hidden bg-white">
@@ -59,7 +58,7 @@ const DashboardMainNavbar = ({ activeItem }: { activeItem?: number }) => {
         })}
       </ul>
       <div className="flex items-center  gap-10">
-        <CTABTN route="/hire-talent/add-jobs" CTA="Add job" />
+        <CTABTN route={buttonLink} CTA={buttonCta} />
         <UserAvatar dropDown={DropDown} />
       </div>
     </nav>

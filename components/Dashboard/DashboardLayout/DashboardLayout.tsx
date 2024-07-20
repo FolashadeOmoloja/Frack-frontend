@@ -8,9 +8,17 @@ type analytics = {
 const DashboardLayout = ({
   dashInfo,
   analytics,
+  link1,
+  link2,
+  status1,
+  status2,
 }: {
   dashInfo: string;
   analytics: analytics;
+  link1: string;
+  link2: string;
+  status1: string;
+  status2: string;
 }) => {
   return (
     <section className="dashboard-container flex gap-10 max-md:flex-col">
@@ -23,15 +31,15 @@ const DashboardLayout = ({
         <DashCards
           gif="/images/dashboard/profile.gif"
           title={"Profile Status:"}
-          status={"Recruit"}
-          link={"hire-talent/dashboard/edit-profile"}
+          status={status1}
+          link={link1}
           linkName={"Edit Profile"}
         />
         <DashCards
           gif="/images/dashboard/suitcase.gif"
           title={"Work mode preference"}
-          status={"Remote/hybrid"}
-          link={"hire-talent/dashboard/my-jobs"}
+          status={status2}
+          link={link2}
           linkName={"Check My Jobs"}
         />
         <DashCards

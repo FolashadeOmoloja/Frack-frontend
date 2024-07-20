@@ -24,13 +24,47 @@ const companyAnalytics = [
   },
 ];
 
+const NavLinks = [
+  {
+    navItem: "Dashboard",
+    href: "/hire-talent/dashboard",
+  },
+  {
+    navItem: "Jobs",
+    href: "/hire-talent/dashboard/my-jobs",
+  },
+];
+
+const DropDown = [
+  {
+    navItem: "Setting",
+    icon: "/images/dashboard/icon1.svg",
+    href: "/hire-talent/dashboard/setting",
+  },
+  {
+    navItem: "Sign Out",
+    icon: "/images/dashboard/icon2.svg",
+    href: "/hire-talent/dashboard/signout",
+  },
+];
+
 const page = () => {
   return (
     <>
-      <DashboardNavbar activeItem={0} />
+      <DashboardNavbar
+        activeItem={0}
+        NavLinks={NavLinks}
+        DropDown={DropDown}
+        buttonCta="Add Job"
+        buttonLink="/hire-talent/dashboard/add-jobs"
+      />
       <DashboardLayout
         dashInfo="This is the breakdown of your recruitment info"
         analytics={companyAnalytics}
+        link2="hire-talent/dashboard/my-jobs"
+        link1="hire-talent/dashboard/edit-profile"
+        status1="Recruit"
+        status2="Remote/hybrid"
       />
     </>
   );

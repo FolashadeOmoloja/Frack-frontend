@@ -25,14 +25,16 @@ type IsCheckedState = {
   [key: number]: boolean;
 };
 
-const JobBoard = () => {
+const JobBoard = ({ className }: { className?: string }) => {
   const [filteredJobs, setFilteredJobs] = useState<FilteredJobs>(jobPostings);
   const [newJobPosting, setNewJobPosting] = useState<FilteredJobs>(jobPostings);
   const [isChecked, setIsChecked] = useState<IsCheckedState>({});
   const [showFilter, setShowFilter] = useState(false);
 
   return (
-    <section className="section-container bg-[#F4F5F7] mt-0 py-7">
+    <section
+      className={`section-container bg-[#F4F5F7] mt-0 py-7 ${className}`}
+    >
       <JobSearchBar
         onNewSearch={setNewJobPosting}
         onSearch={setFilteredJobs}
