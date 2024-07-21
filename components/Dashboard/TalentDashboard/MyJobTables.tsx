@@ -1,7 +1,9 @@
 "use client";
 import Table from "@/components/Elements/Table/Table";
 import { activeJobApplication } from "@/utilities/constants/jobData";
+import { useEffect, useState } from "react";
 import { Column } from "react-table";
+
 interface JobApplication {
   title: string;
   jobProximity: string;
@@ -57,9 +59,39 @@ const columns: Column<JobApplication>[] = [
 ];
 
 const MyJobTables = () => {
+  const [page, setPage] = useState(0);
+  const itemsPerPage = 5;
+
+  useEffect(() => {
+    const lastPage = Math.ceil(activeJobApplication.length / itemsPerPage) - 1;
+    if (page > lastPage) {
+      setPage(lastPage);
+    }
+  }, [activeJobApplication.length, page, itemsPerPage]);
+
+  const currentPageData = activeJobApplication.slice(
+    page * itemsPerPage,
+    (page + 1) * itemsPerPage
+  );
+
+  const totalPages = Math.ceil(activeJobApplication.length / itemsPerPage);
+  const displayTotalPages =
+    currentPageData.length === 0 ? totalPages - 1 : totalPages;
+
   return (
-    <section className="dashboard-container">
-      <Table data={activeJobApplication} columns={columns} />
+    <section className="dashboard-container min-h-svh">
+      <h2 className="text-2xl font-bold mb-1">
+        Ditimi, see how your application is going
+      </h2>
+      <span className="text-[#7C8698] ">
+        This is your complete frack overview
+      </span>
+      <Table
+        data={currentPageData}
+        columns={columns}
+        setPage={setPage}
+        totalPages={displayTotalPages > 1 ? displayTotalPages : 0}
+      />
     </section>
   );
 };

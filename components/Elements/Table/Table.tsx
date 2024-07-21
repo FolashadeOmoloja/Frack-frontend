@@ -10,6 +10,7 @@ import {
   TableState,
   Row,
 } from "react-table";
+import Pagination from "./Pagination";
 
 interface TableProps<T extends object> {
   data: T[];
@@ -96,7 +97,11 @@ const Table = <T extends object>({
           </table>
         </div>
       </div>
-      {/* {totalPages ? <Pagination pageCount={totalPages} handlePageClick={handlePageClick} /> : ""} */}
+      {totalPages && totalPages > 1 ? (
+        <Pagination pageCount={totalPages} handlePageClick={handlePageClick} />
+      ) : (
+        ""
+      )}
     </section>
   );
 };
