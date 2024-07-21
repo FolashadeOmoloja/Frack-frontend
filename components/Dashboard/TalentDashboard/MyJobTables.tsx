@@ -1,9 +1,10 @@
 "use client";
-import Table from "@/components/Elements/Table/Table";
+
 import { activeJobApplication } from "@/utilities/constants/jobData";
 import { useEffect, useState } from "react";
-import { Column } from "react-table";
+import JobTable from "./JobTable";
 
+// Define the structure for job applications
 interface JobApplication {
   title: string;
   jobProximity: string;
@@ -13,86 +14,68 @@ interface JobApplication {
   status: string;
 }
 
-const columns: Column<JobApplication>[] = [
-  {
-    Header: "",
-    accessor: "title",
-    Cell: ({ row }: { row: { original: JobApplication } }) => {
-      return <span>{row.original.title}</span>;
-    },
-  },
-  {
-    Header: "",
-    accessor: "jobProximity",
-    Cell: ({ row }: { row: { original: JobApplication } }) => {
-      return (
-        <div className="flex flex-col gap-4">
-          <span>{row.original.jobProximity}</span>
-          <span>{row.original.location}</span>
-        </div>
-      );
-    },
-  },
-  {
-    Header: "",
-    accessor: "priceRange",
-    Cell: ({ row }: { row: { original: JobApplication } }) => {
-      return (
-        <div className="flex flex-col gap-4">
-          <span>{row.original.company}</span>
-          <span>{row.original.priceRange}</span>
-        </div>
-      );
-    },
-  },
-  {
-    Header: "",
-    accessor: "status",
-    Cell: ({ row }: { row: { original: JobApplication } }) => {
-      return (
-        <button className="w-[138px] h-[50px] bg-[#D8D8D8] text-[#7C8698] text-sm rounded-md">
-          {row.original.status}
-        </button>
-      );
-    },
-  },
-];
+// Define the type for the active state
+type IsActiveState = {
+  [key: number]: boolean;
+};
 
 const MyJobTables = () => {
-  const [page, setPage] = useState(0);
-  const itemsPerPage = 5;
-  const lastPage = Math.ceil(activeJobApplication.length / itemsPerPage) - 1;
-  console.log(activeJobApplication.length);
+  // Define the filter options
+  const filterArr = ["Active Application", "Declined", "Hired"];
 
-  useEffect(() => {
-    if (page > lastPage) {
-      setPage(lastPage);
+  // Initialize the active state and the job application data
+  const [active, setActive] = useState<IsActiveState>({ [0]: true });
+  const [jobApplicationData, setJobApplicationData] =
+    useState<JobApplication[]>(activeJobApplication);
+
+  // Function to filter jobs based on status
+  const filterJobs = (status: string) => {
+    return activeJobApplication.filter((job) =>
+      job.status.toLowerCase().includes(status.toLowerCase())
+    );
+  };
+
+  // Function to handle active tab change
+  const activeFunc = (idx: number) => {
+    const newState: IsActiveState = {};
+    filterArr.forEach((_, i) => (newState[i] = i === idx));
+    setActive(newState);
+
+    // Update the job application data based on the active tab
+    if (idx === 0) {
+      setJobApplicationData(activeJobApplication);
+    } else if (idx === 1) {
+      setJobApplicationData(filterJobs("declined"));
+    } else if (idx === 2) {
+      setJobApplicationData(filterJobs("hired"));
     }
-  }, [activeJobApplication.length, page, itemsPerPage]);
+  };
 
-  const currentPageData = activeJobApplication.slice(
-    page * itemsPerPage,
-    (page + 1) * itemsPerPage
-  );
-
-  const totalPages = Math.ceil(activeJobApplication.length / itemsPerPage);
-  const displayTotalPages =
-    currentPageData.length === 0 ? totalPages - 1 : totalPages;
+  // Initialize with active applications on component mount
+  useEffect(() => {
+    setJobApplicationData(activeJobApplication);
+  }, []);
 
   return (
     <section className="dashboard-container min-h-svh">
       <h2 className="text-2xl font-bold mb-1">
         Ditimi, see how your application is going
       </h2>
-      <span className="text-[#7C8698] ">
+      <span className="text-[#7C8698]">
         This is your complete frack overview
       </span>
-      <Table
-        data={currentPageData}
-        columns={columns}
-        setPage={setPage}
-        totalPages={displayTotalPages > 1 ? displayTotalPages : 0}
-      />
+      <div className="flex w-full text-[#626263] text-lg font-bold mt-16 border-b border-[#CCD2D9]">
+        {filterArr.map((item, idx) => (
+          <span
+            className={`tab ${active[idx] ? "active" : ""}`}
+            key={idx}
+            onClick={() => activeFunc(idx)}
+          >
+            {item}
+          </span>
+        ))}
+      </div>
+      <JobTable jobApplication={jobApplicationData} />
     </section>
   );
 };

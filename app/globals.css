@@ -151,6 +151,36 @@
   opacity: 1;
 }
 
+.tab {
+  position: relative;
+  width: 212px;
+  height: 33px;
+  display: flex;
+  justify-content: center;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+
+.tab::before {
+  content: "";
+  position: absolute;
+  bottom: -3px; /* Adjust according to your needs */
+  left: 50%;
+  width: 0;
+  height: 3px; /* Border height */
+  background-color: #000080;
+  transition: all 0.3s ease-in-out;
+  transform: translateX(-50%);
+}
+
+.tab.active {
+  color: #000080;
+}
+
+.tab.active::before {
+  width: 100%;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
   }

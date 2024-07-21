@@ -53,8 +53,11 @@ const Table = <T extends object>({
   return (
     <section className="w-full">
       <div>
-        <div className="w-full overflow-y-auto">
-          <table {...getTableProps()} className="w-full">
+        <div className="w-full overflow-x-auto flex ">
+          <table
+            {...getTableProps()}
+            className="w-full max-md:flex-1 max-md:min-w-3xl"
+          >
             <thead>
               {headerGroups.map((headerGroup, idx) => (
                 <tr {...headerGroup.getHeaderGroupProps()} key={idx}>

@@ -57,15 +57,10 @@ const columns: Column<JobApplication>[] = [
   },
 ];
 
-const MyJobTables = ({
-  jobApplication,
-}: {
-  jobApplication: JobApplication[];
-}) => {
+const JobTable = ({ jobApplication }: { jobApplication: JobApplication[] }) => {
   const [page, setPage] = useState(0);
   const itemsPerPage = 5;
   const lastPage = Math.ceil(jobApplication.length / itemsPerPage) - 1;
-  console.log(jobApplication.length);
 
   useEffect(() => {
     if (page > lastPage) {
@@ -94,4 +89,4 @@ const MyJobTables = ({
   );
 };
 
-export default MyJobTables;
+export default JobTable;
