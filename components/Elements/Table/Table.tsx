@@ -1,5 +1,4 @@
 "use client";
-
 import React from "react";
 import {
   usePagination,
@@ -19,7 +18,6 @@ interface TableProps<T extends object> {
   totalPages?: number;
 }
 
-// Extend TableState to include pageIndex
 interface ExtendedTableState<T extends object> extends TableState<T> {
   pageIndex: number;
 }
@@ -48,7 +46,7 @@ const Table = <T extends object>({
 
   const handlePageClick = (event: any) => {
     if (setPage) {
-      setPage(event.selected + 1);
+      setPage(event.selected);
     }
   };
 
