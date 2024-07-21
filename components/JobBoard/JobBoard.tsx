@@ -25,14 +25,22 @@ type IsCheckedState = {
   [key: number]: boolean;
 };
 
-const JobBoard = () => {
+const JobBoard = ({
+  className,
+  mainRoute = "job-details",
+}: {
+  className?: string;
+  mainRoute?: string;
+}) => {
   const [filteredJobs, setFilteredJobs] = useState<FilteredJobs>(jobPostings);
   const [newJobPosting, setNewJobPosting] = useState<FilteredJobs>(jobPostings);
   const [isChecked, setIsChecked] = useState<IsCheckedState>({});
   const [showFilter, setShowFilter] = useState(false);
 
   return (
-    <section className="section-container bg-[#F4F5F7] mt-0 py-7">
+    <section
+      className={`section-container bg-[#F4F5F7] mt-0 py-7 ${className}`}
+    >
       <JobSearchBar
         onNewSearch={setNewJobPosting}
         onSearch={setFilteredJobs}
@@ -55,7 +63,11 @@ const JobBoard = () => {
           />
         </div>
         <div className="flex-grow md:pl-5 pb-5 overflow-y-auto">
-          <JobPosting filteredJobs={filteredJobs} jobPostings={jobPostings} />
+          <JobPosting
+            filteredJobs={filteredJobs}
+            jobPostings={jobPostings}
+            mainRoute={mainRoute}
+          />
         </div>
       </section>
     </section>

@@ -15,9 +15,11 @@ type filteredJobs = {
 const JobPosting = ({
   filteredJobs,
   jobPostings,
+  mainRoute,
 }: {
   filteredJobs: filteredJobs;
   jobPostings: filteredJobs;
+  mainRoute?: string;
 }) => {
   return (
     <section>
@@ -51,7 +53,7 @@ const JobPosting = ({
             </div>
             <div>
               <CTABTN
-                route={`/job-details/${idx}`}
+                route={`/${mainRoute}/${idx}`}
                 CTA="View Job"
                 width="w-full xlg:w-[138px]"
                 height2="h-[39px]"

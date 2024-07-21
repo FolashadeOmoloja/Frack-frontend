@@ -1,20 +1,18 @@
+import TalentNavbar from "@/components/Dashboard/TalentDashboard/TalentNavbar";
 import CTABTN from "@/components/Elements/CTA/CTA-Button";
-import Navbar from "@/components/LandingPage/Navbar/NavBar";
-import CTA from "@/components/LandingPage/Offer/CTA";
-import Footer from "@/components/LandingPage/Offer/Footer";
 import { jobPostings } from "@/utilities/constants/jobData";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
 
-const Joblisting = ({ params }: { params: { jobId: string } }) => {
+const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
   const jobData = jobPostings[parseInt(params.jobId)];
 
   return (
     <>
-      <Navbar activeItem={1} />
-      <main className="section-container mt-[50px]">
+      <TalentNavbar activeItem={1} />
+      <main className="section-container relative top-[96px] mt-[50px]">
         <Link
-          href={"/jobs"}
+          href={"/dashboard/jobs"}
           className="flex text-[#000080] gap-3 text-xl items-center font-bold"
         >
           <FaArrowLeft />
@@ -107,13 +105,11 @@ const Joblisting = ({ params }: { params: { jobId: string } }) => {
           </span>
           <span className="block md:text-lg">{jobData.priceRange} </span>
         </div>
-        <div>
-          <CTABTN route={"./sign-in"} CTA="Apply" showIcon />
+        <div className="pb-14">
+          <CTABTN route={""} CTA="Apply" showIcon />
         </div>
       </main>
-      <CTA />
-      <Footer />
     </>
   );
 };
-export default Joblisting;
+export default DashboardJoblisting;
