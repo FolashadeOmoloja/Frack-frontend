@@ -84,8 +84,10 @@ const Table = <T extends object>({
                           {...cell.getCellProps()}
                           key={idx}
                           className={`${
-                            idx === 0 ? "font-semibold text-xl" : ""
-                          }`}
+                            idx === 0
+                              ? "font-semibold md:text-xl"
+                              : "max-md:text-sm"
+                          } max-md:min-w-[150px]`}
                         >
                           <div>{cell.render("Cell")}</div>
                         </td>
