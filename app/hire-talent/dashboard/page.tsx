@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/Dashboard/DashboardLayout/DashboardLayout";
-import DashboardNavbar from "@/components/Dashboard/Navbar/Navbar";
+import HireTalentNav from "@/components/Dashboard/HireTalentDashboard/HireTalentNav";
 
 const companyAnalytics = [
   {
@@ -24,40 +24,10 @@ const companyAnalytics = [
   },
 ];
 
-const NavLinks = [
-  {
-    navItem: "Dashboard",
-    href: "/hire-talent/dashboard",
-  },
-  {
-    navItem: "Jobs",
-    href: "/hire-talent/dashboard/my-jobs",
-  },
-];
-
-const DropDown = [
-  {
-    navItem: "Setting",
-    icon: "/images/dashboard/icon1.svg",
-    href: "/hire-talent/dashboard/setting",
-  },
-  {
-    navItem: "Sign Out",
-    icon: "/images/dashboard/icon2.svg",
-    href: "/hire-talent/dashboard/signout",
-  },
-];
-
 const page = () => {
   return (
     <>
-      <DashboardNavbar
-        activeItem={0}
-        NavLinks={NavLinks}
-        DropDown={DropDown}
-        buttonCta="Add Job"
-        buttonLink="/hire-talent/dashboard/add-jobs"
-      />
+      <HireTalentNav activeItem={0} />
       <DashboardLayout
         dashInfo="This is the breakdown of your recruitment info"
         analytics={companyAnalytics}

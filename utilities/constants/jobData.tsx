@@ -240,3 +240,30 @@ export const jobPostings = [
     country: "USA",
   },
 ];
+
+export const activeJobApplication = [
+  {
+    title: "Senior UI/UX Designer",
+    company: "Creative Studio",
+    location: "New York, NY",
+    priceRange: "$70,000 - $90,000",
+    jobProximity: "Fully Remote",
+    status: "Under Review",
+  },
+  {
+    title: "Senior Frontend Developer",
+    company: "Tech Innovators",
+    location: "San Francisco, CA",
+    priceRange: "$120,000 - $150,000",
+    jobProximity: "Hybrid",
+    status: "Declined",
+  },
+  {
+    title: "Graphic Designer",
+    company: "Design Corp",
+    location: "Lagos, Nigeria",
+    priceRange: "$60,000 - $80,000",
+    jobProximity: "Remote",
+    status: "Hired",
+  },
+];

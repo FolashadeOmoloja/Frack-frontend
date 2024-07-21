@@ -1,5 +1,5 @@
 import DashboardLayout from "@/components/Dashboard/DashboardLayout/DashboardLayout";
-import DashboardNavbar from "@/components/Dashboard/Navbar/Navbar";
+import TalentNavbar from "@/components/Dashboard/TalentDashboard/TalentNavbar";
 
 const talentAnalytics = [
   {
@@ -24,40 +24,10 @@ const talentAnalytics = [
   },
 ];
 
-const NavLinks = [
-  {
-    navItem: "Dashboard",
-    href: "/dashboard",
-  },
-  {
-    navItem: "Jobs",
-    href: "/dashboard/jobs",
-  },
-];
-
-const DropDown = [
-  {
-    navItem: "Setting",
-    icon: "/images/dashboard/icon1.svg",
-    href: "/dashboard/setting",
-  },
-  {
-    navItem: "Sign Out",
-    icon: "/images/dashboard/icon2.svg",
-    href: "/",
-  },
-];
-
 const page = () => {
   return (
     <>
-      <DashboardNavbar
-        activeItem={0}
-        NavLinks={NavLinks}
-        DropDown={DropDown}
-        buttonCta="My Jobs"
-        buttonLink="/dashboard/my-jobs"
-      />
+      <TalentNavbar activeItem={0} />
       <DashboardLayout
         dashInfo="This is the breakdown of your application info"
         analytics={talentAnalytics}
