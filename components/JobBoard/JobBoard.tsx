@@ -25,7 +25,13 @@ type IsCheckedState = {
   [key: number]: boolean;
 };
 
-const JobBoard = ({ className }: { className?: string }) => {
+const JobBoard = ({
+  className,
+  mainRoute = "job-details",
+}: {
+  className?: string;
+  mainRoute?: string;
+}) => {
   const [filteredJobs, setFilteredJobs] = useState<FilteredJobs>(jobPostings);
   const [newJobPosting, setNewJobPosting] = useState<FilteredJobs>(jobPostings);
   const [isChecked, setIsChecked] = useState<IsCheckedState>({});
@@ -57,7 +63,11 @@ const JobBoard = ({ className }: { className?: string }) => {
           />
         </div>
         <div className="flex-grow md:pl-5 pb-5 overflow-y-auto">
-          <JobPosting filteredJobs={filteredJobs} jobPostings={jobPostings} />
+          <JobPosting
+            filteredJobs={filteredJobs}
+            jobPostings={jobPostings}
+            mainRoute={mainRoute}
+          />
         </div>
       </section>
     </section>

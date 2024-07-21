@@ -34,7 +34,7 @@ const TalentJobPage = () => {
         buttonCta="My Jobs"
         buttonLink="/dashboard/my-jobs"
       />
-      <JobBoard className="relative top-[96px]" />
+      <JobBoard className="relative top-[96px]" mainRoute="./dashboard/jobs" />
     </>
   );
 };

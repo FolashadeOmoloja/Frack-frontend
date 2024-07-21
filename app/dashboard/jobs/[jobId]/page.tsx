@@ -105,7 +105,7 @@ const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
           </span>
           <span className="block md:text-lg">{jobData.priceRange} </span>
         </div>
-        <div>
+        <div className="pb-14">
           <CTABTN route={""} CTA="Apply" showIcon />
         </div>
       </main>

@@ -15,7 +15,7 @@ type filteredJobs = {
 const JobPosting = ({
   filteredJobs,
   jobPostings,
-  mainRoute = "job-details",
+  mainRoute,
 }: {
   filteredJobs: filteredJobs;
   jobPostings: filteredJobs;
