@@ -314,6 +314,51 @@ const colorPalette = [
   // "#B0C4DE", // Light steel blue
 ];
 
+export const validationRules = {
+  firstName: {
+    required: "First Name is required",
+  },
+  lastName: {
+    required: "Last Name is required",
+  },
+  companyName: {
+    required: `Your Company's Name is required`,
+  },
+  jobTitle: {
+    required: "Job Title is required",
+  },
+  mobileNo: {
+    required: "Mobile No. is required",
+    pattern: {
+      value: /^[0-9]/,
+      message: "Invalid phone number",
+    },
+  },
+  email: {
+    required: "Email is required",
+    pattern: {
+      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+      message: "Invalid email address",
+    },
+  },
+  url: {
+    required: "Your LinkedIn URL is required",
+    pattern: {
+      value: /^https:\/\/(www\.)?linkedin\.com\/.*$/,
+      message: "Invalid LinkedIn URL",
+    },
+  },
+  role: {
+    required: "Role required",
+  },
+  experience: {
+    required: "Experience required",
+  },
+  resume: {
+    required: "Please upload your resume",
+  },
+};
+
 export function getRandomColor() {
   const randomIndex = Math.floor(Math.random() * colorPalette.length);
   return colorPalette[randomIndex];

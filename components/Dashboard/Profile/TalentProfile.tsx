@@ -1,5 +1,7 @@
+"use client";
 import { getRandomColor } from "@/utilities/constants";
 import Profile from "./Profile";
+import TalentProfileForm from "./TalentProfileForm";
 
 const hexCode = getRandomColor();
 const userObject = {
@@ -23,10 +25,12 @@ const userObject = {
   linkedInUrl: "www.linkedin.com/in/ditimi-podeke-63b8a11a6/",
 };
 
+const skillsArr = ["TypeScript", "Tailwind", "CSS", "JavaScript", "Python"];
+
 const TalentProfile = () => {
   return (
     <>
-      <Profile skillsBool user={userObject} />
+      <Profile skillsBool user={userObject} skillsArr={skillsArr as [string]} />
     </>
   );
 };
