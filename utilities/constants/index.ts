@@ -354,6 +354,9 @@ export const validationRules = {
   experience: {
     required: "Experience required",
   },
+  resume: {
+    required: "Please upload your resume",
+  },
 };
 
 export function getRandomColor() {

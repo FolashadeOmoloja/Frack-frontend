@@ -12,7 +12,7 @@ interface DropdownProps {
   errors?: FieldError;
   validationRules?: any;
   setValue: (name: string, value: string) => void;
-  className?: string;
+  className?: boolean;
 }
 
 const Dropdown = ({

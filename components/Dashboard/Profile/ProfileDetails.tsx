@@ -40,8 +40,10 @@ const ProfileDetails = ({
               details={`${user.experienceYears} `}
             />
             <ProfileBox title={"Industry"} details={user.industry} />
-            {/* <ProfileBox title={"Work mode prefence"} details={user.preference} /> */}
-            <ProfileBox title={"Email Address"} details={user.emailAddress} />
+            <ProfileBox
+              title={"Work mode prefence"}
+              details={user.preference}
+            />
             <DownloadResumeBox title={"Resume"} filename={user.filename} />
             <button
               onClick={() => {
@@ -54,7 +56,9 @@ const ProfileDetails = ({
           </section>
         ) : (
           <section>
-            {skillsBool ? <TalentProfileForm changeState={setIsForm} /> : null}
+            {skillsBool ? (
+              <TalentProfileForm user={user} changeState={setIsForm} />
+            ) : null}
           </section>
         )}
       </section>

@@ -1,17 +1,16 @@
 import PhoneNoInput from "@/components/Elements/PhoneNoInput";
-import { FieldError, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { validationRules } from "@/utilities/constants";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 import Dropdown from "@/components/Elements/Dropdown";
-// type FormComponentProps {
-//     state: string;
-//     setState:
-//     userObject: { name: string; email: string };
-//   }
+import { userObject } from "@/utilities/constants/typeDef";
+
 const TalentProfileForm = ({
   changeState,
+  user,
 }: {
   changeState: (value: boolean) => void;
+  user: userObject;
 }) => {
   const {
     handleSubmit,
@@ -35,13 +34,11 @@ const TalentProfileForm = ({
           <input
             type="text"
             placeholder="Enter your First Name"
+            defaultValue={user.firstName}
             {...register("firstName", {
               required: validationRules.firstName.required,
             })}
           />
-          {errors.firstName && (
-            <span className="text-red-500 text-sm">{`${errors.firstName.message}`}</span>
-          )}
         </div>
         {/* Last Name */}
         <div className="basis-1/2">
@@ -51,13 +48,11 @@ const TalentProfileForm = ({
           <input
             type="text"
             placeholder="Enter your Last Name"
+            defaultValue={user.lastName}
             {...register("lastName", {
               required: validationRules.lastName.required,
             })}
           />
-          {errors.lastName && (
-            <span className="text-red-500 text-sm">{`${errors.lastName.message}`}</span>
-          )}
         </div>
       </div>
       {/* Email */}
@@ -67,15 +62,13 @@ const TalentProfileForm = ({
         </label>
         <input
           type="email"
+          defaultValue={user.emailAddress}
           placeholder="Enter your email address"
           {...register("email", {
             required: validationRules.email.required,
             pattern: validationRules.email.pattern,
           })}
         />
-        {errors.email && (
-          <span className="text-red-600 text-sm">{`${errors.email.message}`}</span>
-        )}
       </div>
       {/* Mobile No. */}
       <div className="flex formdivs flex-col mb-4 gap-[6px]">
@@ -83,22 +76,8 @@ const TalentProfileForm = ({
           Phone Number <span className="text-red-600 text-base">*</span>
         </label>
         <PhoneNoInput register={register} validationRules={validationRules} />
-        {errors.mobileNo && (
-          <span className="text-red-600 text-sm">{`${errors.mobileNo.message}`}</span>
-        )}
       </div>
       <div className="flex flex-col gap-4">
-        <Dropdown
-          ItemsArr={searchBarData[1].options}
-          label="Industry"
-          placeholder="Engineering"
-          name={"role"}
-          required={true}
-          register={register}
-          errors={errors.role as FieldError}
-          validationRules={validationRules.role.required}
-          setValue={setValue}
-        />
         <div className="flex max-sm:flex-col gap-[20px] ">
           <Dropdown
             ItemsArr={["Senior", "Intermediate", "C-level"]}
@@ -107,9 +86,9 @@ const TalentProfileForm = ({
             name={"experienceLevel"}
             required={true}
             register={register}
-            errors={errors.experience as FieldError}
             validationRules={validationRules.experience.required}
             setValue={setValue}
+            className
           />
           <Dropdown
             ItemsArr={[
@@ -124,9 +103,47 @@ const TalentProfileForm = ({
             name={"experience"}
             required={true}
             register={register}
-            errors={errors.experience as FieldError}
             validationRules={validationRules.experience.required}
             setValue={setValue}
+            className
+          />
+        </div>
+        <div className="flex max-sm:flex-col gap-[20px] ">
+          <Dropdown
+            ItemsArr={searchBarData[1].options}
+            label="Industry"
+            placeholder="Engineering"
+            name={"role"}
+            required={true}
+            register={register}
+            validationRules={validationRules.role.required}
+            setValue={setValue}
+            className
+          />
+          <Dropdown
+            ItemsArr={["On Site", "Hybrid", "Fully Remote", "Remote"]}
+            label="Work Mode Preference"
+            placeholder="Remote"
+            name={"experience"}
+            required={true}
+            register={register}
+            validationRules={validationRules.experience.required}
+            setValue={setValue}
+            className
+          />
+        </div>
+        <div>
+          <label className="text-sm font-semibold">
+            Resume(.pdf, .doc, .docx) Max 2mb
+            <span className="text-red-600 text-base">*</span>
+          </label>
+          <input
+            type="file"
+            accept=".pdf, .doc, .docx"
+            className="h-full w-full    file:text-white file:rounded-md file:cursor-pointer file:border-0 file:p-2    file:bg-[#000080] mt-[6px] text-sm "
+            {...register("resume", {
+              required: validationRules.resume.required,
+            })}
           />
         </div>
       </div>

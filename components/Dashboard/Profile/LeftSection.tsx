@@ -2,8 +2,6 @@ import { userObject } from "@/utilities/constants/typeDef";
 import { FaCamera, FaLinkedin } from "react-icons/fa6";
 
 const LeftSection = ({ user }: { user: userObject }) => {
-  console.log("hi");
-
   return (
     <aside className="basis-[30%] flex flex-col gap-10">
       <div className="bg-white rounded-md h-[680px] flex flex-col px-4 centered ">
