@@ -12,6 +12,7 @@ interface DropdownProps {
   errors?: FieldError;
   validationRules?: any;
   setValue: (name: string, value: string) => void;
+  className?: string;
 }
 
 const Dropdown = ({
@@ -24,6 +25,7 @@ const Dropdown = ({
   errors,
   validationRules,
   setValue,
+  className,
 }: DropdownProps) => {
   const [selectedItem, setSelectedItem] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -46,7 +48,9 @@ const Dropdown = ({
   }, [register, name, validationRules]);
 
   return (
-    <section className="h-full slg:min-w-[450px]">
+    <section
+      className={`h-full ${className ? "basis-1/2" : "slg:min-w-[450px]"}`}
+    >
       <label className="text-gray-900 text-sm font-semibold">
         {label}
         {required && <span className="text-red-600 text-base">*</span>}
