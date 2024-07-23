@@ -33,7 +33,7 @@ const DashboardLayout = ({
           title={"Profile Status:"}
           status={status1}
           link={link1}
-          linkName={"Edit Profile"}
+          linkName={"View Profile"}
         />
         <DashCards
           gif="/images/dashboard/suitcase.gif"
