@@ -3,8 +3,8 @@ import Profile from "./Profile";
 
 const hexCode = getRandomColor();
 const userObject = {
-  firstName: "John",
-  lastName: "Doe",
+  firstName: "Ditimi",
+  lastName: "Podeke",
   profileImage: null,
   phoneNumber: "+1-234-567-8901",
   emailAddress: "john.doe@example.com",
@@ -12,8 +12,10 @@ const userObject = {
   role: "Software Engineer",
   experienceYears: 5,
   country: "United States",
-  accountStatus: "Active",
+  location: "Lagos, Nigeria",
+  accountStatus: "Wait list",
   hex: hexCode,
+  linkedInUrl: "www.linkedin.com/in/ditimi-podeke-63b8a11a6/",
 };
 
 const TalentProfile = () => {

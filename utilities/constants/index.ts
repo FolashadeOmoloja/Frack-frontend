@@ -306,12 +306,12 @@ export const blogPosts = [
 const colorPalette = [
   "#000080", // Navy
   "#283742", // Gunmetal
-  "#00509E", // Lighter blue
-  "#87CEEB", // Sky blue
-  "#1E90FF", // Dodger blue
+  // "#00509E", // Lighter blue
+  // "#87CEEB", // Sky blue
+  // "#1E90FF", // Dodger blue
+
   "#A9A9A9", // Dark gray
-  "#B0C4DE", // Light steel blue
-  "#F0F8FF", // Alice blue
+  // "#B0C4DE", // Light steel blue
 ];
 
 export function getRandomColor() {

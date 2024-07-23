@@ -10,4 +10,6 @@ export type userObject = {
   country: string;
   accountStatus: string;
   hex: string;
+  location: string;
+  linkedInUrl: string;
 };
