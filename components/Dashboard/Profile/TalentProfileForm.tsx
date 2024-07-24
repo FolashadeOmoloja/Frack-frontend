@@ -27,7 +27,7 @@ const TalentProfileForm = ({
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <div className="flex formdivs max-sm:flex-col mb-[20px] gap-[20px]">
+      <div className="flex formdivs max-slg:flex-col mb-[20px] gap-[20px]">
         <div className="basis-1/2">
           <label>
             First Name <span className="text-red-600 text-base">*</span>
@@ -84,7 +84,7 @@ const TalentProfileForm = ({
         />
       </div>
       <div className="flex flex-col gap-4">
-        <div className="flex max-xslg:flex-col gap-[20px] ">
+        <div className="flex max-sslg:flex-col gap-[20px] ">
           <Dropdown
             ItemsArr={["Senior", "Intermediate", "C-level"]}
             label="Experience Level"
@@ -116,7 +116,7 @@ const TalentProfileForm = ({
             selctedItem2={user.experienceYears}
           />
         </div>
-        <div className="flex max-sm:flex-col gap-[20px] ">
+        <div className="flex max-sslg:flex-col gap-[20px] ">
           <Dropdown
             ItemsArr={searchBarData[1].options}
             label="Industry"
