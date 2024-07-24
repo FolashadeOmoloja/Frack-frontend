@@ -1,28 +1,25 @@
 "use client";
 import { getRandomColor } from "@/utilities/constants";
 import Profile from "./Profile";
-import TalentProfileForm from "./TalentProfileForm";
 
 const hexCode = getRandomColor();
 const userObject = {
-  firstName: "Ditimi",
-  lastName: "Podeke",
+  companyName: "Frack Pro",
+  firstName: "Folashade",
+  lastName: "Omoloja",
   profileImage: null,
   phoneNumber: "8169537139",
   countryCode: "+234",
-  emailAddress: "john.doe@example.com",
-  industry: "Engineering",
+  emailAddress: "info@frack.pro",
+  industry: ["Education", "Technology"],
   password: "securepassword123",
-  role: "Software Engineer",
-  experienceYears: "4-6 years",
-  experienceLevel: "Senior",
+  companyRole: "Head of Talents",
   preference: "Remote",
-  country: "United States",
+  country: "Nigeria",
   location: "Lagos, Nigeria",
-  filename: "Profile.pdf",
-  accountStatus: "Wait list",
+  accountStatus: "Active",
   hex: hexCode,
-  linkedInUrl: "www.linkedin.com/in/ditimi-podeke-63b8a11a6/",
+  linkedInUrl: "www.linkedin.com/in/frack/",
 };
 
 const skillsArr = ["TypeScript", "Tailwind", "CSS", "JavaScript", "Python"];
@@ -30,7 +27,11 @@ const skillsArr = ["TypeScript", "Tailwind", "CSS", "JavaScript", "Python"];
 const HireTalentProfile = () => {
   return (
     <>
-      <Profile skillsBool user={userObject} skillsArr={skillsArr as [string]} />
+      <Profile
+        skillsBool={false}
+        user={userObject}
+        skillsArr={skillsArr as [string]}
+      />
     </>
   );
 };
