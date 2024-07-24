@@ -32,7 +32,7 @@ const page = () => {
         dashInfo="This is the breakdown of your recruitment info"
         analytics={companyAnalytics}
         link2="hire-talent/dashboard/my-jobs"
-        link1="hire-talent/dashboard/edit-profile"
+        link1="hire-talent/dashboard/profile"
         status1="Recruit"
         status2="Remote/hybrid"
       />
