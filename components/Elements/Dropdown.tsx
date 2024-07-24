@@ -13,6 +13,8 @@ interface DropdownProps {
   validationRules?: any;
   setValue: (name: string, value: string) => void;
   className?: boolean;
+  defaultValue?: string;
+  selctedItem2?: string;
 }
 
 const Dropdown = ({
@@ -26,6 +28,8 @@ const Dropdown = ({
   validationRules,
   setValue,
   className,
+  defaultValue,
+  selctedItem2,
 }: DropdownProps) => {
   const [selectedItem, setSelectedItem] = useState("");
   const [isOpen, setIsOpen] = useState(false);
@@ -64,6 +68,8 @@ const Dropdown = ({
         >
           {selectedItem ? (
             <span>{selectedItem}</span>
+          ) : selctedItem2 ? (
+            <span>{selctedItem2}</span>
           ) : (
             <span className="text-gray-400 text-sm">{placeholder}</span>
           )}
@@ -82,7 +88,12 @@ const Dropdown = ({
             ))}
           </div>
         )}
-        <input type="hidden" value={selectedItem} {...register(name)} />
+        <input
+          type="hidden"
+          value={selectedItem}
+          // defaultValue={defaultValue ? defaultValue : ""}
+          {...register(name)}
+        />
         {errors && (
           <span className="text-red-600 text-sm">{errors.message}</span>
         )}

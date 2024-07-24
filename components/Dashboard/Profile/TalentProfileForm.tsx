@@ -22,6 +22,7 @@ const TalentProfileForm = ({
   const addItem = async (data: any) => {};
 
   const onSubmit = (data: any) => {
+    changeState(false);
     addItem(data);
   };
   return (
@@ -75,20 +76,26 @@ const TalentProfileForm = ({
         <label>
           Phone Number <span className="text-red-600 text-base">*</span>
         </label>
-        <PhoneNoInput register={register} validationRules={validationRules} />
+        <PhoneNoInput
+          register={register}
+          validationRules={validationRules}
+          defaultValue={user.phoneNumber}
+          defaultCode={user.countryCode}
+        />
       </div>
       <div className="flex flex-col gap-4">
-        <div className="flex max-sm:flex-col gap-[20px] ">
+        <div className="flex max-xslg:flex-col gap-[20px] ">
           <Dropdown
             ItemsArr={["Senior", "Intermediate", "C-level"]}
             label="Experience Level"
-            placeholder="Senior"
+            placeholder={user.experienceLevel}
             name={"experienceLevel"}
-            required={true}
+            required={false}
             register={register}
-            validationRules={validationRules.experience.required}
             setValue={setValue}
             className
+            defaultValue={user.experienceLevel}
+            selctedItem2={user.experienceLevel}
           />
           <Dropdown
             ItemsArr={[
@@ -99,13 +106,14 @@ const TalentProfileForm = ({
               "above 10 years",
             ]}
             label="Total years of work experience"
-            placeholder="Select years of work experience"
+            placeholder={user.experienceYears}
             name={"experience"}
-            required={true}
+            required={false}
             register={register}
-            validationRules={validationRules.experience.required}
             setValue={setValue}
             className
+            defaultValue={user.experienceYears}
+            selctedItem2={user.experienceYears}
           />
         </div>
         <div className="flex max-sm:flex-col gap-[20px] ">
@@ -114,21 +122,23 @@ const TalentProfileForm = ({
             label="Industry"
             placeholder="Engineering"
             name={"role"}
-            required={true}
+            required={false}
             register={register}
-            validationRules={validationRules.role.required}
             setValue={setValue}
+            defaultValue={user.industry}
+            selctedItem2={user.industry}
             className
           />
           <Dropdown
             ItemsArr={["On Site", "Hybrid", "Fully Remote", "Remote"]}
             label="Work Mode Preference"
             placeholder="Remote"
-            name={"experience"}
-            required={true}
+            name={"preference"}
+            required={false}
             register={register}
-            validationRules={validationRules.experience.required}
             setValue={setValue}
+            defaultValue={user.preference}
+            selctedItem2={user.preference}
             className
           />
         </div>
@@ -140,7 +150,7 @@ const TalentProfileForm = ({
           <input
             type="file"
             accept=".pdf, .doc, .docx"
-            className="h-full w-full    file:text-white file:rounded-md file:cursor-pointer file:border-0 file:p-2    file:bg-[#000080] mt-[6px] text-sm "
+            className="h-full w-full    file:text-white file:rounded-md file:cursor-pointer file:border-0 file:p-2    file:bg-[#000080] mt-[6px] text-sm file:mr-6"
             {...register("resume", {
               required: validationRules.resume.required,
             })}

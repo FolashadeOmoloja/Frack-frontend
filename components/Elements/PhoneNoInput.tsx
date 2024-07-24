@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react";
-import { useForm, UseFormRegister, FieldErrors } from "react-hook-form";
-import { AiOutlineDown } from "react-icons/ai";
-import axios from "axios";
+import { UseFormRegister } from "react-hook-form";
 import { MdKeyboardArrowDown } from "react-icons/md";
+import axios from "axios";
 
 interface Country {
   name: string;
@@ -23,11 +22,15 @@ interface ValidationRules {
 interface PhoneNoInputProps {
   register: UseFormRegister<any>;
   validationRules: ValidationRules;
+  defaultValue?: string;
+  defaultCode?: string;
 }
 
 const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
   register,
   validationRules,
+  defaultValue,
+  defaultCode,
 }) => {
   const [countries, setCountries] = useState<Country[]>([]);
   const [selectedCountry, setSelectedCountry] = useState<Country | null>(null);
@@ -47,11 +50,25 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
           }))
           .filter((country: Country) => country.code) // filter out countries without codes
           .sort((a: Country, b: Country) => a.name.localeCompare(b.name)); // sort alphabetically by name
+
         setCountries(countryData);
-        setSelectedCountry(countryData[159]);
+
+        // Check for defaultCode and set the selected country accordingly
+        if (defaultCode) {
+          const defaultCountry = countryData.find(
+            (country: { code: string }) => country.code === defaultCode
+          );
+          if (defaultCountry) {
+            setSelectedCountry(defaultCountry);
+          } else {
+            setSelectedCountry(countryData[0]); // Fallback to the first country if defaultCode is not found
+          }
+        } else {
+          setSelectedCountry(countryData[0]); // Default to the first country if no defaultCode is provided
+        }
       })
       .catch((error) => console.error("Error fetching countries:", error));
-  }, []);
+  }, [defaultCode]);
 
   const toggleDropdown = () => setIsOpen(!isOpen);
   const selectCountry = (country: Country) => {
@@ -62,18 +79,18 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
   if (!selectedCountry) return <div>Loading...</div>;
 
   return (
-    <div className=" flex items-center gap-3">
+    <div className="flex items-center gap-3">
       <div className="basis-[20%] relative">
         <div
           onClick={toggleDropdown}
-          className="flex items-center justify-center cursor-pointer bg-[#F3F4F7] h-full py-[14.62px]  rounded-md"
+          className="flex items-center justify-center cursor-pointer bg-[#F3F4F7] h-full py-[14.62px] rounded-md"
         >
           <img
             src={selectedCountry.flag}
             alt={selectedCountry.name}
-            className="w-5 h-5 rounded-full mr-2  object-center"
+            className="w-5 h-5 rounded-full mr-2 object-center"
           />
-          <MdKeyboardArrowDown className=" text-[#98A2B3] max-sm:hidden " />
+          <MdKeyboardArrowDown className="text-[#98A2B3] max-sm:hidden" />
         </div>
         {isOpen && (
           <div className="absolute z-10 mt-2 bg-white border rounded shadow-lg h-[200px] overflow-y-auto custom-scrollbar w-[300px]">
@@ -83,14 +100,18 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
                 onClick={() => selectCountry(country)}
                 className="flex items-center cursor-pointer p-2 hover:bg-gray-200"
               >
-                <img src={country.flag} alt={""} className="w-6 h-4 mr-2 " />
+                <img
+                  src={country.flag}
+                  alt={country.name}
+                  className="w-6 h-4 mr-2"
+                />
                 <span>{country.name}</span>
               </div>
             ))}
           </div>
         )}
       </div>
-      <div className="flex w-full ">
+      <div className="flex w-full">
         <input
           type="tel"
           {...register("countryCode")}
@@ -112,6 +133,7 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
             pattern: validationRules.mobileNo.pattern,
           })}
           className="input phoneinputdiv"
+          defaultValue={defaultValue}
           style={{
             borderTopLeftRadius: "0px",
             borderBottomLeftRadius: "0",
