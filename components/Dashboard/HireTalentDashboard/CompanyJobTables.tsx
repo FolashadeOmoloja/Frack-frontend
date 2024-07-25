@@ -1,21 +1,17 @@
 "use client";
 
-import {
-  activeJobApplication,
-  jobsPostedByCompany,
-} from "@/utilities/constants/jobData";
 import { useEffect, useState } from "react";
 import JobTable from "../TalentDashboard/JobTable";
-import { activeColumns, companyActiveColumns } from "@/utilities/tableData";
-
-interface JobApplication {
-  title: string;
-  jobProximity: string;
-  location: string;
-  company: string;
-  priceRange: string;
-  status: string;
-}
+import {
+  hiredCandidates,
+  jobsPostedByCompany,
+} from "@/utilities/constants/jobData";
+import {
+  companyActiveColumns,
+  hiredCandidatesColumn,
+  JobPosted,
+} from "@/utilities/tableData";
+import { userObject } from "@/utilities/constants/typeDef";
 
 type IsActiveState = {
   [key: number]: boolean;
@@ -24,42 +20,40 @@ type IsActiveState = {
 const CompanyJobTables = () => {
   const filterArr = ["Active Application", "Closed Jobs", "Hired Talents"];
 
-  const [active, setActive] = useState<IsActiveState>({ [0]: true });
-  const [jobApplicationData, setJobApplicationData] =
-    useState<JobApplication[]>(activeJobApplication);
+  const [active, setActive] = useState<IsActiveState>({ 0: true });
+  const [jobPosted, setJobPosted] = useState<JobPosted[]>(jobsPostedByCompany);
+  const [changeTable, setChangeTable] = useState(false);
 
-  // Function to filter jobs based on status
   const filterJobs = (status: string) => {
-    return activeJobApplication.filter((job) =>
+    return jobsPostedByCompany.filter((job) =>
       job.status.toLowerCase().includes(status.toLowerCase())
     );
   };
 
-  // Function to handle active tab change
   const activeFunc = (idx: number) => {
     const newState: IsActiveState = {};
     filterArr.forEach((_, i) => (newState[i] = i === idx));
     setActive(newState);
 
-    // Update the job application data based on the active tab
     if (idx === 0) {
-      setJobApplicationData(activeJobApplication);
+      setChangeTable(false);
+      setJobPosted(filterJobs("open"));
     } else if (idx === 1) {
-      setJobApplicationData(filterJobs("declined"));
+      setChangeTable(false);
+      setJobPosted(filterJobs("closed"));
     } else if (idx === 2) {
-      setJobApplicationData(filterJobs("hired"));
+      setChangeTable(true);
     }
   };
 
-  // Initialize with active applications on component mount
   useEffect(() => {
-    setJobApplicationData(activeJobApplication);
+    setJobPosted(jobsPostedByCompany);
   }, []);
 
   return (
     <section className="dashboard-container min-h-svh">
       <h2 className="text-2xl font-bold mb-1">
-        Ditimi, see how your application is going
+        Frack, see how your recruitment is going
       </h2>
       <span className="text-[#7C8698]">
         This is your complete frack overview
@@ -75,7 +69,14 @@ const CompanyJobTables = () => {
           </span>
         ))}
       </div>
-      <JobTable data={jobsPostedByCompany} columns={companyActiveColumns} />
+      {!changeTable ? (
+        <JobTable<JobPosted> data={jobPosted} columns={companyActiveColumns} />
+      ) : (
+        <JobTable<userObject>
+          data={hiredCandidates}
+          columns={hiredCandidatesColumn}
+        />
+      )}
     </section>
   );
 };

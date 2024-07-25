@@ -1,4 +1,5 @@
 import { Column } from "react-table";
+import { userObject } from "./constants/typeDef";
 
 interface JobApplication {
   title: string;
@@ -9,7 +10,7 @@ interface JobApplication {
   status: string;
 }
 
-interface JobPosted {
+export interface JobPosted {
   title: string;
   department: string;
   location: string;
@@ -106,4 +107,93 @@ export const companyActiveColumns: Column<JobPosted>[] = [
       );
     },
   },
+];
+
+export const hiredCandidatesColumn: Column<userObject>[] = [
+  {
+    Header: "",
+    accessor: "firstName",
+    Cell: ({ row }: { row: { original: userObject } }) => {
+      return (
+        <span>
+          {row.original.firstName} {row.original.lastName}
+        </span>
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "profileImage",
+    Cell: ({ row }: { row: { original: userObject } }) => {
+      return (
+        <div className="p-7 w-[100px]">
+          <div
+            className="h-[60px] w-[50px] rounded-full overflow-hidden "
+            style={{ width: "50px", height: "50px" }}
+          >
+            {row.original.profileImage ? (
+              <img
+                src={row.original.profileImage}
+                alt=""
+                className="object-center"
+              />
+            ) : (
+              <section
+                className={`w-[50px] h-[50px]  text-xl text-white  font-bold centered`}
+                style={{ background: row.original.hex }}
+              >
+                {row.original.firstName[0]}
+              </section>
+            )}
+          </div>
+        </div>
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "role",
+    Cell: ({ row }: { row: { original: userObject } }) => {
+      return (
+        <div className="flex flex-col gap-4">
+          <span>{row.original.role}</span>
+          <span>{row.original.industry}</span>
+        </div>
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "experienceLevel",
+    Cell: ({ row }: { row: { original: userObject } }) => {
+      return (
+        <div className="flex flex-col gap-4">
+          <span>{row.original.experienceLevel}</span>
+          <span>{row.original.location}</span>
+        </div>
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "emailAddress",
+    Cell: ({ row }: { row: { original: userObject } }) => {
+      return (
+        <div className="flex flex-col gap-4">
+          <span>{row.original.emailAddress}</span>
+        </div>
+      );
+    },
+  },
+  // {
+  //   Header: "",
+  //   accessor: "status",
+  //   Cell: ({ row }: { row: { original: JobPosted } }, idx) => {
+  //     return (
+  //       <button className="w-[138px] h-[50px] bg-[#000080] text-white text-sm rounded-md font-semibold">
+  //         View Applicants
+  //       </button>
+  //     );
+  //   },
+  // },
 ];
