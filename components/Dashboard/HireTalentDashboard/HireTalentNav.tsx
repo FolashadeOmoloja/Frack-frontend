@@ -32,7 +32,7 @@ const HireTalentNav = ({ activeItem }: { activeItem?: number }) => {
         NavLinks={NavLinks}
         DropDown={DropDown}
         buttonCta="Add Job"
-        buttonLink="/hire-talent/dashboard/add-jobs"
+        buttonLink="/hire-talent/dashboard/add-job"
       />
     </>
   );

@@ -33,7 +33,7 @@ const page = ({ params }: { params: { myJobsId: string } }) => {
 
         <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 border-b-[3px] border-[#000080]">
           <span className={`tab active max-sm:h-[50px] text-xl`}>
-            Application
+            Job Applications
           </span>
         </div>
         <JobTable<userObject>

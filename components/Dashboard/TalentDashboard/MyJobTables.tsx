@@ -22,7 +22,7 @@ type IsActiveState = {
 
 const MyJobTables = () => {
   // Define the filter options
-  const filterArr = ["Active Application", "Declined", "Hired"];
+  const filterArr = ["Active Applications", "Declined", "Hired"];
 
   // Initialize the active state and the job application data
   const [active, setActive] = useState<IsActiveState>({ [0]: true });

@@ -18,7 +18,7 @@ type IsActiveState = {
 };
 
 const CompanyJobTables = () => {
-  const filterArr = ["Active Application", "Closed Jobs", "Hired Talents"];
+  const filterArr = ["Active Applications", "Closed Jobs", "Hired Talents"];
 
   const [active, setActive] = useState<IsActiveState>({ 0: true });
   const [jobPosted, setJobPosted] = useState<JobPosted[]>(jobsPostedByCompany);

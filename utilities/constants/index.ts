@@ -377,6 +377,34 @@ export const validationRules = {
   resume: {
     required: "Please upload your resume",
   },
+  jobPostTitle: {
+    required: "Job Post Title is required",
+  },
+  location: {
+    required: "Please enter a  location",
+  },
+  department: {
+    required: "Please enter a  department",
+  },
+  salaryRange: {
+    required: "Complete salary range",
+  },
+  workMode: {
+    required: "Work Mode required",
+  },
+  workHours: {
+    required: "Please select an option",
+  },
+  experienceLevel: {
+    required: "Please select an option",
+  },
+  description: {
+    required: "Job description is required",
+    maxLength: {
+      value: 1000,
+      message: "Description cannot exceed 1000 words",
+    },
+  },
 };
 
 const colorPalette = [
