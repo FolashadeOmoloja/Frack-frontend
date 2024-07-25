@@ -8,6 +8,7 @@ import { useState } from "react";
 import { FaTrashCan } from "react-icons/fa6";
 import TalentProfileForm from "./TalentProfileForm";
 import { searchBarData } from "@/utilities/constants/searchbarData";
+import CompanyProfileForm from "./CompanyProfileForm";
 
 // Define a conditional type for the user prop based on skillsBool
 type ProfileDetailsProps<T extends boolean> = {
@@ -108,17 +109,12 @@ const ProfileDetails = <T extends boolean>({
                 title={"Industry"}
                 details={`${(user as userCompanyObject).industry.join(",")} `}
               />
-              {/* <ProfileBox
-                title={"Years of Experience"}
-                details={`${(user as userCompanyObject).experienceYears} `}
-              /> */}
-              {/* <ProfileBox title={"Industry"} details={user.industry} /> */}
               <ProfileBox title={"Work Culture"} details={user.preference} />
               <button
                 onClick={() => {
                   setIsForm(true);
                 }}
-                className="py-4 px-6 bg-[#000080] text-white rounded-md font-semibold mt-5 btn-hover"
+                className="py-4 px-6 bg-[#000080] text-white rounded-md font-semibold mt-14 btn-hover"
               >
                 Edit Profile
               </button>
@@ -131,7 +127,12 @@ const ProfileDetails = <T extends boolean>({
                 user={user as userObject}
                 changeState={setIsForm}
               />
-            ) : null}
+            ) : (
+              <CompanyProfileForm
+                user={user as userCompanyObject}
+                changeState={setIsForm}
+              />
+            )}
           </section>
         )}
       </section>

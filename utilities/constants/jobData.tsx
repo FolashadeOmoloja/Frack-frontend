@@ -403,3 +403,94 @@ export const activeJobApplication = [
     status: "Declined",
   },
 ];
+
+export interface JobPosted {
+  title: string;
+  department: string;
+  location: string;
+  employmentType: string;
+  salaryRange: string;
+  status: string;
+}
+export const jobsPostedByCompany: JobPosted[] = [
+  {
+    title: "Frontend Developer",
+    department: "Engineering",
+    location: "New York, NY",
+    employmentType: "Full-time",
+    salaryRange: "$80,000 - $100,000",
+    status: "Open",
+  },
+  {
+    title: "Backend Developer",
+    department: "Engineering",
+    location: "San Francisco, CA",
+    employmentType: "Full-time",
+    salaryRange: "$90,000 - $110,000",
+    status: "Open",
+  },
+  {
+    title: "UX Designer",
+    department: "Design",
+    location: "Remote",
+    employmentType: "Contract",
+    salaryRange: "$60,000 - $80,000",
+    status: "Open",
+  },
+  {
+    title: "Product Manager",
+    department: "Product",
+    location: "Austin, TX",
+    employmentType: "Full-time",
+    salaryRange: "$100,000 - $120,000",
+    status: "Closed",
+  },
+  {
+    title: "Data Scientist",
+    department: "Data Science",
+    location: "Boston, MA",
+    employmentType: "Full-time",
+    salaryRange: "$110,000 - $130,000",
+    status: "Open",
+  },
+  {
+    title: "Marketing Specialist",
+    department: "Marketing",
+    location: "Chicago, IL",
+    employmentType: "Part-time",
+    salaryRange: "$50,000 - $70,000",
+    status: "Closed",
+  },
+  {
+    title: "Sales Representative",
+    department: "Sales",
+    location: "Seattle, WA",
+    employmentType: "Full-time",
+    salaryRange: "$70,000 - $90,000",
+    status: "Open",
+  },
+  {
+    title: "HR Manager",
+    department: "Human Resources",
+    location: "Miami, FL",
+    employmentType: "Full-time",
+    salaryRange: "$90,000 - $110,000",
+    status: "Open",
+  },
+  {
+    title: "DevOps Engineer",
+    department: "Engineering",
+    location: "Remote",
+    employmentType: "Full-time",
+    salaryRange: "$100,000 - $120,000",
+    status: "Closed",
+  },
+  {
+    title: "Customer Support Specialist",
+    department: "Support",
+    location: "Denver, CO",
+    employmentType: "Part-time",
+    salaryRange: "$40,000 - $60,000",
+    status: "Open",
+  },
+];

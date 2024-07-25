@@ -1,11 +1,13 @@
 "use client";
 
-import { activeJobApplication } from "@/utilities/constants/jobData";
+import {
+  activeJobApplication,
+  jobsPostedByCompany,
+} from "@/utilities/constants/jobData";
 import { useEffect, useState } from "react";
-import JobTable from "./JobTable";
-import { activeColumns } from "@/utilities/tableData";
+import JobTable from "../TalentDashboard/JobTable";
+import { activeColumns, companyActiveColumns } from "@/utilities/tableData";
 
-// Define the structure for job applications
 interface JobApplication {
   title: string;
   jobProximity: string;
@@ -15,16 +17,13 @@ interface JobApplication {
   status: string;
 }
 
-// Define the type for the active state
 type IsActiveState = {
   [key: number]: boolean;
 };
 
-const MyJobTables = () => {
-  // Define the filter options
-  const filterArr = ["Active Application", "Declined", "Hired"];
+const CompanyJobTables = () => {
+  const filterArr = ["Active Application", "Closed Jobs", "Hired Talents"];
 
-  // Initialize the active state and the job application data
   const [active, setActive] = useState<IsActiveState>({ [0]: true });
   const [jobApplicationData, setJobApplicationData] =
     useState<JobApplication[]>(activeJobApplication);
@@ -76,12 +75,9 @@ const MyJobTables = () => {
           </span>
         ))}
       </div>
-      <JobTable<JobApplication>
-        data={jobApplicationData}
-        columns={activeColumns}
-      />
+      <JobTable data={jobsPostedByCompany} columns={companyActiveColumns} />
     </section>
   );
 };
 
-export default MyJobTables;
+export default CompanyJobTables;
