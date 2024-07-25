@@ -1,5 +1,6 @@
 import { Column } from "react-table";
 import { userObject } from "./constants/typeDef";
+import CTABTN from "@/components/Elements/CTA/CTA-Button";
 
 interface JobApplication {
   title: string;
@@ -17,6 +18,7 @@ export interface JobPosted {
   employmentType: string;
   salaryRange: string;
   status: string;
+  candidates?: userObject[];
 }
 
 export const activeColumns: Column<JobApplication>[] = [
@@ -99,11 +101,14 @@ export const companyActiveColumns: Column<JobPosted>[] = [
   {
     Header: "",
     accessor: "status",
-    Cell: ({ row }: { row: { original: JobPosted } }, idx) => {
+    Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
       return (
-        <button className="w-[138px] h-[50px] bg-[#000080] text-white text-sm rounded-md font-semibold">
-          View Applicants
-        </button>
+        <CTABTN
+          route={`/hire-talent/dashboard/my-jobs/${row.index}`}
+          CTA="View Applicants"
+          width="w-[138px]"
+          height2="h-[50px] text-sm"
+        />
       );
     },
   },
