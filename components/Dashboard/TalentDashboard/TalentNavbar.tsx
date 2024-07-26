@@ -13,14 +13,14 @@ const NavLinks = [
 
 const DropDown = [
   {
-    navItem: "Setting",
+    navItem: "Notifications",
     icon: "/images/dashboard/icon1.svg",
-    href: "/dashboard/setting",
+    href: "/dashboard/notifications",
   },
   {
     navItem: "Sign Out",
     icon: "/images/dashboard/icon2.svg",
-    href: "/",
+    href: "/sign-out",
   },
 ];
 

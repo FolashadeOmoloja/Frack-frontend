@@ -3,6 +3,7 @@
 import { activeJobApplication } from "@/utilities/constants/jobData";
 import { useEffect, useState } from "react";
 import JobTable from "./JobTable";
+import { activeColumns } from "@/utilities/tableData";
 
 // Define the structure for job applications
 interface JobApplication {
@@ -21,7 +22,7 @@ type IsActiveState = {
 
 const MyJobTables = () => {
   // Define the filter options
-  const filterArr = ["Active Application", "Declined", "Hired"];
+  const filterArr = ["Active Applications", "Declined", "Hired"];
 
   // Initialize the active state and the job application data
   const [active, setActive] = useState<IsActiveState>({ [0]: true });
@@ -75,7 +76,10 @@ const MyJobTables = () => {
           </span>
         ))}
       </div>
-      <JobTable jobApplication={jobApplicationData} />
+      <JobTable<JobApplication>
+        data={jobApplicationData}
+        columns={activeColumns}
+      />
     </section>
   );
 };

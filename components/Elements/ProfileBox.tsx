@@ -46,3 +46,30 @@ export const DownloadResumeBox = ({
     </div>
   );
 };
+
+export const DownloadResumeBotton = ({ filename }: { filename: string }) => {
+  const linkRef = useRef<HTMLAnchorElement>(null);
+
+  const handleDownload = () => {
+    const link = linkRef.current;
+    if (link) {
+      link.href = `/resume/${filename}`;
+      link.download = filename;
+      link.click();
+    }
+  };
+  return (
+    <div className="">
+      <a ref={linkRef} style={{ display: "none" }}>
+        hidden download link
+      </a>
+      <button
+        onClick={handleDownload}
+        className="px-4 h-[50px] text-sm bg-[#000080] text-white rounded-md font-semibold flex gap-1 items-center max-w-[200px]"
+      >
+        <MdOutlineFileDownload />
+        Download <span className="max-slg:hidden">Resume</span>
+      </button>
+    </div>
+  );
+};

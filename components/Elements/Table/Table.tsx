@@ -56,7 +56,7 @@ const Table = <T extends object>({
         <div className="w-full overflow-x-auto flex ">
           <table
             {...getTableProps()}
-            className="w-full max-md:flex-1 max-md:min-w-3xl"
+            className="w-full max-slg:flex-1 max-slg:min-w-3xl"
           >
             <thead>
               {headerGroups.map((headerGroup, idx) => (

@@ -13,9 +13,9 @@ const NavLinks = [
 
 const DropDown = [
   {
-    navItem: "Setting",
+    navItem: "Notifications",
     icon: "/images/dashboard/icon1.svg",
-    href: "/hire-talent/dashboard/setting",
+    href: "/hire-talent/dashboard/notifications",
   },
   {
     navItem: "Sign Out",
@@ -32,7 +32,7 @@ const HireTalentNav = ({ activeItem }: { activeItem?: number }) => {
         NavLinks={NavLinks}
         DropDown={DropDown}
         buttonCta="Add Job"
-        buttonLink="/hire-talent/dashboard/add-jobs"
+        buttonLink="/hire-talent/dashboard/add-job"
       />
     </>
   );

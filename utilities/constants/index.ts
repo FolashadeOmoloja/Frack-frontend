@@ -303,15 +303,35 @@ export const blogPosts = [
   },
 ];
 
-const colorPalette = [
-  "#000080", // Navy
-  "#283742", // Gunmetal
-  // "#00509E", // Lighter blue
-  // "#87CEEB", // Sky blue
-  // "#1E90FF", // Dodger blue
-
-  "#A9A9A9", // Dark gray
-  // "#B0C4DE", // Light steel blue
+export const talentNotifications = [
+  { message: "New jobs have been added.", timestamp: "2024-07-18T10:24:00Z" },
+  {
+    message: "You have been selected for an interview.",
+    timestamp: "2024-07-17T14:12:00Z",
+  },
+  {
+    message: "You have received a payment.",
+    timestamp: "2024-07-16T09:45:00Z",
+  },
+  { message: "New jobs have been added.", timestamp: "2024-07-15T08:30:00Z" },
+  {
+    message: "You have been selected for an interview.",
+    timestamp: "2024-07-14T16:00:00Z",
+  },
+  {
+    message: "You have received a payment.",
+    timestamp: "2024-07-13T18:20:00Z",
+  },
+  { message: "New jobs have been added.", timestamp: "2024-07-12T12:50:00Z" },
+  {
+    message: "You have been selected for an interview.",
+    timestamp: "2024-07-11T07:10:00Z",
+  },
+  {
+    message: "You have received a payment.",
+    timestamp: "2024-07-10T21:45:00Z",
+  },
+  { message: "New jobs have been added.", timestamp: "2024-07-09T13:30:00Z" },
 ];
 
 export const validationRules = {
@@ -357,9 +377,71 @@ export const validationRules = {
   resume: {
     required: "Please upload your resume",
   },
+  jobPostTitle: {
+    required: "Job Post Title is required",
+  },
+  location: {
+    required: "Please enter a  location",
+  },
+  department: {
+    required: "Please enter a  department",
+  },
+  salaryRange: {
+    required: "Complete salary range",
+  },
+  workMode: {
+    required: "Work Mode required",
+  },
+  workHours: {
+    required: "Please select an option",
+  },
+  experienceLevel: {
+    required: "Please select an option",
+  },
+  description: {
+    required: "Job description is required",
+    maxLength: {
+      value: 3000,
+      message: "Description cannot exceed 1000 words",
+    },
+  },
 };
+
+const colorPalette = [
+  "#000080", // Navy
+  "#283742", // Gunmetal
+  // "#00509E", // Lighter blue
+  // "#87CEEB", // Sky blue
+  // "#1E90FF", // Dodger blue
+
+  "#A9A9A9", // Dark gray
+  // "#B0C4DE", // Light steel blue
+];
 
 export function getRandomColor() {
   const randomIndex = Math.floor(Math.random() * colorPalette.length);
   return colorPalette[randomIndex];
+}
+
+export function formatTimeDifference(timestamp: string): string {
+  const now = new Date();
+  const notificationTime = new Date(timestamp);
+  const diffInSeconds = Math.floor(
+    (now.getTime() - notificationTime.getTime()) / 1000
+  );
+
+  const days = Math.floor(diffInSeconds / (3600 * 24));
+  const hours = Math.floor((diffInSeconds % (3600 * 24)) / 3600);
+  const minutes = Math.floor((diffInSeconds % 3600) / 60);
+  const seconds = diffInSeconds % 60;
+
+  if (days > 0) {
+    return `${days} day${days > 1 ? "s" : ""} ago`;
+  } else if (hours > 0) {
+    return `${hours} hour${hours > 1 ? "s" : ""} ago`;
+  } else if (minutes > 0) {
+    return `${minutes} minute${minutes > 1 ? "s" : ""} ago`;
+  } else {
+    return `${seconds} second${seconds > 1 ? "s" : ""} ago`;
+  }
 }

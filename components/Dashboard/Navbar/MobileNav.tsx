@@ -72,6 +72,17 @@ const DashboardMobileNav = ({
               </li>
             </ul>
           ))}
+          <ul className={`flex flex-col gap-14 mb-8`}>
+            <li
+              className="sm:text-lg font-semibold text-[#000080] flex justify-between"
+              onClick={() => router.push(DropDown[0].href)}
+            >
+              <span>{DropDown[0].navItem}</span>
+              <span>
+                <HiMiniChevronRight />
+              </span>
+            </li>
+          </ul>
           <div className="flex flex-col md:hidden   gap-4">
             <div className="xsm:hidden">
               <UserAvatar dropDown={DropDown} />
@@ -84,7 +95,7 @@ const DashboardMobileNav = ({
             >
               {buttonCta}
             </button>
-            <CTABTN width="w-full" route="/" CTA="Sign Out" />
+            <CTABTN width="w-full" route="/sign-out" CTA="Sign Out" />
           </div>
         </section>
       }
