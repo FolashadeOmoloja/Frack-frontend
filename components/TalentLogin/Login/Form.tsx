@@ -34,6 +34,7 @@ const ForTalentSignInForm = () => {
 
   const onSubmit = (data: any) => {
     addItem(data);
+    router.push("/dashboard");
   };
 
   const [showPassword, setShowPassword] = useState(false);

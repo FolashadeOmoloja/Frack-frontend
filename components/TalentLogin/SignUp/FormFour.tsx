@@ -1,18 +1,20 @@
 import { useForm } from "react-hook-form";
 import StepCounter from "@/components/Elements/StepCounter";
 import FormLogo from "@/components/Elements/FormLogo";
+import { useRouter } from "next/router";
 
 const FormFour = ({}) => {
   const {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm();
-
+  const router = useRouter();
   //add Item to backeend
   const addItem = async (data: any) => {};
 
   const onSubmit = (data: any) => {
     addItem(data);
+    router.push("/dashboard");
   };
 
   return (
