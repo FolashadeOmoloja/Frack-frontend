@@ -13,10 +13,13 @@ type Notification = {
 };
 const Notifications = ({
   notifications,
+  paymentHistoryBool,
 }: {
   notifications: Notification[];
+  paymentHistoryBool?: boolean;
 }) => {
   const filterArr = ["Notifications", "Payment History"];
+  const arr = ["Notifications"];
   const [active, setActive] = useState<IsActiveState>({ [0]: true });
   const [notificationArr, setNotificationArr] = useState(notifications);
   const paymentHistory: any[] = [];
@@ -31,15 +34,25 @@ const Notifications = ({
         Ditimi, Keep track of your notifications and payment history
       </h2>
       <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 border-b border-[#CCD2D9]">
-        {filterArr.map((item, idx) => (
-          <span
-            className={`tab ${active[idx] ? "active" : ""} max-sm:h-[50px]`}
-            key={idx}
-            onClick={() => activeFunc(idx)}
-          >
-            {item}
-          </span>
-        ))}
+        {paymentHistoryBool
+          ? arr.map((item, idx) => (
+              <span
+                className={`tab ${active[idx] ? "active" : ""} max-sm:h-[50px]`}
+                key={idx}
+                onClick={() => activeFunc(idx)}
+              >
+                {item}
+              </span>
+            ))
+          : filterArr.map((item, idx) => (
+              <span
+                className={`tab ${active[idx] ? "active" : ""} max-sm:h-[50px]`}
+                key={idx}
+                onClick={() => activeFunc(idx)}
+              >
+                {item}
+              </span>
+            ))}
       </div>
       <section className="mt-10">
         {active[0] && (

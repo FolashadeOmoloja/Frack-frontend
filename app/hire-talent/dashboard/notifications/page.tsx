@@ -6,7 +6,7 @@ const SettingsPage = () => {
   return (
     <>
       <HireTalentNav activeItem={0} />
-      <Notifications notifications={talentNotifications} />
+      <Notifications notifications={talentNotifications} paymentHistoryBool />
     </>
   );
 };

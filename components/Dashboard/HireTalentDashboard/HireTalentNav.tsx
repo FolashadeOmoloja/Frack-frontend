@@ -13,9 +13,9 @@ const NavLinks = [
 
 const DropDown = [
   {
-    navItem: "Setting",
+    navItem: "Notifications",
     icon: "/images/dashboard/icon1.svg",
-    href: "/hire-talent/dashboard/setting",
+    href: "/hire-talent/dashboard/notifications",
   },
   {
     navItem: "Sign Out",
