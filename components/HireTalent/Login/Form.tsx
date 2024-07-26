@@ -35,6 +35,7 @@ const HireTalentLoginForm = () => {
 
   const onSubmit = (data: any) => {
     addItem(data);
+    router.push("/hire-talent/dashboard");
   };
 
   const [showPassword, setShowPassword] = useState(false);

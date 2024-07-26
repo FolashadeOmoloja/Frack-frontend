@@ -60,6 +60,7 @@ const HireTalentSignUpForm = () => {
 
   const onSubmit = (data: any) => {
     addItem(data);
+    router.push("/hire-talent/dashboard");
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -71,7 +72,7 @@ const HireTalentSignUpForm = () => {
   return (
     <section className="md:max-w-[529px] max-sm:p-4">
       <div className="mb-6">
-       <FormLogo/>
+        <FormLogo />
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
           Register for find talent
         </h3>
