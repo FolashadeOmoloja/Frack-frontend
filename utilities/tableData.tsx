@@ -101,6 +101,20 @@ export const companyActiveColumns: Column<JobPosted>[] = [
   },
   {
     Header: "",
+    accessor: "candidates",
+    Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
+      return (
+        <CTABTN
+          route={`/hire-talent/dashboard/my-jobs/edit-job/${row.index}`}
+          CTA="Edit Job"
+          height2="h-[50px] text-sm"
+          backGround="bg-[#22CCED]"
+        />
+      );
+    },
+  },
+  {
+    Header: "",
     accessor: "status",
     Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
       return (

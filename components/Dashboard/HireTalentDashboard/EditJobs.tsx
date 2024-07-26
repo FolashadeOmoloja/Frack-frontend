@@ -2,17 +2,26 @@
 import Dropdown from "@/components/Elements/Dropdown";
 import { validationRules } from "@/utilities/constants";
 import { searchBarData } from "@/utilities/constants/searchbarData";
-import { useState } from "react";
+import { JobPosted } from "@/utilities/tableData";
+import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 import { FieldError, useForm } from "react-hook-form";
+import { FaArrowLeft } from "react-icons/fa6";
 
-const AddJobs = () => {
+const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
+  const router = useRouter();
   const {
     handleSubmit,
     register,
     setValue,
     formState: { errors, isSubmitting },
   } = useForm();
-  const [skills, setSkills] = useState<string[]>([]);
+  const [skills, setSkills] = useState<string[]>([
+    "Adobe Xd",
+    "CSS",
+    "TypeScript",
+    "Javascript",
+  ]);
   const [newSkill, setNewSkill] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState(
     searchBarData[0].options
@@ -49,6 +58,13 @@ const AddJobs = () => {
   };
   return (
     <section className="dashboard-container min-h-svh">
+      <div
+        onClick={() => router.push("/hire-talent/dashboard/my-jobs")}
+        className="flex text-[#000080] gap-3 text-xl items-center font-bold mb-4 cursor-pointer"
+      >
+        <FaArrowLeft />
+        <span>Go back</span>
+      </div>
       <h2 className="text-2xl font-bold mb-1">
         Welcome, Frack! Ready to Create a New Job Listing?
       </h2>
@@ -77,6 +93,7 @@ const AddJobs = () => {
               </label>
               <input
                 type="text"
+                defaultValue={jobPost.title}
                 placeholder="Enter a title for your job post"
                 {...register("jobPostTitle", {
                   required: validationRules.jobPostTitle.required,
@@ -94,6 +111,7 @@ const AddJobs = () => {
                 <input
                   type="text"
                   placeholder="Enter location"
+                  defaultValue={jobPost.location}
                   {...register("location", {
                     required: validationRules.location.required,
                   })}
@@ -113,6 +131,8 @@ const AddJobs = () => {
                 validationRules={validationRules.department.required}
                 setValue={setValue}
                 className
+                defaultValue={jobPost.department}
+                selctedItem2={jobPost.department}
               />
             </div>
             <div className="flex formdivs max-slg:flex-col mb-[20px] gap-[20px]">
@@ -152,6 +172,8 @@ const AddJobs = () => {
                 validationRules={validationRules.workMode.required}
                 setValue={setValue}
                 className
+                defaultValue={jobPost.employmentType}
+                selctedItem2={jobPost.employmentType}
               />
             </div>
             <div className="flex formdivs max-slg:flex-col mb-[20px] gap-[20px]">
@@ -160,6 +182,8 @@ const AddJobs = () => {
                 label="Experience Level"
                 placeholder="Select an option"
                 name={"experienceLevel"}
+                defaultValue={"Senior level"}
+                selctedItem2={"Senior level"}
                 required={true}
                 register={register}
                 errors={errors.experienceLevel as FieldError}
@@ -178,6 +202,8 @@ const AddJobs = () => {
                 validationRules={validationRules.workHours.required}
                 setValue={setValue}
                 className
+                defaultValue={"8 hours"}
+                selctedItem2={"8 hours"}
               />
             </div>
             <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
@@ -196,6 +222,7 @@ const AddJobs = () => {
                 })}
                 rows={10}
                 className="resize-none"
+                defaultValue={""}
               />
               {errors.description && (
                 <span className="text-red-600 text-sm">{`${errors.description.message}`}</span>
@@ -267,4 +294,4 @@ const AddJobs = () => {
   );
 };
 
-export default AddJobs;
+export default EditJobs;
