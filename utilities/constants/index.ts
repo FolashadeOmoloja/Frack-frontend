@@ -401,7 +401,7 @@ export const validationRules = {
   description: {
     required: "Job description is required",
     maxLength: {
-      value: 1000,
+      value: 3000,
       message: "Description cannot exceed 1000 words",
     },
   },

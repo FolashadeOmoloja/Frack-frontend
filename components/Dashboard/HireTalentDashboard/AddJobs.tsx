@@ -5,6 +5,7 @@ import {
   proximityFilter,
   searchBarData,
 } from "@/utilities/constants/searchbarData";
+import { useState } from "react";
 import { FieldError, useForm } from "react-hook-form";
 
 const AddJobs = () => {
@@ -14,6 +15,37 @@ const AddJobs = () => {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm();
+  const [skills, setSkills] = useState<string[]>([]);
+  const [newSkill, setNewSkill] = useState("");
+  const [filteredSuggestions, setFilteredSuggestions] = useState(
+    searchBarData[0].options
+  );
+
+  const addSkill = (skill: string) => {
+    if (skill && !skills.includes(skill)) {
+      const updatedSkills = [...skills, skill];
+      setSkills(updatedSkills);
+      setValue("skills", updatedSkills); // Update the form state with the new skills array
+      setNewSkill("");
+      setFilteredSuggestions(searchBarData[0].options);
+    }
+  };
+
+  const removeSkill = (index: number) => {
+    const updatedSkills = skills.filter((_, idx) => idx !== index);
+    setSkills(updatedSkills);
+    setValue("skills", updatedSkills); // Update the form state with the new skills array
+  };
+
+  const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setNewSkill(value);
+    setFilteredSuggestions(
+      searchBarData[0].options.filter((item) =>
+        item.toLowerCase().includes(value.toLowerCase())
+      )
+    );
+  };
   const addItem = async (data: any) => {};
   const onSubmit = (data: any) => {
     addItem(data);
@@ -29,7 +61,7 @@ const AddJobs = () => {
       <section className="flex justify-center w-full">
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="bg-white rounded-sm md:w-[70%] py-8 md:px-16 sm:px-6 px-4 mt-16"
+          className="bg-white rounded-sm md:w-[70%] py-8 md:px-16 sm:px-6 px-4 mt-16 max-sm:mt-10 max-sm:py-6"
         >
           <div className="flex   md:text-lg font-bold mt-16  justify-center">
             <span
@@ -165,13 +197,72 @@ const AddJobs = () => {
                     message: "Description cannot exceed 1000 words",
                   },
                 })}
-                rows={6}
+                rows={10}
                 className="resize-none"
               />
               {errors.description && (
                 <span className="text-red-600 text-sm">{`${errors.description.message}`}</span>
               )}
             </div>
+            <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
+              <label className="text-lg">
+                Skills Needed
+                <span className="text-red-600 text-base">*</span>
+              </label>
+              <div className="flex gap-2 relative">
+                <input
+                  type="text"
+                  value={newSkill}
+                  onChange={onChangeHandler}
+                  placeholder="Add a skill"
+                  className="flex-1"
+                />
+                <button
+                  type="button"
+                  onClick={() => addSkill(newSkill)}
+                  className="py-2 px-4 bg-[#000080] text-white rounded-md"
+                >
+                  Add
+                </button>
+                {newSkill && filteredSuggestions.length > 0 && (
+                  <ul className="absolute z-10 bg-white border border-gray-300 w-full mt-12 max-h-40 overflow-auto  custom-scrollbar">
+                    {filteredSuggestions.map((suggestion, index) => (
+                      <li
+                        key={index}
+                        className="p-2 hover:bg-[#00008015] cursor-pointer"
+                        onClick={() => addSkill(suggestion)}
+                      >
+                        {suggestion}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              {errors.skills && (
+                <span className="text-red-600 text-sm">{`${errors.skills.message}`}</span>
+              )}
+              <ul className="mt-2">
+                {skills.map((skill, index) => (
+                  <li key={index} className="flex justify-between items-center">
+                    <span>{skill}</span>
+                    <button
+                      type="button"
+                      onClick={() => removeSkill(index)}
+                      className="text-red-600 text-sm"
+                    >
+                      Remove
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <button
+              type="submit"
+              className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg btn-hover mt-20"
+              disabled={isSubmitting}
+            >
+              Add Job
+            </button>
           </section>
         </form>
       </section>
