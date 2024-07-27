@@ -12,6 +12,7 @@ const DashboardLayout = ({
   link2,
   status1,
   status2,
+  className = "",
 }: {
   dashInfo: string;
   analytics: analytics;
@@ -19,6 +20,7 @@ const DashboardLayout = ({
   link2: string;
   status1: string;
   status2: string;
+  className?: string;
 }) => {
   return (
     <section className="dashboard-container flex gap-10 max-md:flex-col">
@@ -34,6 +36,7 @@ const DashboardLayout = ({
           status={status1}
           link={link1}
           linkName={"View Profile"}
+          className={className}
         />
         <DashCards
           gif="/images/dashboard/suitcase.gif"
@@ -41,6 +44,7 @@ const DashboardLayout = ({
           status={status2}
           link={link2}
           linkName={"Check My Jobs"}
+          className={className}
         />
         <DashCards
           gif="/images/dashboard/message.gif"
@@ -48,6 +52,7 @@ const DashboardLayout = ({
           status={""}
           link={"hire-talent/dashboard/contact"}
           linkName={"Send us a message"}
+          className={className}
         />
       </aside>
     </section>

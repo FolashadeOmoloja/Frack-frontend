@@ -7,15 +7,19 @@ const DashCards = ({
   status,
   link,
   linkName,
+  className,
 }: {
   gif: string;
   title: string;
   status: string;
   link: string;
   linkName: string;
+  className?: string;
 }) => {
   return (
-    <div className="bg-white rounded-md flex flex-col w-full h-[200px] pl-7 pr-4 pt-6 gap-2">
+    <div
+      className={`bg-white rounded-md flex flex-col w-full h-[200px] ${className}  pl-7 pr-4 pt-6 gap-2`}
+    >
       <img src={gif} alt="" className="w-11 h-11 " />
       <span className="text-lg font-semibold  ">{title}</span>
       <span className="text-3xl font-bold ">{status}</span>
