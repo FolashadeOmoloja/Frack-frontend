@@ -35,6 +35,7 @@ const page = () => {
         link1="/dashboard/profile"
         status1="Shortlist"
         status2="Remote"
+        className="max-xslg:h-[230px] max-md:h-[200px]"
       />
     </>
   );
