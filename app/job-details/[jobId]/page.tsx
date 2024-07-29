@@ -77,7 +77,7 @@ const Joblisting = ({ params }: { params: { jobId: string } }) => {
             vero optio harum corporis minus. Tempore harum dignissimos deserunt
             voluptatem sequi recusandae nobis corrupti nemo aspernatur delectus!
             Nihil deleniti placeat perspiciatis dignissimos, dolor a aut alias
-            voluptatem odit quis, itaque aliquam earum nam fugiat delectus.
+            voluptatem odit quis, itaque aliquam earum nam fugiat deleEEEEEctus.
           </p>
         </section>
         <div>

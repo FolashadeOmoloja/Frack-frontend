@@ -20,6 +20,7 @@ const Header = () => {
             src="/images/homepage/globe2.svg"
             alt=""
             className="w-full max-slg:max-w-[500px]"
+            loading="eager"
           />
         </div>
       </section>

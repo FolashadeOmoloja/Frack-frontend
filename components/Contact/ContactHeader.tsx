@@ -15,6 +15,7 @@ const ContactHeader = () => {
           src="/images/homepage/contactuspic.svg"
           alt="img"
           className="w-full"
+          loading="eager"
         />
       </div>
     </header>
