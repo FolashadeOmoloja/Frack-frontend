@@ -12,6 +12,7 @@
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "axios": "^1.7.2",
+    "framer-motion": "^11.3.19",
     "next": "14.2.3",
     "pdfjs-dist": "^3.11.174",
     "react": "^18",
