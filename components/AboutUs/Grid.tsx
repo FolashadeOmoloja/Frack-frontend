@@ -1,23 +1,23 @@
 const items = [
   {
     num: "01",
-    title: "Access to Talent for All:",
-    txt: `We believe that every business, regardless of size or budget constraints, deserves access to top-tier talent. Our mission is to level the playing field and provide companies of all sizes with the tools and resources they need to compete in today's competitive landscape.`,
+    title: "Talent for every Business:",
+    txt: `We connect businesses of all sizes with exceptional talent. No matter your budget, we ensure you get the professionals who can drive your success.`,
   },
   {
     num: "02",
-    title: "Streamlined Recruitment Processes:",
-    txt: "Traditional hiring processes are often time-consuming, inefficient, and costly. Our mission is to streamline the recruitment process and make it easier than ever for companies to find the talent they need.",
+    title: "Effortless Hiring:",
+    txt: "We’re just as picky as you are . We ditch the tedious traditional hiring methods and make finding the right people ultra-quick and hassle free, so you can focus on what really matters.",
   },
   {
     num: "03",
-    title: "Personalized Experience:",
-    txt: `At Frack, we understand that every company is unique, with its own set of challenges and requirements. That's why our mission is to provide a personalized experience for every client. From matching companies with qualified professionals to providing ongoing support and guidance, we're committed to delivering solutions that meet the specific needs of each business.`,
+    title: "Customized Support:",
+    txt: `We know every business is different. That is why we work on a very personalized level to ensure that you get exactly the right support and talent for your needs.`,
   },
   {
     num: "04",
-    title: "Driving Success:",
-    txt: `Ultimately, our mission is to drive success for businesses around the world. By helping companies build high-performing teams, we're not just filling positions—we're driving growth, innovation, and success. Our mission is to be a trusted partner on the journey to success, providing the support and resources companies need to thrive in today's ever-changing business landscape.`,
+    title: "Fueling your success:",
+    txt: `We want to see your business succeed. We enable growth and innovation with powerful and effective teams, driving you toward achieving your goals.`,
   },
 ];
 
@@ -27,7 +27,7 @@ const Grid = () => {
       <div className="max-sm:text-center">
         <span className="headingspan">Our Mission</span>
         <p className="font-bold text-[52px] leading-[52px] text-[#111013] lg:max-w-[408px] max-md:text-[38px] max-sm:text-3xl max-xsm:text-[22px]">
-          Empowering Companies to Build Their Dream Teams
+          Transforming How You Build Your Dream Team
         </p>
       </div>
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10">

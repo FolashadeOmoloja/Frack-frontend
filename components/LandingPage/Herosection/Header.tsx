@@ -1,5 +1,5 @@
-"use client";
-import { motion } from "framer-motion";
+// "use client";
+// import { motion } from "framer-motion";
 import CTABTN from "../../Elements/CTA/CTA-Button";
 
 const Header = () => {
@@ -32,21 +32,18 @@ const Header = () => {
     <header className="section-container flex max-slg:flex-col max-lg:pt-6 justify-between mt-0">
       <section className="flex flex-col slg:pt-[92px] max-md:text-center">
         <h1 className="text-[48px] font-extrabold max-w-[700px] lg:text-[44px] max-sm:text-[36px] max-xsm:text-[28px]">
-          Welcome to Frack: Your Fractional Talent Solution
+          BETTER HIRING, EFFICIENT RESULTS
         </h1>
         <p className="text-lg">
-          Unlock the power of fractional talent with Frack.
+          Frack offers a gateway to exceptional fractional talent,
+          <br className="max-md:hidden" /> enabling you to achieve maximum
+          success in your business
         </p>
         <div className="mt-8 max-md:justify-center flex">
           <CTABTN route={"/hiretalent"} CTA="Get Started" showIcon={true} />
         </div>
       </section>
-      <motion.section
-        variants={globeVariants}
-        initial="hidden"
-        animate="visible"
-        whileHover="hover"
-      >
+      <section>
         <div className="basis-[1/2] mt-8 flex max-slg:justify-center">
           <img
             src="/images/homepage/globe2.svg"
@@ -55,7 +52,7 @@ const Header = () => {
             loading="eager"
           />
         </div>
-      </motion.section>
+      </section>
     </header>
   );
 };

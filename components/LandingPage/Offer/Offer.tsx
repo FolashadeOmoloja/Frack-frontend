@@ -4,18 +4,18 @@ import { motion } from "framer-motion";
 const cards = [
   {
     img: "/images/homepage/delivery.svg",
-    cardTitle: "Quality You Can Trust",
-    text: "At Frack, we believe in quality over quantity. Every professional in our network undergoes a rigorous vetting process to ensure they possess the skills, experience, and expertise needed to excel in their roles.",
+    cardTitle: "Quality without Compromise",
+    text: "At Frack, we prioritize quality over quantity. Each professional in our network is thoroughly vetted to ensure they have the skills, experience, and expertise necessary to excel in their roles.",
   },
   {
     img: "/images/homepage/Character.svg",
-    cardTitle: "Cost-Effective Solutions",
-    text: "Why pay for more than you need? With Frack, companies can access the expertise they need on an as-needed basis, without the financial commitment of full-time hires.",
+    cardTitle: "High- Value Solutions",
+    text: "Why pay for more than you need? With Frack, companies can access the precise expertise they require on an as-needed basis, without the financial commitment of full-time employees.",
   },
   {
     img: "/images/homepage/error.svg",
-    cardTitle: "Flexible Scaling",
-    text: "Whether you're a startup looking to build your dream team on a budget or a large corporation seeking specialized skills for a short-term project, Frack offers the flexibility to scale your teams up or down quickly and easily.",
+    cardTitle: "Flexible Team Scaling",
+    text: "Whether you’re a budget-conscious startup or a large corporation needing short-term expertise, Frack lets you scale your team quickly and efficiently.",
   },
 ];
 
@@ -42,13 +42,12 @@ const Offer = () => {
     <section className="section-container">
       <div className="flex flex-col items-center text-center">
         <h2 className="font-extrabold text-[40px] max-md:text-[24px] mb-5">
-          Efficiency at Your Fingertips
+          Speed Up Success: Faster, Better, Quicker with Frack
         </h2>
         <p className="font-light md:text-[20px] text-lg max-w-[941px] max-md:text-lg">
-          Say goodbye to endless hours spent searching for the perfect
-          candidate. With Frack, companies can post their requirements on our
-          job board and instantly access a curated list of qualified
-          professionals from our network.
+          Fewer hours, more results. Simply post your requirements on our job
+          board and instantly connect with top professionals from our curated
+          network
         </p>
       </div>
       <motion.section
