@@ -1,50 +1,119 @@
-const cards = [
-    {
-        gif:'images/homepage/clock.gif',
-        title: 'Expertise',
-        text: `Every member of the Frack talent pool is a master of their craft. From seasoned CFOs toinnovative marketing strategists to talented software developers, our professionalsbring a wealth of expertise to the table. With years of experience under their belts,they're equipped to tackle even the most complex challenges withconfidence and precision.`,
-        bgColor:'bg-[#F4E7E5]',
-        color: 'text-[#000080]'
-    },
-    {
-        gif:'images/homepage/note.gif',
-        title: 'Reliability',
-        text: `When you partner with Frack, you can trust that you're working with professionals who are committed to excellence. Our talent pool is known for its reliability and dedication to delivering results on time and on budget. With Frack, you can rest easy knowing that your projects are in good hands.`,
-        bgColor:'bg-[#00B5E8]',
-        color: 'text-white'
-    },
-    {
-        gif:'images/homepage/coins.gif',
-        title: 'Innovation',
-        text: `At Frack, we believe in pushing the boundaries of what's possible. That's why we're proud to work with professionals who are not only experts in their fields but also innovators who are constantly pushing the envelope and driving change.`,
-        bgColor:'bg-[#000080]',
-        color: 'text-white'
-    },
-]
+const cards1 = [
+  {
+    gif: "images/homepage/clock.gif",
+    title: "Direct Connections: ",
+    text: `At Frack, you connect directly with companies seeking your expertise—no recruiters, no middlemen. Just you and the opportunities.`,
+  },
+  {
+    gif: "images/homepage/note.gif",
+    title: "Transparent Job Offers: ",
+    text: `Know exactly what you’re signing up for. View project details, rates, and expectations upfront, so you can choose the work that suits you best.`,
+  },
+  {
+    gif: "images/homepage/spin.gif",
+    title: "Simple Application Process: ",
+    text: `Forget the endless resumes and cover letters. With Frack, your profile is all you need—just one click to apply and you’re all set.`,
+  },
+  {
+    gif: "images/homepage/coins.gif",
+    title: "Exclusive Job Opportunities: ",
+    text: `Access unique, high-quality gigs and freelance projects you won’t find on other platforms. Whether you’re after short-term work or ongoing projects, we have options that match your skills.`,
+  },
+  {
+    gif: "images/homepage/handshake.gif",
+    title: "Work Your Way: ",
+    text: `Enjoy the freedom to choose projects that fit your schedule and interests. With Frack, you have the flexibility to work when, where, and how you want.`,
+  },
+];
+
+const cards2 = [
+  {
+    gif: "images/homepage/clock.gif",
+    title: "A Talent Pool That Gets You: ",
+    text: `At Frack, we don’t just glance through resumes. We handpick professionals who genuinely fit your needs and are ready to hit the ground running..`,
+  },
+  {
+    gif: "images/homepage/note.gif",
+    title: "Experts who get it done: ",
+    text: `Whether you need a battle-hardened CFO, a creative marketing mind, or a tech whiz, our people really know what they're doing. They bring real-world experience and the know-how to tackle your challenges head-on.`,
+  },
+  {
+    gif: "images/homepage/coins.gif",
+    title: "People You Can Count On: ",
+    text: `With Frack, you gain dedicated partners who are reliable, meet deadlines, and stay within budget, allowing you to focus on your bigger goals.
+`,
+  },
+  {
+    gif: "images/homepage/chart.gif",
+    title: "Fresh Ideas, Real Results: ",
+    text: `We collaborate with experts who don’t just keep up with the trends—they set them. They bring fresh, innovative ideas to the table, helping your business grow and evolve.`,
+  },
+];
 
 const TalentPool = () => {
   return (
-    <section className='section-container  '>
-    <div className=' flex flex-col items-center text-center '>
-        <h2 className='font-extrabold text-[40px] max-md:text-[24px] mb-5'>Frack Talent Pool</h2>
-        <p className='font-light md:text-[20px] text-lg max-w-[941px] max-md:text-lg'>At Frack, our talent pool is more than just a collection of resumes,it's a carefully curated ecosystem of top-tier professionals whoembody the four key characteristics that set Frack apart from the rest:</p>
-    </div>
-    <section className="md:mt-[108px] mt-[50px] flex flex-col md:gap-[104px] gap-9">
-        {
-            cards.map((item,idx) =>(
-                <div key={idx} className={`${item.bgColor} md:py-[104px] py-[50px] max-w-[1304px] div-center flex-col  gap-6 rounded-2xl max-xslg:px-7 ` }>
-                        <div className="div-center gap-4 " >
-                                <div className="w-[57px] h-[57px]"><img src={item.gif} alt="gif" className="w-full h-full"/></div>
-                            <span className={`${item.color} xsm:text-lg font-bold`}>{item.title}</span>
-                        </div>     
-                        <p className={`${item.color} text-center leading-[30px] max-w-[909px] max-xsm:text-sm`}>{item.text}</p>  
+    <section className="section-container  ">
+      <section className="flex max-slg:flex-col max-slg:gap-16 max-sm:text-center">
+        <section className="basis-1/2 md:pr-10 pt-6">
+          <span className="font-semibold text-lg text-[#161519] mb-4">
+            Got talent ?
+          </span>
+          <h3 className="font-bold text-[40px]  text-[#111013]  max-sm:text-2xl mb-14">
+            Why jobseekers love us{" "}
+          </h3>
+          <div className="flex flex-col gap-5 max-sm:gap-8">
+            {cards1.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex max-sm:flex-col  gap-2 items-center"
+              >
+                <div className="min-w-[60px] h-[60px] rounded-full bg-[#000080] flex items-center justify-center overflow-hidden">
+                  <img
+                    src={item.gif}
+                    alt="gif"
+                    className="w-[30px] h-[30px] object-contain"
+                  />
                 </div>
-            ))
-        }
+                <p className="ml-4 text-sm leading-7">
+                  <span className="font-bold block">{item.title}</span>
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="basis-1/2 bg-[#00b6e844] sm:px-10 px-3 py-6  rounded-[20px] max-sm:text-center">
+          <span className="font-semibold text-[20px] text-lg mb-4">
+            Want great talent ?
+          </span>
+          <h3 className="font-bold text-[40px]   max-sm:text-2xl mb-14">
+            Why Companies love us
+          </h3>
+          <div className="flex flex-col gap-5 max-sm:gap-8">
+            {cards2.map((item, idx) => (
+              <div
+                key={idx}
+                className="flex max-sm:flex-col gap-2 items-center"
+              >
+                <div className="min-w-[60px] h-[60px] rounded-full bg-white flex items-center justify-center overflow-hidden">
+                  <img
+                    src={item.gif}
+                    alt="gif"
+                    className="w-[30px] h-[30px] object-contain"
+                  />
+                </div>
+                <p className="sm:ml-4 text-sm leading-7">
+                  <span className="font-bold block">{item.title}</span>
+                  {item.text}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+      </section>
     </section>
+  );
+};
 
-</section>
-  )
-}
-
-export default TalentPool
+export default TalentPool;
