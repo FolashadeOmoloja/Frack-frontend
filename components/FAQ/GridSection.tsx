@@ -26,7 +26,7 @@ const GridSection = () => {
           </span>
         </div>
         <div>
-          <CTABTN route={"contact-us"} CTA="Get in touch" showIcon />
+          <CTABTN route={"/contact-us"} CTA="Get in touch" showIcon />
         </div>
       </section>
     </section>
