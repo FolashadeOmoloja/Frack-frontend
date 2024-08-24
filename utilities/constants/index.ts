@@ -121,32 +121,52 @@ export const faqs = [
   {
     img: "images/homepage/icon.svg",
     title: "What is Frack?",
-    p: "Frack is a platform where companies can post their requirements on our job board and instantly access a curated list of qualified professionals from our network.",
+    p: "Frack is the go-to marketplace to find quality fractional talent. We bridge the gap between businesses and independent experienced professionals who are offering their expertise part-time or on project basis to make it easy for you to get the right kind of experience when you need it.",
   },
   {
     img: "images/homepage/icon1.svg",
-    title: "How does Frack work?",
-    p: "Companies post their job requirements on Frack, and our system matches them with a curated list of qualified professionals from our extensive network.",
+    title: "What is Fractional Talent?",
+    p: "Fractional talent means professionals working according to need: part-time or by project, not full-time. This allows one to hire experts only in tasks that one needs help with and not be bound into long-term commitments. Your business is better poised to scale now with flexible capacity.",
   },
   {
     img: "images/homepage/icon2.svg",
-    title: "What types of professionals are available on Frack?",
-    p: "Frack features a wide range of professionals including software developers, project managers, designers, marketers, and more, all curated to meet your specific requirements.",
+    title: "How does Frack vet its professionals?",
+    p: "We take quality seriously. Each professional in our talent pool has been rigorously vetted. Their skills and experience are checked; their past work is analyzed to ensure they're top-tier experts who could turn out results. Only the best make it into Frack.",
   },
   {
     img: "images/homepage/icon3.svg",
-    title: "How quickly can I find professionals on Frack?",
-    p: "With Frack, you can instantly access a curated list of qualified professionals as soon as you post your job requirements on our platform.",
+    title: "How can I hire through Frack?",
+    p: "Finding the right talent on Frack is pretty easy. Browse through our pool of experts, view their profiles, and connect with the relevant ones to discuss your project directly. Discuss the project, agree on terms, and get started without a headache of hiring",
   },
   {
     img: "images/homepage/icon4.svg",
-    title: "Is there a fee to use Frack?",
-    p: "Frack offers various pricing plans to suit your needs. You can choose a plan that best fits your hiring requirements and budget.",
+    title: "What kind of talent can I find on Frack?",
+    p: "From experienced CFOs to out-of-the-box marketing strategists and qualified software developers, everything you need to make your business thrive is on Frack.",
   },
   {
     img: "images/homepage/icon5.svg",
-    title: "How does Frack ensure the quality of professionals?",
-    p: "Frack uses a thorough vetting process to ensure that all professionals in our network are highly qualified and meet the specific needs of your job requirements.",
+    title: "Can anyone or any business, big and small, join Frack?",
+    p: "Absolutely! Frack is designed to be flexible and scalable. It's the perfect solution for any startup, small business, or large enterprise looking to skyrocket its performance. Irrespective of your size, be assured that we have the right talent to suit your needs.",
+  },
+  {
+    img: "images/homepage/icon3.svg",
+    title: "How does Frack ensure the success of any project?",
+    p: "We're all about getting results. Frack connects you with top-quality professionals committed to the timely and cost-effective delivery of quality work. Plus, our platform ensures smooth communication and collaboration to keep everything on track.",
+  },
+  {
+    img: "images/homepage/icon4.svg",
+    title: " How much does Frack cost?",
+    p: "The prices vary based on the professional you hire  and the magnitude of a project. We are transparent about the pricing so, right upfront, you do see the rates—no hidden fees, just pay for the kind of talent you need",
+  },
+  {
+    img: "images/homepage/icon5.svg",
+    title: "Can I hire talent for long-term projects?",
+    p: "Absolutely! Although Frack does fractional and short-term projects, many of our professionals are available for long-term engagements as well. You can work out the specifics directly with the talent to suit your needs.",
+  },
+  {
+    img: "images/homepage/icon5.svg",
+    title: "How do I get started with Frack?",
+    p: "Get started right away. Join our platform, get into our pool of high-end professionals, and lock in your relations with the right talent for the project at hand. If you have any questions, our support team stands by to help you every step of the way..",
   },
 ];
 
