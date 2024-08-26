@@ -1,6 +1,7 @@
 // "use client";
 // import { motion } from "framer-motion";
 import CTABTN from "../../Elements/CTA/CTA-Button";
+import Globe from "./Globe";
 
 const Header = () => {
   const globeVariants = {
@@ -29,13 +30,13 @@ const Header = () => {
   };
 
   return (
-    <header className="section-container flex max-sslg:flex-col max-lg:pt-6 justify-between mt-0">
+    <header className="section-container flex max-sslg:flex-col max-lg:pt-6 justify-between mt-0 max-xslg:gap-5">
       <section className="flex flex-col max-sslg:items-center slg:pt-[92px] max-sslg:text-center">
-        <h1 className="font-extrabold max-w-[700px] xslg:text-[52px] text-5xl max-sm:text-[36px] max-xsm:text-[28px]">
+        <h1 className="font-extrabold max-w-[700px] leading-[1.5] text-5xl max-sm:text-[36px] max-xsm:text-[28px]">
           BETTER HIRING,
           <br /> EFFICIENT RESULTS
         </h1>
-        <p className="text-2xl max-xslg:text-lg mt-6">
+        <p className="text-lg max-xslg:text-lg mt-6">
           Frack offers a gateway to exceptional fractional talent,
           <br className="max-sslg:hidden" /> enabling you to achieve maximum
           success in your business
@@ -54,6 +55,7 @@ const Header = () => {
               loading="eager"
             />
           </div>
+          {/* <Globe/> */}
         </div>
       </section>
     </header>
