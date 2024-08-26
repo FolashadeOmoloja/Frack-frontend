@@ -41,6 +41,16 @@ const JobBoard = ({
     <section
       className={`section-container bg-[#F4F5F7] mt-0 py-7 ${className}`}
     >
+      <h2 className="header-headline max-sm:text-center mb-8">
+        Explore new opportunities <br />
+        <span className="header-headline-span max-sm:text-[#000080] max-sm:bg-none">
+          quickly
+        </span>{" "}
+        and{" "}
+        <span className="header-headline-span max-sm:text-[#000080] max-sm:bg-none">
+          easily
+        </span>
+      </h2>
       <JobSearchBar
         onNewSearch={setNewJobPosting}
         onSearch={setFilteredJobs}

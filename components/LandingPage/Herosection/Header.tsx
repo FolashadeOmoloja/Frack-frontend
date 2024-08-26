@@ -47,15 +47,15 @@ const Header = () => {
       </section>
       <section>
         <div className="basis-[1/2] mt-8 flex max-sslg:justify-center">
-          <div className="xslg:w-[540px] xslg:h-[540px] w-full h-full max-sslg:max-w-[300px] rounded-full shadow-[0_0_20px_10px_rgba(0,0,128,0.3)] overflow-hidden">
+          {/* <div className="xslg:w-[540px] xslg:h-[540px] w-full h-full max-sslg:max-w-[300px] rounded-full shadow-[0_0_20px_10px_rgba(0,0,128,0.3)] overflow-hidden">
             <img
               src="/images/homepage/rotating-globe.gif"
               alt=""
               className="w-full h-full object-cover scale-[1.2] filter"
               loading="eager"
             />
-          </div>
-          {/* <Globe/> */}
+          </div> */}
+          <Globe />
         </div>
       </section>
     </header>

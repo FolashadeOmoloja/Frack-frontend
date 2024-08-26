@@ -203,7 +203,7 @@
   background-size: cover; /* Ensure the image covers the entire div */
   background-position: 0 0; /* Start at the top-left corner */
   /* transform: rotateX(6deg) rotateY(6deg) rotateZ(6deg); */
-  animation: rotate-globe 20s linear infinite;
+  animation: rotate-globe 15s linear infinite;
 }
 
 @keyframes rotate-globe {
