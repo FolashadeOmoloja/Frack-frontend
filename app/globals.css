@@ -183,6 +183,10 @@
   width: 100%;
 }
 
+/* .filter {
+  filter: sepia(1) saturate(500%) hue-rotate(180deg) brightness(0.8);
+} */
+
 @media (prefers-color-scheme: light) {
   :root {
   }
