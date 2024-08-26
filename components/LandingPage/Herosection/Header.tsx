@@ -42,7 +42,7 @@ const Header = () => {
           success in your business
         </p>
         <div className="mt-12 max-sslg:justify-center flex">
-          <CTABTN route={"/hiretalent"} CTA="Get Started" showIcon={true} />
+          <CTABTN route={"/hire-talent"} CTA="Get Started" showIcon={true} />
         </div>
       </section>
       <section>
