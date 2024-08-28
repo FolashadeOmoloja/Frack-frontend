@@ -8,9 +8,8 @@ const Login = () => {
         style={{ backgroundImage: "url('/images/homepage/signup-bg1.svg')" }}
       >
         <p className="login-text">
-          companies can simply post their requirements on our job board, and
-          within moments,they'll be matched with a curated list of highly
-          qualified professionals from our extensive network.
+          Access Talent with a simple Login We help organizations around the
+          world harness the power of great talent to drive their success.
         </p>
       </div>
       <section className="md:basis-1/2 max-md:w-full flex items-center justify-center">

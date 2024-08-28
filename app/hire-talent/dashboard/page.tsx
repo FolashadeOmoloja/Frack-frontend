@@ -29,7 +29,7 @@ const page = () => {
     <>
       <HireTalentNav activeItem={0} />
       <DashboardLayout
-        dashInfo="This is the breakdown of your recruitment info"
+        dashInfo="This provides a summary of your application details"
         analytics={companyAnalytics}
         link2="/hire-talent/dashboard/my-jobs"
         link1="/hire-talent/dashboard/profile"

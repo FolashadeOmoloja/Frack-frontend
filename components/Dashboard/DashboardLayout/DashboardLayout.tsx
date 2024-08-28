@@ -25,7 +25,7 @@ const DashboardLayout = ({
   return (
     <section className="dashboard-container flex gap-10 max-md:flex-col">
       <section className="bg-white pt-14 px-9 max-sm:px-[10px] pb-20 rounded-md md:basis-[75%]">
-        <h2 className="text-2xl font-bold mb-1">Your dashboard info</h2>
+        <h2 className="text-2xl font-bold mb-1">Your Dashboard Overview</h2>
         <span className="text-[#7C8698] ">{dashInfo}</span>
         <StatsCard analytics={analytics} />
       </section>
