@@ -1,5 +1,5 @@
 "use client";
-import { useForm } from "react-hook-form";
+import { FieldError, useForm } from "react-hook-form";
 import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
@@ -7,6 +7,9 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import PhoneNoInput from "@/components/Elements/PhoneNoInput";
 import FormLogo from "@/components/Elements/FormLogo";
+import { getRandomColor } from "@/utilities/constants";
+import Dropdown, { DropdownSelector } from "@/components/Elements/Dropdown";
+import { industriesArr } from "@/utilities/constants/searchbarData";
 
 // Define validation rules for each form field
 const validationRules = {
@@ -19,8 +22,23 @@ const validationRules = {
   companyName: {
     required: `Your Company's Name is required`,
   },
-  jobTitle: {
-    required: "Job Title is required",
+  companyRole: {
+    required: "Company Role is required",
+  },
+  location: {
+    required: "Location is required",
+  },
+  country: {
+    required: "Country is required",
+  },
+  preference: {
+    required: "This is required",
+  },
+  industries: {
+    required: "This is required",
+  },
+  privacyConsent: {
+    required: "This is required",
   },
   mobileNo: {
     required: "Mobile No. is required",
@@ -44,22 +62,55 @@ const validationRules = {
         "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
     },
   },
+  url: {
+    required: "Your LinkedIn URL is required",
+    pattern: {
+      value: /^https:\/\/(www\.)?linkedin\.com\/.*$/,
+      message: "Invalid LinkedIn URL",
+    },
+  },
 };
 
 const HireTalentSignUpForm = () => {
   const {
     handleSubmit,
     register,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm();
 
   const router = useRouter();
 
   //add Item to backeend
-  const addItem = async (data: any) => {};
+  const addItem = async (data: any) => {
+    const hexCode = getRandomColor();
+    if (data) {
+      const companyData = {
+        firstName: data.firstName.trim(),
+        lastName: data.lastName.trim(),
+        phoneNumber: data.mobileNo.trim(),
+        countryCode: data.countryCode.trim(),
+        emailAddress: data.email.trim(),
+        password: data.password.trim(),
+        country: data.country.trim(),
+        hex: hexCode,
+        location: data.location.trim(),
+        linkedInUrl: data.url.trim(),
+        companyName: data.companyName.trim(),
+        industry: data.industries
+          .split(", ")
+          .map((industry: string) => industry.trim()),
+        companyRole: data.companyRole.trim(),
+        preference: data.preference.trim(),
+        privacyConsent: data.privacyConsent,
+      };
+
+      console.log(companyData);
+    }
+  };
 
   const onSubmit = (data: any) => {
-    router.push("./hire-talent/dashboard");
+    router.push("./dashboard");
     addItem(data);
   };
 
@@ -148,20 +199,38 @@ const HireTalentSignUpForm = () => {
             <span className="text-red-600 text-sm">{`${errors.companyName.message}`}</span>
           )}
         </div>
+        {/* linkedIn */}
+        <div className="flex formdivs flex-col mb-4 gap-[6px]">
+          <label>
+            Company's linkedin url{" "}
+            <span className="text-red-600 text-base">*</span>
+          </label>
+          <input
+            type="url"
+            placeholder="Enter linkedin url"
+            {...register("url", {
+              required: validationRules.url.required,
+              pattern: validationRules.url.pattern,
+            })}
+          />
+          {errors.url && (
+            <span className="text-red-600 text-sm">{`${errors.url.message}`}</span>
+          )}
+        </div>
         {/* Job TiTle */}
         <div className="flex formdivs flex-col mb-4 gap-[6px]">
           <label>
-            Job Title <span className="text-red-600 text-base">*</span>
+            Company Role <span className="text-red-600 text-base">*</span>
           </label>
           <input
             type="text"
             placeholder="Enter your job title"
-            {...register("jobTitle", {
-              required: validationRules.jobTitle.required,
+            {...register("companyRole", {
+              required: validationRules.companyRole.required,
             })}
           />
-          {errors.jobTitle && (
-            <span className="text-red-600 text-sm">{`${errors.jobTitle.message}`}</span>
+          {errors.companyRole && (
+            <span className="text-red-600 text-sm">{`${errors.companyRole.message}`}</span>
           )}
         </div>
         {/* Mobile No. */}
@@ -174,6 +243,68 @@ const HireTalentSignUpForm = () => {
             <span className="text-red-600 text-sm">{`${errors.mobileNo.message}`}</span>
           )}
         </div>
+        <div className="flex formdivs max-sm:flex-col mb-[20px] gap-[20px]">
+          <div className="basis-1/2">
+            <label>
+              Country <span className="text-red-600 text-base">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter company's country"
+              {...register("country", {
+                required: validationRules.country.required,
+              })}
+            />
+            {errors.country && (
+              <span className="text-red-500 text-sm">{`${errors.country.message}`}</span>
+            )}
+          </div>
+          {/* Last Name */}
+          <div className="basis-1/2">
+            <label>
+              Location (state/city){" "}
+              <span className="text-red-600 text-base">*</span>
+            </label>
+            <input
+              type="text"
+              placeholder="Enter company's location e.g Lagos"
+              {...register("location", {
+                required: validationRules.location.required,
+              })}
+            />
+            {errors.location && (
+              <span className="text-red-500 text-sm">{`${errors.location.message}`}</span>
+            )}
+          </div>
+        </div>
+        <Dropdown
+          ItemsArr={["On Site", "Hybrid", "Remote", "Fully Remote"]}
+          label="Work Culture"
+          placeholder="Select your work culture"
+          name={"preference"}
+          required={true}
+          register={register}
+          errors={errors.preference as FieldError}
+          validationRules={validationRules.preference.required}
+          setValue={setValue}
+        />
+        <br className="mb-4" />
+        {/* industry */}
+        <DropdownSelector
+          ItemsArr={industriesArr}
+          label="Select industry that best represent your company (max 3)"
+          placeholder="Choose up to 3 industries"
+          name="industries"
+          required={true}
+          register={register}
+          errors={errors.industries as FieldError}
+          validationRules={{
+            required: "At least one industry must be selected",
+          }}
+          setValue={setValue}
+          className={false}
+        />
+        <br className="mb-2" />
         {/* password */}
         <div className="flex formdivs flex-col mb-6 gap-[6px]">
           <label>Password</label>
@@ -203,21 +334,27 @@ const HireTalentSignUpForm = () => {
             <span className="text-red-600 text-sm">{`${errors.password.message}`}</span>
           )}
         </div>
-        <div className="mb-6 flex items-center  ">
-          <input
-            type="checkbox"
-            name="approval-check"
-            id="approval-check"
-            className="rounded-md h-5 w-5 accent-[#000080]"
-            required
-          />
-          <label
-            htmlFor="approval-check"
-            className="ml-2 text-sm text-[#667185]"
-          >
-            By submitting my personal data, I consent to Frack collecting,
-            processing, and storing my information.
-          </label>
+        <div className="mb-6  ">
+          <div className="flex items-center">
+            <input
+              type="checkbox"
+              id="approval-check"
+              className="rounded-md h-5 w-5 accent-[#000080]"
+              {...register("privacyConsent", {
+                required: validationRules.privacyConsent.required,
+              })}
+            />
+            <label
+              htmlFor="approval-check"
+              className="ml-2 text-sm text-[#667185]"
+            >
+              By submitting my personal data, I consent to Frack collecting,
+              processing, and storing my information.
+            </label>
+          </div>
+          {errors.privacyConsent && (
+            <span className="text-red-500 text-sm">{`${errors.privacyConsent.message}`}</span>
+          )}
         </div>
         <button
           type="submit"
