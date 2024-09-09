@@ -1,6 +1,6 @@
 "use client";
 import { FieldError, useForm } from "react-hook-form";
-import Image from "next/image";
+import { companyValidationRules } from "@/utilities/constants/formValidation";
 import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
@@ -12,64 +12,6 @@ import Dropdown, { DropdownSelector } from "@/components/Elements/Dropdown";
 import { industriesArr } from "@/utilities/constants/searchbarData";
 
 // Define validation rules for each form field
-const validationRules = {
-  firstName: {
-    required: "First Name is required",
-  },
-  lastName: {
-    required: "Last Name is required",
-  },
-  companyName: {
-    required: `Your Company's Name is required`,
-  },
-  companyRole: {
-    required: "Company Role is required",
-  },
-  location: {
-    required: "Location is required",
-  },
-  country: {
-    required: "Country is required",
-  },
-  preference: {
-    required: "This is required",
-  },
-  industries: {
-    required: "This is required",
-  },
-  privacyConsent: {
-    required: "This is required",
-  },
-  mobileNo: {
-    required: "Mobile No. is required",
-    pattern: {
-      value: /^[0-9]/,
-      message: "Invalid mobile phone number",
-    },
-  },
-  email: {
-    required: "Email is required",
-    pattern: {
-      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      message: "Invalid email address",
-    },
-  },
-  password: {
-    required: "Password is required",
-    pattern: {
-      value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-      message:
-        "Password must be at least 8 characters long and contain at least one uppercase letter, one lowercase letter, and one number",
-    },
-  },
-  url: {
-    required: "Your LinkedIn URL is required",
-    pattern: {
-      value: /^https:\/\/(www\.)?linkedin\.com\/.*$/,
-      message: "Invalid LinkedIn URL",
-    },
-  },
-};
 
 const HireTalentSignUpForm = () => {
   const {
@@ -106,6 +48,10 @@ const HireTalentSignUpForm = () => {
       };
 
       console.log(companyData);
+      try {
+      } catch (error) {
+        console.log("Error:", error);
+      }
     }
   };
 
@@ -142,7 +88,7 @@ const HireTalentSignUpForm = () => {
               type="text"
               placeholder="Enter your First Name"
               {...register("firstName", {
-                required: validationRules.firstName.required,
+                required: companyValidationRules.firstName.required,
               })}
             />
             {errors.firstName && (
@@ -158,7 +104,7 @@ const HireTalentSignUpForm = () => {
               type="text"
               placeholder="Enter your Last Name"
               {...register("lastName", {
-                required: validationRules.lastName.required,
+                required: companyValidationRules.lastName.required,
               })}
             />
             {errors.lastName && (
@@ -175,8 +121,8 @@ const HireTalentSignUpForm = () => {
             type="email"
             placeholder="Enter your work address"
             {...register("email", {
-              required: validationRules.email.required,
-              pattern: validationRules.email.pattern,
+              required: companyValidationRules.email.required,
+              pattern: companyValidationRules.email.pattern,
             })}
           />
           {errors.email && (
@@ -192,7 +138,7 @@ const HireTalentSignUpForm = () => {
             type="text"
             placeholder="Enter your company's name"
             {...register("companyName", {
-              required: validationRules.companyName.required,
+              required: companyValidationRules.companyName.required,
             })}
           />
           {errors.companyName && (
@@ -209,8 +155,8 @@ const HireTalentSignUpForm = () => {
             type="url"
             placeholder="Enter linkedin url"
             {...register("url", {
-              required: validationRules.url.required,
-              pattern: validationRules.url.pattern,
+              required: companyValidationRules.url.required,
+              pattern: companyValidationRules.url.pattern,
             })}
           />
           {errors.url && (
@@ -226,7 +172,7 @@ const HireTalentSignUpForm = () => {
             type="text"
             placeholder="Enter your job title"
             {...register("companyRole", {
-              required: validationRules.companyRole.required,
+              required: companyValidationRules.companyRole.required,
             })}
           />
           {errors.companyRole && (
@@ -238,7 +184,10 @@ const HireTalentSignUpForm = () => {
           <label>
             Phone Number <span className="text-red-600 text-base">*</span>
           </label>
-          <PhoneNoInput register={register} validationRules={validationRules} />
+          <PhoneNoInput
+            register={register}
+            validationRules={companyValidationRules}
+          />
           {errors.mobileNo && (
             <span className="text-red-600 text-sm">{`${errors.mobileNo.message}`}</span>
           )}
@@ -252,7 +201,7 @@ const HireTalentSignUpForm = () => {
               type="text"
               placeholder="Enter company's country"
               {...register("country", {
-                required: validationRules.country.required,
+                required: companyValidationRules.country.required,
               })}
             />
             {errors.country && (
@@ -269,7 +218,7 @@ const HireTalentSignUpForm = () => {
               type="text"
               placeholder="Enter company's location e.g Lagos"
               {...register("location", {
-                required: validationRules.location.required,
+                required: companyValidationRules.location.required,
               })}
             />
             {errors.location && (
@@ -285,7 +234,7 @@ const HireTalentSignUpForm = () => {
           required={true}
           register={register}
           errors={errors.preference as FieldError}
-          validationRules={validationRules.preference.required}
+          validationRules={companyValidationRules.preference.required}
           setValue={setValue}
         />
         <br className="mb-4" />
@@ -315,7 +264,7 @@ const HireTalentSignUpForm = () => {
               className="pr-10"
               {...register("password", {
                 required: "Password is required",
-                pattern: validationRules.password.pattern,
+                pattern: companyValidationRules.password.pattern,
               })}
             />
             <button
@@ -341,7 +290,7 @@ const HireTalentSignUpForm = () => {
               id="approval-check"
               className="rounded-md h-5 w-5 accent-[#000080]"
               {...register("privacyConsent", {
-                required: validationRules.privacyConsent.required,
+                required: companyValidationRules.privacyConsent.required,
               })}
             />
             <label
