@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -12,12 +13,12 @@ const config: Config = {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-        "custom-bg": "url('/images/homepage/background.svg')",
-        "contact-bg": "url('/images/homepage/CTAContact.svg')",
-        "picture-bg": "url('/images/homepage/picturebg.svg')",
         "custom-linear-gradient":
           "linear-gradient(90deg, #000080 0%, #22CCED 49.5%, #000080 100%)",
         "faq-gradient": "linear-gradient(180deg, #000080 0%, #00002F 96.94%)",
+        "custom-bg": "url('/images/homepage/background.svg')",
+        "contact-bg": "url('/images/homepage/CTAContact.svg')",
+        "picture-bg": "url('/images/homepage/picturebg.svg')",
       },
       backgroundPosition: {
         "right-medium": "right center",
@@ -50,8 +51,14 @@ const config: Config = {
           },
         },
       },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
+      },
+      colors: {},
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 export default config;

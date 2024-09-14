@@ -4,12 +4,13 @@ import { companyValidationRules } from "@/utilities/constants/formValidation";
 import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import PhoneNoInput from "@/components/Elements/PhoneNoInput";
 import FormLogo from "@/components/Elements/FormLogo";
 import { getRandomColor } from "@/utilities/constants";
 import Dropdown, { DropdownSelector } from "@/components/Elements/Dropdown";
 import { industriesArr } from "@/utilities/constants/searchbarData";
+import { Loader2 } from "lucide-react";
+import useRegisterCompany from "@/hooks/register-company-hook";
 
 // Define validation rules for each form field
 
@@ -21,8 +22,7 @@ const HireTalentSignUpForm = () => {
     formState: { errors, isSubmitting },
   } = useForm();
 
-  const router = useRouter();
-
+  const { onSubmit: registerCompany, loading } = useRegisterCompany();
   //add Item to backeend
   const addItem = async (data: any) => {
     const hexCode = getRandomColor();
@@ -47,16 +47,11 @@ const HireTalentSignUpForm = () => {
         privacyConsent: data.privacyConsent,
       };
 
-      console.log(companyData);
-      try {
-      } catch (error) {
-        console.log("Error:", error);
-      }
+      await registerCompany(companyData);
     }
   };
 
   const onSubmit = (data: any) => {
-    router.push("./dashboard");
     addItem(data);
   };
 
@@ -71,7 +66,7 @@ const HireTalentSignUpForm = () => {
       <div className="mb-6">
         <FormLogo />
         <h3 className="text-[#1B1818] font-semibold text-2xl mb-1">
-          Register for find talent
+          Join Frack to discover top talent effortlessly!
         </h3>
         <p className="text-gray-500 text-sm">
           we can unlock the power of talent and drive success for{" "}
@@ -310,7 +305,14 @@ const HireTalentSignUpForm = () => {
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
           disabled={isSubmitting}
         >
-          Find Talent
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </div>
+          ) : (
+            "Find Talent"
+          )}
         </button>
       </form>
       <p className="text-sm text-[#667185] mt-6  text-center">
