@@ -1,7 +1,8 @@
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
-import axios, { AxiosError } from "axios";
+import axios from "axios";
+import Cookies from "js-cookie";
 import { setUser, setLoading } from "../redux/slices/authSlice";
 import { COMPANY_API_END_POINT } from "@/utilities/constants/constants";
 
@@ -11,44 +12,44 @@ const useRegisterCompany = () => {
   const { loading } = useSelector((store: any) => store.auth);
 
   const onSubmit = async (companyData: any) => {
-    try {
-      dispatch(setLoading(true));
+    dispatch(setLoading(true));
 
-      const res = await axios.post(
+    try {
+      const response = await axios.post(
         `${COMPANY_API_END_POINT}/register`,
         companyData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            withCredentials: true,
           },
+          withCredentials: true,
         }
       );
 
-      if (res.data.success) {
-        // Store token and user data in sessionStorage (or localStorage)
-        sessionStorage.setItem("token", res.data.token);
-        sessionStorage.setItem("company", JSON.stringify(res.data.company));
+      const { success, message, company, token } = response.data;
 
-        // Set the user data in Redux state
-        dispatch(setUser(res.data.company));
+      if (success) {
+        // Handle 'Set-Cookie' header if necessary
+        const setCookieHeader = response.headers["set-cookie"];
+        if (setCookieHeader) {
+          Cookies.set("token", setCookieHeader[0]);
+        }
+
+        // Set user in Redux
+        dispatch(setUser(company));
 
         // Navigate to dashboard
         router.push("/hire-talent/dashboard");
-        toast.success(res.data.message);
+        toast.success(message);
       } else {
-        toast.error(res.data.message);
+        toast.error(message);
       }
-    } catch (error) {
-      if (error instanceof AxiosError) {
-        if (error.response && error.response.data) {
-          toast.error(error.response.data.message);
-        }
-      } else if (error instanceof Error) {
-        toast.error(error.message);
-      } else {
-        toast.error("An unknown error occurred.");
-      }
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "An unknown error occurred.";
+      toast.error(errorMessage);
     } finally {
       dispatch(setLoading(false));
     }
