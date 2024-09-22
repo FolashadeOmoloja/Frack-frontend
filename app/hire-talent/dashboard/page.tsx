@@ -1,5 +1,8 @@
+"use client";
 import DashboardLayout from "@/components/Dashboard/DashboardLayout/DashboardLayout";
 import HireTalentNav from "@/components/Dashboard/HireTalentDashboard/HireTalentNav";
+import { useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const companyAnalytics = [
   {
@@ -25,6 +28,17 @@ const companyAnalytics = [
 ];
 
 const page = () => {
+  const searchParams = useSearchParams();
+
+  useEffect(() => {
+    const refresh = searchParams.get("refresh");
+    console.log("Refresh Param:", refresh);
+
+    if (refresh) {
+      // Remove the `?refresh=true` from the URL without reloading the page
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+  }, [searchParams]);
   return (
     <>
       <HireTalentNav activeItem={0} />
