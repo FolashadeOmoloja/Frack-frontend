@@ -10,8 +10,6 @@ import { useEffect } from "react";
 export const useLoginCompany = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
   const { loading } = useSelector((store: any) => store.auth);
 
   const onSubmit = async (companyData: any) => {

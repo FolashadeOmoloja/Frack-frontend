@@ -38,8 +38,9 @@ const useRegisterCompany = () => {
         // Set user in Redux
         dispatch(setUser(company));
 
-        // Navigate to dashboard
-        router.push("/hire-talent/dashboard");
+        // Redirect to the dashboard with `refresh=true` in query params
+        router.push("/hire-talent/dashboard?refresh=true");
+
         toast.success(message);
       } else {
         toast.error(message);
