@@ -1,7 +1,10 @@
 import { useForm } from "react-hook-form";
 import StepCounter from "@/components/Elements/StepCounter";
 import FormLogo from "@/components/Elements/FormLogo";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { getRandomColor } from "@/utilities/constants";
 
 const FormFour = ({}) => {
   const {
@@ -9,8 +12,37 @@ const FormFour = ({}) => {
     formState: { isSubmitting },
   } = useForm();
   const router = useRouter();
+  const { step1Data, step2Data, step3Data } = useSelector(
+    (state: RootState) => state.talentRegistration
+  );
   //add Item to backeend
-  const addItem = async (data: any) => {};
+  const addItem = async (data: any) => {
+    const userData = { ...step1Data, ...step2Data, ...step3Data };
+    const hexCode = getRandomColor();
+    if (data) {
+      const userData = {
+        firstName: data.firstName.trim(),
+        lastName: data.lastName.trim(),
+        phoneNumber: data.mobileNo.trim(),
+        countryCode: data.countryCode.trim(),
+        emailAddress: data.email.trim(),
+        password: data.password.trim(),
+        country: data.country.trim(),
+        hex: hexCode,
+        location: data.location.trim(),
+        linkedInUrl: data.url.trim(),
+        experienceYears: data.experience.trim(),
+        experienceLevel: data.level.trim(),
+        industry: data.role.trim(),
+        preference: data.preference.trim(),
+        skills: [data.skills.trim()],
+        filename: data.resume,
+        privacyConsent: data.privacyConsent,
+        channel: data.channel ? data.channel.trim() : null,
+      };
+      console.log(userData);
+    }
+  };
 
   const onSubmit = (data: any) => {
     addItem(data);

@@ -1,11 +1,10 @@
-import { useRouter, useSearchParams, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import axios from "axios";
 import { setUser, setLoading } from "../redux/slices/authSlice";
 import { COMPANY_API_END_POINT } from "@/utilities/constants/constants";
 import Cookies from "js-cookie";
-import { useEffect } from "react";
 
 export const useLoginCompany = () => {
   const dispatch = useDispatch();

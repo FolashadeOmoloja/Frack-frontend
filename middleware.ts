@@ -6,7 +6,7 @@ export async function middleware(req: NextRequest) {
   const token = req.cookies.get("token")?.value;
   const url = req.nextUrl.pathname;
 
-  // Check if the request is for a protected route (e.g., company, talent, admin)
+  // Check if the request is for a protected route (company, talent, or admin)
   const isCompanyRoute = url.startsWith("/hire-talent/dashboard");
   const isTalentRoute = url.startsWith("/talent/dashboard");
   const isAdminRoute = url.startsWith("/admin/dashboard");
@@ -18,15 +18,35 @@ export async function middleware(req: NextRequest) {
 
   // If no token is found, redirect to the login page for protected routes
   if (!token) {
-    return NextResponse.redirect(new URL("/hire-talent", req.url)); // Redirect to the login page
+    if (isCompanyRoute) {
+      return NextResponse.redirect(new URL("/hire-talent", req.url)); // Company login
+    } else if (isTalentRoute) {
+      return NextResponse.redirect(new URL("/sign-in", req.url)); // Talent login
+    } else if (isAdminRoute) {
+      return NextResponse.redirect(new URL("/sign-in", req.url)); // Admin login
+    }
   }
 
   try {
-    // Use jose's jwtVerify to verify the token
-    const secretKey = new TextEncoder().encode(process.env.COMPANY_SECRET_KEY);
-    const { payload } = await jwtVerify(token, secretKey);
+    let secretKey;
 
-    // Extract the user role
+    // Assign the correct secret key based on the route
+    if (isCompanyRoute) {
+      secretKey = new TextEncoder().encode(process.env.COMPANY_SECRET_KEY);
+    } else if (isTalentRoute) {
+      secretKey = new TextEncoder().encode(process.env.TALENT_SECRET_KEY);
+    } else if (isAdminRoute) {
+      secretKey = new TextEncoder().encode(process.env.ADMIN_SECRET_KEY);
+    }
+
+    if (!secretKey) {
+      throw new Error("Secret key not found for the requested route.");
+    }
+
+    // Verify the token using the appropriate secret key
+    const { payload } = await jwtVerify(token!, secretKey);
+
+    // Extract the user role from the token payload
     //@ts-ignore
     const userRole: string = payload.role; // Assuming 'role' is present in the token
 
@@ -43,7 +63,13 @@ export async function middleware(req: NextRequest) {
     }
   } catch (error) {
     console.error("Error verifying token:", error);
-    return NextResponse.redirect(new URL("/hire-talent", req.url)); // Redirect to login if token verification fails
+    if (isCompanyRoute) {
+      return NextResponse.redirect(new URL("/hire-talent", req.url)); // Company login
+    } else if (isTalentRoute) {
+      return NextResponse.redirect(new URL("/sign-in", req.url)); // Talent login
+    } else if (isAdminRoute) {
+      return NextResponse.redirect(new URL("/sign-in", req.url)); // Admin login
+    } // Redirect to login if token verification fails
   }
 }
 

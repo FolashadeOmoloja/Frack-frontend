@@ -20,7 +20,7 @@ const DropDown = [
   {
     navItem: "Sign Out",
     icon: "/images/dashboard/icon2.svg",
-    href: "/hire-talent/dashboard/signout",
+    href: "/hire-talent/sign-out",
   },
 ];
 

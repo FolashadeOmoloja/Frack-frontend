@@ -8,12 +8,9 @@ import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
 import { BiSolidFileDoc } from "react-icons/bi";
 import FormLogo from "@/components/Elements/FormLogo";
-
-const validationRules = {
-  resume: {
-    required: "Please upload your resume",
-  },
-};
+import { companyValidationRules as validationRules } from "@/utilities/constants/formValidation";
+import { useDispatch } from "react-redux";
+import { setStep3Data } from "@/redux/slices/talentRegistrationSlice";
 
 const MAX_FILE_SIZE_MB = 2;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
@@ -36,15 +33,9 @@ const FormThree = ({
   const [fileType, setFileType] = useState<string | null>(null);
   const [fileSizeError, setFileSizeError] = useState<string | null>(null);
 
-  const addItem = async (data: any) => {
-    if (data) {
-      // Add item to backend
-    }
-  };
-
+  const dispatch = useDispatch();
   const onSubmit = (data: any) => {
-    console.log(data);
-    addItem(data);
+    dispatch(setStep3Data(data));
     changeBgState("url('/images/homepage/signup-bg6.svg')");
     changeActive(4);
   };
@@ -153,7 +144,7 @@ const FormThree = ({
           ItemsArr={["Twitter", "Whatsapp", "LinkedIn", "Referral"]}
           label="How did you hear about Frack? (optional)"
           placeholder="Select an option"
-          name={"chanel"}
+          name={"channel"}
           required={false}
           register={register}
           setValue={setValue}
