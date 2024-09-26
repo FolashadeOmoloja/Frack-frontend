@@ -95,7 +95,8 @@ const FormFour = ({ resume }: { resume: File | null }) => {
             Congratulations!
           </h3>
           <p className="text-gray-500 text-sm text-center">
-            Congratulations you will be added to the wait list.
+            Congratulations! You have successfully completed all the necessary
+            details of your registration. You will now be added to the waitlist.
           </p>
         </div>
       </div>
