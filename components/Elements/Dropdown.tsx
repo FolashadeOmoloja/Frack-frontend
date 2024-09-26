@@ -51,6 +51,13 @@ const Dropdown = ({
     register(name, { required: validationRules });
   }, [register, name, validationRules]);
 
+  //updating selectedItem
+  useEffect(() => {
+    if (selctedItem2) {
+      setSelectedItem(selctedItem2);
+    }
+  }, [selctedItem2]);
+
   return (
     <section
       className={`h-full ${className ? "basis-1/2" : "slg:min-w-[450px]"}`}

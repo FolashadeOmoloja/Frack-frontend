@@ -1,52 +1,86 @@
 import { useForm } from "react-hook-form";
 import StepCounter from "@/components/Elements/StepCounter";
 import FormLogo from "@/components/Elements/FormLogo";
-import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
 import { getRandomColor } from "@/utilities/constants";
+import useRegisterTalent from "@/hooks/register-user-hook";
+import { Loader2 } from "lucide-react";
 
-const FormFour = ({}) => {
+interface TalentRegistrationData {
+  firstName: string;
+  lastName: string;
+  mobileNo: string;
+  countryCode: string;
+  email: string;
+  password: string;
+  country: string;
+  location: string;
+  url: string;
+  experience: string;
+  level: string;
+  role: string;
+  preference: string;
+  skills: string;
+  resume: File;
+  privacyConsent: boolean;
+  channel?: string;
+}
+
+const FormFour = ({ resume }: { resume: File | null }) => {
   const {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm();
-  const router = useRouter();
+  const { onSubmit: registerTalent, loading } = useRegisterTalent();
+
   const { step1Data, step2Data, step3Data } = useSelector(
     (state: RootState) => state.talentRegistration
   );
-  //add Item to backeend
-  const addItem = async (data: any) => {
-    const userData = { ...step1Data, ...step2Data, ...step3Data };
+
+  // Function to add item to the backend
+  const addItem = async () => {
     const hexCode = getRandomColor();
-    if (data) {
-      const userData = {
-        firstName: data.firstName.trim(),
-        lastName: data.lastName.trim(),
-        phoneNumber: data.mobileNo.trim(),
-        countryCode: data.countryCode.trim(),
-        emailAddress: data.email.trim(),
-        password: data.password.trim(),
-        country: data.country.trim(),
-        hex: hexCode,
-        location: data.location.trim(),
-        linkedInUrl: data.url.trim(),
-        experienceYears: data.experience.trim(),
-        experienceLevel: data.level.trim(),
-        industry: data.role.trim(),
-        preference: data.preference.trim(),
-        skills: [data.skills.trim()],
-        filename: data.resume,
-        privacyConsent: data.privacyConsent,
-        channel: data.channel ? data.channel.trim() : null,
-      };
-      console.log(userData);
+
+    const data: Partial<TalentRegistrationData> = {
+      ...step1Data,
+      ...step2Data,
+      ...step3Data,
+    };
+
+    const formData = new FormData();
+
+    // Append all other fields with a fallback for undefined values
+    formData.append("firstName", data.firstName?.trim() || "");
+    formData.append("lastName", data.lastName?.trim() || "");
+    formData.append("phoneNumber", data.mobileNo?.trim() || "");
+    formData.append("countryCode", data.countryCode?.trim() || "");
+    formData.append("emailAddress", data.email?.trim() || "");
+    formData.append("password", data.password?.trim() || "");
+    formData.append("country", data.country?.trim() || "");
+    formData.append("hex", hexCode || "");
+    formData.append("location", data.location?.trim() || "");
+    formData.append("linkedInUrl", data.url?.trim() || "");
+    formData.append("experienceYears", data.experience?.trim() || "");
+    formData.append("experienceLevel", data.level?.trim() || "");
+    formData.append("industry", data.role?.trim() || "");
+    formData.append("preference", data.preference?.trim() || "");
+    formData.append("skills", data.skills?.trim() || "");
+    formData.append("privacyConsent", data.privacyConsent ? "true" : "false");
+    formData.append("channel", data.channel?.trim() || "");
+
+    //@ts-ignore
+    if (resume && resume.length > 0) {
+      //@ts-ignore
+      formData.append("file", resume[0]); // Access the first file in the FileList
     }
+
+    await registerTalent(formData);
   };
 
-  const onSubmit = (data: any) => {
-    addItem(data);
-    router.push("/dashboard");
+  // Handle form submission
+  const onSubmit = () => {
+    addItem();
   };
 
   return (
@@ -61,7 +95,7 @@ const FormFour = ({}) => {
             Congratulations!
           </h3>
           <p className="text-gray-500 text-sm text-center">
-            Congratulations you have been added to the wait list.
+            Congratulations you will be added to the wait list.
           </p>
         </div>
       </div>
@@ -71,7 +105,14 @@ const FormFour = ({}) => {
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
           disabled={isSubmitting}
         >
-          Continue
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </div>
+          ) : (
+            "Continue"
+          )}
         </button>
       </form>
     </section>

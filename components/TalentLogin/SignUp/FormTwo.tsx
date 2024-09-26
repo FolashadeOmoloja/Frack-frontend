@@ -4,9 +4,11 @@ import Dropdown from "@/components/Elements/Dropdown";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 import { FaArrowLeft } from "react-icons/fa6";
 import FormLogo from "@/components/Elements/FormLogo";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStep2Data } from "@/redux/slices/talentRegistrationSlice";
 import { companyValidationRules as validationRules } from "@/utilities/constants/formValidation";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
 
 const FormTwo = ({
   changeBgState,
@@ -24,6 +26,20 @@ const FormTwo = ({
 
   //add Item to backeend
   const dispatch = useDispatch();
+  const { step2Data } = useSelector(
+    (state: RootState) => state.talentRegistration
+  );
+
+  useEffect(() => {
+    if (step2Data) {
+      setValue("role", step2Data.role);
+      setValue("experience", step2Data.experience);
+      setValue("skills", step2Data.skills);
+      setValue("level", step2Data.level);
+      setValue("preference", step2Data.preference);
+      setValue("url", step2Data.url);
+    }
+  }, [step2Data, setValue]);
 
   const onSubmit = (data: any) => {
     dispatch(setStep2Data(data));
@@ -56,6 +72,7 @@ const FormTwo = ({
           errors={errors.role as FieldError}
           validationRules={validationRules.role.required}
           setValue={setValue}
+          selctedItem2={step2Data.role}
         />
         <Dropdown
           ItemsArr={[
@@ -66,13 +83,14 @@ const FormTwo = ({
             "above 10 years",
           ]}
           label="Total years of work experience"
-          placeholder="Select years of work experience"
+          placeholder={"Select years of work experience"}
           name={"experience"}
           required={true}
           register={register}
           errors={errors.experience as FieldError}
           validationRules={validationRules.experience.required}
           setValue={setValue}
+          selctedItem2={step2Data.experience}
         />
         <Dropdown
           ItemsArr={searchBarData[0].options}
@@ -84,6 +102,7 @@ const FormTwo = ({
           errors={errors.skills as FieldError}
           validationRules={validationRules.skills.required}
           setValue={setValue}
+          selctedItem2={step2Data.skills}
         />
         <Dropdown
           ItemsArr={["Intermediate", "Senior", "C-level"]}
@@ -95,6 +114,7 @@ const FormTwo = ({
           setValue={setValue}
           errors={errors.level as FieldError}
           validationRules={validationRules.level.required}
+          selctedItem2={step2Data.level}
         />
 
         <Dropdown
@@ -107,6 +127,7 @@ const FormTwo = ({
           errors={errors.preference as FieldError}
           validationRules={validationRules.preference.required}
           setValue={setValue}
+          selctedItem2={step2Data.preference}
         />
 
         {/* linkedin url */}
@@ -116,6 +137,7 @@ const FormTwo = ({
           </label>
           <input
             type="url"
+            defaultValue={step2Data.url}
             placeholder="Enter linkedin url"
             {...register("url", {
               required: validationRules.url.required,

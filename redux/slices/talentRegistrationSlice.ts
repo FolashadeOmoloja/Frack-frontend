@@ -1,7 +1,34 @@
 // talentRegistrationSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
+interface StepsData {
+  firstName: string;
+  lastName: string;
+  mobileNo: string;
+  countryCode: string;
+  email: string;
+  password: string;
+  country: string;
+  location: string;
+  url: string;
+  experience: string;
+  level: string;
+  role: string;
+  preference: string;
+  skills: string;
+  privacyConsent: boolean;
+  resume: File;
+  channel?: string;
+}
+
+interface TalentRegistrationState {
+  step1Data: Partial<StepsData>; // Partial allows some fields to be optional
+  step2Data: Partial<StepsData>;
+  step3Data: Partial<StepsData>;
+  step4Data: Partial<StepsData>;
+}
+
+const initialState: TalentRegistrationState = {
   step1Data: {},
   step2Data: {},
   step3Data: {},

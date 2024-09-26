@@ -81,6 +81,7 @@ const TalentProfileForm = ({
           validationRules={validationRules}
           defaultValue={user.phoneNumber}
           defaultCode={user.countryCode}
+          setValue={setValue}
         />
       </div>
       <div className="flex flex-col gap-4">

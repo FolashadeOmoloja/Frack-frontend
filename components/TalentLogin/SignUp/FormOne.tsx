@@ -7,7 +7,8 @@ import StepCounter from "@/components/Elements/StepCounter";
 import FormLogo from "@/components/Elements/FormLogo";
 import { companyValidationRules as validationRules } from "@/utilities/constants/formValidation";
 import { setStep1Data } from "@/redux/slices/talentRegistrationSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 // Define validation rules for each form field
 
@@ -21,11 +22,15 @@ const FormOne = ({
   const {
     handleSubmit,
     register,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm();
 
   //add Item
   const dispatch = useDispatch();
+  const { step1Data } = useSelector(
+    (state: RootState) => state.talentRegistration
+  );
 
   const onSubmit = (data: any) => {
     dispatch(setStep1Data(data));
@@ -64,6 +69,7 @@ const FormOne = ({
             </label>
             <input
               type="text"
+              defaultValue={step1Data?.firstName}
               placeholder="Enter your First Name"
               {...register("firstName", {
                 required: validationRules.firstName.required,
@@ -80,6 +86,7 @@ const FormOne = ({
             </label>
             <input
               type="text"
+              defaultValue={step1Data?.lastName}
               placeholder="Enter your Last Name"
               {...register("lastName", {
                 required: validationRules.lastName.required,
@@ -97,6 +104,7 @@ const FormOne = ({
           </label>
           <input
             type="email"
+            defaultValue={step1Data.email}
             placeholder="Enter your email address"
             {...register("email", {
               required: validationRules.email.required,
@@ -112,7 +120,13 @@ const FormOne = ({
           <label>
             Phone Number <span className="text-red-600 text-base">*</span>
           </label>
-          <PhoneNoInput register={register} validationRules={validationRules} />
+          <PhoneNoInput
+            register={register}
+            validationRules={validationRules}
+            defaultValue={step1Data.mobileNo}
+            defaultCode={step1Data.countryCode}
+            setValue={setValue}
+          />
           {errors.mobileNo && (
             <span className="text-red-600 text-sm">{`${errors.mobileNo.message}`}</span>
           )}
@@ -125,6 +139,7 @@ const FormOne = ({
             </label>
             <input
               type="text"
+              defaultValue={step1Data.country}
               placeholder="Enter your country"
               {...register("country", {
                 required: validationRules.country.required,
@@ -142,6 +157,7 @@ const FormOne = ({
             </label>
             <input
               type="text"
+              defaultValue={step1Data.location}
               placeholder="Enter your location e.g Lagos"
               {...register("location", {
                 required: validationRules.location.required,
@@ -158,6 +174,7 @@ const FormOne = ({
           <div className="relative">
             <input
               type={showPassword ? "text" : "password"}
+              defaultValue={step1Data.password}
               placeholder="Enter your password"
               className="pr-10"
               {...register("password", {

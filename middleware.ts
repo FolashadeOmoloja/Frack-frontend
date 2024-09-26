@@ -8,7 +8,7 @@ export async function middleware(req: NextRequest) {
 
   // Check if the request is for a protected route (company, talent, or admin)
   const isCompanyRoute = url.startsWith("/hire-talent/dashboard");
-  const isTalentRoute = url.startsWith("/talent/dashboard");
+  const isTalentRoute = url.startsWith("/dashboard");
   const isAdminRoute = url.startsWith("/admin/dashboard");
 
   // If the route is not protected, let the request proceed
@@ -77,7 +77,7 @@ export async function middleware(req: NextRequest) {
 export const config = {
   matcher: [
     "/hire-talent/dashboard/:path*", // Company routes
-    "/talent/dashboard/:path*", // Talent routes
+    "/dashboard/:path*", // Talent routes
     "/admin/dashboard/:path*", // Admin routes
   ],
 };

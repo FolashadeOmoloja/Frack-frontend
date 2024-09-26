@@ -182,6 +182,7 @@ const HireTalentSignUpForm = () => {
           <PhoneNoInput
             register={register}
             validationRules={companyValidationRules}
+            setValue={setValue}
           />
           {errors.mobileNo && (
             <span className="text-red-600 text-sm">{`${errors.mobileNo.message}`}</span>

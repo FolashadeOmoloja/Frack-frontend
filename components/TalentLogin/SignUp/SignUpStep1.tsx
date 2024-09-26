@@ -10,6 +10,7 @@ const SignUpStep1 = () => {
     "url('/images/homepage/signup-bg2.svg')"
   );
   const [active, setActive] = useState(1);
+  const [resume, setResume] = useState<File | null>(null);
   return (
     <section className="flex">
       <div
@@ -36,9 +37,13 @@ const SignUpStep1 = () => {
           <FormTwo changeBgState={setBgImage} changeActive={setActive} />
         )}
         {active === 3 && (
-          <FormThree changeBgState={setBgImage} changeActive={setActive} />
+          <FormThree
+            changeBgState={setBgImage}
+            changeActive={setActive}
+            setResume={setResume}
+          />
         )}
-        {active === 4 && <FormFour />}
+        {active === 4 && <FormFour resume={resume} />}
       </section>
     </section>
   );

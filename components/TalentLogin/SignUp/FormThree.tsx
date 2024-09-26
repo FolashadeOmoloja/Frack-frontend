@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa6";
 import { MdOutlineUploadFile } from "react-icons/md";
@@ -9,8 +9,9 @@ import Dropdown from "@/components/Elements/Dropdown";
 import { BiSolidFileDoc } from "react-icons/bi";
 import FormLogo from "@/components/Elements/FormLogo";
 import { companyValidationRules as validationRules } from "@/utilities/constants/formValidation";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStep3Data } from "@/redux/slices/talentRegistrationSlice";
+import { RootState } from "@/redux/store";
 
 const MAX_FILE_SIZE_MB = 2;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
@@ -18,9 +19,11 @@ const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 const FormThree = ({
   changeBgState,
   changeActive,
+  setResume,
 }: {
   changeBgState: (value: string) => void;
   changeActive: (value: number) => void;
+  setResume: (value: File | null) => void;
 }) => {
   const {
     handleSubmit,
@@ -34,8 +37,19 @@ const FormThree = ({
   const [fileSizeError, setFileSizeError] = useState<string | null>(null);
 
   const dispatch = useDispatch();
+  const { step3Data } = useSelector(
+    (state: RootState) => state.talentRegistration
+  );
+
+  useEffect(() => {
+    if (step3Data) {
+      setValue("channel", step3Data.channel);
+    }
+  }, [step3Data, setValue]);
+
   const onSubmit = (data: any) => {
-    dispatch(setStep3Data(data));
+    dispatch(setStep3Data({ channel: data.channel }));
+    setResume(data.resume);
     changeBgState("url('/images/homepage/signup-bg6.svg')");
     changeActive(4);
   };
@@ -148,6 +162,7 @@ const FormThree = ({
           required={false}
           register={register}
           setValue={setValue}
+          selctedItem2={step3Data.channel}
         />
         <div className="mb-14 mt-14 max-sm:mt-10 flex gap-10 max-xsm:gap-5">
           <div
