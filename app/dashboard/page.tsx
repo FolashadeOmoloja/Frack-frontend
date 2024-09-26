@@ -32,7 +32,6 @@ const page = () => {
 
   useEffect(() => {
     const refresh = searchParams.get("refresh");
-    console.log("Refresh Param:", refresh);
 
     if (refresh) {
       // Remove the `?refresh=true` from the URL without reloading the page

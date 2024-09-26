@@ -7,7 +7,7 @@ export type userObject = {
   industry: string;
   emailAddress: string;
   password: string;
-  role: string;
+  profession: string;
   experienceYears: string;
   experienceLevel: string;
   filename: string;

@@ -121,6 +121,7 @@ const CompanyProfileForm = ({
           validationRules={validationRules}
           defaultValue={user.phoneNumber}
           defaultCode={user.countryCode}
+          setValue={setValue}
         />
       </div>
 

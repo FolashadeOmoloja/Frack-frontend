@@ -2,6 +2,7 @@
 import { getRandomColor } from "@/utilities/constants";
 import Profile from "./Profile";
 import TalentProfileForm from "./TalentProfileForm";
+import { useSelector } from "react-redux";
 
 const hexCode = getRandomColor();
 const userObject = {
@@ -13,7 +14,7 @@ const userObject = {
   emailAddress: "john.doe@example.com",
   industry: "Engineering",
   password: "securepassword123",
-  role: "Software Engineer",
+  profession: "Software Engineer",
   experienceYears: "4-6 years",
   experienceLevel: "Senior",
   preference: "Remote",
@@ -28,6 +29,8 @@ const userObject = {
 const skillsArr = ["TypeScript", "Tailwind", "CSS", "JavaScript", "Python"];
 
 const TalentProfile = () => {
+  const { user } = useSelector((store: any) => store.auth);
+  console.log(user);
   return (
     <>
       <Profile skillsBool user={userObject} skillsArr={skillsArr as [string]} />
