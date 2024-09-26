@@ -29,7 +29,7 @@ const LeftSection = ({ user }: { user: userObject }) => {
           {user.firstName} {user.lastName}
         </span>
         <span className="font-bold text-[#7C8698] mt-6">{user.profession}</span>
-        <span className="font-bold text-[#7C8698] mt-6">{user.location}</span>
+        <span className="font-bold text-[#7C8698] mt-6">{user.location}, {user.country}</span>
         <div className="py-4 px-6 centered bg-[#000080] text-white rounded-md font-semibold mt-11">
           Profile status: {user.accountStatus}
         </div>

@@ -11,6 +11,7 @@ export type userObject = {
   experienceYears: string;
   experienceLevel: string;
   filename: string;
+  resume: string;
   preference: string;
   country: string;
   accountStatus: string;

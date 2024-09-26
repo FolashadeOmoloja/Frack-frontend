@@ -18,6 +18,7 @@ interface TalentRegistrationData {
   location: string;
   url: string;
   experience: string;
+  profession: string;
   level: string;
   role: string;
   preference: string;
@@ -56,6 +57,7 @@ const FormFour = ({ resume }: { resume: File | null }) => {
     formData.append("phoneNumber", data.mobileNo?.trim() || "");
     formData.append("countryCode", data.countryCode?.trim() || "");
     formData.append("emailAddress", data.email?.trim() || "");
+    formData.append("profession", data.profession?.trim() || "");
     formData.append("password", data.password?.trim() || "");
     formData.append("country", data.country?.trim() || "");
     formData.append("hex", hexCode || "");

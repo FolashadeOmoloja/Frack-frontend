@@ -73,7 +73,7 @@ const ProfileDetails = <T extends boolean>({
               />
               <DownloadResumeBox
                 title={"Resume"}
-                filename={(user as userObject).filename}
+                filename={(user as userObject).resume}
               />
               <button
                 onClick={() => {

@@ -168,6 +168,23 @@ const FormOne = ({
             )}
           </div>
         </div>
+        {/* profession */}
+        <div className="flex formdivs flex-col mb-4 gap-[6px]">
+          <label>
+            Profession <span className="text-red-600 text-base">*</span>
+          </label>
+          <input
+            type="text"
+            defaultValue={step1Data.email}
+            placeholder="Enter your professional role"
+            {...register("profession", {
+              required: validationRules.profession.required,
+            })}
+          />
+          {errors.profession && (
+            <span className="text-red-600 text-sm">{`${errors.profession.message}`}</span>
+          )}
+        </div>
         {/* password */}
         <div className="flex formdivs flex-col mb-6 gap-[6px]">
           <label>Password</label>

@@ -1,8 +1,8 @@
 "use client";
 import { getRandomColor } from "@/utilities/constants";
 import Profile from "./Profile";
-import TalentProfileForm from "./TalentProfileForm";
 import { useSelector } from "react-redux";
+import ClientProvider from "@/components/Client/ClientProvider";
 
 const hexCode = getRandomColor();
 const userObject = {
@@ -32,9 +32,9 @@ const TalentProfile = () => {
   const { user } = useSelector((store: any) => store.auth);
   console.log(user);
   return (
-    <>
-      <Profile skillsBool user={userObject} skillsArr={skillsArr as [string]} />
-    </>
+    <ClientProvider>
+      <Profile skillsBool user={user} skillsArr={user?.skills} />
+    </ClientProvider>
   );
 };
 

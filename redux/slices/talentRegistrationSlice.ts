@@ -11,6 +11,7 @@ interface StepsData {
   country: string;
   location: string;
   url: string;
+  profession: string;
   experience: string;
   level: string;
   role: string;

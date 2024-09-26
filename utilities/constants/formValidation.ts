@@ -8,6 +8,9 @@ export const companyValidationRules = {
   companyName: {
     required: `Your Company's Name is required`,
   },
+  profession: {
+    required: `Your profession is required`,
+  },
   companyRole: {
     required: "Company Role is required",
   },
