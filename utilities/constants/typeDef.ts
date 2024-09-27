@@ -12,6 +12,7 @@ export type userObject = {
   experienceLevel: string;
   filename: string;
   resume: string;
+  resumeOriginalName: string;
   preference: string;
   country: string;
   accountStatus: string;

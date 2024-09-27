@@ -4,6 +4,16 @@ import { validationRules } from "@/utilities/constants";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 import Dropdown from "@/components/Elements/Dropdown";
 import { userObject } from "@/utilities/constants/typeDef";
+import axios from "axios";
+import { TALENT_API_END_POINT } from "@/utilities/constants/constants";
+import { toast } from "sonner";
+import { useState } from "react";
+import { setLoading, setUser } from "@/redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { Loader2 } from "lucide-react";
+
+const MAX_FILE_SIZE_MB = 2;
+const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 
 const TalentProfileForm = ({
   changeState,
@@ -16,14 +26,98 @@ const TalentProfileForm = ({
     handleSubmit,
     register,
     setValue,
-    formState: { errors, isSubmitting },
+    watch,
+    formState: { isSubmitting },
   } = useForm();
+  const [isEditingResume, setIsEditingResume] = useState(false);
+  const [fileSizeError, setFileSizeError] = useState<string | null>(null);
+  const { loading } = useSelector((store: any) => store.auth);
+  const dispatch = useDispatch();
 
-  const addItem = async (data: any) => {};
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      console.log(file);
+      if (file.size > MAX_FILE_SIZE_BYTES) {
+        setFileSizeError(`File size should not exceed ${MAX_FILE_SIZE_MB}MB`);
+        console.log("error");
+        // setValue("resume", null);
+      } else {
+        setFileSizeError(null);
+        // setValue("resume", e.target.files);
+        console.log("yes");
+      }
+    }
+  };
+
+  const addItem = async (data: any) => {
+    const updatedData: Record<string, any> = {};
+
+    // Loop over the form data and check for changes
+    if (data.firstName !== user.firstName)
+      updatedData["firstName"] = data.firstName;
+    if (data.lastName !== user.lastName)
+      updatedData["lastName"] = data.lastName;
+    if (data.email !== user.emailAddress) updatedData["email"] = data.email;
+    if (
+      data.mobileNo !== user.phoneNumber ||
+      data.countryCode !== user.countryCode
+    ) {
+      updatedData["phoneNumber"] = data.mobileNo;
+      updatedData["countryCode"] = data.countryCode;
+    }
+    if (data.experienceLevel !== user.experienceLevel)
+      updatedData["experienceLevel"] = data.experienceLevel;
+    if (data.experience !== user.experienceYears)
+      updatedData["experienceYears"] = data.experience;
+    if (data.role !== user.industry) updatedData["industry"] = data.role;
+    if (data.preference !== user.preference)
+      updatedData["preference"] = data.preference;
+    if (data.resume && data.resume[0]) updatedData["file"] = data.resume[0];
+
+    if (Object.keys(updatedData).length > 0) {
+      try {
+        dispatch(setLoading(true));
+        const formData = new FormData();
+        console.log(formData);
+        for (const key in updatedData) {
+          formData.append(key, updatedData[key]);
+        }
+
+        const response = await axios.put(
+          `${TALENT_API_END_POINT}/profile/update`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+          }
+        );
+        const { talent } = response.data;
+        if (response.data.success) {
+          dispatch(setUser(talent));
+          changeState(false);
+          toast.success("Profile updated successfully!");
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error: any) {
+        toast.error(error.response?.data?.message || "An error occurred");
+      } finally {
+        dispatch(setLoading(false));
+      }
+    } else {
+      toast.info("No changes to update");
+    }
+  };
 
   const onSubmit = (data: any) => {
-    changeState(false);
-    addItem(data);
+    if (!fileSizeError) {
+      addItem(data);
+    } else {
+      toast.error(fileSizeError);
+    }
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -148,17 +242,46 @@ const TalentProfileForm = ({
             Resume(.pdf, .doc, .docx) Max 2mb
             <span className="text-red-600 text-base">*</span>
           </label>
-          <input
-            type="file"
-            accept=".pdf, .doc, .docx"
-            className="h-full w-full    file:text-white file:rounded-md file:cursor-pointer file:border-0 file:p-2    file:bg-[#000080] mt-[6px] text-sm file:mr-6"
-            {...register("resume", {
-              required: validationRules.resume.required,
-            })}
-          />
+
+          {!isEditingResume ? (
+            <div className="relative">
+              <a href={user.resume} target="_blank">
+                {user.resumeOriginalName || "No resume uploaded"}
+              </a>
+              <button
+                type="button"
+                className="text-[#000080] slg:absolute right-0 top-0 block"
+                onClick={() => setIsEditingResume(true)}
+              >
+                Edit Resume
+              </button>
+            </div>
+          ) : (
+            <div className="relative">
+              <input
+                type="file"
+                accept=".pdf, .doc, .docx"
+                className="h-full w-full file:text-white file:rounded-md file:cursor-pointer file:border-0 file:p-2 file:bg-[#000080] mt-[6px] text-sm file:mr-6"
+                {...register("resume", {
+                  required: validationRules.resume.required,
+                  onChange: (e) => handleFileChange(e),
+                })}
+              />
+              {fileSizeError && (
+                <div className="text-red-600 text-sm">{fileSizeError}</div>
+              )}
+              <button
+                type="button"
+                className="text-red-500  mt-1 slg:absolute right-0"
+                onClick={() => setIsEditingResume(false)}
+              >
+                Cancel
+              </button>
+            </div>
+          )}
         </div>
       </div>
-      <div className="mt-4 flex gap-10 max-xsm:gap-5">
+      <div className="mt-5 flex gap-10 max-xsm:gap-5">
         <div
           className="login-btn centered gap-3 cursor-pointer icon-animate"
           onClick={() => changeState(false)}
@@ -166,7 +289,14 @@ const TalentProfileForm = ({
           Cancel
         </div>
         <button type="submit" className="login-btn" disabled={isSubmitting}>
-          Update Profile
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </div>
+          ) : (
+            "Continue"
+          )}
         </button>
       </div>
     </form>

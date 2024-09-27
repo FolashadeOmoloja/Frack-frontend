@@ -1,6 +1,6 @@
 import ProfilePhotoHandler from "@/components/Elements/profilePhotoHandler";
 import { userCompanyObject, userObject } from "@/utilities/constants/typeDef";
-import { FaCamera, FaLinkedin } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa6";
 
 const LeftSection = ({ user }: { user: userObject }) => {
   return (
@@ -18,11 +18,11 @@ const LeftSection = ({ user }: { user: userObject }) => {
           Profile status: {user.accountStatus}
         </div>
       </div>
-      <div className="bg-white rounded-md  flex justify-between gap-7 p-6 max-xxsm:flex-col max-xxsm:gap-4 max-xsm:p-4">
+      <div className="bg-white rounded-md  flex justify-between gap-7 p-6 max-xsm:flex-col max-xsm:gap-4 max-xsm:p-4">
         <span className="text-[#0A66C2] text-3xl">
           <FaLinkedin />
         </span>
-        <span className="text-sm text-[#7C8698] font-semibold">
+        <span className="text-sm text-[#7C8698] font-semibold text-wrap">
           {user.linkedInUrl}
         </span>
       </div>
