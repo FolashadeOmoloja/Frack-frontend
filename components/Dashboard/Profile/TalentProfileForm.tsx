@@ -26,7 +26,6 @@ const TalentProfileForm = ({
     handleSubmit,
     register,
     setValue,
-    watch,
     formState: { isSubmitting },
   } = useForm();
   const [isEditingResume, setIsEditingResume] = useState(false);
@@ -40,12 +39,8 @@ const TalentProfileForm = ({
       console.log(file);
       if (file.size > MAX_FILE_SIZE_BYTES) {
         setFileSizeError(`File size should not exceed ${MAX_FILE_SIZE_MB}MB`);
-        console.log("error");
-        // setValue("resume", null);
       } else {
         setFileSizeError(null);
-        // setValue("resume", e.target.files);
-        console.log("yes");
       }
     }
   };
@@ -58,7 +53,8 @@ const TalentProfileForm = ({
       updatedData["firstName"] = data.firstName;
     if (data.lastName !== user.lastName)
       updatedData["lastName"] = data.lastName;
-    if (data.email !== user.emailAddress) updatedData["email"] = data.email;
+    if (data.email !== user.emailAddress)
+      updatedData["emailAddress"] = data.email;
     if (
       data.mobileNo !== user.phoneNumber ||
       data.countryCode !== user.countryCode

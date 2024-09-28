@@ -27,7 +27,11 @@ const ProfileDetails = <T extends boolean>({
 
   return (
     <section className="basis-[70%]">
-      <section className="bg-white rounded-md lg:h-[680px] p-9 max-slg:p-7 max-sm:px-4 ">
+      <section
+        className={`bg-white rounded-md  ${
+          isForm && !skillsBool ? "lg:h-full" : "lg:h-[680px]"
+        } p-9 max-slg:p-7 max-sm:px-4 transition duration-500`}
+      >
         {!isForm ? (
           skillsBool ? (
             <section>

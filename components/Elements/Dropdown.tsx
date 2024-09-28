@@ -14,7 +14,7 @@ interface DropdownProps {
   setValue: (name: string, value: string) => void;
   className?: boolean;
   defaultValue?: string;
-  selctedItem2?: string;
+  selctedItem2?: string | string[];
 }
 
 const Dropdown = ({
@@ -54,7 +54,7 @@ const Dropdown = ({
   //updating selectedItem
   useEffect(() => {
     if (selctedItem2) {
-      setSelectedItem(selctedItem2);
+      setSelectedItem(selctedItem2 as string);
     }
   }, [selctedItem2]);
 
@@ -122,7 +122,6 @@ export const DropdownSelector = ({
   validationRules,
   setValue,
   className,
-  defaultValue,
   selctedItem2,
 }: DropdownProps) => {
   const [selectedItems, setSelectedItems] = useState<string[]>([]);
@@ -152,9 +151,18 @@ export const DropdownSelector = ({
     setValue(name, newSelectedItems.join(", "));
   };
 
+  // Handle registration and validation
   useEffect(() => {
     register(name, { required: validationRules });
   }, [register, name, validationRules]);
+
+  // Updating selectedItems based on selctedItem2
+  useEffect(() => {
+    if (selctedItem2) {
+      setSelectedItems([selctedItem2 as string]);
+      setValue(name, selctedItem2 as string);
+    }
+  }, [selctedItem2, setValue, name]);
 
   return (
     <section

@@ -1,8 +1,14 @@
 import PhoneNoInput from "@/components/Elements/PhoneNoInput";
-import { useForm } from "react-hook-form";
-import { validationRules } from "@/utilities/constants";
-import Dropdown from "@/components/Elements/Dropdown";
+import { FieldError, useForm } from "react-hook-form";
+import { companyValidationRules as validationRules } from "@/utilities/constants/formValidation";
+import Dropdown, { DropdownSelector } from "@/components/Elements/Dropdown";
 import { userCompanyObject } from "@/utilities/constants/typeDef";
+import { COMPANY_API_END_POINT } from "@/utilities/constants/constants";
+import axios from "axios";
+import { setLoading, setUser } from "@/redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "sonner";
+import { industriesArr } from "@/utilities/constants/searchbarData";
 
 const CompanyProfileForm = ({
   changeState,
@@ -15,20 +21,89 @@ const CompanyProfileForm = ({
     handleSubmit,
     register,
     setValue,
-    formState: { isSubmitting },
+    formState: { errors, isSubmitting },
   } = useForm();
 
-  const addItem = async (data: any) => {};
+  const { loading } = useSelector((store: any) => store.auth);
+  const dispatch = useDispatch();
+
+  const addItem = async (data: any) => {
+    const updatedData: Record<string, any> = {};
+
+    // Loop over the form data and check for changes
+    if (data.companyName !== user.companyName)
+      updatedData["companyName"] = data.companyName;
+    if (data.firstName !== user.firstName)
+      updatedData["firstName"] = data.firstName;
+    if (data.lastName !== user.lastName)
+      updatedData["lastName"] = data.lastName;
+    if (data.role !== user.companyRole)
+      updatedData["companyRole"] = data.companyRole;
+    if (data.preference !== user.preference)
+      updatedData["preference"] = data.preference;
+    if (data.email !== user.emailAddress)
+      updatedData["emailAddress"] = data.email;
+    if (
+      data.mobileNo !== user.phoneNumber ||
+      data.countryCode !== user.countryCode
+    ) {
+      updatedData["phoneNumber"] = data.mobileNo;
+      updatedData["countryCode"] = data.countryCode;
+    }
+
+    if (data.industries !== user.industry) {
+      const industriesArray = data.industries
+        .split(",")
+        .map((industry: string) => industry.trim());
+
+      updatedData["industry"] = industriesArray;
+    }
+
+    if (Object.keys(updatedData).length > 0) {
+      try {
+        dispatch(setLoading(true));
+        const formData = new FormData();
+        console.log(formData);
+        for (const key in updatedData) {
+          formData.append(key, updatedData[key]);
+        }
+
+        const response = await axios.put(
+          `${COMPANY_API_END_POINT}/profile/update`,
+          formData,
+          {
+            headers: {
+              "Content-Type": "multipart/form-data",
+            },
+            withCredentials: true,
+          }
+        );
+        const { talent } = response.data;
+        if (response.data.success) {
+          dispatch(setUser(talent));
+          changeState(false);
+          toast.success("Profile updated successfully!");
+        } else {
+          toast.error(response.data.message);
+        }
+      } catch (error: any) {
+        toast.error(error.response?.data?.message || "An error occurred");
+      } finally {
+        dispatch(setLoading(false));
+      }
+    } else {
+      toast.info("No changes to update");
+    }
+  };
 
   const onSubmit = (data: any) => {
-    changeState(false);
     addItem(data);
   };
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="flex formdivs flex-col mb-4 gap-[6px]">
         <label>
-          Comapny Name <span className="text-red-600 text-base">*</span>
+          Company Name <span className="text-red-600 text-base">*</span>
         </label>
         <input
           type="text"
@@ -124,6 +199,24 @@ const CompanyProfileForm = ({
           setValue={setValue}
         />
       </div>
+      <br className="mb-4" />
+      {/* industry */}
+      <DropdownSelector
+        ItemsArr={industriesArr}
+        label="Select industry that best represent your company (max 3)"
+        placeholder="Choose up to 3 industries"
+        name="industries"
+        required={true}
+        register={register}
+        errors={errors.industries as FieldError}
+        validationRules={{
+          required: "At least one industry must be selected",
+        }}
+        setValue={setValue}
+        selctedItem2={user.industry}
+        className={false}
+      />
+      <br className="mb-2" />
 
       <div className="mt-16 flex gap-10 max-xsm:gap-5">
         <div

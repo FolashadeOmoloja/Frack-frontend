@@ -5,7 +5,6 @@ import ClientProvider from "@/components/Client/ClientProvider";
 
 const TalentProfile = () => {
   const { user } = useSelector((store: any) => store.auth);
-  console.log(user);
   return (
     <ClientProvider>
       <Profile skillsBool user={user} skillsArr={user?.skills} />
