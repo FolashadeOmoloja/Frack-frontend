@@ -291,7 +291,7 @@ const TalentProfileForm = ({
               Please wait
             </div>
           ) : (
-            "Continue"
+            "Update Profile"
           )}
         </button>
       </div>

@@ -9,6 +9,7 @@ import { setLoading, setUser } from "@/redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
 import { industriesArr } from "@/utilities/constants/searchbarData";
+import { Loader2 } from "lucide-react";
 
 const CompanyProfileForm = ({
   changeState,
@@ -226,7 +227,14 @@ const CompanyProfileForm = ({
           Cancel
         </div>
         <button type="submit" className="login-btn" disabled={isSubmitting}>
-          Update Profile
+        {loading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </div>
+          ) : (
+            "Update Profile"
+          )}
         </button>
       </div>
     </form>
