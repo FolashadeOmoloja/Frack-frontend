@@ -37,34 +37,34 @@ const ProfileDetails = <T extends boolean>({
             <section>
               <ProfileBox
                 title={"Full Name"}
-                details={`${(user as userObject).firstName} ${
+                details={`${(user as userObject)?.firstName} ${
                   (user as userObject).lastName
                 }`}
               />
               <ProfileBox title={"Email Address"} details={user.emailAddress} />
               <ProfileBox
                 title={"Mobile Number"}
-                details={user.countryCode + user.phoneNumber}
+                details={user?.countryCode + user?.phoneNumber}
               />
               <ProfileBox
                 title={"Experience Level"}
-                details={`${(user as userObject).experienceLevel} `}
+                details={`${(user as userObject)?.experienceLevel} `}
               />
               <ProfileBox
                 title={"Years of Experience"}
-                details={`${(user as userObject).experienceYears} `}
+                details={`${(user as userObject)?.experienceYears} `}
               />
               <ProfileBox
                 title={"Industry"}
-                details={(user as userObject).industry}
+                details={(user as userObject)?.industry}
               />
               <ProfileBox
                 title={"Work mode preference"}
-                details={user.preference}
+                details={user?.preference}
               />
               <DownloadResumeBox
                 title={"Resume"}
-                filename={(user as userObject).resume}
+                filename={(user as userObject)?.resume}
               />
               <button
                 onClick={() => {
@@ -79,28 +79,31 @@ const ProfileDetails = <T extends boolean>({
             <section>
               <ProfileBox
                 title={"Company Name"}
-                details={`${(user as userCompanyObject).companyName} `}
+                details={`${(user as userCompanyObject)?.companyName} `}
               />
               <ProfileBox
                 title={"Full Name"}
-                details={`${(user as userCompanyObject).firstName} ${
-                  (user as userCompanyObject).lastName
+                details={`${(user as userCompanyObject)?.firstName} ${
+                  (user as userCompanyObject)?.lastName
                 }`}
               />
               <ProfileBox
                 title={"Role"}
-                details={(user as userCompanyObject).companyRole}
+                details={(user as userCompanyObject)?.companyRole}
               />
-              <ProfileBox title={"Email Address"} details={user.emailAddress} />
+              <ProfileBox
+                title={"Email Address"}
+                details={user?.emailAddress}
+              />
               <ProfileBox
                 title={"Mobile Number"}
-                details={user.countryCode + user.phoneNumber}
+                details={user?.countryCode + user?.phoneNumber}
               />
               <ProfileBox
                 title={"Industry"}
-                details={`${(user as userCompanyObject).industry.join(",")} `}
+                details={`${(user as userCompanyObject)?.industry.join(",")} `}
               />
-              <ProfileBox title={"Work Culture"} details={user.preference} />
+              <ProfileBox title={"Work Culture"} details={user?.preference} />
               <button
                 onClick={() => {
                   setIsForm(true);

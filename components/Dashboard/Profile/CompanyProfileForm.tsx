@@ -53,9 +53,20 @@ const CompanyProfileForm = ({
     }
 
     if (data.industries !== user.industry) {
-      const industriesArray = data.industries
-        .split(",")
-        .map((industry: string) => industry.trim());
+      let industriesArray;
+
+      // Check if data.industries is a string and can be split
+      if (typeof data.industries === "string") {
+        industriesArray = data.industries
+          .split(",")
+          .map((industry: string) => industry.trim());
+      } else if (Array.isArray(data.industries)) {
+        // If it's already an array, just use it directly
+        industriesArray = data.industries;
+      } else {
+        // Handle the case where data.industries is undefined or another type
+        industriesArray = [];
+      }
 
       updatedData["industry"] = industriesArray;
     }
@@ -63,15 +74,16 @@ const CompanyProfileForm = ({
     if (Object.keys(updatedData).length > 0) {
       try {
         dispatch(setLoading(true));
-        const formData = new FormData();
-        console.log(formData);
-        for (const key in updatedData) {
-          formData.append(key, updatedData[key]);
-        }
+        // const formData = new FormData();
+        // console.log(formData);
+        // for (const key in updatedData) {
+        //   formData.append(key, updatedData[key]);
+        // }
 
+        console.log(updatedData);
         const response = await axios.put(
           `${COMPANY_API_END_POINT}/profile/update`,
-          formData,
+          updatedData,
           {
             headers: {
               "Content-Type": "multipart/form-data",
@@ -79,9 +91,9 @@ const CompanyProfileForm = ({
             withCredentials: true,
           }
         );
-        const { talent } = response.data;
+        const { company } = response.data;
         if (response.data.success) {
-          dispatch(setUser(talent));
+          dispatch(setUser(company));
           changeState(false);
           toast.success("Profile updated successfully!");
         } else {
@@ -227,7 +239,7 @@ const CompanyProfileForm = ({
           Cancel
         </div>
         <button type="submit" className="login-btn" disabled={isSubmitting}>
-        {loading ? (
+          {loading ? (
             <div className="flex items-center justify-center">
               <Loader2 className="mr-2 h-4 w-4 animate-spin" />
               Please wait
