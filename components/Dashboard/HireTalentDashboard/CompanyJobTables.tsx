@@ -1,17 +1,15 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import JobTable from "../TalentDashboard/JobTable";
-import {
-  hiredCandidates,
-  jobsPostedByCompany,
-} from "@/utilities/constants/jobData";
 import {
   companyActiveColumns,
   hiredCandidatesColumn,
   JobPosted,
 } from "@/utilities/tableData";
 import { userObject } from "@/utilities/constants/typeDef";
+import { useGetCompanyJobs } from "@/hooks/job-hook";
+import { Loader2 } from "lucide-react";
 
 type IsActiveState = {
   [key: number]: boolean;
@@ -19,36 +17,29 @@ type IsActiveState = {
 
 const CompanyJobTables = () => {
   const filterArr = ["Active Applications", "Closed Jobs", "Hired Talents"];
-
+  const { jobs, loading } = useGetCompanyJobs();
   const [active, setActive] = useState<IsActiveState>({ 0: true });
-  const [jobPosted, setJobPosted] = useState<JobPosted[]>(jobsPostedByCompany);
-  const [changeTable, setChangeTable] = useState(false);
+  const [changeTable, setChangeTable] = useState(0);
 
+  // Function to filter jobs based on status
   const filterJobs = (status: string) => {
-    return jobsPostedByCompany.filter((job) =>
-      job.status.toLowerCase().includes(status.toLowerCase())
+    return jobs.filter((job) =>
+      //@ts-ignore
+      job.status?.toLowerCase().includes(status.toLowerCase())
     );
   };
+
+  // Recalculate the jobs when `jobs` or `changeTable` changes
+  const openedJobs = changeTable === 0 ? filterJobs("open") : [];
+  const closedJobs = changeTable === 1 ? filterJobs("closed") : [];
+  const hiredCandidates: string | any[] = [];
 
   const activeFunc = (idx: number) => {
     const newState: IsActiveState = {};
     filterArr.forEach((_, i) => (newState[i] = i === idx));
     setActive(newState);
-
-    if (idx === 0) {
-      setChangeTable(false);
-      setJobPosted(filterJobs("open"));
-    } else if (idx === 1) {
-      setChangeTable(false);
-      setJobPosted(filterJobs("closed"));
-    } else if (idx === 2) {
-      setChangeTable(true);
-    }
+    setChangeTable(idx); // Change the table based on active tab index
   };
-
-  useEffect(() => {
-    setJobPosted(jobsPostedByCompany);
-  }, []);
 
   return (
     <section className="dashboard-container min-h-svh">
@@ -69,14 +60,45 @@ const CompanyJobTables = () => {
           </span>
         ))}
       </div>
-      {!changeTable ? (
-        <JobTable<JobPosted> data={jobPosted} columns={companyActiveColumns} />
-      ) : (
-        <JobTable<userObject>
-          data={hiredCandidates}
-          columns={hiredCandidatesColumn}
-        />
-      )}
+
+      {changeTable === 0 ? (
+        loading ? (
+          <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#000080]" />
+        ) : openedJobs.length === 0 ? (
+          <p className="mt-10 text-[#000040] italic text-2xl">
+            No data available at the moment.
+          </p>
+        ) : (
+          <JobTable<JobPosted>
+            data={openedJobs}
+            columns={companyActiveColumns}
+          />
+        )
+      ) : changeTable === 1 ? (
+        loading ? (
+          <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#000080]" />
+        ) : closedJobs.length === 0 ? (
+          <p className="mt-10 text-[#000040] italic text-2xl">
+            No data available at the moment.
+          </p>
+        ) : (
+          <JobTable<JobPosted>
+            data={closedJobs}
+            columns={companyActiveColumns}
+          />
+        )
+      ) : changeTable === 2 ? (
+        hiredCandidates.length === 0 ? (
+          <p className="mt-10 text-[#000040] italic text-2xl">
+            No data available at the moment.
+          </p>
+        ) : (
+          <JobTable<userObject>
+            data={hiredCandidates}
+            columns={hiredCandidatesColumn}
+          />
+        )
+      ) : null}
     </section>
   );
 };

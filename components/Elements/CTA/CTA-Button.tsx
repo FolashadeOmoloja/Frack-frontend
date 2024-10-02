@@ -12,6 +12,8 @@ interface ButtonProps {
   width?: string;
   backGround?: string;
   color?: string;
+  isFunc?: boolean;
+  func?: () => void;
 }
 
 const CTABTN: React.FC<ButtonProps> = ({
@@ -24,11 +26,17 @@ const CTABTN: React.FC<ButtonProps> = ({
   backGround = "bg-[#000080]",
   color = "text-white",
   height2,
+  isFunc = false,
+  func,
 }) => {
   const router = useRouter();
 
   const handleSignInClick = (route: string) => {
-    router.push(route);
+    if (isFunc && func) {
+      func();
+    } else {
+      router.push(route);
+    }
   };
 
   return (

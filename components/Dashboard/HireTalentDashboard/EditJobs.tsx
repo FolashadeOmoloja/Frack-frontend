@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa6";
+import { useSelector } from "react-redux";
 
-const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
+const EditJobs = () => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -16,6 +17,8 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  const { job: jobPost } = useSelector((store: any) => store.job);
   const [skills, setSkills] = useState<string[]>([
     "Adobe Xd",
     "CSS",
@@ -31,7 +34,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
     if (skill && !skills.includes(skill)) {
       const updatedSkills = [...skills, skill];
       setSkills(updatedSkills);
-      setValue("skills", updatedSkills); // Update the form state with the new skills array
+      setValue("skills", updatedSkills);
       setNewSkill("");
       setFilteredSuggestions(searchBarData[0].options);
     }
@@ -40,7 +43,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
   const removeSkill = (index: number) => {
     const updatedSkills = skills.filter((_, idx) => idx !== index);
     setSkills(updatedSkills);
-    setValue("skills", updatedSkills); // Update the form state with the new skills array
+    setValue("skills", updatedSkills);
   };
 
   const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -66,11 +69,9 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
         <span>Go back</span>
       </div>
       <h2 className="text-2xl font-bold mb-1">
-        Welcome, Frack! Ready to Create a New Job Listing?
+        Ready to Update Your Job Listing?
       </h2>
-      <span className="text-[#7C8698]">
-        Efficiently create and manage your job postings.
-      </span>
+      <span className="text-[#7C8698]">Efficiently manage your job posts.</span>
       <section className="flex justify-center w-full">
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -84,7 +85,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
             </span>
           </div>
           <p className="text-gray-500 text-lg mt-9">
-            Fill the form below to add a job post
+            Make changes to the form below to update your existing job post.
           </p>
           <section className="mt-8">
             <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
@@ -93,7 +94,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
               </label>
               <input
                 type="text"
-                defaultValue={jobPost.title}
+                defaultValue={jobPost?.title}
                 placeholder="Enter a title for your job post"
                 {...register("jobPostTitle", {
                   required: validationRules.jobPostTitle.required,
@@ -103,15 +104,48 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
                 <span className="text-red-600 text-sm">{`${errors.jobPostTitle.message}`}</span>
               )}
             </div>
+            <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
+              <label>
+                Required Role <span className="text-red-600 text-base">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter the role required"
+                {...register("role", {
+                  required: validationRules.role.required,
+                })}
+                defaultValue={jobPost?.role}
+              />
+              {errors.role && (
+                <span className="text-red-600 text-sm">{`${errors.role.message}`}</span>
+              )}
+            </div>
+            <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
+              <label>
+                Country <span className="text-red-600 text-base">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter country"
+                {...register("country", {
+                  required: validationRules.country.required,
+                })}
+                defaultValue={jobPost?.country}
+              />
+              {errors.country && (
+                <span className="text-red-600 text-sm">{`${errors.country.message}`}</span>
+              )}
+            </div>
             <div className="flex formdivs max-slg:flex-col mb-[20px] gap-[20px]">
               <div className="basis-1/2 flex flex-col gap-[6px]">
                 <label>
-                  Location <span className="text-red-600 text-base">*</span>
+                  Location e.g (Lagos, Nigeria){" "}
+                  <span className="text-red-600 text-base">*</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter location"
-                  defaultValue={jobPost.location}
+                  placeholder="Enter location e.g (Lagos, Nigeria)"
+                  defaultValue={jobPost?.location}
                   {...register("location", {
                     required: validationRules.location.required,
                   })}
@@ -131,8 +165,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
                 validationRules={validationRules.department.required}
                 setValue={setValue}
                 className
-                defaultValue={jobPost.department}
-                selctedItem2={jobPost.department}
+                selctedItem2={jobPost?.department}
               />
             </div>
             <div className="flex formdivs max-slg:flex-col mb-[20px] gap-[20px]">
@@ -148,6 +181,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
                     {...register("salaryRange1", {
                       required: validationRules.salaryRange.required,
                     })}
+                    defaultValue={jobPost?.salaryRange1}
                   />
                   <input
                     type="number"
@@ -155,6 +189,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
                     {...register("salaryRange2", {
                       required: validationRules.salaryRange.required,
                     })}
+                    defaultValue={jobPost?.salaryRange2}
                   />
                 </div>
                 {errors.salaryRange && (
@@ -172,8 +207,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
                 validationRules={validationRules.workMode.required}
                 setValue={setValue}
                 className
-                defaultValue={jobPost.employmentType}
-                selctedItem2={jobPost.employmentType}
+                selctedItem2={jobPost?.jobProximity}
               />
             </div>
             <div className="flex formdivs max-slg:flex-col mb-[20px] gap-[20px]">
@@ -182,8 +216,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
                 label="Experience Level"
                 placeholder="Select an option"
                 name={"experienceLevel"}
-                defaultValue={"Senior level"}
-                selctedItem2={"Senior level"}
+                selctedItem2={jobPost?.experience}
                 required={true}
                 register={register}
                 errors={errors.experienceLevel as FieldError}
@@ -193,7 +226,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
               />
               <Dropdown
                 ItemsArr={["6", "8", "10", "12"]}
-                label="No of working hours"
+                label="No of working hours (per day)"
                 placeholder="Select working hours"
                 name={"workHours"}
                 required={true}
@@ -202,8 +235,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
                 validationRules={validationRules.workHours.required}
                 setValue={setValue}
                 className
-                defaultValue={"8 hours"}
-                selctedItem2={"8 hours"}
+                selctedItem2={jobPost?.jobHours}
               />
             </div>
             <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
@@ -222,7 +254,7 @@ const EditJobs = ({ jobPost }: { jobPost: JobPosted }) => {
                 })}
                 rows={10}
                 className="resize-none"
-                defaultValue={""}
+                defaultValue={jobPost?.description}
               />
               {errors.description && (
                 <span className="text-red-600 text-sm">{`${errors.description.message}`}</span>

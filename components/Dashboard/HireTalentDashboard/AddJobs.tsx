@@ -1,9 +1,12 @@
 "use client";
 import Dropdown from "@/components/Elements/Dropdown";
+import { useAddJob } from "@/hooks/job-hook";
 import { validationRules } from "@/utilities/constants";
 import { searchBarData } from "@/utilities/constants/searchbarData";
+import { Loader2 } from "lucide-react";
 import { useState } from "react";
 import { FieldError, useForm } from "react-hook-form";
+import { useSelector } from "react-redux";
 
 const AddJobs = () => {
   const {
@@ -12,6 +15,9 @@ const AddJobs = () => {
     setValue,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  const { user } = useSelector((store: any) => store.auth);
+  const { onSubmit: addJob, loading } = useAddJob();
   const [skills, setSkills] = useState<string[]>([]);
   const [newSkill, setNewSkill] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState(
@@ -22,7 +28,7 @@ const AddJobs = () => {
     if (skill && !skills.includes(skill)) {
       const updatedSkills = [...skills, skill];
       setSkills(updatedSkills);
-      setValue("skills", updatedSkills); // Update the form state with the new skills array
+      setValue("skills", updatedSkills);
       setNewSkill("");
       setFilteredSuggestions(searchBarData[0].options);
     }
@@ -43,14 +49,34 @@ const AddJobs = () => {
       )
     );
   };
-  const addItem = async (data: any) => {};
+  const addItem = async (data: any) => {
+    if (data) {
+      const jobPost = {
+        title: data.jobPostTitle.trim(),
+        location: data.location.trim(),
+        salaryRange1: data.salaryRange1.trim(),
+        salaryRange2: data.salaryRange2.trim(),
+        jobProximity: data.workMode.trim(),
+        jobHours: data.workHours.trim(),
+        experience: data.experienceLevel.trim(),
+        skills: skills,
+        role: data.role.trim(),
+        country: data.country.trim(),
+        department: data.department.trim(),
+        // employmentType,
+        description: data.description.trim(),
+      };
+
+      await addJob(jobPost);
+    }
+  };
   const onSubmit = (data: any) => {
     addItem(data);
   };
   return (
     <section className="dashboard-container min-h-svh">
       <h2 className="text-2xl font-bold mb-1">
-        Welcome, Frack! Ready to Create a New Job Listing?
+        Welcome, {user?.companyName}! Ready to Create a New Job Listing?
       </h2>
       <span className="text-[#7C8698]">
         Efficiently create and manage your job postings.
@@ -86,14 +112,45 @@ const AddJobs = () => {
                 <span className="text-red-600 text-sm">{`${errors.jobPostTitle.message}`}</span>
               )}
             </div>
+            <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
+              <label>
+                Required Role <span className="text-red-600 text-base">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter the role required"
+                {...register("role", {
+                  required: validationRules.role.required,
+                })}
+              />
+              {errors.role && (
+                <span className="text-red-600 text-sm">{`${errors.role.message}`}</span>
+              )}
+            </div>
+            <div className="flex formdivs flex-col mb-4 sm:mb-5 gap-[6px]">
+              <label>
+                Country <span className="text-red-600 text-base">*</span>
+              </label>
+              <input
+                type="text"
+                placeholder="Enter country"
+                {...register("country", {
+                  required: validationRules.country.required,
+                })}
+              />
+              {errors.country && (
+                <span className="text-red-600 text-sm">{`${errors.country.message}`}</span>
+              )}
+            </div>
             <div className="flex formdivs max-slg:flex-col mb-[20px] gap-[20px]">
               <div className="basis-1/2 flex flex-col gap-[6px]">
                 <label>
-                  Location <span className="text-red-600 text-base">*</span>
+                  Location e.g (Lagos, Nigeria){" "}
+                  <span className="text-red-600 text-base">*</span>
                 </label>
                 <input
                   type="text"
-                  placeholder="Enter location"
+                  placeholder="Enter location e.g (Lagos, Nigeria)"
                   {...register("location", {
                     required: validationRules.location.required,
                   })}
@@ -169,7 +226,7 @@ const AddJobs = () => {
               />
               <Dropdown
                 ItemsArr={["6", "8", "10", "12"]}
-                label="No of working hours"
+                label="No of working hours (per day)"
                 placeholder="Select working hours"
                 name={"workHours"}
                 required={true}
@@ -189,10 +246,10 @@ const AddJobs = () => {
                 placeholder="Enter a detailed description for your job post"
                 {...register("description", {
                   required: validationRules.description.required,
-                  maxLength: {
-                    value: 1000,
-                    message: "Description cannot exceed 1000 words",
-                  },
+                  // maxLength: {
+                  //   value: 1000,
+                  //   message: "Description cannot exceed 1000 words",
+                  // },
                 })}
                 rows={10}
                 className="resize-none"
@@ -258,7 +315,14 @@ const AddJobs = () => {
               className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg btn-hover mt-20"
               disabled={isSubmitting}
             >
-              Add Job
+              {loading ? (
+                <div className="flex items-center justify-center">
+                  <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                  Please wait
+                </div>
+              ) : (
+                "Add Job"
+              )}
             </button>
           </section>
         </form>

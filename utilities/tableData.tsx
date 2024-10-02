@@ -2,6 +2,9 @@ import { Column } from "react-table";
 import { userObject } from "./constants/typeDef";
 import CTABTN from "@/components/Elements/CTA/CTA-Button";
 import { DownloadResumeBotton } from "@/components/Elements/ProfileBox";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { setJob } from "@/redux/slices/jobSlice";
 
 interface JobApplication {
   title: string;
@@ -17,9 +20,16 @@ export interface JobPosted {
   department: string;
   location: string;
   employmentType: string;
-  salaryRange: string;
+  jobProximity: string;
+  jobHours: string;
+  experience: string;
+  salaryRange1: string;
+  salaryRange2: string;
   status: string;
+  country: string;
+  role: string;
   candidates?: userObject[];
+  description: string;
 }
 
 export const activeColumns: Column<JobApplication>[] = [
@@ -93,8 +103,10 @@ export const companyActiveColumns: Column<JobPosted>[] = [
     Cell: ({ row }: { row: { original: JobPosted } }) => {
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.employmentType}</span>
-          <span>{row.original.salaryRange}</span>
+          <span>{row.original.jobProximity}</span>
+          <span>
+            ${row.original.salaryRange1} - ${row.original.salaryRange2}
+          </span>
         </div>
       );
     },
@@ -103,9 +115,17 @@ export const companyActiveColumns: Column<JobPosted>[] = [
     Header: "",
     accessor: "candidates",
     Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
+      const dispatch = useDispatch();
+      const router = useRouter();
+      const editJob = (data: any, idx: number) => {
+        dispatch(setJob(data));
+        router.push(`/hire-talent/dashboard/my-jobs/edit-job/${idx}`);
+      };
       return (
         <CTABTN
-          route={`/hire-talent/dashboard/my-jobs/edit-job/${row.index}`}
+          route={``}
+          isFunc
+          func={() => editJob(row.original, row.index)}
           CTA="Edit Job"
           height2="h-[50px] text-sm"
           backGround="bg-[#22CCED]"

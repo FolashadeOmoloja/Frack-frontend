@@ -400,6 +400,9 @@ export const validationRules = {
   jobPostTitle: {
     required: "Job Post Title is required",
   },
+  country: {
+    required: "This is required",
+  },
   location: {
     required: "Please enter a  location",
   },
@@ -420,10 +423,10 @@ export const validationRules = {
   },
   description: {
     required: "Job description is required",
-    maxLength: {
-      value: 3000,
-      message: "Description cannot exceed 1000 words",
-    },
+    // maxLength: {
+    //   value: 10000,
+    //   message: "Description cannot exceed 3000 words",
+    // },
   },
 };
 
