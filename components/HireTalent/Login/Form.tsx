@@ -1,10 +1,7 @@
-"use client";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import FormLogo from "@/components/Elements/FormLogo";
 import { validationRules } from "@/utilities/constants";
 import useLoginCompany from "@/hooks/login-company-hook";
@@ -18,8 +15,6 @@ const HireTalentLoginForm = () => {
   } = useForm();
   const { onSubmit: loginCompany, loading } = useLoginCompany();
 
-  const router = useRouter();
-
   //add Item to backeend
   const addItem = async (data: any) => {
     if (data) {
@@ -27,7 +22,6 @@ const HireTalentLoginForm = () => {
         emailAddress: data.email.trim(),
         password: data.password.trim(),
       };
-
       await loginCompany(companyData);
     }
   };

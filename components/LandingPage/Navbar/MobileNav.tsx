@@ -1,4 +1,3 @@
-"use client";
 import { NavLinks } from "@/utilities/constants";
 import React, { useState } from "react";
 import { BsCaretRightFill } from "react-icons/bs";
@@ -11,7 +10,7 @@ type IsOpenState = {
   [key: number]: boolean;
 };
 
-const MobileNav = () => {
+const MobileNav = ({ user }: any) => {
   const router = useRouter();
   const [isOpenDropdown, setisOpenDropdown] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -62,24 +61,41 @@ const MobileNav = () => {
                 }  `}
               />
             </div>
-            {isOpenDropdown && (
-              <ul className="absolute top-full left-[-50%] mt-2 bg-white shadow-md rounded-lg p-[20px] w-[8rem] flex flex-col gap-7">
-                <li
-                  onClick={() => {
-                    router.push("/hire-talent");
-                  }}
-                >
-                  Hire Talent
-                </li>
-                <li
-                  onClick={() => {
-                    router.push("/sign-in");
-                  }}
-                >
-                  Sign In
-                </li>
-              </ul>
-            )}
+            {isOpenDropdown &&
+              (!user ? (
+                <ul className="absolute top-full left-[-50%] mt-2 bg-white shadow-md rounded-lg p-[20px] w-[8rem] flex flex-col gap-7">
+                  <li
+                    onClick={() => {
+                      router.push("/hire-talent");
+                    }}
+                  >
+                    Hire Talent
+                  </li>
+                  <li
+                    onClick={() => {
+                      router.push("/sign-in");
+                    }}
+                  >
+                    Sign In
+                  </li>
+                </ul>
+              ) : (
+                <ul className="absolute top-full left-[-50%] mt-2 bg-white shadow-md rounded-lg p-[20px] w-[8rem] flex flex-col gap-7 font-bold text-[#000080]">
+                  <li
+                    onClick={() => {
+                      router.push(
+                        `${
+                          user.companyName
+                            ? "/hire-talent/dashboard"
+                            : "/dashboard"
+                        }`
+                      );
+                    }}
+                  >
+                    Dashboard
+                  </li>
+                </ul>
+              ))}
           </li>
         </ul>
       </section>
@@ -159,17 +175,29 @@ const MobileNav = () => {
               </ul>
             </ul>
           ))}
-          <div className="flex flex-col sm:hidden   gap-4">
-            <button
-              className="bg-[#22CCED] h-[55px] rounded-[6px] font-semibold"
-              onClick={() => {
-                router.push("/sign-in");
-              }}
-            >
-              Sign In
-            </button>
-            <CTABTN width="w-full" route="/hire-talent" CTA="Hire Talent" />
-          </div>
+          {!user ? (
+            <div className="flex flex-col sm:hidden   gap-4">
+              <button
+                className="bg-[#22CCED] h-[55px] rounded-[6px] font-semibold"
+                onClick={() => {
+                  router.push("/sign-in");
+                }}
+              >
+                Sign In
+              </button>
+              <CTABTN width="w-full" route="/hire-talent" CTA="Hire Talent" />
+            </div>
+          ) : (
+            <div className="flex flex-col sm:hidden   gap-4">
+              <CTABTN
+                width="w-full"
+                route={
+                  user.companyName ? "/hire-talent/dashboard" : "/dashboard"
+                }
+                CTA="Dashboard"
+              />
+            </div>
+          )}
         </section>
       }
     </nav>

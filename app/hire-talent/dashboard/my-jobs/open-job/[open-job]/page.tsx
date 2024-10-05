@@ -5,7 +5,7 @@ const EditJobPage = ({ params }: { params: { editId: string } }) => {
   return (
     <>
       <HireTalentNav activeItem={1} />
-      <EditJobs />
+      <EditJobs openJobPage />
     </>
   );
 };

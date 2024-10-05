@@ -1,15 +1,16 @@
 "use client";
 import Dropdown from "@/components/Elements/Dropdown";
+import { useEditJob } from "@/hooks/job-hook";
 import { validationRules } from "@/utilities/constants";
 import { searchBarData } from "@/utilities/constants/searchbarData";
-import { JobPosted } from "@/utilities/tableData";
+import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
-const EditJobs = () => {
+const EditJobs = ({ openJobPage }: { openJobPage?: boolean }) => {
   const router = useRouter();
   const {
     handleSubmit,
@@ -19,17 +20,13 @@ const EditJobs = () => {
   } = useForm();
 
   const { job: jobPost } = useSelector((store: any) => store.job);
-  const [skills, setSkills] = useState<string[]>([
-    "Adobe Xd",
-    "CSS",
-    "TypeScript",
-    "Javascript",
-  ]);
+
+  //skills handler
+  const [skills, setSkills] = useState<string[]>(jobPost?.skills);
   const [newSkill, setNewSkill] = useState("");
   const [filteredSuggestions, setFilteredSuggestions] = useState(
     searchBarData[0].options
   );
-
   const addSkill = (skill: string) => {
     if (skill && !skills.includes(skill)) {
       const updatedSkills = [...skills, skill];
@@ -55,19 +52,70 @@ const EditJobs = () => {
       )
     );
   };
-  const addItem = async (data: any) => {};
+
+  //skills handler
+
+  //setValue
+  useEffect(() => {
+    if (jobPost) {
+      setValue("department", jobPost.department);
+      setValue("experienceLevel", jobPost.experience);
+
+      setValue("workMode", jobPost.jobProximity);
+      setValue("workHours", jobPost.jobHours);
+    }
+  }, [jobPost, setValue]);
+
+  //api call to update
+  const { onSubmit: updateJob, loading } = useEditJob();
+  const addItem = async (data: any) => {
+    const updatedData: Record<string, any> = {};
+    if (data.jobPostTitle !== jobPost.title)
+      updatedData["title"] = data.jobPostTitle.trim();
+    if (data.location !== jobPost.location)
+      updatedData["location"] = data.location.trim();
+    if (data.salaryRange1 !== jobPost.salaryRange1)
+      updatedData["salaryRange1"] = data.salaryRange1.trim();
+    if (data.salaryRange2 !== jobPost.salaryRange2)
+      updatedData["salaryRange2"] = data.salaryRange2.trim();
+    if (data.workMode !== jobPost.jobProximity)
+      updatedData["jobProximity"] = data.workMode.trim();
+    if (data.workHours !== jobPost.jobHours)
+      updatedData["jobHours"] = data.workHours.trim();
+    if (data.experienceLevel !== jobPost.experience)
+      updatedData["experience"] = data.experienceLevel.trim();
+    if (skills !== jobPost.skills) updatedData["skills"] = skills; //array
+    if (data.role !== jobPost.role) updatedData["role"] = data.role.trim();
+    if (data.country !== jobPost.country)
+      updatedData["country"] = data.country.trim();
+    if (data.department !== jobPost.department)
+      updatedData["department"] = data.department.trim();
+    if (data.description !== jobPost.description)
+      updatedData["description"] = data.description.trim();
+
+    updateJob(updatedData, jobPost._id);
+  };
   const onSubmit = (data: any) => {
     addItem(data);
   };
+  const changeStatus = () => {
+    const updatedStatus: Record<string, any> = {};
+    updatedStatus["status"] = "Closed";
+    isSubmitting;
+    updateJob(updatedStatus, jobPost._id);
+    !isSubmitting;
+  };
   return (
     <section className="dashboard-container min-h-svh">
-      <div
-        onClick={() => router.push("/hire-talent/dashboard/my-jobs")}
-        className="flex text-[#000080] gap-3 text-xl items-center font-bold mb-4 cursor-pointer"
-      >
-        <FaArrowLeft />
-        <span>Go back</span>
-      </div>
+      {!openJobPage ? (
+        <div
+          onClick={() => router.push("/hire-talent/dashboard/my-jobs")}
+          className="flex text-[#000080] gap-3 text-xl items-center font-bold mb-4 cursor-pointer"
+        >
+          <FaArrowLeft />
+          <span>Go back</span>
+        </div>
+      ) : null}
       <h2 className="text-2xl font-bold mb-1">
         Ready to Update Your Job Listing?
       </h2>
@@ -217,6 +265,7 @@ const EditJobs = () => {
                 placeholder="Select an option"
                 name={"experienceLevel"}
                 selctedItem2={jobPost?.experience}
+                defaultValue={jobPost?.experience}
                 required={true}
                 register={register}
                 errors={errors.experienceLevel as FieldError}
@@ -247,10 +296,6 @@ const EditJobs = () => {
                 placeholder="Enter a detailed description for your job post"
                 {...register("description", {
                   required: validationRules.description.required,
-                  maxLength: {
-                    value: 1000,
-                    message: "Description cannot exceed 1000 words",
-                  },
                 })}
                 rows={10}
                 className="resize-none"
@@ -312,13 +357,55 @@ const EditJobs = () => {
                 ))}
               </ul>
             </div>
-            <button
-              type="submit"
-              className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg btn-hover mt-20"
-              disabled={isSubmitting}
-            >
-              Add Job
-            </button>
+
+            {!openJobPage ? (
+              <div className="mt-20 flex gap-10 max-xsm:gap-5">
+                <button
+                  type="submit"
+                  className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg btn-hover "
+                  disabled={isSubmitting}
+                >
+                  {loading ? (
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait
+                    </div>
+                  ) : (
+                    "Update Job"
+                  )}
+                </button>
+                <div
+                  className="login-btn centered gap-3 cursor-pointer icon-animate"
+                  onClick={changeStatus}
+                >
+                  {loading ? (
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Closing Job...
+                    </div>
+                  ) : (
+                    "Close Job"
+                  )}
+                </div>
+              </div>
+            ) : (
+              <div className="mt-20">
+                <button
+                  type="submit"
+                  className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg btn-hover "
+                  disabled={isSubmitting}
+                >
+                  {loading ? (
+                    <div className="flex items-center justify-center">
+                      <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                      Please wait
+                    </div>
+                  ) : (
+                    "Reopen Job"
+                  )}
+                </button>
+              </div>
+            )}
           </section>
         </form>
       </section>

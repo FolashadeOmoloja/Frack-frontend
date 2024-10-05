@@ -5,6 +5,7 @@ import { DownloadResumeBotton } from "@/components/Elements/ProfileBox";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setJob } from "@/redux/slices/jobSlice";
+import { useEditJob, useGetCompanyJobs } from "@/hooks/job-hook";
 
 interface JobApplication {
   title: string;
@@ -16,6 +17,7 @@ interface JobApplication {
 }
 
 export interface JobPosted {
+  _id: string;
   title: string;
   department: string;
   location: string;
@@ -127,6 +129,86 @@ export const companyActiveColumns: Column<JobPosted>[] = [
           isFunc
           func={() => editJob(row.original, row.index)}
           CTA="Edit Job"
+          height2="h-[50px] text-sm"
+          backGround="bg-[#22CCED]"
+        />
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "status",
+    Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
+      return (
+        <CTABTN
+          route={`/hire-talent/dashboard/my-jobs/${row.index}`}
+          CTA="View Applicants"
+          width="w-[138px]"
+          height2="h-[50px] text-sm"
+        />
+      );
+    },
+  },
+];
+
+export const closedJobsColumns: Column<JobPosted>[] = [
+  {
+    Header: "",
+    accessor: "title",
+    Cell: ({ row }: { row: { original: JobPosted } }) => {
+      return <span>{row.original.title}</span>;
+    },
+  },
+  {
+    Header: "",
+    accessor: "department",
+    Cell: ({ row }: { row: { original: JobPosted } }) => {
+      return (
+        <div className="flex flex-col gap-4">
+          <span>{row.original.department}</span>
+          <span>{row.original.location}</span>
+        </div>
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "employmentType",
+    Cell: ({ row }: { row: { original: JobPosted } }) => {
+      return (
+        <div className="flex flex-col gap-4">
+          <span>{row.original.jobProximity}</span>
+          <span>
+            ${row.original.salaryRange1} - ${row.original.salaryRange2}
+          </span>
+        </div>
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "candidates",
+    Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
+      const { onSubmit: updateJob } = useEditJob();
+
+      const dispatch = useDispatch();
+      const router = useRouter();
+      const changeStatus = async (id: any, idx: any, data: any) => {
+        const updatedStatus: Record<string, any> = {};
+        updatedStatus["status"] = "Open";
+
+        // Call the API to update job status
+        await updateJob(updatedStatus, id);
+        dispatch(setJob(data));
+        router.push(`/hire-talent/dashboard/my-jobs/open-job/${idx}`);
+      };
+
+      return (
+        <CTABTN
+          route={``}
+          isFunc
+          func={() => changeStatus(row.original._id, row.index, row.original)}
+          CTA="Reopen Job"
           height2="h-[50px] text-sm"
           backGround="bg-[#22CCED]"
         />

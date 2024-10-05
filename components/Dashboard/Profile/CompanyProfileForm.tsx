@@ -74,13 +74,6 @@ const CompanyProfileForm = ({
     if (Object.keys(updatedData).length > 0) {
       try {
         dispatch(setLoading(true));
-        // const formData = new FormData();
-        // console.log(formData);
-        // for (const key in updatedData) {
-        //   formData.append(key, updatedData[key]);
-        // }
-
-        console.log(updatedData);
         const response = await axios.put(
           `${COMPANY_API_END_POINT}/profile/update`,
           updatedData,

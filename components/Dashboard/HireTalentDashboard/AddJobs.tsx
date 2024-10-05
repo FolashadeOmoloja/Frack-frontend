@@ -4,7 +4,7 @@ import { useAddJob } from "@/hooks/job-hook";
 import { validationRules } from "@/utilities/constants";
 import { searchBarData } from "@/utilities/constants/searchbarData";
 import { Loader2 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FieldError, useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 
@@ -73,10 +73,17 @@ const AddJobs = () => {
   const onSubmit = (data: any) => {
     addItem(data);
   };
+
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
   return (
     <section className="dashboard-container min-h-svh">
       <h2 className="text-2xl font-bold mb-1">
-        Welcome, {user?.companyName}! Ready to Create a New Job Listing?
+        Welcome, {user?.companyName && mounted ? user?.companyName : ""}! Ready
+        to Create a New Job Listing?
       </h2>
       <span className="text-[#7C8698]">
         Efficiently create and manage your job postings.

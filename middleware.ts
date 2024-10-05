@@ -16,15 +16,25 @@ export async function middleware(req: NextRequest) {
     return NextResponse.next();
   }
 
-  // If no token is found, redirect to the login page for protected routes
+  // If no token is found, set the loggedOut cookie and redirect to login pages
   if (!token) {
-    if (isCompanyRoute) {
-      return NextResponse.redirect(new URL("/hire-talent", req.url)); // Company login
-    } else if (isTalentRoute) {
-      return NextResponse.redirect(new URL("/sign-in", req.url)); // Talent login
-    } else if (isAdminRoute) {
-      return NextResponse.redirect(new URL("/sign-in", req.url)); // Admin login
-    }
+    const response = NextResponse.redirect(
+      new URL(
+        isCompanyRoute
+          ? "/hire-talent"
+          : isTalentRoute
+          ? "/sign-in"
+          : isAdminRoute
+          ? "/sign-in"
+          : req.url,
+        req.url // This will create a full URL
+      )
+    );
+
+    // Set the 'loggedOut' cookie for identifying logged out users
+    response.cookies.set("loggedOut", "true", { path: "/", httpOnly: false });
+
+    return response;
   }
 
   try {
@@ -44,36 +54,32 @@ export async function middleware(req: NextRequest) {
     }
 
     // Verify the token using the appropriate secret key
-    const { payload } = await jwtVerify(token!, secretKey);
+    const { payload } = await jwtVerify(token, secretKey);
 
     // Extract the user role from the token payload
     //@ts-ignore
     const userRole: string = payload.role; // Assuming 'role' is present in the token
 
     // Dynamic route protection based on user role
-    if (isCompanyRoute && userRole === "company") {
-      return NextResponse.next(); // Allow company access
-    } else if (isTalentRoute && userRole === "talent") {
-      return NextResponse.next(); // Allow talent access
-    } else if (isAdminRoute && userRole === "admin") {
-      return NextResponse.next(); // Allow admin access
+    if (
+      (isCompanyRoute && userRole === "company") ||
+      (isTalentRoute && userRole === "talent") ||
+      (isAdminRoute && userRole === "admin")
+    ) {
+      return NextResponse.next(); // Allow access based on role
     } else {
-      // Redirect to unauthorized page if the role doesn't match
       return NextResponse.redirect(new URL("/auth/unauthorized", req.url));
     }
   } catch (error) {
     console.error("Error verifying token:", error);
-    if (isCompanyRoute) {
-      return NextResponse.redirect(new URL("/hire-talent", req.url)); // Company login
-    } else if (isTalentRoute) {
-      return NextResponse.redirect(new URL("/sign-in", req.url)); // Talent login
-    } else if (isAdminRoute) {
-      return NextResponse.redirect(new URL("/sign-in", req.url)); // Admin login
-    } // Redirect to login if token verification fails
+    const response = NextResponse.redirect(new URL("/sign-in", req.url));
+
+    // Set 'loggedOut' cookie on error
+    response.cookies.set("loggedOut", "true", { path: "/", httpOnly: false });
+    return response;
   }
 }
 
-// Specify the routes where the middleware should run
 export const config = {
   matcher: [
     "/hire-talent/dashboard/:path*", // Company routes

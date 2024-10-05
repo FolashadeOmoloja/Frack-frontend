@@ -1,31 +1,9 @@
 "use client";
 import DashboardLayout from "@/components/Dashboard/DashboardLayout/DashboardLayout";
 import HireTalentNav from "@/components/Dashboard/HireTalentDashboard/HireTalentNav";
+import { useGetCompanyJobs } from "@/hooks/job-hook";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-
-const companyAnalytics = [
-  {
-    analtyticsTitle: "Active Job Offers",
-    stats: 36,
-    desc: "A Total of 123 Job Views",
-  },
-  {
-    analtyticsTitle: "Total Applicants",
-    stats: 336,
-    desc: "96 Shortlisted Applicants",
-  },
-  {
-    analtyticsTitle: "Talent Interviews",
-    stats: 136,
-    desc: "25 Active Interviews",
-  },
-  {
-    analtyticsTitle: "Employed Talents",
-    stats: 16,
-    desc: "6 Job Categories",
-  },
-];
 
 const page = () => {
   const searchParams = useSearchParams();
@@ -38,6 +16,43 @@ const page = () => {
       window.history.replaceState(null, "", window.location.pathname);
     }
   }, [searchParams]);
+
+  const { jobs } = useGetCompanyJobs();
+
+  // Function to filter jobs based on status
+  const filterJobs = (status: string) => {
+    return jobs.filter((job) =>
+      //@ts-ignore
+      job.status?.toLowerCase().includes(status.toLowerCase())
+    );
+  };
+
+  // Recalculate the jobs when `jobs` or `changeTable` changes
+  const openedJobs = jobs.length != 0 ? filterJobs("open") : [];
+  const closedJobs = jobs.length != 0 ? filterJobs("closed") : [];
+
+  const companyAnalytics = [
+    {
+      analtyticsTitle: "Active Job Offers",
+      stats: openedJobs.length,
+      desc: `Current active job listings`,
+    },
+    {
+      analtyticsTitle: "Total Applicants",
+      stats: 336,
+      desc: "96 Shortlisted Applicants",
+    },
+    {
+      analtyticsTitle: "Talent Interviews",
+      stats: 136,
+      desc: "25 Active Interviews",
+    },
+    {
+      analtyticsTitle: "Employed Talents",
+      stats: 16,
+      desc: "6 Job Categories",
+    },
+  ];
   return (
     <>
       <HireTalentNav activeItem={0} />

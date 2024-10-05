@@ -1,15 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import JobTable from "../TalentDashboard/JobTable";
 import {
   companyActiveColumns,
   hiredCandidatesColumn,
+  closedJobsColumns,
   JobPosted,
 } from "@/utilities/tableData";
 import { userObject } from "@/utilities/constants/typeDef";
 import { useGetCompanyJobs } from "@/hooks/job-hook";
 import { Loader2 } from "lucide-react";
+import { useSelector } from "react-redux";
 
 type IsActiveState = {
   [key: number]: boolean;
@@ -20,6 +22,7 @@ const CompanyJobTables = () => {
   const { jobs, loading } = useGetCompanyJobs();
   const [active, setActive] = useState<IsActiveState>({ 0: true });
   const [changeTable, setChangeTable] = useState(0);
+  const { user } = useSelector((store: any) => store.auth);
 
   // Function to filter jobs based on status
   const filterJobs = (status: string) => {
@@ -41,13 +44,20 @@ const CompanyJobTables = () => {
     setChangeTable(idx); // Change the table based on active tab index
   };
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="dashboard-container min-h-svh">
       <h2 className="text-2xl font-bold mb-1">
-        Frack, see how your recruitment is going
+        {mounted && user?.companyName ? `${user.companyName}` : "You can"}, see
+        how your recruitment is going
       </h2>
       <span className="text-[#7C8698]">
-        This is your complete frack overview
+        This is your complete job list overview
       </span>
       <div className="flex w-full text-[#626263] md:text-lg font-bold mt-16 border-b border-[#CCD2D9]">
         {filterArr.map((item, idx) => (
@@ -82,10 +92,7 @@ const CompanyJobTables = () => {
             No data available at the moment.
           </p>
         ) : (
-          <JobTable<JobPosted>
-            data={closedJobs}
-            columns={companyActiveColumns}
-          />
+          <JobTable<JobPosted> data={closedJobs} columns={closedJobsColumns} />
         )
       ) : changeTable === 2 ? (
         hiredCandidates.length === 0 ? (

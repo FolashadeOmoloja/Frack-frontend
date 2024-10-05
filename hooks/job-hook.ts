@@ -3,7 +3,7 @@ import { JOB_API_END_POINT } from "@/utilities/constants/constants";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import { toast } from "sonner";
 
@@ -82,4 +82,54 @@ export const useGetCompanyJobs = () => {
   }, []);
 
   return { jobs, loading };
+};
+
+export const useEditJob = () => {
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const { loading } = useSelector((store: any) => store.auth);
+
+  const onSubmit = async (updatedJobPost: any, id: any) => {
+    dispatch(setLoading(true));
+
+    // if (Object.keys(updatedJobPost).length > 0) {
+    try {
+      const response = await axios.put(
+        `${JOB_API_END_POINT}/edit/${id}`,
+        updatedJobPost,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      const { success, message, job } = response.data;
+
+      if (success) {
+        toast.success(message);
+        router.push("/hire-talent/dashboard/my-jobs");
+      } else {
+        toast.error(message);
+      }
+    } catch (error: any) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "An unknown error occurred.";
+      toast.error(errorMessage);
+    } finally {
+      dispatch(setLoading(false));
+    }
+    // } else {
+    //   toast.info("No changes to update");
+    // }
+  };
+
+  return {
+    onSubmit,
+    loading,
+  };
 };
