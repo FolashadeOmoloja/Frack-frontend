@@ -2,13 +2,16 @@
 import TalentNavbar from "@/components/Dashboard/TalentDashboard/TalentNavbar";
 import CTABTN from "@/components/Elements/CTA/CTA-Button";
 import Link from "next/link";
+import { applyJobHandler } from "@/hooks/job-hook";
 import { FaArrowLeft } from "react-icons/fa6";
 import { useSelector } from "react-redux";
 
 const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
   const jobPostings = useSelector((state: any) => state.jobPosts.jobPosts);
   const jobData = jobPostings[parseInt(params.jobId)];
-
+  const { onSubmit: applyHandler, loading, isApplied } = applyJobHandler();
+  const jobDataId = jobData._id ? jobData._id : "";
+  console.log(jobData._id);
   return (
     <>
       <TalentNavbar activeItem={1} />
@@ -68,9 +71,27 @@ const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
             ${jobData?.salaryRange1} - ${jobData?.salaryRange2}
           </span>
         </div>
-        <div className="pb-14">
-          <CTABTN route={""} CTA="Apply" showIcon />
-        </div>
+        {!isApplied ? (
+          <div className="pb-14">
+            <CTABTN
+              route={""}
+              isFunc
+              func={() => applyHandler(jobDataId)}
+              CTA={loading ? "Applying.." : "Apply"}
+              showIcon
+            />
+          </div>
+        ) : (
+          <div className="pb-14">
+            <CTABTN
+              route={""}
+              backGround="bg-gray-600 cursor-not-allowed"
+              width="w-full"
+              disabled
+              CTA={"Already Applied"}
+            />
+          </div>
+        )}
       </main>
     </>
   );

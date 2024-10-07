@@ -1,6 +1,22 @@
+"use client";
+import { useDispatch } from "react-redux";
 import ForTalentSignInForm from "./Form";
+import { setUser } from "@/redux/slices/authSlice";
+import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 const ForTalentSignIn = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const loggedOut = Cookies.get("loggedOut");
+
+    if (loggedOut) {
+      dispatch(setUser(null));
+      console.log("done");
+      Cookies.remove("loggedOut");
+    }
+  }, [dispatch]);
   return (
     <section className="xsm:h-[100vh] flex">
       <div

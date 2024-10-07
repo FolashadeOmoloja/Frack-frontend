@@ -1,5 +1,9 @@
 import { setLoading } from "@/redux/slices/authSlice";
-import { JOB_API_END_POINT } from "@/utilities/constants/constants";
+import { setApplyLoading, setSingleJob } from "@/redux/slices/jobSlice";
+import {
+  APPLICATIONS_API_END_POINT,
+  JOB_API_END_POINT,
+} from "@/utilities/constants/constants";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,10 +12,9 @@ import { useState, useEffect, useCallback } from "react";
 import { toast } from "sonner";
 
 export const useAddJob = () => {
+  const { loading } = useSelector((store: any) => store.auth);
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const { loading } = useSelector((store: any) => store.auth);
 
   const onSubmit = async (jobPost: any) => {
     dispatch(setLoading(true));
@@ -50,8 +53,9 @@ export const useAddJob = () => {
 };
 
 export const useGetCompanyJobs = () => {
-  const [jobs, setJobs] = useState([]);
   const dispatch = useDispatch();
+
+  const [jobs, setJobs] = useState([]);
   const { loading } = useSelector((store: any) => store.auth);
   useEffect(() => {
     const fetchJobs = async () => {
@@ -85,10 +89,9 @@ export const useGetCompanyJobs = () => {
 };
 
 export const useEditJob = () => {
+  const { loading } = useSelector((store: any) => store.auth);
   const dispatch = useDispatch();
   const router = useRouter();
-
-  const { loading } = useSelector((store: any) => store.auth);
 
   const onSubmit = async (updatedJobPost: any, id: any) => {
     dispatch(setLoading(true));
@@ -131,5 +134,66 @@ export const useEditJob = () => {
   return {
     onSubmit,
     loading,
+  };
+};
+
+export const applyJobHandler = () => {
+  const { singleJob, loading } = useSelector((store: any) => store.job);
+  const { user } = useSelector((store: any) => store.auth);
+  const dispatch = useDispatch();
+  const router = useRouter();
+  const isInitiallyApplied =
+    singleJob?.applications?.some(
+      (application: { applicant: string }) =>
+        application.applicant === user?._id
+    ) || false;
+
+  const [isApplied, setIsApplied] = useState(isInitiallyApplied);
+
+  // Update `isApplied` whenever `singleJob` or `user` changes
+  useEffect(() => {
+    setIsApplied(isInitiallyApplied);
+  }, [singleJob, user]);
+
+  // Job application submission handler
+  const onSubmit = async (jobId: string) => {
+    console.log(jobId);
+    dispatch(setApplyLoading(true)); // Show loading state
+    try {
+      const res = await axios.get(
+        `${APPLICATIONS_API_END_POINT}/apply/${jobId}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+
+      if (res.data.success) {
+        setIsApplied(true); // Update local state
+        const updatedSingleJob = {
+          ...singleJob,
+          applications: [...singleJob.applications, { applicant: user?._id }],
+        };
+        dispatch(setSingleJob(updatedSingleJob)); // Update Redux state for real-time UI update
+        toast.success(res.data.message); // Notify user on success
+      }
+    } catch (error: any) {
+      console.log(error);
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "An unknown error occurred.";
+      toast.error(errorMessage); // Notify user on error
+    } finally {
+      dispatch(setApplyLoading(false)); // Stop loading state
+    }
+  };
+
+  return {
+    onSubmit,
+    loading,
+    isApplied,
   };
 };

@@ -4,6 +4,7 @@ import { activeJobApplication } from "@/utilities/constants/jobData";
 import { useEffect, useState } from "react";
 import JobTable from "./JobTable";
 import { activeColumns } from "@/utilities/tableData";
+import { useSelector } from "react-redux";
 
 // Define the structure for job applications
 interface JobApplication {
@@ -23,6 +24,7 @@ type IsActiveState = {
 const MyJobTables = () => {
   // Define the filter options
   const filterArr = ["Active Applications", "Declined", "Hired"];
+  const { user } = useSelector((store: any) => store.auth);
 
   // Initialize the active state and the job application data
   const [active, setActive] = useState<IsActiveState>({ [0]: true });
@@ -57,10 +59,17 @@ const MyJobTables = () => {
     setJobApplicationData(activeJobApplication);
   }, []);
 
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   return (
     <section className="dashboard-container min-h-svh">
       <h2 className="text-2xl font-bold mb-1">
-        Ditimi, see how your application is going
+        {mounted && user?.firstName ? `${user.firstName}` : "You can"}, see how
+        your application is going
       </h2>
       <span className="text-[#7C8698]">
         This is your complete frack overview
