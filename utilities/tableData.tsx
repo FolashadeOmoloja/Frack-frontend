@@ -5,15 +5,21 @@ import { DownloadResumeBotton } from "@/components/Elements/ProfileBox";
 import { useDispatch } from "react-redux";
 import { useRouter } from "next/navigation";
 import { setJob } from "@/redux/slices/jobSlice";
-import { useEditJob, useGetCompanyJobs } from "@/hooks/job-hook";
+import { useEditJob } from "@/hooks/job-hook";
 
-interface JobApplication {
+type Company = {
+  companyName: string;
+};
+
+export interface JobApplication {
   title: string;
   jobProximity: string;
   location: string;
-  company: string;
+  company: Company;
   priceRange: string;
   status: string;
+  salaryRange1: string;
+  salaryRange2: string;
 }
 
 export interface JobPosted {
@@ -60,8 +66,11 @@ export const activeColumns: Column<JobApplication>[] = [
     Cell: ({ row }: { row: { original: JobApplication } }) => {
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.company}</span>
-          <span>{row.original.priceRange}</span>
+          <span>{row.original.company.companyName}</span>
+          <span>
+            {" "}
+            ${row.original.salaryRange1} - ${row.original.salaryRange2}
+          </span>
         </div>
       );
     },

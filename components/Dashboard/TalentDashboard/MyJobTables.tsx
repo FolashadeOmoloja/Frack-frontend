@@ -1,63 +1,57 @@
 "use client";
 
-import { activeJobApplication } from "@/utilities/constants/jobData";
 import { useEffect, useState } from "react";
 import JobTable from "./JobTable";
-import { activeColumns } from "@/utilities/tableData";
+import { activeColumns, JobApplication } from "@/utilities/tableData";
 import { useSelector } from "react-redux";
+import { Loader2 } from "lucide-react";
+import { useGetAppliedJobs } from "@/hooks/job-hook";
 
-// Define the structure for job applications
-interface JobApplication {
-  title: string;
-  jobProximity: string;
-  location: string;
-  company: string;
-  priceRange: string;
-  status: string;
-}
-
-// Define the type for the active state
 type IsActiveState = {
   [key: number]: boolean;
 };
 
 const MyJobTables = () => {
-  // Define the filter options
   const filterArr = ["Active Applications", "Declined", "Hired"];
   const { user } = useSelector((store: any) => store.auth);
-
-  // Initialize the active state and the job application data
+  const jobPostings = useSelector((state: any) => state.jobPosts.jobPosts);
+  const { appliedJobs, loading } = useGetAppliedJobs();
   const [active, setActive] = useState<IsActiveState>({ [0]: true });
-  const [jobApplicationData, setJobApplicationData] =
-    useState<JobApplication[]>(activeJobApplication);
+  const [changeTable, setChangeTable] = useState(0);
+  const mergedJobs = appliedJobs
+    .map((appliedJob: any) => {
+      const jobPosting = jobPostings.find(
+        (job: any) => job._id === appliedJob.job
+      );
+      if (jobPosting) {
+        return {
+          ...jobPosting,
+          status: appliedJob.status,
+        };
+      }
+      return null;
+    })
+    .filter((job: any) => job !== null);
+  console.log(mergedJobs);
 
   // Function to filter jobs based on status
   const filterJobs = (status: string) => {
-    return activeJobApplication.filter((job) =>
+    return mergedJobs.filter((job: { status: string }) =>
       job.status.toLowerCase().includes(status.toLowerCase())
     );
   };
+
+  const activeAppliedJobs = changeTable === 0 ? filterJobs("Under Review") : [];
+  const declinedJobs = changeTable === 1 ? filterJobs("declined") : [];
+  const hiredJobs = changeTable === 2 ? filterJobs("hired") : [];
 
   // Function to handle active tab change
   const activeFunc = (idx: number) => {
     const newState: IsActiveState = {};
     filterArr.forEach((_, i) => (newState[i] = i === idx));
     setActive(newState);
-
-    // Update the job application data based on the active tab
-    if (idx === 0) {
-      setJobApplicationData(activeJobApplication);
-    } else if (idx === 1) {
-      setJobApplicationData(filterJobs("declined"));
-    } else if (idx === 2) {
-      setJobApplicationData(filterJobs("hired"));
-    }
+    setChangeTable(idx);
   };
-
-  // Initialize with active applications on component mount
-  useEffect(() => {
-    setJobApplicationData(activeJobApplication);
-  }, []);
 
   const [mounted, setMounted] = useState(false);
 
@@ -85,10 +79,41 @@ const MyJobTables = () => {
           </span>
         ))}
       </div>
-      <JobTable<JobApplication>
-        data={jobApplicationData}
-        columns={activeColumns}
-      />
+      {changeTable === 0 ? (
+        loading ? (
+          <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#000080]" />
+        ) : activeAppliedJobs.length === 0 ? (
+          <p className="mt-10 text-[#000040] italic text-2xl">
+            No data available at the moment.
+          </p>
+        ) : (
+          <JobTable<JobApplication>
+            data={activeAppliedJobs}
+            columns={activeColumns}
+          />
+        )
+      ) : changeTable === 1 ? (
+        loading ? (
+          <Loader2 className=" h-14 w-14 animate-spin ml-10 mt-10 text-[#000080]" />
+        ) : declinedJobs.length === 0 ? (
+          <p className="mt-10 text-[#000040] italic text-2xl">
+            No data available at the moment.
+          </p>
+        ) : (
+          <JobTable<JobApplication>
+            data={declinedJobs}
+            columns={activeColumns}
+          />
+        )
+      ) : changeTable === 2 ? (
+        hiredJobs.length === 0 ? (
+          <p className="mt-10 text-[#000040] italic text-2xl">
+            No data available at the moment.
+          </p>
+        ) : (
+          <JobTable<JobApplication> data={hiredJobs} columns={activeColumns} />
+        )
+      ) : null}
     </section>
   );
 };

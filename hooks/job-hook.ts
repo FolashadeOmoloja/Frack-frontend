@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useState, useEffect, useCallback } from "react";
 
 import { toast } from "sonner";
+import { addAppliedJob } from "@/redux/slices/appliedJobSlice";
 
 export const useAddJob = () => {
   const { loading } = useSelector((store: any) => store.auth);
@@ -138,27 +139,13 @@ export const useEditJob = () => {
 };
 
 export const applyJobHandler = () => {
-  const { singleJob, loading } = useSelector((store: any) => store.job);
+  const { loading } = useSelector((store: any) => store.job);
   const { user } = useSelector((store: any) => store.auth);
   const dispatch = useDispatch();
-  const router = useRouter();
-  const isInitiallyApplied =
-    singleJob?.applications?.some(
-      (application: { applicant: string }) =>
-        application.applicant === user?._id
-    ) || false;
-
-  const [isApplied, setIsApplied] = useState(isInitiallyApplied);
-
-  // Update `isApplied` whenever `singleJob` or `user` changes
-  useEffect(() => {
-    setIsApplied(isInitiallyApplied);
-  }, [singleJob, user]);
 
   // Job application submission handler
   const onSubmit = async (jobId: string) => {
-    console.log(jobId);
-    dispatch(setApplyLoading(true)); // Show loading state
+    dispatch(setApplyLoading(true));
     try {
       const res = await axios.get(
         `${APPLICATIONS_API_END_POINT}/apply/${jobId}`,
@@ -171,29 +158,58 @@ export const applyJobHandler = () => {
       );
 
       if (res.data.success) {
-        setIsApplied(true); // Update local state
-        const updatedSingleJob = {
-          ...singleJob,
-          applications: [...singleJob.applications, { applicant: user?._id }],
-        };
-        dispatch(setSingleJob(updatedSingleJob)); // Update Redux state for real-time UI update
-        toast.success(res.data.message); // Notify user on success
+        dispatch(addAppliedJob(jobId));
+        toast.success(res.data.message);
       }
     } catch (error: any) {
-      console.log(error);
       const errorMessage =
         error.response?.data?.message ||
         error.message ||
         "An unknown error occurred.";
-      toast.error(errorMessage); // Notify user on error
+      toast.error(errorMessage);
     } finally {
-      dispatch(setApplyLoading(false)); // Stop loading state
+      dispatch(setApplyLoading(false));
     }
   };
 
   return {
     onSubmit,
     loading,
-    isApplied,
   };
+};
+
+export const useGetAppliedJobs = () => {
+  const dispatch = useDispatch();
+
+  const [appliedJobs, setAppliedJobs] = useState([]);
+  const { loading } = useSelector((store: any) => store.auth);
+  useEffect(() => {
+    const fetchAppliedJobs = async () => {
+      dispatch(setLoading(true));
+      try {
+        const response = await axios.get(
+          `${APPLICATIONS_API_END_POINT}/get-all`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+        setAppliedJobs(response.data.applications);
+      } catch (error: any) {
+        const errorMessage =
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch Applied Jobs";
+        toast.error(errorMessage);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
+
+    fetchAppliedJobs();
+  }, []);
+
+  return { appliedJobs, loading };
 };

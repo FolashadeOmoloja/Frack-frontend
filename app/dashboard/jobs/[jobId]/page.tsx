@@ -8,10 +8,14 @@ import { useSelector } from "react-redux";
 
 const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
   const jobPostings = useSelector((state: any) => state.jobPosts.jobPosts);
+  const { jobIds: appliedJobIds } = useSelector(
+    (state: any) => state.appliedJobs
+  );
   const jobData = jobPostings[parseInt(params.jobId)];
-  const { onSubmit: applyHandler, loading, isApplied } = applyJobHandler();
+  const { onSubmit: applyHandler, loading } = applyJobHandler();
   const jobDataId = jobData._id ? jobData._id : "";
-  console.log(jobData._id);
+  const isApplied = appliedJobIds.includes(jobDataId);
+
   return (
     <>
       <TalentNavbar activeItem={1} />
@@ -85,8 +89,8 @@ const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
           <div className="pb-14">
             <CTABTN
               route={""}
-              backGround="bg-gray-600 cursor-not-allowed"
-              width="w-full"
+              backGround="bg-gray-600 border-gray-600 cursor-not-allowed"
+              width="w-[175px]"
               disabled
               CTA={"Already Applied"}
             />

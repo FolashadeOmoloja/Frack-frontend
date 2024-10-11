@@ -14,6 +14,7 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import jobSlice from "./slices/jobSlice";
+import appliedJobSlice from "./slices/appliedJobSlice";
 
 // Configuration for redux-persist
 const persistConfig = {
@@ -28,6 +29,7 @@ const rootReducer = combineReducers({
   talentRegistration: talentRegistrationSlice,
   job: jobSlice,
   jobPosts: jobPostsSlice,
+  appliedJobs: appliedJobSlice,
 });
 
 // Persisting the combined reducers
