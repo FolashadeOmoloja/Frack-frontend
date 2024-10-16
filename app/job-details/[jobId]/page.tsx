@@ -18,7 +18,6 @@ const Joblisting = ({ params }: { params: { jobId: string } }) => {
   const { onSubmit: applyHandler, loading } = applyJobHandler();
   const jobDataId = jobData._id ? jobData._id : "";
   const isApplied = appliedJobIds.includes(jobDataId);
-
   return (
     <>
       <Navbar activeItem={1} />
@@ -80,38 +79,30 @@ const Joblisting = ({ params }: { params: { jobId: string } }) => {
             ${jobData?.salaryRange1} - ${jobData?.salaryRange2}
           </span>
         </div>
-        <div>
-          <CTABTN route={"./sign-in"} CTA="Apply" showIcon />
-        </div>
-        {!user ? (
-          !isApplied ? (
-            <div className="pb-14">
-              <CTABTN
-                route={""}
-                isFunc
-                func={() => applyHandler(jobDataId)}
-                CTA={loading ? "Applying.." : "Apply"}
-                showIcon
-              />
-            </div>
-          ) : (
-            <div className="pb-14">
-              <CTABTN
-                route={""}
-                backGround="bg-gray-600 border-gray-600 cursor-not-allowed"
-                width="w-[175px]"
-                disabled
-                CTA={"Already Applied"}
-              />
-            </div>
-          )
-        ) : (
-          <div>
-            <CTABTN route={"./sign-in"} CTA="Apply" showIcon />
+        {user && !isApplied ? (
+          <div className="pb-14">
+            <CTABTN
+              route={""}
+              isFunc
+              func={() => applyHandler(jobDataId)}
+              CTA={loading ? "Applying.." : "Apply"}
+              showIcon
+            />
           </div>
-        )}
+        ) : user && isApplied ? (
+          <div className="pb-14">
+            <CTABTN
+              route={""}
+              backGround="bg-gray-600 border-gray-600 cursor-not-allowed"
+              width="w-[175px]"
+              disabled
+              CTA={"Already Applied"}
+            />
+          </div>
+        ) : !user ? (
+          <CTA />
+        ) : null}
       </main>
-      <CTA />
       <Footer />
     </>
   );

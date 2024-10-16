@@ -20,6 +20,7 @@ type Job = {
   experience: string;
   skills: string[];
   role: string;
+  department: string;
   country: string;
 };
 

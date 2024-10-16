@@ -25,7 +25,7 @@ const CTA = ({
         </h3>
         <div className="mt-8 max-md:justify-center flex">
           <CTABTN
-            route={"/sign-up"}
+            route={"/sign-in"}
             CTA="Get Started"
             showIcon={true}
             color={btnColor}

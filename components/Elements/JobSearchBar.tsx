@@ -19,6 +19,7 @@ type filteredJobs = {
   experience: string;
   skills: string[];
   role: string;
+  department: string;
   country: string;
 }[];
 
@@ -57,7 +58,7 @@ const JobSearchBar = ({
   const search = () => {
     const newFilteredJobArr = jobPosting.filter((job) => {
       return (
-        job.role.toLowerCase().includes(role.toLowerCase()) &&
+        job.department.toLowerCase().includes(role.toLowerCase()) &&
         job.country.toLowerCase().includes(location.toLowerCase()) &&
         job.skills.some((skill) =>
           skill.toLowerCase().includes(skills.toLowerCase())
