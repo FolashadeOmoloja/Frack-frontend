@@ -75,7 +75,6 @@ const TalentProfileForm = ({
       try {
         dispatch(setLoading(true));
         const formData = new FormData();
-        console.log(formData);
         for (const key in updatedData) {
           formData.append(key, updatedData[key]);
         }

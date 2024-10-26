@@ -1,5 +1,5 @@
 import { Column } from "react-table";
-import { userObject } from "./constants/typeDef";
+import { userObject, JobPosted } from "./constants/typeDef";
 import CTABTN from "@/components/Elements/CTA/CTA-Button";
 import { DownloadResumeBotton } from "@/components/Elements/ProfileBox";
 import { useDispatch } from "react-redux";
@@ -20,24 +20,6 @@ export interface JobApplication {
   status: string;
   salaryRange1: string;
   salaryRange2: string;
-}
-
-export interface JobPosted {
-  _id: string;
-  title: string;
-  department: string;
-  location: string;
-  employmentType: string;
-  jobProximity: string;
-  jobHours: string;
-  experience: string;
-  salaryRange1: string;
-  salaryRange2: string;
-  status: string;
-  country: string;
-  role: string;
-  candidates?: userObject[];
-  description: string;
 }
 
 export const activeColumns: Column<JobApplication>[] = [
@@ -124,7 +106,7 @@ export const companyActiveColumns: Column<JobPosted>[] = [
   },
   {
     Header: "",
-    accessor: "candidates",
+    accessor: "applicants",
     Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
       const dispatch = useDispatch();
       const router = useRouter();
@@ -196,7 +178,7 @@ export const closedJobsColumns: Column<JobPosted>[] = [
   },
   {
     Header: "",
-    accessor: "candidates",
+    accessor: "applicants",
     Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
       const { onSubmit: updateJob } = useEditJob();
 

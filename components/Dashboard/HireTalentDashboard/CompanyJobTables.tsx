@@ -6,9 +6,8 @@ import {
   companyActiveColumns,
   hiredCandidatesColumn,
   closedJobsColumns,
-  JobPosted,
 } from "@/utilities/tableData";
-import { userObject } from "@/utilities/constants/typeDef";
+import { userObject, JobPosted } from "@/utilities/constants/typeDef";
 import { useGetCompanyJobs } from "@/hooks/job-hook";
 import { Loader2 } from "lucide-react";
 import { useSelector } from "react-redux";
@@ -18,7 +17,7 @@ type IsActiveState = {
 };
 
 const CompanyJobTables = () => {
-  const filterArr = ["Active Applications", "Closed Jobs", "Hired Talents"];
+  const filterArr = ["Active Jobs", "Closed Jobs", "Hired Talents"];
   const { jobs, loading } = useGetCompanyJobs();
   const [active, setActive] = useState<IsActiveState>({ 0: true });
   const [changeTable, setChangeTable] = useState(0);

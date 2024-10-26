@@ -33,9 +33,9 @@ const page = () => {
 
   const companyAnalytics = [
     {
-      analtyticsTitle: "Active Job Offers",
-      stats: openedJobs.length,
-      desc: `Current active job listings`,
+      analtyticsTitle: "Total Job Offers",
+      stats: jobs.length != 0 ? jobs.length : 0,
+      desc: `${openedJobs.length} active job listings`,
     },
     {
       analtyticsTitle: "Total Applicants",
@@ -43,7 +43,7 @@ const page = () => {
       desc: "96 Shortlisted Applicants",
     },
     {
-      analtyticsTitle: "Talent Interviews",
+      analtyticsTitle: "Talent Interviews", //notifications
       stats: 136,
       desc: "25 Active Interviews",
     },
