@@ -3,10 +3,10 @@ import axios from "axios";
 import { FaTrashCan } from "react-icons/fa6";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import { TALENT_API_END_POINT } from "@/utilities/constants/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { setLoading, setUser } from "@/redux/slices/authSlice";
+import { useGetAllFilters } from "@/hooks/content-hook";
 
 interface SkillsProps {
   initialSkills: string[];
@@ -17,6 +17,7 @@ const SkillsBox: React.FC<SkillsProps> = ({ initialSkills }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
   const { loading } = useSelector((store: any) => store.auth);
+  const { filter } = useGetAllFilters();
 
   const handleUpdateSkills = async (skills: string[], action: string) => {
     dispatch(setLoading(true));
@@ -79,7 +80,7 @@ const SkillsBox: React.FC<SkillsProps> = ({ initialSkills }) => {
         </button>
         {isOpen && (
           <div className="dropdown-menu custom-scrollbar max-w-[270px] max-h-[200px] font-normal right-0 text-sm text-black top-6">
-            {searchBarData[0].options.map((option, optionIdx) => (
+            {filter.skills.map((option: any, optionIdx: number) => (
               <div
                 key={optionIdx}
                 className="dropdown-item"

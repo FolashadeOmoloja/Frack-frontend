@@ -1,7 +1,6 @@
 import { FieldError, useForm } from "react-hook-form";
 import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import { FaArrowLeft } from "react-icons/fa6";
 import FormLogo from "@/components/Elements/FormLogo";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,6 +8,7 @@ import { setStep2Data } from "@/redux/slices/talentRegistrationSlice";
 import { companyValidationRules as validationRules } from "@/utilities/constants/formValidation";
 import { RootState } from "@/redux/store";
 import { useEffect } from "react";
+import { useGetAllFilters } from "@/hooks/content-hook";
 
 const FormTwo = ({
   changeBgState,
@@ -29,6 +29,7 @@ const FormTwo = ({
   const { step2Data } = useSelector(
     (state: RootState) => state.talentRegistration
   );
+  const { filter } = useGetAllFilters();
 
   useEffect(() => {
     if (step2Data) {
@@ -63,9 +64,9 @@ const FormTwo = ({
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <Dropdown
-          ItemsArr={searchBarData[1].options}
-          label="Role"
-          placeholder="Select your role"
+          ItemsArr={filter.role}
+          label="Department"
+          placeholder="Select your department"
           name={"role"}
           required={true}
           register={register}
@@ -93,7 +94,7 @@ const FormTwo = ({
           selctedItem2={step2Data.experience}
         />
         <Dropdown
-          ItemsArr={searchBarData[0].options}
+          ItemsArr={filter.skills}
           label="Primary skill"
           placeholder="Select a skill"
           name={"skills"}

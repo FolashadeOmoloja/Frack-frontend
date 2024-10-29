@@ -19,6 +19,7 @@
     "clsx": "^2.1.1",
     "cookie": "^0.6.0",
     "cookies": "^0.9.1",
+    "dompurify": "^3.1.7",
     "framer-motion": "^11.3.19",
     "jose": "^5.9.2",
     "js-cookie": "^3.0.5",
@@ -44,6 +45,7 @@
   "devDependencies": {
     "@types/cookie": "^0.6.0",
     "@types/cookies": "^0.9.0",
+    "@types/dompurify": "^3.0.5",
     "@types/js-cookie": "^3.0.6",
     "@types/jsonwebtoken": "^9.0.7",
     "@types/node": "^20",

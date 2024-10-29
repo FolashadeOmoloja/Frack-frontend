@@ -2,7 +2,6 @@
 import Dropdown from "@/components/Elements/Dropdown";
 import { useAddJob } from "@/hooks/job-hook";
 import { validationRules } from "@/utilities/constants";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import { Loader2 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { FieldError, useForm } from "react-hook-form";
@@ -17,12 +16,11 @@ const AddJobs = () => {
   } = useForm();
 
   const { user } = useSelector((store: any) => store.auth);
+  const { filter } = useSelector((store: any) => store.content);
   const { onSubmit: addJob, loading } = useAddJob();
   const [skills, setSkills] = useState<string[]>([]);
   const [newSkill, setNewSkill] = useState("");
-  const [filteredSuggestions, setFilteredSuggestions] = useState(
-    searchBarData[0].options
-  );
+  const [filteredSuggestions, setFilteredSuggestions] = useState(filter.skills);
 
   const addSkill = (skill: string) => {
     if (skill && !skills.includes(skill)) {
@@ -30,7 +28,7 @@ const AddJobs = () => {
       setSkills(updatedSkills);
       setValue("skills", updatedSkills);
       setNewSkill("");
-      setFilteredSuggestions(searchBarData[0].options);
+      setFilteredSuggestions(filter.skills);
     }
   };
 
@@ -44,7 +42,7 @@ const AddJobs = () => {
     const { value } = e.target;
     setNewSkill(value);
     setFilteredSuggestions(
-      searchBarData[0].options.filter((item) =>
+      filter.skills.filter((item: string) =>
         item.toLowerCase().includes(value.toLowerCase())
       )
     );
@@ -167,7 +165,7 @@ const AddJobs = () => {
                 )}
               </div>
               <Dropdown
-                ItemsArr={searchBarData[1].options}
+                ItemsArr={filter.role}
                 label="Department"
                 placeholder="Select a Department"
                 name={"department"}
@@ -287,15 +285,17 @@ const AddJobs = () => {
                 </button>
                 {newSkill && filteredSuggestions.length > 0 && (
                   <ul className="absolute z-10 bg-white border border-gray-300 w-full mt-12 max-h-40 overflow-auto  custom-scrollbar">
-                    {filteredSuggestions.map((suggestion, index) => (
-                      <li
-                        key={index}
-                        className="p-2 hover:bg-[#00008015] cursor-pointer"
-                        onClick={() => addSkill(suggestion)}
-                      >
-                        {suggestion}
-                      </li>
-                    ))}
+                    {filteredSuggestions.map(
+                      (suggestion: string, index: number) => (
+                        <li
+                          key={index}
+                          className="p-2 hover:bg-[#00008015] cursor-pointer"
+                          onClick={() => addSkill(suggestion)}
+                        >
+                          {suggestion}
+                        </li>
+                      )
+                    )}
                   </ul>
                 )}
               </div>

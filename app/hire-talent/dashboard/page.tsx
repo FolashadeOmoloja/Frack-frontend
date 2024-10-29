@@ -1,6 +1,7 @@
 "use client";
 import DashboardLayout from "@/components/Dashboard/DashboardLayout/DashboardLayout";
 import HireTalentNav from "@/components/Dashboard/HireTalentDashboard/HireTalentNav";
+import { useGetAllFilters } from "@/hooks/content-hook";
 import { useGetCompanyJobs } from "@/hooks/job-hook";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -18,6 +19,8 @@ const page = () => {
   }, [searchParams]);
 
   const { jobs } = useGetCompanyJobs();
+  const { filter } = useGetAllFilters();
+  const getFilter = filter;
 
   // Function to filter jobs based on status
   const filterJobs = (status: string) => {

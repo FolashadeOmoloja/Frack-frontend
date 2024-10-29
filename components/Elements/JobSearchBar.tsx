@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import {
   hoursFilter,
   proximityFilter,
   experienceFilter,
 } from "@/utilities/constants/searchbarData";
+import { useGetAllFilters } from "@/hooks/content-hook";
 
 type IsOpenState = {
   [key: number]: boolean;
@@ -27,6 +27,11 @@ type IsCheckedState = {
   [key: number]: boolean;
 };
 
+type DataItem = {
+  label: string;
+  options: string[];
+};
+
 const JobSearchBar = ({
   onSearch,
   jobPosting,
@@ -42,6 +47,13 @@ const JobSearchBar = ({
   const [role, setRole] = useState("");
   const [location, setLocation] = useState("");
   const [skills, setSkills] = useState("");
+
+  const { filter } = useGetAllFilters();
+  const searchBarData: DataItem[] = [
+    { label: "Select your skill", options: filter.skills },
+    { label: "Select a country", options: filter.country },
+    { label: "Select a department", options: filter.role },
+  ];
 
   const [selectedItems, setSelectedItems] = useState(
     searchBarData.map(() => "")

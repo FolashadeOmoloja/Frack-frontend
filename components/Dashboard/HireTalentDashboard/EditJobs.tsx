@@ -2,7 +2,6 @@
 import Dropdown from "@/components/Elements/Dropdown";
 import { useEditJob } from "@/hooks/job-hook";
 import { validationRules } from "@/utilities/constants";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import { Loader2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -20,20 +19,19 @@ const EditJobs = ({ openJobPage }: { openJobPage?: boolean }) => {
   } = useForm();
 
   const { job: jobPost } = useSelector((store: any) => store.job);
+  const { filter } = useSelector((store: any) => store.content);
 
   //skills handler
   const [skills, setSkills] = useState<string[]>(jobPost?.skills);
   const [newSkill, setNewSkill] = useState("");
-  const [filteredSuggestions, setFilteredSuggestions] = useState(
-    searchBarData[0].options
-  );
+  const [filteredSuggestions, setFilteredSuggestions] = useState(filter.skills);
   const addSkill = (skill: string) => {
     if (skill && !skills.includes(skill)) {
       const updatedSkills = [...skills, skill];
       setSkills(updatedSkills);
       setValue("skills", updatedSkills);
       setNewSkill("");
-      setFilteredSuggestions(searchBarData[0].options);
+      setFilteredSuggestions(filter.skills);
     }
   };
 
@@ -47,7 +45,7 @@ const EditJobs = ({ openJobPage }: { openJobPage?: boolean }) => {
     const { value } = e.target;
     setNewSkill(value);
     setFilteredSuggestions(
-      searchBarData[0].options.filter((item) =>
+      filter.skills.filter((item: string) =>
         item.toLowerCase().includes(value.toLowerCase())
       )
     );
@@ -203,7 +201,7 @@ const EditJobs = ({ openJobPage }: { openJobPage?: boolean }) => {
                 )}
               </div>
               <Dropdown
-                ItemsArr={searchBarData[1].options}
+                ItemsArr={filter.role}
                 label="Department"
                 placeholder="Select a Department"
                 name={"department"}
@@ -327,15 +325,17 @@ const EditJobs = ({ openJobPage }: { openJobPage?: boolean }) => {
                 </button>
                 {newSkill && filteredSuggestions.length > 0 && (
                   <ul className="absolute z-10 bg-white border border-gray-300 w-full mt-12 max-h-40 overflow-auto  custom-scrollbar">
-                    {filteredSuggestions.map((suggestion, index) => (
-                      <li
-                        key={index}
-                        className="p-2 hover:bg-[#00008015] cursor-pointer"
-                        onClick={() => addSkill(suggestion)}
-                      >
-                        {suggestion}
-                      </li>
-                    ))}
+                    {filteredSuggestions.map(
+                      (suggestion: string, index: number) => (
+                        <li
+                          key={index}
+                          className="p-2 hover:bg-[#00008015] cursor-pointer"
+                          onClick={() => addSkill(suggestion)}
+                        >
+                          {suggestion}
+                        </li>
+                      )
+                    )}
                   </ul>
                 )}
               </div>

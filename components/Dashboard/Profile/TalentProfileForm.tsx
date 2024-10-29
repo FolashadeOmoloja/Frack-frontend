@@ -1,7 +1,6 @@
 import PhoneNoInput from "@/components/Elements/PhoneNoInput";
 import { useForm } from "react-hook-form";
 import { validationRules } from "@/utilities/constants";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import Dropdown from "@/components/Elements/Dropdown";
 import { userObject } from "@/utilities/constants/typeDef";
 import axios from "axios";
@@ -31,6 +30,7 @@ const TalentProfileForm = ({
   const [isEditingResume, setIsEditingResume] = useState(false);
   const [fileSizeError, setFileSizeError] = useState<string | null>(null);
   const { loading } = useSelector((store: any) => store.auth);
+  const { filter } = useSelector((store: any) => store.content);
   const dispatch = useDispatch();
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -208,7 +208,7 @@ const TalentProfileForm = ({
         </div>
         <div className="flex max-sslg:flex-col gap-[20px] ">
           <Dropdown
-            ItemsArr={searchBarData[1].options}
+            ItemsArr={filter.role}
             label="Industry"
             placeholder="Engineering"
             name={"role"}
