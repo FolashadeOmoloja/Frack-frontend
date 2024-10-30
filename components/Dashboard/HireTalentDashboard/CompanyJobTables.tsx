@@ -7,10 +7,11 @@ import {
   hiredCandidatesColumn,
   closedJobsColumns,
 } from "@/utilities/tableData";
-import { userObject, JobPosted } from "@/utilities/constants/typeDef";
-import { useGetCompanyJobs } from "@/hooks/job-hook";
+import { JobPosted, SuccessApplications } from "@/utilities/constants/typeDef";
+import { useGetAllCompanyEmployed, useGetCompanyJobs } from "@/hooks/job-hook";
 import { Loader2 } from "lucide-react";
 import { useSelector } from "react-redux";
+import { handleSendNotification } from "@/hooks/notification-hook";
 
 type IsActiveState = {
   [key: number]: boolean;
@@ -19,9 +20,12 @@ type IsActiveState = {
 const CompanyJobTables = () => {
   const filterArr = ["Active Jobs", "Closed Jobs", "Hired Talents"];
   const { jobs, loading } = useGetCompanyJobs();
+  const { successApplications } = useGetAllCompanyEmployed();
   const [active, setActive] = useState<IsActiveState>({ 0: true });
   const [changeTable, setChangeTable] = useState(0);
   const { user } = useSelector((store: any) => store.auth);
+  const { onSubmit: createNotice, loading: noticeLoading } =
+    handleSendNotification();
 
   // Function to filter jobs based on status
   const filterJobs = (status: string) => {
@@ -34,7 +38,7 @@ const CompanyJobTables = () => {
   // Recalculate the jobs when `jobs` or `changeTable` changes
   const openedJobs = changeTable === 0 ? filterJobs("open") : [];
   const closedJobs = changeTable === 1 ? filterJobs("closed") : [];
-  const hiredCandidates: string | any[] = [];
+  const hiredCandidates = changeTable === 2 ? successApplications : [];
 
   const activeFunc = (idx: number) => {
     const newState: IsActiveState = {};
@@ -48,6 +52,17 @@ const CompanyJobTables = () => {
   useEffect(() => {
     setMounted(true);
   }, []);
+
+  const onSubmit = () => {
+    const meetingUrl = "";
+
+    const senderMessage = `
+ ${user.companyName} has requested a meeting with Frack.
+  `;
+    const receiverMessage = `You’ve successfully requested a meeting with Frack! We’ll get back to you soon to confirm the details.`;
+
+    createNotice(user._id, senderMessage, receiverMessage, meetingUrl);
+  };
 
   return (
     <section className="dashboard-container min-h-svh">
@@ -99,12 +114,28 @@ const CompanyJobTables = () => {
             No data available at the moment.
           </p>
         ) : (
-          <JobTable<userObject>
+          <JobTable<SuccessApplications>
             data={hiredCandidates}
             columns={hiredCandidatesColumn}
           />
         )
       ) : null}
+      <button
+        onClick={onSubmit}
+        className="py-4 px-6 max-w-[300px] mt-10 bg-[#000080] text-white rounded-md font-semibold btn-hover"
+      >
+        {noticeLoading ? (
+          <div className="flex items-center justify-center">
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Requesting Meeting. . .
+          </div>
+        ) : (
+          "Request For Meeting with Frack"
+        )}
+      </button>
+      <p className="text-gray-600 text-sm mb-4 italic">
+        (Request for a meeting with frack to discuss job details)
+      </p>
     </section>
   );
 };

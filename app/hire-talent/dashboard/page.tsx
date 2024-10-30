@@ -2,9 +2,20 @@
 import DashboardLayout from "@/components/Dashboard/DashboardLayout/DashboardLayout";
 import HireTalentNav from "@/components/Dashboard/HireTalentDashboard/HireTalentNav";
 import { useGetAllFilters } from "@/hooks/content-hook";
-import { useGetCompanyJobs } from "@/hooks/job-hook";
+import {
+  useGetAllCompanyEmployed,
+  useGetCompanyJobs,
+  useGetAllActiveApp,
+} from "@/hooks/job-hook";
+import { JobPosted, userObject } from "@/utilities/constants/typeDef";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { useSelector } from "react-redux";
+
+interface Application {
+  job: JobPosted;
+  talent: userObject;
+}
 
 const page = () => {
   const searchParams = useSearchParams();
@@ -20,6 +31,7 @@ const page = () => {
 
   const { jobs } = useGetCompanyJobs();
   const { filter } = useGetAllFilters();
+  const { user } = useSelector((store: any) => store.auth);
   const getFilter = filter;
 
   // Function to filter jobs based on status
@@ -33,27 +45,51 @@ const page = () => {
   // Recalculate the jobs when `jobs` or `changeTable` changes
   const openedJobs = jobs.length != 0 ? filterJobs("open") : [];
   const closedJobs = jobs.length != 0 ? filterJobs("closed") : [];
+  const { successApplications } = useGetAllCompanyEmployed();
+  const { activeApplications, interviewApplications } = useGetAllActiveApp();
+
+  const uniqueJobs: JobPosted[] = [];
+  const uniqueTalents: userObject[] = [];
+
+  // Create sets to track IDs and ensure uniqueness
+  const jobIds = new Set<string>();
+  const talentIds = new Set<string>();
+
+  successApplications.forEach((application: Application) => {
+    // Check for job duplicates
+    if (!jobIds.has(application.job._id)) {
+      jobIds.add(application.job._id);
+      uniqueJobs.push(application.job);
+    }
+
+    // Check for talent duplicates
+    if (!talentIds.has(application.talent._id)) {
+      talentIds.add(application.talent._id);
+      uniqueTalents.push(application.talent);
+    }
+  });
 
   const companyAnalytics = [
     {
       analtyticsTitle: "Total Job Offers",
       stats: jobs.length != 0 ? jobs.length : 0,
-      desc: `${openedJobs.length} active job listings`,
+      desc: `${openedJobs.length} open job listings`,
     },
     {
       analtyticsTitle: "Total Applicants",
-      stats: 336,
-      desc: "96 Shortlisted Applicants",
+      stats: activeApplications.length != 0 ? activeApplications.length : 0,
+      desc: "Active Applicants for jobs",
     },
     {
       analtyticsTitle: "Talent Interviews", //notifications
-      stats: 136,
-      desc: "25 Active Interviews",
+      stats:
+        interviewApplications.length != 0 ? interviewApplications.length : 0,
+      desc: "Active Interviews for jobs",
     },
     {
       analtyticsTitle: "Employed Talents",
-      stats: 16,
-      desc: "6 Job Categories",
+      stats: uniqueTalents.length != 0 ? uniqueTalents.length : 0,
+      desc: `${uniqueJobs.length != 0 ? uniqueJobs.length : 0} Job Categories`,
     },
   ];
   return (
@@ -64,8 +100,8 @@ const page = () => {
         analytics={companyAnalytics}
         link2="/hire-talent/dashboard/my-jobs"
         link1="/hire-talent/dashboard/profile"
-        status1="Recruit"
-        status2="Remote/hybrid"
+        status1={user?.accountStatus ? user?.accountStatus : "Loading"}
+        status2={user?.preference ? user?.preference : "Loading"}
       />
     </>
   );

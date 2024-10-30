@@ -1,5 +1,5 @@
 import { setLoading } from "@/redux/slices/authSlice";
-import { setApplyLoading, setSingleJob } from "@/redux/slices/jobSlice";
+import { setApplyLoading } from "@/redux/slices/jobSlice";
 import {
   APPLICATIONS_API_END_POINT,
   JOB_API_END_POINT,
@@ -7,7 +7,7 @@ import {
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 import { toast } from "sonner";
 import { addAppliedJob } from "@/redux/slices/appliedJobSlice";
@@ -212,4 +212,102 @@ export const useGetAppliedJobs = () => {
   }, []);
 
   return { appliedJobs, loading };
+};
+
+export const useGetAllCompanyEmployed = () => {
+  const dispatch = useDispatch();
+
+  const [successApplications, setSuccessApplications] = useState([]);
+  const { loading } = useSelector((store: any) => store.auth);
+  useEffect(() => {
+    const fetchApplicants = async () => {
+      dispatch(setLoading(true));
+      try {
+        const response = await axios.get(
+          `${APPLICATIONS_API_END_POINT}/get-company-hired-applicants`,
+          {
+            withCredentials: true,
+          }
+        );
+        setSuccessApplications(response.data.employed);
+      } catch (error: any) {
+        const errorMessage =
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch talents";
+        toast.error(errorMessage);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
+
+    fetchApplicants();
+  }, []);
+
+  return { successApplications, loading };
+};
+
+export const useGetAllActiveApp = () => {
+  const dispatch = useDispatch();
+
+  const [activeApplications, setActiveApplications] = useState([]);
+  const [interviewApplications, setInterviewApplications] = useState([]);
+  const { loading } = useSelector((store: any) => store.auth);
+  useEffect(() => {
+    const fetchApplicants = async () => {
+      dispatch(setLoading(true));
+      try {
+        const response = await axios.get(
+          `${APPLICATIONS_API_END_POINT}/get-company-active-applicants`,
+          {
+            withCredentials: true,
+          }
+        );
+        setActiveApplications(response.data.active);
+        setInterviewApplications(response.data.interview);
+      } catch (error: any) {
+        const errorMessage =
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch talents";
+        toast.error(errorMessage);
+      } finally {
+        dispatch(setLoading(false));
+      }
+    };
+
+    fetchApplicants();
+  }, []);
+
+  return { activeApplications, interviewApplications, loading };
+};
+
+export const useGetTalentInterview = () => {
+  const dispatch = useDispatch();
+  const [interviewApplications, setInterviewApplications] = useState([]);
+
+  useEffect(() => {
+    const fetchApplicants = async () => {
+      try {
+        const response = await axios.get(
+          `${APPLICATIONS_API_END_POINT}//get-talent-applicants`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        setInterviewApplications(response.data.interviews);
+      } catch (error: any) {
+        const errorMessage =
+          error.response?.data?.message ||
+          error.message ||
+          "Failed to fetch talents";
+        toast.error(errorMessage);
+      }
+    };
+
+    fetchApplicants();
+  }, []);
+
+  return { interviewApplications };
 };

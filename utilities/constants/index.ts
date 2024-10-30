@@ -72,37 +72,6 @@ export const NavLinks = [
   },
 ];
 
-export const talentNotifications = [
-  { message: "New jobs have been added.", timestamp: "2024-07-18T10:24:00Z" },
-  {
-    message: "You have been selected for an interview.",
-    timestamp: "2024-07-17T14:12:00Z",
-  },
-  {
-    message: "You have received a payment.",
-    timestamp: "2024-07-16T09:45:00Z",
-  },
-  { message: "New jobs have been added.", timestamp: "2024-07-15T08:30:00Z" },
-  {
-    message: "You have been selected for an interview.",
-    timestamp: "2024-07-14T16:00:00Z",
-  },
-  {
-    message: "You have received a payment.",
-    timestamp: "2024-07-13T18:20:00Z",
-  },
-  { message: "New jobs have been added.", timestamp: "2024-07-12T12:50:00Z" },
-  {
-    message: "You have been selected for an interview.",
-    timestamp: "2024-07-11T07:10:00Z",
-  },
-  {
-    message: "You have received a payment.",
-    timestamp: "2024-07-10T21:45:00Z",
-  },
-  { message: "New jobs have been added.", timestamp: "2024-07-09T13:30:00Z" },
-];
-
 export const validationRules = {
   firstName: {
     required: "First Name is required",

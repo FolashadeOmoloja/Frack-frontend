@@ -4,12 +4,16 @@ import Navbar from "@/components/LandingPage/Navbar/NavBar";
 import CTA from "@/components/LandingPage/Offer/CTA";
 import Footer from "@/components/LandingPage/Offer/Footer";
 import { applyJobHandler } from "@/hooks/job-hook";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Link from "next/link";
 import { FaArrowLeft } from "react-icons/fa6";
+import { AppDispatch } from "@/redux/store";
+import { fetchAppliedJobs } from "@/redux/slices/appliedJobSlice";
+import { useEffect } from "react";
 
 const Joblisting = ({ params }: { params: { jobId: string } }) => {
   const jobPostings = useSelector((state: any) => state.jobPosts.jobPosts);
+  const dispatch = useDispatch<AppDispatch>();
   const { user } = useSelector((store: any) => store.auth);
   const { jobIds: appliedJobIds } = useSelector(
     (state: any) => state.appliedJobs
@@ -18,6 +22,12 @@ const Joblisting = ({ params }: { params: { jobId: string } }) => {
   const { onSubmit: applyHandler, loading } = applyJobHandler();
   const jobDataId = jobData._id ? jobData._id : "";
   const isApplied = appliedJobIds.includes(jobDataId);
+
+  // Fetch applied jobs on component mount
+  useEffect(() => {
+    dispatch(fetchAppliedJobs());
+  }, [dispatch]);
+
   return (
     <>
       <Navbar activeItem={1} />

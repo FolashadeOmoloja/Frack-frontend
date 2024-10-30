@@ -50,7 +50,7 @@ const DashboardLayout = ({
           gif="/images/dashboard/message.gif"
           title={"Have an idea you’d like to share?"}
           status={""}
-          link={"hire-talent/dashboard/contact"}
+          link={"/contact-us"}
           linkName={"Send us a message"}
           className={className}
         />

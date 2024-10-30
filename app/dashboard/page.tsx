@@ -28,6 +28,7 @@ const page = () => {
   const activeAppliedJobs =
     appliedJobs.length != 0 ? filterJobs("Under Review") : [];
   const declinedJobs = appliedJobs.length != 0 ? filterJobs("declined") : [];
+  const interviews = appliedJobs.length != 0 ? filterJobs("Interview") : [];
   const hiredJobs = appliedJobs.length != 0 ? filterJobs("hired") : [];
 
   const talentAnalytics = [
@@ -41,12 +42,12 @@ const page = () => {
     {
       analtyticsTitle: "Total Applications",
       stats: appliedJobs.length ? appliedJobs.length : 0,
-      desc: `${hiredJobs.length} Shortlisted Applications`,
+      desc: `active job Applications`,
     },
     {
       analtyticsTitle: "Active Interviews",
-      stats: hiredJobs.length,
-      desc: "1 Active Interviews",
+      stats: interviews.length,
+      desc: "Scheduled Interviews",
     },
     {
       analtyticsTitle: "Total Offers",

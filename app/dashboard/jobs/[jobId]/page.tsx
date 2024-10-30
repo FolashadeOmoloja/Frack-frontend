@@ -4,17 +4,29 @@ import CTABTN from "@/components/Elements/CTA/CTA-Button";
 import Link from "next/link";
 import { applyJobHandler } from "@/hooks/job-hook";
 import { FaArrowLeft } from "react-icons/fa6";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { fetchAppliedJobs } from "@/redux/slices/appliedJobSlice"; // Import fetch function
+import { AppDispatch } from "@/redux/store";
 
 const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Fetch job postings and applied job IDs
   const jobPostings = useSelector((state: any) => state.jobPosts.jobPosts);
-  const { jobIds: appliedJobIds } = useSelector(
+  const { jobIds: appliedJobIds, loading: appliedJobsLoading } = useSelector(
     (state: any) => state.appliedJobs
   );
+
   const jobData = jobPostings[parseInt(params.jobId)];
-  const { onSubmit: applyHandler, loading } = applyJobHandler();
-  const jobDataId = jobData._id ? jobData._id : "";
+  const { onSubmit: applyHandler, loading: applyLoading } = applyJobHandler();
+  const jobDataId = jobData?._id ?? ""; // Use optional chaining here
   const isApplied = appliedJobIds.includes(jobDataId);
+
+  // Fetch applied jobs on component mount
+  useEffect(() => {
+    dispatch(fetchAppliedJobs());
+  }, [dispatch]);
 
   return (
     <>
@@ -75,13 +87,16 @@ const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
             ${jobData?.salaryRange1} - ${jobData?.salaryRange2}
           </span>
         </div>
-        {!isApplied ? (
+
+        {appliedJobsLoading ? (
+          <p>Loading...</p>
+        ) : !isApplied ? (
           <div className="pb-14">
             <CTABTN
               route={""}
               isFunc
               func={() => applyHandler(jobDataId)}
-              CTA={loading ? "Applying.." : "Apply"}
+              CTA={applyLoading ? "Applying.." : "Apply"}
               showIcon
             />
           </div>
@@ -100,4 +115,5 @@ const DashboardJoblisting = ({ params }: { params: { jobId: string } }) => {
     </>
   );
 };
+
 export default DashboardJoblisting;

@@ -1,4 +1,5 @@
 export type userObject = {
+  _id: string;
   firstName: string;
   lastName: string;
   profileImage: string | null; // Use '|' for union types
@@ -22,6 +23,7 @@ export type userObject = {
 };
 
 export type userCompanyObject = {
+  _id: string;
   companyName: string;
   firstName: string;
   lastName: string;
@@ -57,4 +59,12 @@ export interface JobPosted {
   company: userCompanyObject;
   applicants?: userObject[];
   description: string;
+}
+
+export interface SuccessApplications {
+  _id: string;
+  job: JobPosted;
+  status: string;
+  createdAt: string;
+  talent: userObject;
 }

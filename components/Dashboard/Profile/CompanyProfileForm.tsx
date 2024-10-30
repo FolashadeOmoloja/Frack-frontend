@@ -15,7 +15,7 @@ const CompanyProfileForm = ({
   changeState,
   user,
 }: {
-  changeState: (value: boolean) => void;
+  changeState: (value: number) => void;
   user: userCompanyObject;
 }) => {
   const {
@@ -87,7 +87,7 @@ const CompanyProfileForm = ({
         const { company } = response.data;
         if (response.data.success) {
           dispatch(setUser(company));
-          changeState(false);
+          changeState(0);
           toast.success("Profile updated successfully!");
         } else {
           toast.error(response.data.message);
@@ -227,7 +227,7 @@ const CompanyProfileForm = ({
       <div className="mt-16 flex gap-10 max-xsm:gap-5">
         <div
           className="login-btn centered gap-3 cursor-pointer icon-animate"
-          onClick={() => changeState(false)}
+          onClick={() => changeState(0)}
         >
           Cancel
         </div>

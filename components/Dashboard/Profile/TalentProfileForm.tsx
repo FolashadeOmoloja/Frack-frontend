@@ -18,7 +18,7 @@ const TalentProfileForm = ({
   changeState,
   user,
 }: {
-  changeState: (value: boolean) => void;
+  changeState: (value: number) => void;
   user: userObject;
 }) => {
   const {
@@ -92,7 +92,7 @@ const TalentProfileForm = ({
         const { talent } = response.data;
         if (response.data.success) {
           dispatch(setUser(talent));
-          changeState(false);
+          changeState(0);
           toast.success("Profile updated successfully!");
         } else {
           toast.error(response.data.message);
@@ -279,7 +279,7 @@ const TalentProfileForm = ({
       <div className="mt-5 flex gap-10 max-xsm:gap-5">
         <div
           className="login-btn centered gap-3 cursor-pointer icon-animate"
-          onClick={() => changeState(false)}
+          onClick={() => changeState(0)}
         >
           Cancel
         </div>
