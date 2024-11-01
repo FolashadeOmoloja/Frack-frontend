@@ -2,7 +2,6 @@
 import Notifications from "@/components/Dashboard/TalentDashboard/NotificationsCont";
 import TalentNavbar from "@/components/Dashboard/TalentDashboard/TalentNavbar";
 import { useGetTalentNotifications } from "@/hooks/notification-hook";
-import { talentNotifications } from "@/utilities/constants";
 import { useSelector } from "react-redux";
 
 const SettingsPage = () => {
