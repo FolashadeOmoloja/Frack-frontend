@@ -39,16 +39,16 @@ const ProfilePhotoHandler: React.FC<ProfilePhotoProps> = ({ user, talent }) => {
           <img
             src={user?.profileImage}
             alt="Profile"
-            className="object-center"
+            className="object-center object-cover w-full h-full"
           />
         ) : (
           <div
             className={`w-full h-full text-white text-8xl font-bold centered`}
             style={{ background: user?.hex }}
           >
-                     {talent
-            ? user?.firstName[0]
-            : (user as userCompanyObject)?.companyName[0]}
+            {talent
+              ? user?.firstName[0]
+              : (user as userCompanyObject)?.companyName[0]}
           </div>
         )}
 

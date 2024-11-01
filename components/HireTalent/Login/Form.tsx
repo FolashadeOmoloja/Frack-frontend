@@ -109,6 +109,12 @@ const HireTalentLoginForm = () => {
           )}
         </button>
       </form>
+      <Link
+        href={"/hire-talent/retrieve-password"}
+        className="text-[#000080] mt-2 font-semibold block text-[15px]"
+      >
+        Forgot Password?
+      </Link>
       <p className="text-sm text-[#667185] mt-6 text-center">
         Don’t have an account?{" "}
         <Link

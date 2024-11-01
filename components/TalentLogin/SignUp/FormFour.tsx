@@ -54,7 +54,10 @@ const FormFour = ({ resume }: { resume: File | null }) => {
     // Append all other fields with a fallback for undefined values
     formData.append("firstName", data.firstName?.trim() || "");
     formData.append("lastName", data.lastName?.trim() || "");
-    formData.append("phoneNumber", data.mobileNo?.trim() || "");
+    formData.append(
+      "phoneNumber",
+      data.mobileNo?.trim().replace(/^0+/, "") || ""
+    );
     formData.append("countryCode", data.countryCode?.trim() || "");
     formData.append("emailAddress", data.email?.trim() || "");
     formData.append("profession", data.profession?.trim() || "");

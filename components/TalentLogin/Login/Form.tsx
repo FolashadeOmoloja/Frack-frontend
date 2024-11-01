@@ -18,7 +18,7 @@ const validationRules = {
     },
   },
   password: {
-    required: "Pickup Date is required",
+    required: "This is required",
   },
 };
 
@@ -84,7 +84,7 @@ const ForTalentSignInForm = () => {
           <label>Email Address</label>
           <input
             type="email"
-            placeholder="Enter your work address"
+            placeholder="Enter your email address"
             {...register("email", {
               required: validationRules.email.required,
               pattern: validationRules.email.pattern,
@@ -138,6 +138,12 @@ const ForTalentSignInForm = () => {
           )}
         </button>
       </form>
+      <Link
+        href={"/retrieve-password"}
+        className="text-[#000080] mt-2 font-semibold block text-[15px]"
+      >
+        Forgot Password?
+      </Link>
       <p className="text-sm text-[#667185] mt-6 text-center">
         Don’t have an account?{" "}
         <Link href={"/sign-up"} className="text-black font-semibold">

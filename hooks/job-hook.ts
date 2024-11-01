@@ -235,7 +235,7 @@ export const useGetAllCompanyEmployed = () => {
           error.response?.data?.message ||
           error.message ||
           "Failed to fetch talents";
-        toast.error(errorMessage);
+        // toast.error(errorMessage);
       } finally {
         dispatch(setLoading(false));
       }

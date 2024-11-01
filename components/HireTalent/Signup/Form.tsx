@@ -30,7 +30,7 @@ const HireTalentSignUpForm = () => {
       const companyData = {
         firstName: data.firstName.trim(),
         lastName: data.lastName.trim(),
-        phoneNumber: data.mobileNo.trim(),
+        phoneNumber: data.mobileNo.trim().replace(/^0+/, ""),
         countryCode: data.countryCode.trim(),
         emailAddress: data.email.trim(),
         password: data.password.trim(),

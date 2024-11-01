@@ -48,7 +48,7 @@ const CompanyProfileForm = ({
       data.mobileNo !== user.phoneNumber ||
       data.countryCode !== user.countryCode
     ) {
-      updatedData["phoneNumber"] = data.mobileNo;
+      updatedData["phoneNumber"] = data.mobileNo.replace(/^0+/, "");
       updatedData["countryCode"] = data.countryCode;
     }
 

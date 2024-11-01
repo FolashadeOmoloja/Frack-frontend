@@ -29,7 +29,7 @@ const UserAvatar = ({ dropDown }: { dropDown: DropDown }) => {
             <img
               src={user?.profileImage}
               alt="Profile"
-              className="object-center"
+              className="object-center object-cover w-full h-full"
             />
           ) : (
             <div
