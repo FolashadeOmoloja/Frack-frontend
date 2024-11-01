@@ -41,10 +41,8 @@ const JobBoard = ({
   const jobPostings = useSelector((state: any) => state.jobPosts.jobPosts);
   const loading = useSelector((state: any) => state.jobPosts.loading);
   useEffect(() => {
-    if (jobPostings.length === 0) {
-      dispatch(fetchJobs()); // Only fetch if no jobs are stored
-    }
-  }, [dispatch, jobPostings.length]);
+    dispatch(fetchJobs()); // Only fetch if no jobs are stored
+  }, [dispatch]);
 
   const [filteredJobs, setFilteredJobs] = useState<FilteredJobs>(jobPostings);
   const [newJobPosting, setNewJobPosting] = useState<FilteredJobs>(jobPostings);

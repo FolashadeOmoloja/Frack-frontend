@@ -32,7 +32,7 @@ const MyJobTables = () => {
       return null;
     })
     .filter((job: any) => job !== null);
-  console.log(mergedJobs);
+  
 
   // Function to filter jobs based on status
   const filterJobs = (status: string) => {

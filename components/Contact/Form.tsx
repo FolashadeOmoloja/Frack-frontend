@@ -10,6 +10,7 @@ const Form = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    reset,
   } = useForm();
 
   // Function to handle adding item
@@ -26,6 +27,7 @@ const Form = () => {
       };
 
       sendMessage(userData);
+      reset();
     }
   };
 
@@ -121,7 +123,7 @@ const Form = () => {
             {...register("message", { required: "Message is required" })}
             id="message"
             placeholder="How can we help you?"
-            className="contact-input px-3 h-[76px] resize-none"
+            className="contact-input px-3 h-[176px] resize-none"
           ></textarea>
           {errors.message && (
             <p className="text-red-500">{String(errors.message.message)}</p>
@@ -148,7 +150,7 @@ const Form = () => {
       </div>
       <button
         type="submit"
-        className="w-[180px] max-xxsm:w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
+        className="w-[180px] max-xxsm:w-full h-12 bg-white text-[#000080] shadow-sm rounded-lg font-semibold"
         disabled={isSubmitting}
       >
         {loading ? (
