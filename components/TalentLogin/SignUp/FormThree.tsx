@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { FaArrowLeft } from "react-icons/fa6";
 import { MdOutlineUploadFile } from "react-icons/md";
@@ -8,12 +8,10 @@ import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
 import { BiSolidFileDoc } from "react-icons/bi";
 import FormLogo from "@/components/Elements/FormLogo";
-
-const validationRules = {
-  resume: {
-    required: "Please upload your resume",
-  },
-};
+import { companyValidationRules as validationRules } from "@/utilities/constants/formValidation";
+import { useDispatch, useSelector } from "react-redux";
+import { setStep3Data } from "@/redux/slices/talentRegistrationSlice";
+import { RootState } from "@/redux/store";
 
 const MAX_FILE_SIZE_MB = 2;
 const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
@@ -21,9 +19,11 @@ const MAX_FILE_SIZE_BYTES = MAX_FILE_SIZE_MB * 1024 * 1024;
 const FormThree = ({
   changeBgState,
   changeActive,
+  setResume,
 }: {
   changeBgState: (value: string) => void;
   changeActive: (value: number) => void;
+  setResume: (value: File | null) => void;
 }) => {
   const {
     handleSubmit,
@@ -36,15 +36,20 @@ const FormThree = ({
   const [fileType, setFileType] = useState<string | null>(null);
   const [fileSizeError, setFileSizeError] = useState<string | null>(null);
 
-  const addItem = async (data: any) => {
-    if (data) {
-      // Add item to backend
+  const dispatch = useDispatch();
+  const { step3Data } = useSelector(
+    (state: RootState) => state.talentRegistration
+  );
+
+  useEffect(() => {
+    if (step3Data) {
+      setValue("channel", step3Data.channel);
     }
-  };
+  }, [step3Data, setValue]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
-    addItem(data);
+    dispatch(setStep3Data({ channel: data.channel }));
+    setResume(data.resume);
     changeBgState("url('/images/homepage/signup-bg6.svg')");
     changeActive(4);
   };
@@ -153,10 +158,11 @@ const FormThree = ({
           ItemsArr={["Twitter", "Whatsapp", "LinkedIn", "Referral"]}
           label="How did you hear about Frack? (optional)"
           placeholder="Select an option"
-          name={"chanel"}
+          name={"channel"}
           required={false}
           register={register}
           setValue={setValue}
+          selctedItem2={step3Data.channel}
         />
         <div className="mb-14 mt-14 max-sm:mt-10 flex gap-10 max-xsm:gap-5">
           <div

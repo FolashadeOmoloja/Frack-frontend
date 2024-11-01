@@ -5,6 +5,8 @@ import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { useLoginUser } from "@/hooks/login-company-hook";
+import { Loader2 } from "lucide-react";
 
 // Define validation rules for each form field
 const validationRules = {
@@ -16,7 +18,7 @@ const validationRules = {
     },
   },
   password: {
-    required: "Pickup Date is required",
+    required: "This is required",
   },
 };
 
@@ -28,13 +30,21 @@ const ForTalentSignInForm = () => {
   } = useForm();
 
   const router = useRouter();
+  const { onSubmit: loginUser, loading } = useLoginUser();
 
   //add Item to backeend
-  const addItem = async (data: any) => {};
+  const addItem = async (data: any) => {
+    if (data) {
+      const userData = {
+        emailAddress: data.email.trim(),
+        password: data.password.trim(),
+      };
+      await loginUser(userData);
+    }
+  };
 
   const onSubmit = (data: any) => {
     addItem(data);
-    router.push("/dashboard");
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -74,7 +84,7 @@ const ForTalentSignInForm = () => {
           <label>Email Address</label>
           <input
             type="email"
-            placeholder="Enter your work address"
+            placeholder="Enter your email address"
             {...register("email", {
               required: validationRules.email.required,
               pattern: validationRules.email.pattern,
@@ -118,9 +128,22 @@ const ForTalentSignInForm = () => {
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
           disabled={isSubmitting}
         >
-          Continue
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </div>
+          ) : (
+            "Continue"
+          )}
         </button>
       </form>
+      <Link
+        href={"/retrieve-password"}
+        className="text-[#000080] mt-2 font-semibold block text-[15px]"
+      >
+        Forgot Password?
+      </Link>
       <p className="text-sm text-[#667185] mt-6 text-center">
         Don’t have an account?{" "}
         <Link href={"/sign-up"} className="text-black font-semibold">

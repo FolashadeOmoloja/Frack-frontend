@@ -1,25 +1,29 @@
 import { Column } from "react-table";
-import { userObject } from "./constants/typeDef";
+import {
+  userObject,
+  JobPosted,
+  SuccessApplications,
+} from "./constants/typeDef";
 import CTABTN from "@/components/Elements/CTA/CTA-Button";
 import { DownloadResumeBotton } from "@/components/Elements/ProfileBox";
+import { useDispatch } from "react-redux";
+import { useRouter } from "next/navigation";
+import { setJob } from "@/redux/slices/jobSlice";
+import { useEditJob } from "@/hooks/job-hook";
 
-interface JobApplication {
+type Company = {
+  companyName: string;
+};
+
+export interface JobApplication {
   title: string;
   jobProximity: string;
   location: string;
-  company: string;
+  company: Company;
   priceRange: string;
   status: string;
-}
-
-export interface JobPosted {
-  title: string;
-  department: string;
-  location: string;
-  employmentType: string;
-  salaryRange: string;
-  status: string;
-  candidates?: userObject[];
+  salaryRange1: string;
+  salaryRange2: string;
 }
 
 export const activeColumns: Column<JobApplication>[] = [
@@ -48,8 +52,11 @@ export const activeColumns: Column<JobApplication>[] = [
     Cell: ({ row }: { row: { original: JobApplication } }) => {
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.company}</span>
-          <span>{row.original.priceRange}</span>
+          <span>{row.original.company.companyName}</span>
+          <span>
+            {" "}
+            ${row.original.salaryRange1} - ${row.original.salaryRange2}
+          </span>
         </div>
       );
     },
@@ -93,20 +100,109 @@ export const companyActiveColumns: Column<JobPosted>[] = [
     Cell: ({ row }: { row: { original: JobPosted } }) => {
       return (
         <div className="flex flex-col gap-4">
-          <span>{row.original.employmentType}</span>
-          <span>{row.original.salaryRange}</span>
+          <span>{row.original.jobProximity}</span>
+          <span>
+            ${row.original.salaryRange1} - ${row.original.salaryRange2}
+          </span>
         </div>
       );
     },
   },
   {
     Header: "",
-    accessor: "candidates",
+    accessor: "applicants",
     Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
+      const dispatch = useDispatch();
+      const router = useRouter();
+      const editJob = (data: any, idx: number) => {
+        dispatch(setJob(data));
+        router.push(`/hire-talent/dashboard/my-jobs/edit-job/${idx}`);
+      };
       return (
         <CTABTN
-          route={`/hire-talent/dashboard/my-jobs/edit-job/${row.index}`}
+          route={``}
+          isFunc
+          func={() => editJob(row.original, row.index)}
           CTA="Edit Job"
+          height2="h-[50px] text-sm"
+        />
+      );
+    },
+  },
+  // {
+  //   Header: "",
+  //   accessor: "status",
+  //   Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
+  //     return (
+  //       <CTABTN
+  //         route={`/hire-talent/dashboard/my-jobs/${row.index}`}
+  //         CTA="View Applicants"
+  //         width="w-[138px]"
+  //         height2="h-[50px] text-sm"
+  //       />
+  //     );
+  //   },
+  // },
+];
+
+export const closedJobsColumns: Column<JobPosted>[] = [
+  {
+    Header: "",
+    accessor: "title",
+    Cell: ({ row }: { row: { original: JobPosted } }) => {
+      return <span>{row.original.title}</span>;
+    },
+  },
+  {
+    Header: "",
+    accessor: "department",
+    Cell: ({ row }: { row: { original: JobPosted } }) => {
+      return (
+        <div className="flex flex-col gap-4">
+          <span>{row.original.department}</span>
+          <span>{row.original.location}</span>
+        </div>
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "employmentType",
+    Cell: ({ row }: { row: { original: JobPosted } }) => {
+      return (
+        <div className="flex flex-col gap-4">
+          <span>{row.original.jobProximity}</span>
+          <span>
+            ${row.original.salaryRange1} - ${row.original.salaryRange2}
+          </span>
+        </div>
+      );
+    },
+  },
+  {
+    Header: "",
+    accessor: "applicants",
+    Cell: ({ row }: { row: { index: number; original: JobPosted } }) => {
+      const { onSubmit: updateJob } = useEditJob();
+
+      const dispatch = useDispatch();
+      const router = useRouter();
+      const changeStatus = async (id: any, idx: any, data: any) => {
+        const updatedStatus: Record<string, any> = {};
+        updatedStatus["status"] = "Open";
+
+        // Call the API to update job status
+        await updateJob(updatedStatus, id);
+        dispatch(setJob(data));
+        router.push(`/hire-talent/dashboard/my-jobs/open-job/${idx}`);
+      };
+
+      return (
+        <CTABTN
+          route={``}
+          isFunc
+          func={() => changeStatus(row.original._id, row.index, row.original)}
+          CTA="Reopen Job"
           height2="h-[50px] text-sm"
           backGround="bg-[#22CCED]"
         />
@@ -129,177 +225,87 @@ export const companyActiveColumns: Column<JobPosted>[] = [
   },
 ];
 
-export const hiredCandidatesColumn: Column<userObject>[] = [
+export const hiredCandidatesColumn: Column<SuccessApplications>[] = [
   {
     Header: "",
-    accessor: "firstName",
-    Cell: ({ row }: { row: { original: userObject } }) => {
+    accessor: "job",
+    Cell: ({ row }: { row: { original: SuccessApplications } }) => {
       return (
-        <span>
-          {row.original.firstName} {row.original.lastName}
-        </span>
+        <div className="flex flex-col gap-2">
+          <span>{row.original.job.title}</span>
+        </div>
       );
     },
   },
   {
     Header: "",
-    accessor: "profileImage",
-    Cell: ({ row }: { row: { original: userObject } }) => {
+    accessor: "talent",
+    Cell: ({ row }: { row: { original: SuccessApplications } }) => {
       return (
-        <div className="p-7 w-[100px]">
-          <div
-            className="h-[60px] w-[50px] rounded-full overflow-hidden "
-            style={{ width: "50px", height: "50px" }}
-          >
-            {row.original.profileImage ? (
-              <img
-                src={row.original.profileImage}
-                alt=""
-                className="object-center"
-              />
-            ) : (
-              <section
-                className={`w-[50px] h-[50px]  text-xl text-white  font-bold centered`}
-                style={{ background: row.original.hex }}
-              >
-                {row.original.firstName[0]}
-              </section>
-            )}
+        <section className="flex flex-col gap-3 ">
+          <div className="p-7">
+            <div
+              className="h-[60px] w-[50px] rounded-full overflow-hidden "
+              style={{ width: "50px", height: "50px" }}
+            >
+              {row.original.talent.profileImage ? (
+                <img
+                  src={row.original.talent.profileImage}
+                  alt=" "
+                  className="object-center"
+                />
+              ) : (
+                <section
+                  className={`w-[50px] h-[50px]  text-xl text-white  font-bold centered bg-[#000080]`}
+                >
+                  {row.original.talent.firstName[0]}
+                </section>
+              )}
+            </div>
           </div>
-        </div>
-      );
-    },
-  },
-  {
-    Header: "",
-    accessor: "role",
-    Cell: ({ row }: { row: { original: userObject } }) => {
-      return (
-        <div className="flex flex-col gap-4">
-          <span>{row.original.role}</span>
-          <span>{row.original.industry}</span>
-        </div>
-      );
-    },
-  },
-  {
-    Header: "",
-    accessor: "experienceLevel",
-    Cell: ({ row }: { row: { original: userObject } }) => {
-      return (
-        <div className="flex flex-col gap-4">
-          <span>{row.original.experienceLevel}</span>
-          <span>{row.original.location}</span>
-        </div>
-      );
-    },
-  },
-  {
-    Header: "",
-    accessor: "emailAddress",
-    Cell: ({ row }: { row: { original: userObject } }) => {
-      return (
-        <div className="flex flex-col gap-4">
-          <span>{row.original.emailAddress}</span>
-        </div>
-      );
-    },
-  },
-  // {
-  //   Header: "",
-  //   accessor: "status",
-  //   Cell: ({ row }: { row: { original: JobPosted } }, idx) => {
-  //     return (
-  //       <button className="w-[138px] h-[50px] bg-[#000080] text-white text-sm rounded-md font-semibold">
-  //         View Applicants
-  //       </button>
-  //     );
-  //   },
-  // },
-];
-
-export const activeCandidatesColumn: Column<userObject>[] = [
-  {
-    Header: "",
-    accessor: "firstName",
-    Cell: ({ row }: { row: { original: userObject } }) => {
-      return (
-        <span className="max-slg:text-lg">
-          {row.original.firstName} {row.original.lastName}
-        </span>
-      );
-    },
-  },
-  {
-    Header: "",
-    accessor: "profileImage",
-    Cell: ({ row }: { row: { original: userObject } }) => {
-      return (
-        <div className="p-7">
-          <div
-            className="h-[60px] w-[50px] rounded-full overflow-hidden "
-            style={{ width: "50px", height: "50px" }}
-          >
-            {row.original.profileImage ? (
-              <img
-                src={row.original.profileImage}
-                alt=""
-                className="object-center"
-              />
-            ) : (
-              <section
-                className={`w-[50px] h-[50px]  text-xl text-white  font-bold centered`}
-                style={{ background: row.original.hex }}
-              >
-                {row.original.firstName[0]}
-              </section>
-            )}
+          <div className="flex flex-col gap-2">
+            <p>
+              <span className="font-semibold">Name: </span>{" "}
+              {row.original.talent.firstName}
+              {row.original.talent.lastName}
+            </p>
+            <p>
+              <span className="font-semibold">
+                Profession: {row.original.talent.profession}
+              </span>
+            </p>
           </div>
-        </div>
+        </section>
       );
     },
   },
   {
     Header: "",
-    accessor: "role",
-    Cell: ({ row }: { row: { original: userObject } }) => {
+    accessor: "status",
+    Cell: ({ row }: { row: { original: SuccessApplications } }) => {
       return (
-        <div className="flex flex-col gap-4">
-          <span>{row.original.role}</span>
-          <span>{row.original.preference}</span>
+        <div className="flex flex-col gap-2">
+          <p>
+            {" "}
+            <span className="font-semibold">Industry: </span>
+            {row.original.talent.industry}
+          </p>
+          <p>
+            {" "}
+            <span className="font-semibold">Level: </span>
+            {row.original.talent.experienceLevel}
+          </p>
+          <p>
+            {" "}
+            <span className="font-semibold">Experience: </span>
+            {row.original.talent.experienceYears}
+          </p>
+          <p>
+            <span className="font-semibold">Location: </span>
+            {row.original.talent.location}, {row.original.talent.country}{" "}
+          </p>
         </div>
       );
-    },
-  },
-  {
-    Header: "",
-    accessor: "experienceLevel",
-    Cell: ({ row }: { row: { original: userObject } }) => {
-      return (
-        <div className="flex flex-col gap-4 ">
-          <span>{row.original.experienceLevel}</span>
-          <span>{row.original.experienceYears}</span>
-        </div>
-      );
-    },
-  },
-  {
-    Header: "",
-    accessor: "emailAddress",
-    Cell: ({ row }: { row: { original: userObject } }) => {
-      return (
-        <div className="flex flex-col gap-4 w-[200px]">
-          <span>{row.original.emailAddress}</span>
-          <span>{row.original.location}</span>
-        </div>
-      );
-    },
-  },
-  {
-    Header: "",
-    accessor: "filename",
-    Cell: ({ row }: { row: { original: userObject } }) => {
-      return <DownloadResumeBotton filename={row.original.filename} />;
     },
   },
 ];

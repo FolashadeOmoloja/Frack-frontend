@@ -1,25 +1,14 @@
 import { FieldError, useForm } from "react-hook-form";
 import StepCounter from "@/components/Elements/StepCounter";
 import Dropdown from "@/components/Elements/Dropdown";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import { FaArrowLeft } from "react-icons/fa6";
 import FormLogo from "@/components/Elements/FormLogo";
-
-const validationRules = {
-  url: {
-    required: "Your LinkedIn URL is required",
-    pattern: {
-      value: /^https:\/\/(www\.)?linkedin\.com\/.*$/,
-      message: "Invalid LinkedIn URL",
-    },
-  },
-  role: {
-    required: "Role required",
-  },
-  experience: {
-    required: "Experience required",
-  },
-};
+import { useDispatch, useSelector } from "react-redux";
+import { setStep2Data } from "@/redux/slices/talentRegistrationSlice";
+import { companyValidationRules as validationRules } from "@/utilities/constants/formValidation";
+import { RootState } from "@/redux/store";
+import { useEffect } from "react";
+import { useGetAllFilters } from "@/hooks/content-hook";
 
 const FormTwo = ({
   changeBgState,
@@ -36,15 +25,25 @@ const FormTwo = ({
   } = useForm();
 
   //add Item to backeend
-  const addItem = async (data: any) => {
-    if (data) {
-      console.log(data.url.trim());
+  const dispatch = useDispatch();
+  const { step2Data } = useSelector(
+    (state: RootState) => state.talentRegistration
+  );
+  const { filter } = useGetAllFilters();
+
+  useEffect(() => {
+    if (step2Data) {
+      setValue("role", step2Data.role);
+      setValue("experience", step2Data.experience);
+      setValue("skills", step2Data.skills);
+      setValue("level", step2Data.level);
+      setValue("preference", step2Data.preference);
+      setValue("url", step2Data.url);
     }
-  };
+  }, [step2Data, setValue]);
 
   const onSubmit = (data: any) => {
-    console.log(data);
-    addItem(data);
+    dispatch(setStep2Data(data));
     changeBgState("url('/images/homepage/signup-bg5.svg')");
     changeActive(3);
   };
@@ -65,15 +64,16 @@ const FormTwo = ({
       </div>
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-5">
         <Dropdown
-          ItemsArr={searchBarData[1].options}
-          label="Role"
-          placeholder="Select your role"
+          ItemsArr={filter.role}
+          label="Department"
+          placeholder="Select your department"
           name={"role"}
           required={true}
           register={register}
           errors={errors.role as FieldError}
           validationRules={validationRules.role.required}
           setValue={setValue}
+          selctedItem2={step2Data.role}
         />
         <Dropdown
           ItemsArr={[
@@ -84,31 +84,51 @@ const FormTwo = ({
             "above 10 years",
           ]}
           label="Total years of work experience"
-          placeholder="Select years of work experience"
+          placeholder={"Select years of work experience"}
           name={"experience"}
           required={true}
           register={register}
           errors={errors.experience as FieldError}
           validationRules={validationRules.experience.required}
           setValue={setValue}
+          selctedItem2={step2Data.experience}
         />
         <Dropdown
-          ItemsArr={searchBarData[0].options}
+          ItemsArr={filter.skills}
           label="Primary skill"
-          placeholder="Select skills"
+          placeholder="Select a skill"
           name={"skills"}
-          required={false}
+          required={true}
           register={register}
+          errors={errors.skills as FieldError}
+          validationRules={validationRules.skills.required}
           setValue={setValue}
+          selctedItem2={step2Data.skills}
         />
         <Dropdown
-          ItemsArr={["English", "Spanish", "French"]}
-          label="Language"
-          placeholder="Select your language"
-          name={"language"}
-          required={false}
+          ItemsArr={["Intermediate", "Senior", "C-level"]}
+          label="Current experience level"
+          placeholder="Select your experience level"
+          name={"level"}
+          required={true}
           register={register}
           setValue={setValue}
+          errors={errors.level as FieldError}
+          validationRules={validationRules.level.required}
+          selctedItem2={step2Data.level}
+        />
+
+        <Dropdown
+          ItemsArr={["On Site", "Hybrid", "Remote", "Fully Remote"]}
+          label="Work mode preference"
+          placeholder="Select your preference"
+          name={"preference"}
+          required={true}
+          register={register}
+          errors={errors.preference as FieldError}
+          validationRules={validationRules.preference.required}
+          setValue={setValue}
+          selctedItem2={step2Data.preference}
         />
 
         {/* linkedin url */}
@@ -118,6 +138,7 @@ const FormTwo = ({
           </label>
           <input
             type="url"
+            defaultValue={step2Data.url}
             placeholder="Enter linkedin url"
             {...register("url", {
               required: validationRules.url.required,
@@ -132,7 +153,7 @@ const FormTwo = ({
           <div
             className="login-btn centered gap-3 cursor-pointer icon-animate"
             onClick={() => {
-              changeActive(2);
+              changeActive(1);
               changeBgState("url('/images/homepage/signup-bg3.svg')");
             }}
           >

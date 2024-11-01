@@ -1,25 +1,11 @@
-"use client";
 import { useForm } from "react-hook-form";
-import Image from "next/image";
 import Link from "next/link";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { useState } from "react";
-import { useRouter } from "next/navigation";
 import FormLogo from "@/components/Elements/FormLogo";
-
-// Define validation rules for each form field
-const validationRules = {
-  email: {
-    required: "Email is required",
-    pattern: {
-      value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-      message: "Invalid email address",
-    },
-  },
-  password: {
-    required: "Pickup Date is required",
-  },
-};
+import { validationRules } from "@/utilities/constants";
+import useLoginCompany from "@/hooks/login-company-hook";
+import { Loader2 } from "lucide-react";
 
 const HireTalentLoginForm = () => {
   const {
@@ -27,15 +13,22 @@ const HireTalentLoginForm = () => {
     register,
     formState: { errors, isSubmitting },
   } = useForm();
-
-  const router = useRouter();
+  const { onSubmit: loginCompany, loading } = useLoginCompany();
 
   //add Item to backeend
-  const addItem = async (data: any) => {};
+  const addItem = async (data: any) => {
+    if (data) {
+      const companyData = {
+        emailAddress: data.email.trim(),
+        password: data.password.trim(),
+      };
+      await loginCompany(companyData);
+    }
+  };
 
   const onSubmit = (data: any) => {
     addItem(data);
-    router.push("/hire-talent/dashboard");
+    // router.push("/hire-talent/dashboard");
   };
 
   const [showPassword, setShowPassword] = useState(false);
@@ -106,9 +99,22 @@ const HireTalentLoginForm = () => {
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
           disabled={isSubmitting}
         >
-          Find Talent
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </div>
+          ) : (
+            "Find Talent"
+          )}
         </button>
       </form>
+      <Link
+        href={"/hire-talent/retrieve-password"}
+        className="text-[#000080] mt-2 font-semibold block text-[15px]"
+      >
+        Forgot Password?
+      </Link>
       <p className="text-sm text-[#667185] mt-6 text-center">
         Don’t have an account?{" "}
         <Link

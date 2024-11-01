@@ -3,8 +3,12 @@ import { FaFilter } from "react-icons/fa6";
 import JobSearchBar from "../Elements/JobSearchBar";
 import Filter from "./Filter";
 import JobPosting from "./JobPostings";
-import { jobPostings } from "@/utilities/constants/jobData";
-import { useState } from "react";
+// import { jobPostings } from "@/utilities/constants/jobData";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchJobs } from "@/redux/slices/jobPostSlice";
+import { Loader2 } from "lucide-react";
+import { AppDispatch } from "@/redux/store";
 
 type Job = {
   title: string;
@@ -16,6 +20,7 @@ type Job = {
   experience: string;
   skills: string[];
   role: string;
+  department: string;
   country: string;
 };
 
@@ -32,6 +37,13 @@ const JobBoard = ({
   className?: string;
   mainRoute?: string;
 }) => {
+  const dispatch: AppDispatch = useDispatch();
+  const jobPostings = useSelector((state: any) => state.jobPosts.jobPosts);
+  const loading = useSelector((state: any) => state.jobPosts.loading);
+  useEffect(() => {
+    dispatch(fetchJobs()); // Only fetch if no jobs are stored
+  }, [dispatch]);
+
   const [filteredJobs, setFilteredJobs] = useState<FilteredJobs>(jobPostings);
   const [newJobPosting, setNewJobPosting] = useState<FilteredJobs>(jobPostings);
   const [isChecked, setIsChecked] = useState<IsCheckedState>({});
@@ -72,13 +84,19 @@ const JobBoard = ({
             changeIsCheck={setIsChecked}
           />
         </div>
-        <div className="flex-grow md:pl-5 pb-5 overflow-y-auto">
-          <JobPosting
-            filteredJobs={filteredJobs}
-            jobPostings={jobPostings}
-            mainRoute={mainRoute}
-          />
-        </div>
+        {!loading ? (
+          <div className="flex-grow md:pl-5 pb-5 overflow-y-auto">
+            <JobPosting
+              filteredJobs={filteredJobs}
+              jobPostings={jobPostings}
+              mainRoute={mainRoute}
+            />
+          </div>
+        ) : (
+          <div className="flex-grow md:pl-5 pb-5 overflow-y-auto">
+            <Loader2 className=" h-24 w-24 animate-spin ml-10 mt-10 text-[#000080]" />
+          </div>
+        )}
       </section>
     </section>
   );

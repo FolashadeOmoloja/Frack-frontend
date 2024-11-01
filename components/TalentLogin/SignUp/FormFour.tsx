@@ -1,20 +1,91 @@
 import { useForm } from "react-hook-form";
 import StepCounter from "@/components/Elements/StepCounter";
 import FormLogo from "@/components/Elements/FormLogo";
-import { useRouter } from "next/router";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
+import { getRandomColor } from "@/utilities/constants";
+import useRegisterTalent from "@/hooks/register-user-hook";
+import { Loader2 } from "lucide-react";
 
-const FormFour = ({}) => {
+interface TalentRegistrationData {
+  firstName: string;
+  lastName: string;
+  mobileNo: string;
+  countryCode: string;
+  email: string;
+  password: string;
+  country: string;
+  location: string;
+  url: string;
+  experience: string;
+  profession: string;
+  level: string;
+  role: string;
+  preference: string;
+  skills: string;
+  resume: File;
+  privacyConsent: boolean;
+  channel?: string;
+}
+
+const FormFour = ({ resume }: { resume: File | null }) => {
   const {
     handleSubmit,
     formState: { isSubmitting },
   } = useForm();
-  const router = useRouter();
-  //add Item to backeend
-  const addItem = async (data: any) => {};
+  const { onSubmit: registerTalent, loading } = useRegisterTalent();
 
-  const onSubmit = (data: any) => {
-    addItem(data);
-    router.push("/dashboard");
+  const { step1Data, step2Data, step3Data } = useSelector(
+    (state: RootState) => state.talentRegistration
+  );
+
+  // Function to add item to the backend
+  const addItem = async () => {
+    const hexCode = getRandomColor();
+
+    const data: Partial<TalentRegistrationData> = {
+      ...step1Data,
+      ...step2Data,
+      ...step3Data,
+    };
+
+    const formData = new FormData();
+
+    // Append all other fields with a fallback for undefined values
+    formData.append("firstName", data.firstName?.trim() || "");
+    formData.append("lastName", data.lastName?.trim() || "");
+    formData.append(
+      "phoneNumber",
+      data.mobileNo?.trim().replace(/^0+/, "") || ""
+    );
+    formData.append("countryCode", data.countryCode?.trim() || "");
+    formData.append("emailAddress", data.email?.trim() || "");
+    formData.append("profession", data.profession?.trim() || "");
+    formData.append("password", data.password?.trim() || "");
+    formData.append("country", data.country?.trim() || "");
+    formData.append("hex", hexCode || "");
+    formData.append("location", data.location?.trim() || "");
+    formData.append("linkedInUrl", data.url?.trim() || "");
+    formData.append("experienceYears", data.experience?.trim() || "");
+    formData.append("experienceLevel", data.level?.trim() || "");
+    formData.append("industry", data.role?.trim() || "");
+    formData.append("preference", data.preference?.trim() || "");
+    formData.append("skills", data.skills?.trim() || "");
+    formData.append("privacyConsent", data.privacyConsent ? "true" : "false");
+    formData.append("channel", data.channel?.trim() || "");
+
+    //@ts-ignore
+    if (resume && resume.length > 0) {
+      //@ts-ignore
+      formData.append("file", resume[0]); // Access the first file in the FileList
+    }
+
+    await registerTalent(formData);
+  };
+
+  // Handle form submission
+  const onSubmit = () => {
+    addItem();
   };
 
   return (
@@ -29,7 +100,8 @@ const FormFour = ({}) => {
             Congratulations!
           </h3>
           <p className="text-gray-500 text-sm text-center">
-            Congratulations you have been added to the wait list.
+            Congratulations! You have successfully completed all the necessary
+            details of your registration. You will now be added to the waitlist.
           </p>
         </div>
       </div>
@@ -39,7 +111,14 @@ const FormFour = ({}) => {
           className="w-full h-12 bg-[#000080] text-white shadow-sm rounded-lg hover:shadow-xl hover:bg-[#000099] transition-all duration-300"
           disabled={isSubmitting}
         >
-          Continue
+          {loading ? (
+            <div className="flex items-center justify-center">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Please wait
+            </div>
+          ) : (
+            "Continue"
+          )}
         </button>
       </form>
     </section>

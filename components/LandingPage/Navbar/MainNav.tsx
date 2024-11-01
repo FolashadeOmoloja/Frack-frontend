@@ -1,4 +1,3 @@
-"use client";
 import { NavLinks } from "@/utilities/constants";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -12,7 +11,7 @@ type IsOpenState = {
   [key: number]: boolean;
 };
 
-const MainNav = ({ activeItem }: { activeItem?: number }) => {
+const MainNav = ({ activeItem, user }: { activeItem?: number; user: any }) => {
   const [isOpen, setIsOpen] = useState<IsOpenState>({});
 
   const toggleDropdown = (idx: number) => {
@@ -101,17 +100,27 @@ const MainNav = ({ activeItem }: { activeItem?: number }) => {
           );
         })}
       </ul>
-      <div className="flex items-center  gap-10">
-        <button
-          className=""
-          onClick={() => {
-            router.push("/sign-in");
-          }}
-        >
-          Sign In
-        </button>
-        <CTABTN route="/hire-talent" CTA="Hire Talent" />
-      </div>
+      {!user ? (
+        <div className="flex items-center  gap-10">
+          <button
+            className=""
+            onClick={() => {
+              router.push("/sign-in");
+            }}
+          >
+            Sign In
+          </button>
+          <CTABTN route="/hire-talent" CTA="Hire Talent" />
+        </div>
+      ) : (
+        <div className="flex items-center  gap-10">
+          {user.companyName ? (
+            <CTABTN route="/hire-talent/dashboard" CTA="Dashboard" showIcon />
+          ) : (
+            <CTABTN route="/dashboard" CTA="Dashboard" showIcon />
+          )}
+        </div>
+      )}
     </nav>
   );
 };

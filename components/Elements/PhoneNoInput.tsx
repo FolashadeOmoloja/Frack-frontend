@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { UseFormRegister } from "react-hook-form";
+import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import axios from "axios";
 
@@ -21,6 +21,7 @@ interface ValidationRules {
 
 interface PhoneNoInputProps {
   register: UseFormRegister<any>;
+  setValue: UseFormSetValue<any>; // Add this to set the country code value
   validationRules: ValidationRules;
   defaultValue?: string;
   defaultCode?: string;
@@ -28,6 +29,7 @@ interface PhoneNoInputProps {
 
 const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
   register,
+  setValue, // Destructure setValue from props
   validationRules,
   defaultValue,
   defaultCode,
@@ -69,6 +71,13 @@ const PhoneNoInput: React.FC<PhoneNoInputProps> = ({
       })
       .catch((error) => console.error("Error fetching countries:", error));
   }, [defaultCode]);
+
+  // Update the country code in the form when selectedCountry changes
+  useEffect(() => {
+    if (selectedCountry) {
+      setValue("countryCode", selectedCountry.code); // Set the countryCode in the form state
+    }
+  }, [selectedCountry, setValue]); // Add setValue to dependencies
 
   const toggleDropdown = () => setIsOpen(!isOpen);
   const selectCountry = (country: Country) => {

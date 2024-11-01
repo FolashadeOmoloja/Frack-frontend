@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { searchBarData } from "@/utilities/constants/searchbarData";
 import {
   hoursFilter,
   proximityFilter,
   experienceFilter,
 } from "@/utilities/constants/searchbarData";
+import { useGetAllFilters } from "@/hooks/content-hook";
 
 type IsOpenState = {
   [key: number]: boolean;
@@ -19,11 +19,17 @@ type filteredJobs = {
   experience: string;
   skills: string[];
   role: string;
+  department: string;
   country: string;
 }[];
 
 type IsCheckedState = {
   [key: number]: boolean;
+};
+
+type DataItem = {
+  label: string;
+  options: string[];
 };
 
 const JobSearchBar = ({
@@ -42,6 +48,13 @@ const JobSearchBar = ({
   const [location, setLocation] = useState("");
   const [skills, setSkills] = useState("");
 
+  const { filter } = useGetAllFilters();
+  const searchBarData: DataItem[] = [
+    { label: "Select your skill", options: filter.skills },
+    { label: "Select a country", options: filter.country },
+    { label: "Select a department", options: filter.role },
+  ];
+
   const [selectedItems, setSelectedItems] = useState(
     searchBarData.map(() => "")
   );
@@ -57,7 +70,7 @@ const JobSearchBar = ({
   const search = () => {
     const newFilteredJobArr = jobPosting.filter((job) => {
       return (
-        job.role.toLowerCase().includes(role.toLowerCase()) &&
+        job.department.toLowerCase().includes(role.toLowerCase()) &&
         job.country.toLowerCase().includes(location.toLowerCase()) &&
         job.skills.some((skill) =>
           skill.toLowerCase().includes(skills.toLowerCase())

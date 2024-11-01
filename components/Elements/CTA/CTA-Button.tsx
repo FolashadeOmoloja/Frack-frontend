@@ -12,6 +12,9 @@ interface ButtonProps {
   width?: string;
   backGround?: string;
   color?: string;
+  isFunc?: boolean;
+  func?: () => void;
+  disabled?: boolean;
 }
 
 const CTABTN: React.FC<ButtonProps> = ({
@@ -24,17 +27,25 @@ const CTABTN: React.FC<ButtonProps> = ({
   backGround = "bg-[#000080]",
   color = "text-white",
   height2,
+  isFunc = false,
+  func,
+  disabled = false,
 }) => {
   const router = useRouter();
 
   const handleSignInClick = (route: string) => {
-    router.push(route);
+    if (isFunc && func) {
+      func();
+    } else {
+      router.push(route);
+    }
   };
 
   return (
     <button
       className={`${width} h-[${height}] ${height2} ${backGround} ${color} rounded-[6px] flex items-center justify-center gap-2 font-semibold button-container`}
       onClick={() => handleSignInClick(route)}
+      disabled={disabled}
     >
       <span>{CTA}</span>
       <span

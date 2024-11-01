@@ -1,6 +1,25 @@
+"use client";
+import { useEffect } from "react";
 import HireTalentLoginForm from "./Form";
+import { setUser } from "@/redux/slices/authSlice";
+import { useDispatch } from "react-redux";
+import Cookies from "js-cookie";
 
 const Login = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // Check if the 'loggedOut' cookie is present
+    const loggedOut = Cookies.get("loggedOut");
+
+    if (loggedOut) {
+      // If the user has been logged out, set the user to null
+      dispatch(setUser(null));
+      console.log("done");
+      // Remove the cookie once it's handled
+      Cookies.remove("loggedOut");
+    }
+  }, [dispatch]); // Dependency array includes dispatch
   return (
     <section className="sm:h-[100vh] flex">
       <div

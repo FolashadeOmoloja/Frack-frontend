@@ -1,34 +1,7 @@
-// "use client";
-// import { motion } from "framer-motion";
 import CTABTN from "../../Elements/CTA/CTA-Button";
 import Globe from "./Globe";
 
 const Header = () => {
-  const globeVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8, ease: "easeOut" },
-    },
-    hover: {
-      y: [0, -10, 0],
-      x: [0, -10, 10, 0],
-      transition: {
-        y: {
-          yoyo: Infinity,
-          duration: 0.6,
-          ease: "easeInOut",
-        },
-        x: {
-          yoyo: Infinity,
-          duration: 0.6,
-          ease: "easeInOut",
-        },
-      },
-    },
-  };
-
   return (
     <header className="section-container flex max-sslg:flex-col max-lg:pt-6 justify-between mt-0 max-xslg:gap-5">
       <section className="flex flex-col max-sslg:items-center slg:pt-[92px] max-sslg:text-center">

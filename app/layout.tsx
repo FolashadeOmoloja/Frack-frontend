@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Archivo, Archivo_Black, Inter } from "next/font/google";
 import "./globals.css";
-import Footer from "@/components/LandingPage/Offer/Footer";
+import { Toaster } from "@/components/ui/sonner";
+import { ReduxProvider } from "./provider";
 
 const inter = Inter({ subsets: ["latin"] });
 const archivo = Archivo({
@@ -22,7 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${archivo.className} `}>
-        <main className="max-w-[2400px] mx-auto">{children}</main>
+        <ReduxProvider>
+          <main className="max-w-[2400px] mx-auto">{children}</main>
+          <Toaster closeButton />
+        </ReduxProvider>
       </body>
     </html>
   );
